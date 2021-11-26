@@ -3,6 +3,7 @@ from enum import Enum
 
 import geopandas as gpd
 import numpy as np
+import pygeos
 import pytest
 import shapely.geometry as sg
 
@@ -81,12 +82,20 @@ Ld = sg.LineString(
         (1.5, 0.5),
     ]
 )
+# Bowtie
 Le = sg.LineString(
     [
         (3.0, 0.0),
         (4.0, 1.0),
         (3.0, 1.0),
         (4.0, 0.0),
+    ]
+)
+# Outside
+Lf = sg.LineString(
+    [
+        (1.0, 2.0),
+        (2.0, 2.0),
     ]
 )
 
@@ -155,20 +164,25 @@ def test_intersecting_features():
 
 def test_check_linestrings():
     polygons = gpd.GeoSeries(data=[a, c, d], index=[0, 1, 2])
+
+    # Complex (self-intersecting) linestring
     linestrings = gpd.GeoSeries(data=[La, Lb, Lc, Le], index=[0, 1, 2, 3])
     with pytest.raises(ValueError, match="1 cases of complex linestring detected"):
         common.check_linestrings(linestrings, polygons)
 
+    # Linestrings intersecting with each other
     linestrings = gpd.GeoSeries(data=[La, Lb, Lc], index=[0, 1, 2])
     with pytest.raises(ValueError, match="1 cases of intersecting linestring detected"):
         common.check_linestrings(linestrings, polygons)
 
+    # Ld present in multiple polygons
     linestrings = gpd.GeoSeries(data=[La, Ld], index=[0, 1])
     with pytest.raises(
-        ValueError, match="The same linestring detected in multiple polygons"
+        ValueError, match="The same linestring detected in multiple polygons or"
     ):
         common.check_linestrings(linestrings, polygons)
 
+    # Valid input
     polygons = gpd.GeoSeries(data=[a, c, d], index=[0, 1, 2])
     linestrings = gpd.GeoSeries(data=[La, Lc], index=[0, 1])
     common.check_linestrings(linestrings, polygons)
@@ -191,9 +205,31 @@ def test_check_points():
         common.check_points(points, polygons)
 
 
-def test_separate_shapely():
+def test_separate():
     gdf = gpd.GeoDataFrame(geometry=[a, c, d, La, Lc, pa])
-    polygons, linestrings, points = common.separate_shapely(gdf)
+    polygons, linestrings, points = common.separate(gdf)
     assert isinstance(polygons.geometry.iloc[0], sg.Polygon)
     assert isinstance(linestrings.geometry.iloc[0], sg.LineString)
     assert isinstance(points.geometry.iloc[0], sg.Point)
+
+    # Make sure it works for single elements
+    gdf = gpd.GeoDataFrame(geometry=[a])
+    common.separate(gdf)
+
+    gdf = gpd.GeoDataFrame(geometry=[a, La])
+    polygons, linestrings, points = common.separate(gdf)
+
+
+def test_to_pygeos():
+    geometry = [a, c, d, La, Lc, pa]
+    converted = common.to_pygeos(geometry)
+    assert all(isinstance(geom, pygeos.Geometry) for geom in converted)
+
+    geometry = pygeos.points([[0.0, 0.0], [1.0, 1.0]])
+    converted = common.to_pygeos(geometry)
+    assert all(isinstance(geom, pygeos.Geometry) for geom in converted)
+
+    geometry = [[0.0, 0.0], [1.0, 1.0]]
+    msg = "geometry should be pygeos or shapely type. Received instead list"
+    with pytest.raises(TypeError, match=msg):
+        common.to_pygeos(geometry)

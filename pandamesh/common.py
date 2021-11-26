@@ -6,6 +6,7 @@ from typing import Any, Sequence, Tuple
 
 import geopandas as gpd
 import numpy as np
+import pygeos
 import shapely.geometry as sg
 
 IntArray = np.ndarray
@@ -102,7 +103,7 @@ def check_features(features: gpd.GeoSeries, feature_type) -> None:
             " features contain self intersections"
         )
 
-    if len(features) == 1:
+    if len(features) <= 1:
         return
 
     check_intersection(features, feature_type)
@@ -124,12 +125,13 @@ def check_linestrings(
 
     intersects = gpd.GeoDataFrame(geometry=linestrings).sjoin(
         df=gpd.GeoDataFrame(geometry=polygons),
-        predicate="intersects",
+        predicate="within",
     )
     n_diff = len(linestrings) - len(intersects)
     if n_diff != 0:
         raise ValueError(
-            "The same linestring detected in multiple polygons; "
+            "The same linestring detected in multiple polygons or "
+            "linestring detected outside of any polygon; "
             "a linestring must be fully contained by a single polygon."
         )
 
@@ -153,12 +155,17 @@ def check_points(
     return
 
 
-def separate_shapely(
+def separate(
     gdf: gpd.GeoDataFrame,
 ) -> Tuple[gpd.GeoDataFrame, gpd.GeoDataFrame, gpd.GeoDataFrame]:
-    polygons = gdf[[isinstance(x, sg.Polygon) for x in gdf["geometry"]]]
-    linestrings = gdf[[isinstance(x, sg.LineString) for x in gdf["geometry"]]]
-    points = gdf[[isinstance(x, sg.Point) for x in gdf["geometry"]]]
+    geom_type = gdf.geom_type
+    acceptable = ["Polygon", "LineString", "Point"]
+    if not geom_type.isin(acceptable).all():
+        raise TypeError(f"Geometry shouldd be one of {acceptable}")
+
+    polygons = gdf[geom_type == "Polygon"]
+    linestrings = gdf[geom_type == "LineString"]
+    points = gdf[geom_type == "Point"]
     # Set crs to None to avoid crs warnings on joins and overlays
     polygons.crs = linestrings.crs = points.crs = None
 
@@ -167,3 +174,16 @@ def separate_shapely(
     check_points(points.geometry, polygons.geometry)
 
     return polygons, linestrings, points
+
+
+def to_pygeos(geometry: Any):
+    first = next(iter(geometry))
+    if isinstance(first, pygeos.Geometry):
+        return geometry
+    elif isinstance(first, sg.base.BaseGeometry):
+        return pygeos.from_shapely(geometry)
+    else:
+        raise TypeError(
+            "geometry should be pygeos or shapely type. "
+            f"Received instead {type(first).__name__}"
+        )
