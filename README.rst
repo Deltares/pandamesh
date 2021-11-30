@@ -1,8 +1,13 @@
 pandamesh
 =========
 
+.. image:: https://img.shields.io/github/workflow/status/deltares/pandamesh/ci?style=flat-square
+   :target: https://github.com/deltares/numba_celltree/actions?query=workflows%3Aci
+.. image:: https://img.shields.io/codecov/c/github/deltares/pandamesh.svg?style=flat-square
+   :target: https://app.codecov.io/gh/deltares/numba_celltree
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square
    :target: https://github.com/psf/black
+
 
 This package translates geospatial vector data, presented as `geopandas`_
 `GeoDataFrames`_, to unstructured meshes using the open source high quality
@@ -38,6 +43,12 @@ Installation
 .. code:: console
 
     pip install pandamesh
+    
+Documentation
+-------------
+
+.. image:: https://img.shields.io/github/workflow/status/deltares/pandamesh/docs?style=flat-square
+   :target: https://deltares.github.io/pandamesh/
 
 .. _geopandas: https://geopandas.org/
 .. _GeoDataFrames: https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html
