@@ -32,6 +32,13 @@ the vertices, and the connectivity of the mesh faces to these vertices (as is
 GeoPandas is not suited for geometries that "wrap around" around the world.
 Consequently, this package cannot generate meshes for e.g. a sphere.
 
+Installation
+------------
+
+.. code:: console
+
+    pip install pandamesh
+
 .. _geopandas: https://geopandas.org/
 .. _GeoDataFrames: https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html
 .. _Gmsh: https://gmsh.info/
