@@ -11,9 +11,6 @@ from pandamesh.triangle_mesher import (
     polygon_holes,
 )
 
-gpd.options.use_pygeos = False
-
-
 outer_coords = np.array([(0.0, 0.0), (10.0, 0.0), (10.0, 10.0), (0.0, 10.0)])
 inner_coords = np.array([(3.0, 3.0), (7.0, 3.0), (7.0, 7.0), (3.0, 7.0)])
 line_coords = np.array([(2.0, 8.0), (8.0, 2.0)])
