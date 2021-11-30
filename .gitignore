@@ -6,6 +6,7 @@ docs/_build/
 docs/examples/
 examples/*
 !examples/*.py
+!examples/*.rst
 
 # IDE
 .vscode
