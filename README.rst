@@ -1,6 +1,9 @@
 pandamesh
 =========
 
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square
+   :target: https://github.com/psf/black
+
 This package translates geospatial vector data, presented as `geopandas`_
 `GeoDataFrames`_, to unstructured meshes using the open source high quality
 mesh generators:
