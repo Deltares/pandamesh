@@ -2,9 +2,9 @@ pandamesh
 =========
 
 .. image:: https://img.shields.io/github/workflow/status/deltares/pandamesh/ci?style=flat-square
-   :target: https://github.com/deltares/numba_celltree/actions?query=workflows%3Aci
+   :target: https://github.com/deltares/pandamesh/actions?query=workflows%3Aci
 .. image:: https://img.shields.io/codecov/c/github/deltares/pandamesh.svg?style=flat-square
-   :target: https://app.codecov.io/gh/deltares/numba_celltree
+   :target: https://app.codecov.io/gh/deltares/pandamesh
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square
    :target: https://github.com/psf/black
 
