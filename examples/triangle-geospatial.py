@@ -57,15 +57,6 @@ union_gdf["cellsize"] = 10_000.0
 # by inconsistencies, but by a small number of Belgian exclaves,
 # `Baarle-Hertog`_.
 #
-# Their presence becomes clear as we can identify areas with much smaller
-# triangles. These small triangles are also present along the exterior border,
-# since every input vertex from the geometry forces the triangulation.
-
-mesher = pm.TriangleMesher(union_gdf)
-vertices, triangles = mesher.generate()
-pm.plot(vertices, triangles)
-
-# %%
 # Simplify
 # --------
 #
