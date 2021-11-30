@@ -14,6 +14,19 @@ FloatArray = np.ndarray
 coord_dtype = np.dtype([("x", np.float64), ("y", np.float64)])
 
 
+def repr(obj: Any) -> str:
+    strings = [type(obj).__name__]
+    for k, v in obj.__dict__.items():
+        if k.startswith("_"):
+            k = k[1:]
+        if isinstance(v, np.ndarray):
+            s = f"    {k} = np.ndarray with shape({v.shape})"
+        else:
+            s = f"    {k} = {v}"
+        strings.append(s)
+    return "\n".join(strings)
+
+
 def flatten(seq: Sequence[Any]):
     return functools.reduce(operator.concat, seq)
 

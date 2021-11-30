@@ -10,3 +10,6 @@ examples/*
 
 # IDE
 .vscode
+
+# tox
+.tox/*

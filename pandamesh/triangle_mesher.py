@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Any, Tuple, Union
+from typing import Tuple, Union
 
 import geopandas as gpd
 import numpy as np
@@ -13,6 +13,7 @@ from .common import (
     check_geodataframe,
     flatten,
     invalid_option,
+    repr,
     separate,
     to_pygeos,
 )
@@ -110,19 +111,6 @@ class DelaunayAlgorithm(Enum):
     DIVIDE_AND_CONQUER = ""
     INCREMENTAL = "i"
     SWEEPLINE = "F"
-
-
-def repr(obj: Any) -> str:
-    strings = [type(obj).__name__]
-    for k, v in obj.__dict__.items():
-        if k.startswith("_"):
-            k = k[1:]
-        if isinstance(v, np.ndarray):
-            s = f"    {k} = np.ndarray with shape({v.shape})"
-        else:
-            s = f"    {k} = {v}"
-        strings.append(s)
-    return "\n".join(strings)
 
 
 class TriangleMesher:
