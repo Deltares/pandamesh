@@ -7,7 +7,15 @@ import pygeos
 import shapely.geometry as sg
 import triangle
 
-from .common import FloatArray, IntArray, flatten, invalid_option, separate, to_pygeos
+from .common import (
+    FloatArray,
+    IntArray,
+    check_geodataframe,
+    flatten,
+    invalid_option,
+    separate,
+    to_pygeos,
+)
 
 
 def add_linestrings(linestrings: gpd.GeoSeries) -> Tuple[FloatArray, IntArray]:
@@ -67,7 +75,7 @@ def polygon_holes(
     Triangle recognizes holes as a point contained by segments.
     """
     inner_rings = gpd.GeoSeries(flatten(polygons.interiors))
-    interiors = gpd.GeoDataFrame(geometry=[sg.asPolygon(ring) for ring in inner_rings])
+    interiors = gpd.GeoDataFrame(geometry=[sg.Polygon(ring) for ring in inner_rings])
     points = interiors.representative_point()
     # Filter the points, if the point can be found in a polygon, it's located
     # in a refinement zone.
@@ -151,6 +159,7 @@ class TriangleMesher:
     """
 
     def __init__(self, gdf: gpd.GeoDataFrame) -> None:
+        check_geodataframe(gdf)
         polygons, linestrings, points = separate(gdf)
         self.vertices, self.segments, self.regions = collect_geometry(
             polygons, linestrings, points

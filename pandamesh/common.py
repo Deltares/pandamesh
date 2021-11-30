@@ -26,6 +26,19 @@ def invalid_option(value: Any, options: Enum) -> str:
     return f"Invalid option: {value}. Valid options are:\n{_show_options(options)}"
 
 
+def check_geodataframe(features: gpd.GeoDataFrame) -> None:
+    if not isinstance(features, gpd.GeoDataFrame):
+        raise TypeError(
+            f"Expected GeoDataFrame, received instead: {type(features).__name__}"
+        )
+    if not features.index.is_integer():
+        raise ValueError(
+            f"geodataframe index is not integer typed, received: {features.index.dtype}"
+        )
+    if features.index.duplicated().any():
+        raise ValueError("geodataframe index contains duplicates")
+
+
 def overlap_shortlist(features: gpd.GeoSeries) -> Tuple[IntArray, IntArray]:
     """
     Create a shortlist of polygons or linestrings indices to check against each
@@ -161,7 +174,7 @@ def separate(
     geom_type = gdf.geom_type
     acceptable = ["Polygon", "LineString", "Point"]
     if not geom_type.isin(acceptable).all():
-        raise TypeError(f"Geometry shouldd be one of {acceptable}")
+        raise TypeError(f"Geometry should be one of {acceptable}")
 
     polygons = gdf[geom_type == "Polygon"]
     linestrings = gdf[geom_type == "LineString"]

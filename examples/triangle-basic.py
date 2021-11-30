@@ -15,8 +15,6 @@ import shapely.geometry as sg
 
 import pandamesh as pm
 
-gpd.options.use_pygeos = False
-
 # %%
 # A simple rectangular mesh
 # -------------------------

@@ -131,6 +131,23 @@ def test_invalid_option():
     )
 
 
+def test_check_geodataframe():
+    with pytest.raises(TypeError, match="Expected GeoDataFrame"):
+        common.check_geodataframe([1, 2, 3])
+
+    gdf = gpd.GeoDataFrame(geometry=[pa, pb])
+    gdf.index = [0, "1"]
+    with pytest.raises(ValueError, match="geodataframe index is not integer typed"):
+        common.check_geodataframe(gdf)
+
+    gdf.index = [0, 0]
+    with pytest.raises(ValueError, match="geodataframe index contains duplicates"):
+        common.check_geodataframe(gdf)
+
+    gdf.index = [0, 1]
+    common.check_geodataframe(gdf)
+
+
 def test_overlap_shortlist():
     # b overlaps with a
     polygons = gpd.GeoSeries(data=[a, b, d], index=[0, 1, 2])
