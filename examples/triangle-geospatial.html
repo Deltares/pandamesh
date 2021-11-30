@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Geospatial Triangle Example &#8212; pandamesh 0.1.0 documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/theme-deltares.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Triangle Example" href="triangle-basic.html" />
+    <link rel="prev" title="Examples" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-deltares fixed-top bd-navbar shadow" id="navbar-main"><div class="container-xl">
+
+    <a class="navbar-brand" href="../index.html">
+    <p style="color:#fff;font-size:25px;" class="title">pandamesh</p>
+    </a>
+
+    <a class="navbar-brand" href="../index.html">
+    <img src="../_static/pandamesh-low-res.svg" class="logo" alt="logo" />
+    </a>
+  
+    <div id="navbar-menu" class="collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav">
+        <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../introduction.html">
+  Introduction
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="index.html">
+  Examples
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api.html">
+  API Reference
+ </a>
+</li>
+
+        
+      </ul>
+    </div>
+
+
+    <a class="navbar-brand" href="https://www.deltares.nl/en/">
+    <img src="../_static/deltares-white.svg" class="logo" alt="logo" />
+    </a>
+
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Geospatial Triangle Example
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="triangle-basic.html">
+   Basic Triangle Example
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overlap">
+   Overlap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clean-up">
+   Clean-up
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simplify">
+   Simplify
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#local-refinement">
+   Local refinement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-triangle-geospatial-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="geospatial-triangle-example">
+<span id="sphx-glr-examples-triangle-geospatial-py"></span><h1>Geospatial Triangle Example<a class="headerlink" href="#geospatial-triangle-example" title="Permalink to this headline">¶</a></h1>
+<p>In this example we’ll illustrate how to generate a mesh from a “real-world”
+geospatial vector dataset.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">shapely.geometry</span> <span class="k">as</span> <span class="nn">sg</span>
+
+<span class="kn">import</span> <span class="nn">pandamesh</span> <span class="k">as</span> <span class="nn">pm</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.9.9/x64/lib/python3.9/site-packages/geopandas/_compat.py:111: UserWarning: The Shapely GEOS version (3.9.1-CAPI-1.14.2) is incompatible with the GEOS version PyGEOS was compiled with (3.10.0-CAPI-1.16.0). Conversions between both will be slow.
+  warnings.warn(
+</pre></div>
+</div>
+<section id="overlap">
+<h2>Overlap<a class="headerlink" href="#overlap" title="Permalink to this headline">¶</a></h2>
+<p>We will open a GeoJSON file describing the provinces of the Netherlands, and
+select only the name and geometry columns. We’ll set the coordinate reference
+system to the Dutch national standard (EPSG:28992). Finally we set the name
+column to be used as index, so we can select provinces on name.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">provinces</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;data/provinces.geojson&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">]]</span>
+<span class="n">provinces</span> <span class="o">=</span> <span class="n">provinces</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">&quot;epsg:28992&quot;</span><span class="p">)</span>
+<span class="n">provinces</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">provinces</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">provinces</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The mesh generation software cannot deal with overlap of polygons. To get rid
+of overlap, we can use the spatial functionality that geopandas provides.
+Let’s check the polygons for overlap first.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">overlap</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;intersection&quot;</span><span class="p">,</span> <span class="n">keep_geom_type</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">overlap</span> <span class="o">=</span> <span class="n">overlap</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">overlap</span><span class="p">[</span><span class="s2">&quot;name_1&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">overlap</span><span class="p">[</span><span class="s2">&quot;name_2&quot;</span><span class="p">]]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">overlap</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_triangle-geospatial_001.png" srcset="../_images/sphx_glr_triangle-geospatial_001.png" alt="triangle geospatial" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+</section>
+<section id="clean-up">
+<h2>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">¶</a></h2>
+<p>There are many small overlaps visible at the province borders.</p>
+<p>We can generate a consistent polygon using a unary union.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">union</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">unary_union</span><span class="p">)</span>
+<span class="n">union_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="p">[</span><span class="n">union</span><span class="p">])</span>
+<span class="n">union_gdf</span><span class="p">[</span><span class="s2">&quot;cellsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">10_000.0</span>
+</pre></div>
+</div>
+<p>Unfortunately, the province boundaries of this dataset no do align neatly and
+there are a number of small holes present. Some of these holes are not formed
+by inconsistencies, but by a small number of Belgian exclaves,
+<a class="reference external" href="https://en.wikipedia.org/wiki/Baarle-Hertog">Baarle-Hertog</a>.</p>
+</section>
+<section id="simplify">
+<h2>Simplify<a class="headerlink" href="#simplify" title="Permalink to this headline">¶</a></h2>
+<p>We’ll ignore the subtleties of international law for now and use geopandas to
+remove all blemishes by:</p>
+<ul class="simple">
+<li><p>squeezing out the holes with <code class="docutils literal notranslate"><span class="pre">.buffer</span></code></p></li>
+<li><p>dissolving the buffered polygons into a single polygon with <code class="docutils literal notranslate"><span class="pre">.dissolve</span></code></p></li>
+<li><p>simplifying the dissolved polygon to avoid over-refinement with <code class="docutils literal notranslate"><span class="pre">.simplify</span></code></p></li>
+</ul>
+<p>This creates a clean, and simpler, geometry.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simplified</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">simplified</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">simplified</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mf">500.0</span><span class="p">)</span>
+<span class="n">simplified</span><span class="p">[</span><span class="s2">&quot;dissolve_column&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">simplified</span> <span class="o">=</span> <span class="n">simplified</span><span class="o">.</span><span class="n">dissolve</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;dissolve_column&quot;</span><span class="p">)</span>
+<span class="n">simplified</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">simplified</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="mf">5_000.0</span><span class="p">)</span>
+<span class="n">simplified</span><span class="p">[</span><span class="s2">&quot;cellsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">10_000.0</span>
+
+<span class="n">simplified</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_triangle-geospatial_002.png" srcset="../_images/sphx_glr_triangle-geospatial_002.png" alt="triangle geospatial" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<p>Using this clean geometry, we can generate an unstructured grid with a fairly
+constant cell size.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mesher</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">TriangleMesher</span><span class="p">(</span><span class="n">simplified</span><span class="p">)</span>
+<span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_triangle-geospatial_003.png" srcset="../_images/sphx_glr_triangle-geospatial_003.png" alt="triangle geospatial" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.9.9/x64/lib/python3.9/site-packages/pygeos/io.py:72: UserWarning: The shapely GEOS version (3.9.1-CAPI-1.14.2) is incompatible with the PyGEOS GEOS version (3.10.0-CAPI-1.16.0). Conversions between both will be slow
+  warnings.warn(
+</pre></div>
+</div>
+</section>
+<section id="local-refinement">
+<h2>Local refinement<a class="headerlink" href="#local-refinement" title="Permalink to this headline">¶</a></h2>
+<p>To set a zone of refinement, we can define an additional polygon. We need to
+ensure that no overlap occurs in the follwing steps:</p>
+<ul class="simple">
+<li><p>select the geometry of a single province;</p></li>
+<li><p>simplify its geometry to an appropriate level of detail;</p></li>
+<li><p>specify a smaller cell size;</p></li>
+<li><p>remove this province from the enveloping polygon;</p></li>
+<li><p>collect the two polygons in a single geodataframe.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">utrecht</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;Utrecht&quot;</span><span class="p">]]</span>
+<span class="n">utrecht</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">utrecht</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="mf">2_500.0</span><span class="p">)</span>
+<span class="n">utrecht</span><span class="p">[</span><span class="s2">&quot;cellsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">5000.0</span>
+
+<span class="n">envelope</span> <span class="o">=</span> <span class="n">simplified</span><span class="o">.</span><span class="n">overlay</span><span class="p">(</span><span class="n">utrecht</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;difference&quot;</span><span class="p">)</span>
+<span class="n">refined</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">envelope</span><span class="p">,</span> <span class="n">utrecht</span><span class="p">])</span>
+<span class="n">refined</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">refined</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_triangle-geospatial_004.png" srcset="../_images/sphx_glr_triangle-geospatial_004.png" alt="triangle geospatial" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<p>This results in a mesh with a smaller cell size in the province of Utrecht.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mesher</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">TriangleMesher</span><span class="p">(</span><span class="n">refined</span><span class="p">)</span>
+<span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_triangle-geospatial_005.png" srcset="../_images/sphx_glr_triangle-geospatial_005.png" alt="triangle geospatial" class = "sphx-glr-single-img"/></section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>This example provides a taste of how to convert a geospatial vector dataset
+into an unstructured grid with a locally refined part. Real-world data
+generally come with their own idiosyncrasies and inconsistencies. Depending
+on the nature of the necessary fixes, they can be solved with geopandas
+functionality, but sometimes manual editing is required. Fortunately,
+geopandas provides easy input and output for many file formats, which can be
+opened by e.g. QGIS.</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.658 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-triangle-geospatial-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/b09e184455098f3e19aac18afab7c2d7/triangle-geospatial.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">triangle-geospatial.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/a12a4ea5eaa3778e285b02114c10d8a1/triangle-geospatial.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">triangle-geospatial.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Examples</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="triangle-basic.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Basic Triangle Example</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright Huite Bootsma.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>
