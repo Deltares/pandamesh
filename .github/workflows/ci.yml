@@ -28,6 +28,11 @@ jobs:
     - uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+      # Copied from: https://github.com/nschloe/pygmsh/blob/main/.github/workflows/ci.yml
+      # install gmsh from system -- not sure why this is necessary
+      - name: Install gmsh
+        run: |
+          sudo apt-get install -y python3-gmsh
     - uses: actions/checkout@v2
     - name: Test with tox
       run: |
