@@ -14,6 +14,12 @@ jobs:
         with:
           python-version: 3.9
 
+      # Copied from: https://github.com/nschloe/pygmsh/blob/main/.github/workflows/ci.yml
+      # install gmsh from system -- not sure why this is necessary
+      - name: Install gmsh
+        run: |
+          sudo apt-get install -y python3-gmsh
+
       - name: Install dependencies
         run: |
           pip install -e ".[docs]"
