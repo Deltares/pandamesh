@@ -1,4 +1,4 @@
-from typing import List, NamedTuple, Sequence, Tuple, Union
+from typing import List, NamedTuple, Tuple, Union
 
 import geopandas as gpd
 import gmsh
@@ -65,7 +65,7 @@ def add_vertices(vertices, cellsizes, tags) -> None:
 
 
 def add_linestrings(
-    features: Sequence[LineStringInfo], tags: IntArray
+    features: List[LineStringInfo], tags: IntArray
 ) -> Tuple[IntArray, IntArray]:
     n_lines = sum(info.size - 1 for info in features)
     line_indices = np.empty(n_lines, dtype=np.int64)
@@ -94,7 +94,10 @@ def add_curve_loop(point_tags: FloatArray) -> int:
     return curve_loop_tag
 
 
-def add_polygons(features: Sequence[PolygonInfo], tags: IntArray) -> None:
+def add_polygons(
+    features: List[PolygonInfo], tags: IntArray
+) -> Tuple[List[int], List[int]]:
+    plane_tags = []
     for info in features:
         # Add the exterior loop first
         curve_loop_tags = [add_curve_loop(tags[info.index : info.index + info.size])]
@@ -102,14 +105,17 @@ def add_polygons(features: Sequence[PolygonInfo], tags: IntArray) -> None:
         for start, size in zip(info.interior_indices, info.interior_sizes):
             loop_tag = add_curve_loop(tags[start : start + size])
             curve_loop_tags.append(loop_tag)
-        gmsh.model.geo.addPlaneSurface(curve_loop_tags, tag=info.polygon_id)
+        plane_tag = gmsh.model.geo.addPlaneSurface(curve_loop_tags, tag=info.polygon_id)
+        plane_tags.append(plane_tag)
+    return curve_loop_tags, plane_tags
 
 
 def add_points(points: gpd.GeoDataFrame) -> Tuple[IntArray, IntArray]:
     n_points = len(points)
     indices = np.empty(n_points, dtype=np.int64)
     embedded_in = points["__polygon_id"].values
-    for i, (_, row) in enumerate(points.iterrows()):
+    # We have to add points one by one due to the Gmsh addPoint API
+    for i, row in enumerate(points.to_dict("records")):
         point = row["geometry"]
         # Rely on the automatic number of gmsh now to generate the indices
         point_index = gmsh.model.geo.addPoint(
@@ -125,7 +131,7 @@ def collect_polygons(
     vertices = []
     cellsizes = []
     features = []
-    for _, row in polygons.iterrows():
+    for row in polygons.to_dict("records"):
         info, coords, cells, index = polygon_info(
             row["geometry"], row["cellsize"], index, row["__polygon_id"]
         )
@@ -141,7 +147,7 @@ def collect_linestrings(
     vertices = []
     cellsizes = []
     features = []
-    for _, row in linestrings.iterrows():
+    for row in linestrings.to_dict("records"):
         info, coords, cells, index = linestring_info(
             row["geometry"], row["cellsize"], index, row["__polygon_id"]
         )
@@ -156,7 +162,7 @@ def collect_points(points: gpd.GeoDataFrame) -> FloatArray:
 
 
 def embed_where(gdf: gpd.GeoDataFrame, polygons: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
-    tmp = gpd.sjoin(gdf, polygons, op="within", how="inner")
+    tmp = gpd.sjoin(gdf, polygons, predicate="within", how="inner")
     tmp["cellsize"] = tmp[["cellsize_left", "cellsize_right"]].min(axis=1)
     return tmp[["cellsize", "__polygon_id", "geometry"]]
 
@@ -164,7 +170,6 @@ def embed_where(gdf: gpd.GeoDataFrame, polygons: gpd.GeoDataFrame) -> gpd.GeoDat
 def filter_points(
     points: gpd.GeoDataFrame, polygons: gpd.GeoDataFrame
 ) -> Tuple[gpd.GeoDataFrame, gpd.GeoDataFrame]:
-    # TODO: within
     if len(points) > 0:
         embedded = embed_where(points, polygons)
         intersection = gpd.overlay(points, polygons, how="intersection")
@@ -197,13 +202,14 @@ def add_geometry(
     vertices = np.concatenate(poly_vertices + line_vertices)
     cellsizes = np.concatenate(poly_cellsizes + line_cellsizes)
 
-    # Identify points that already exists, these do not have to be embedded
-    # but their specified cellsize might have to be taken into account.
+    # Identify points that already exists, these do not have to be embedded but
+    # their specified cellsize might have to be taken into account.
     if len(overload_points) > 0:
         cellsizes = np.append(cellsizes, overload_points["cellsize"].values)
         vertices = np.append(vertices, collect_points(overload_points))
 
-    # Get the unique vertices, and generate the array of indices pointing to them for every feature
+    # Get the unique vertices, and generate the array of indices pointing to
+    # them for every feature
     vertices, indices = np.unique(
         vertices.reshape(-1).view(coord_dtype), return_inverse=True
     )

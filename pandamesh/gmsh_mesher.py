@@ -10,8 +10,20 @@ import gmsh
 import numpy as np
 import pandas as pd
 
-from .common import FloatArray, IntArray, check_geodataframe, invalid_option, separate
-from .gmsh_fields import FIELDS, add_distance_field, add_structured_field, validate
+from .common import (
+    FloatArray,
+    IntArray,
+    check_geodataframe,
+    invalid_option,
+    repr,
+    separate,
+)
+from .gmsh_fields import (
+    FIELDS,
+    add_distance_field,
+    add_structured_field,
+    validate_field,
+)
 from .gmsh_geometry import add_field_geometry, add_geometry
 
 
@@ -58,7 +70,7 @@ def coerce_field(field: Union[dict, str]) -> dict:
 
 class GmshMesher:
     def __init__(self, gdf: gpd.GeoDataFrame) -> None:
-        gmsh.clear()
+        self.initialize_gmsh()
         check_geodataframe(gdf)
         polygons, linestrings, points = separate(gdf)
 
@@ -81,6 +93,21 @@ class GmshMesher:
         self.characteristic_length_from_curvature = False
         self.field_combination = FieldCombination.MIN
         self.subdivision_algorithm = SubdivisionAlgorithm.NONE
+
+    def __repr__(self):
+        return repr(self)
+
+    @staticmethod
+    def initialize_gmsh():
+        # Calling finalize before will ensure no warning is given about gmsh
+        # already being initialized.
+        gmsh.finalize()
+        gmsh.initialize()
+        gmsh.option.setNumber("General.Terminal", 1)
+
+    @staticmethod
+    def finalize_gmsh():
+        gmsh.finalize()
 
     # Properties
     # ----------
@@ -215,7 +242,7 @@ class GmshMesher:
 
             spec, add_field = FIELDS[fieldtype.lower()]
             try:
-                validate(field_dict, spec)
+                validate_field(field_dict, spec)
             except KeyError:
                 raise ValueError(
                     f'invalid field type {fieldtype}. Allowed are: "MathEval", "Threshold".'
