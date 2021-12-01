@@ -16,6 +16,27 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate som...">
+
+.. only:: html
+
+ .. figure:: /examples/images/thumb/sphx_glr_gmsh-basic_thumb.png
+     :alt: Basic Gmsh Example
+
+     :ref:`sphx_glr_examples_gmsh-basic.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/gmsh-basic
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll illustrate how to generate a mesh from a &quot;real-world&quot; geospatial vector d...">
 
 .. only:: html

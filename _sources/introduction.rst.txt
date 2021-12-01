@@ -19,8 +19,8 @@ For completeness, the source code of both projects can be found at:
 * https://github.com/drufat/triangle
 
 These APIs are wrapped in two lightweight classes:
-:py:class:`pandamesh.TriangleMesher` and ``pandamesh.GmshMesher``. Both are
-initialized with a GeoDataFrame defining the geometry features of the mesh.
+:py:class:`pandamesh.TriangleMesher` and :py:class:`pandamesh.GmshMesher`. Both
+are initialized with a GeoDataFrame defining the geometry features of the mesh.
 During initialization, geometries are checked for overlaps and intersections,
 as the mesh generators cannot deal with these.  Generated meshes are returned
 as two numpy arrays: the coordinates of the vertices, and the connectivity of
