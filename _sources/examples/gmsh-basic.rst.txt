@@ -202,7 +202,7 @@ The GmshMesher class is initialized with a number of default parameters:
         fields = Empty GeoDataFrame
     Columns: []
     Index: []
-        tmpdir = <TemporaryDirectory '/tmp/tmpq56zd0p6'>
+        tmpdir = <TemporaryDirectory '/tmp/tmpkbm1p1h3'>
         recombine_all = False
         characteristic_length_from_boundary = True
         characteristic_length_from_points = True
@@ -269,7 +269,7 @@ mesh.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.310 seconds)
+   **Total running time of the script:** ( 0 minutes  0.982 seconds)
 
 
 .. _sphx_glr_download_examples_gmsh-basic.py:
