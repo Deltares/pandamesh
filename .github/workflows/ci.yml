@@ -25,18 +25,20 @@ jobs:
       matrix:
         python-version: [3.7, 3.8, 3.9]
     steps:
-    - uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: actions/checkout@v2
+    
       # Copied from: https://github.com/nschloe/pygmsh/blob/main/.github/workflows/ci.yml
       # install gmsh from system -- not sure why this is necessary
       - name: Install gmsh
         run: |
           sudo apt-get install -y python3-gmsh
-    - uses: actions/checkout@v2
-    - name: Test with tox
-      run: |
-        pip install tox
-        tox -- --cov pandamesh --cov-report xml --cov-report term
-    - uses: codecov/codecov-action@v1
-      if: ${{ matrix.python-version == '3.9' }}
+
+      - name: Test with tox
+        run: |
+          pip install tox
+          tox -- --cov pandamesh --cov-report xml --cov-report term
+      - uses: codecov/codecov-action@v1
+        if: ${{ matrix.python-version == '3.9' }}
