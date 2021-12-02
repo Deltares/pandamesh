@@ -13,8 +13,8 @@
 # -- Project information -----------------------------------------------------
 
 project = "pandamesh"
-copyright = "Huite Bootsma"
-author = "Huite Bootsma"
+copyright = "Deltares"
+author = "Deltares"
 
 # The full version, including alpha/beta/rc tags
 release = "0.1.0"

@@ -13,3 +13,7 @@ examples/*
 
 # tox
 .tox/*
+
+# Distribution
+build/*
+dist/*
