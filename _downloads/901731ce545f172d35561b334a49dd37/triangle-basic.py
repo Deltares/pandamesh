@@ -177,4 +177,4 @@ gdf.plot(facecolor="none", edgecolor="red", ax=ax)
 # In real use, the vector geometries will be more complex, and not based on
 # just a few coordinate pairs. Such cases are presented in the other examples,
 # but the same principles apply: we may use polygons with associated cell
-# sizes, jand linestrings and points to steer the triangulation.
+# sizes, and linestrings and points to steer the triangulation.

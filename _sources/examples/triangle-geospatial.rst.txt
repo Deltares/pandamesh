@@ -39,6 +39,15 @@ geospatial vector dataset.
 
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    /opt/hostedtoolcache/Python/3.9.9/x64/lib/python3.9/site-packages/geopandas/_compat.py:111: UserWarning: The Shapely GEOS version (3.9.1-CAPI-1.14.2) is incompatible with the GEOS version PyGEOS was compiled with (3.10.0-CAPI-1.16.0). Conversions between both will be slow.
+      warnings.warn(
+
 
 
 
@@ -208,6 +217,15 @@ constant cell size.
    :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    /opt/hostedtoolcache/Python/3.9.9/x64/lib/python3.9/site-packages/pygeos/io.py:72: UserWarning: The shapely GEOS version (3.9.1-CAPI-1.14.2) is incompatible with the PyGEOS GEOS version (3.10.0-CAPI-1.16.0). Conversions between both will be slow
+      warnings.warn(
+
 
 
 
@@ -302,7 +320,7 @@ opened by e.g. QGIS.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.955 seconds)
+   **Total running time of the script:** ( 0 minutes  1.506 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-geospatial.py:

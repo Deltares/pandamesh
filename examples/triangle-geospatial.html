@@ -39,8 +39,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Basic Triangle Example" href="triangle-basic.html" />
-    <link rel="prev" title="Basic Gmsh Example" href="gmsh-basic.html" />
+    <link rel="next" title="Basic Gmsh Example" href="gmsh-basic.html" />
+    <link rel="prev" title="Examples" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -65,20 +65,14 @@
   
     <div id="navbar-menu" class="collapse navbar-collapse">
       <ul id="navbar-main-elements" class="navbar-nav">
-        <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../introduction.html">
-  Introduction
- </a>
-</li>
-
-<li class="toctree-l1 current active nav-item">
+        <li class="toctree-l1 current active nav-item">
  <a class="reference internal nav-link" href="index.html">
   Examples
  </a>
 </li>
 
 <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../api.html">
+ <a class="reference internal nav-link" href="../api/index.html">
   API Reference
  </a>
 </li>
@@ -106,17 +100,17 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <div class="bd-toc-item active">
-    <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="gmsh-basic.html">
-   Basic Gmsh Example
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+    <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Geospatial Triangle Example
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="gmsh-basic.html">
+   Basic Gmsh Example
   </a>
  </li>
 </ul>
@@ -209,6 +203,11 @@ geospatial vector dataset.</p>
 <span class="kn">import</span> <span class="nn">pandamesh</span> <span class="k">as</span> <span class="nn">pm</span>
 </pre></div>
 </div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.9.9/x64/lib/python3.9/site-packages/geopandas/_compat.py:111: UserWarning: The Shapely GEOS version (3.9.1-CAPI-1.14.2) is incompatible with the GEOS version PyGEOS was compiled with (3.10.0-CAPI-1.16.0). Conversions between both will be slow.
+  warnings.warn(
+</pre></div>
+</div>
 <section id="overlap">
 <h2>Overlap<a class="headerlink" href="#overlap" title="Permalink to this headline">¶</a></h2>
 <p>We will open a GeoJSON file describing the provinces of the Netherlands, and
@@ -282,7 +281,12 @@ constant cell size.</p>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_triangle-geospatial_003.png" srcset="../_images/sphx_glr_triangle-geospatial_003.png" alt="triangle geospatial" class = "sphx-glr-single-img"/></section>
+<img src="../_images/sphx_glr_triangle-geospatial_003.png" srcset="../_images/sphx_glr_triangle-geospatial_003.png" alt="triangle geospatial" class = "sphx-glr-single-img"/><p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.9.9/x64/lib/python3.9/site-packages/pygeos/io.py:72: UserWarning: The shapely GEOS version (3.9.1-CAPI-1.14.2) is incompatible with the PyGEOS GEOS version (3.10.0-CAPI-1.16.0). Conversions between both will be slow
+  warnings.warn(
+</pre></div>
+</div>
+</section>
 <section id="local-refinement">
 <h2>Local refinement<a class="headerlink" href="#local-refinement" title="Permalink to this headline">¶</a></h2>
 <p>To set a zone of refinement, we can define an additional polygon. We need to
@@ -324,7 +328,7 @@ on the nature of the necessary fixes, they can be solved with geopandas
 functionality, but sometimes manual editing is required. Fortunately,
 geopandas provides easy input and output for many file formats, which can be
 opened by e.g. QGIS.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.955 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.506 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-triangle-geospatial-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/b09e184455098f3e19aac18afab7c2d7/triangle-geospatial.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">triangle-geospatial.py</span></code></a></p>
@@ -343,17 +347,17 @@ opened by e.g. QGIS.</p>
               
               <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="gmsh-basic.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Basic Gmsh Example</p>
+            <p class="prev-next-title">Examples</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="triangle-basic.html" title="next page">
+    <a class='right-next' id="next-link" href="gmsh-basic.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Basic Triangle Example</p>
+        <p class="prev-next-title">Basic Gmsh Example</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

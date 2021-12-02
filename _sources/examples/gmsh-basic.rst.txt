@@ -27,15 +27,15 @@ combination with polygon, point, and linestring geometries represented by
 geopandas.
 
 The :py:class:`GmshMesher` supports the geometry show in the basic Triangle
-example. Not all of those are repeated here, rather we focus on some of the
-additional features that Gmsh provides.
+example and has a number of additional features.
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-21
+.. GENERATED FROM PYTHON SOURCE LINES 14-21
 
 .. code-block:: default
 
     import geopandas as gpd
     import matplotlib.pyplot as plt
+    import numpy as np
     import shapely.geometry as sg
 
     import pandamesh as pm
@@ -43,15 +43,6 @@ additional features that Gmsh provides.
 
 
 
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-    /opt/hostedtoolcache/Python/3.9.9/x64/lib/python3.9/site-packages/geopandas/_compat.py:111: UserWarning: The Shapely GEOS version (3.9.1-CAPI-1.14.2) is incompatible with the GEOS version PyGEOS was compiled with (3.10.0-CAPI-1.16.0). Conversions between both will be slow.
-      warnings.warn(
 
 
 
@@ -128,7 +119,7 @@ and whistles for defining cellsizes.
 
     line = sg.LineString([(2.0, 8.0), (8.0, 2.0)])
     gdf = gpd.GeoDataFrame(geometry=[polygon, line])
-    gdf["cellsize"] = [2.0, 0.2]
+    gdf["cellsize"] = [2.0, 0.5]
 
     fig, (ax0, ax1) = plt.subplots(ncols=2)
 
@@ -148,21 +139,6 @@ and whistles for defining cellsizes.
    :srcset: /examples/images/sphx_glr_gmsh-basic_002.png
    :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-    /opt/hostedtoolcache/Python/3.9.9/x64/lib/python3.9/site-packages/pygeos/io.py:72: UserWarning: The shapely GEOS version (3.9.1-CAPI-1.14.2) is incompatible with the PyGEOS GEOS version (3.10.0-CAPI-1.16.0). Conversions between both will be slow
-      warnings.warn(
-    /opt/hostedtoolcache/Python/3.9.9/x64/lib/python3.9/site-packages/geopandas/geodataframe.py:1351: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      super().__setitem__(key, value)
 
 
 
@@ -202,25 +178,88 @@ The GmshMesher class is initialized with a number of default parameters:
         fields = Empty GeoDataFrame
     Columns: []
     Index: []
-        tmpdir = <TemporaryDirectory '/tmp/tmpkbm1p1h3'>
+        tmpdir = <TemporaryDirectory '/tmp/tmpd32nco25'>
         recombine_all = False
-        characteristic_length_from_boundary = True
-        characteristic_length_from_points = True
-        characteristic_length_from_curvature = False
+        mesh_size_extend_from_boundary = True
+        mesh_size_from_points = True
+        mesh_size_from_curvature = False
         field_combination = FieldCombination.MIN
         subdivision_algorithm = 0
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-85
+.. GENERATED FROM PYTHON SOURCE LINES 81-88
+
+The parameters of Gmsh differ from Triangle, but they work the same: they can
+be altered after initialization to control the triangulation.
+
+Forcing points, lines, local refinement
+---------------------------------------
+
+We can force points and lines into the triangulation:
+
+.. GENERATED FROM PYTHON SOURCE LINES 88-115
+
+.. code-block:: default
+
+
+    outer = [(0.0, 0.0), (10.0, 0.0), (10.0, 10.0), (0.0, 10.0)]
+    inner = [(3.0, 3.0), (7.0, 3.0), (7.0, 7.0), (3.0, 7.0)]
+    donut = sg.Polygon(shell=outer, holes=[inner])
+    refined = sg.Polygon(inner)
+
+    y = np.arange(0.5, 10.0, 0.5)
+    x = np.full(y.size, 1.0)
+    points = gpd.points_from_xy(x, y)
+
+    line = sg.LineString(
+        [
+            [9.0, 2.0],
+            [9.0, 8.0],
+        ]
+    )
+
+    gdf = gpd.GeoDataFrame(geometry=[donut, refined, line, *points])
+    gdf["cellsize"] = [2.0, 0.5, 2.0] + (len(points) * [2.0])
+
+    mesher = pm.GmshMesher(gdf)
+    vertices, triangles = mesher.generate()
+
+    fig, ax = plt.subplots()
+    pm.plot(vertices, triangles, ax=ax)
+    gdf.plot(facecolor="none", edgecolor="red", ax=ax)
+
+
+
+
+.. image-sg:: /examples/images/sphx_glr_gmsh-basic_003.png
+   :alt: gmsh basic
+   :srcset: /examples/images/sphx_glr_gmsh-basic_003.png
+   :class: sphx-glr-single-img
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    <AxesSubplot:>
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 116-122
 
 Quadrilateral meshes
 --------------------
 
-It is also capable of generating quadrilateral (dominant) meshes:
+One of the features of Gmsh is that it is also capable of generating
+quadrilateral (dominant) meshes, by recombining triangles. We can achieve
+this by changing a parameter on the mesher:
 
-.. GENERATED FROM PYTHON SOURCE LINES 85-94
+.. GENERATED FROM PYTHON SOURCE LINES 122-131
 
 .. code-block:: default
 
@@ -236,16 +275,16 @@ It is also capable of generating quadrilateral (dominant) meshes:
 
 
 
-.. image-sg:: /examples/images/sphx_glr_gmsh-basic_003.png
+.. image-sg:: /examples/images/sphx_glr_gmsh-basic_004.png
    :alt: gmsh basic
-   :srcset: /examples/images/sphx_glr_gmsh-basic_003.png
+   :srcset: /examples/images/sphx_glr_gmsh-basic_004.png
    :class: sphx-glr-single-img
 
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 95-100
+.. GENERATED FROM PYTHON SOURCE LINES 132-137
 
 Writing to file
 ---------------
@@ -253,7 +292,7 @@ It's also possible to use the Python bindings to write a Gmsh ``.msh`` file.
 This file can be opened using the Gmsh GUI to e.g. inspect the generated
 mesh.
 
-.. GENERATED FROM PYTHON SOURCE LINES 100-102
+.. GENERATED FROM PYTHON SOURCE LINES 137-140
 
 .. code-block:: default
 
@@ -267,9 +306,22 @@ mesh.
 
 
 
+.. GENERATED FROM PYTHON SOURCE LINES 141-150
+
+Conclusion
+----------
+
+In real use, the vector geometries will be more complex, and not based on
+just a few coordinate pairs. Such cases are presented in the other examples,
+but the same principles apply: we may use polygons, linestrings and points
+with associated cell sizes to steer the triangulation; unlike Triangle,
+for Gmsh cell sizes can associated to linestrings and points, not just
+polygons.
+
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.982 seconds)
+   **Total running time of the script:** ( 0 minutes  0.744 seconds)
 
 
 .. _sphx_glr_download_examples_gmsh-basic.py:

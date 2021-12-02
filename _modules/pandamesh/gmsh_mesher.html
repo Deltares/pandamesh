@@ -63,19 +63,13 @@
     <div id="navbar-menu" class="collapse navbar-collapse">
       <ul id="navbar-main-elements" class="navbar-nav">
         <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../introduction.html">
-  Introduction
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../examples/index.html">
   Examples
  </a>
 </li>
 
 <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../../api.html">
+ <a class="reference internal nav-link" href="../../api/index.html">
   API Reference
  </a>
 </li>
@@ -154,7 +148,7 @@
 <span class="kn">from</span> <span class="nn">.gmsh_geometry</span> <span class="kn">import</span> <span class="n">add_field_geometry</span><span class="p">,</span> <span class="n">add_geometry</span>
 
 
-<div class="viewcode-block" id="gmsh_env"><a class="viewcode-back" href="../../api.html#pandamesh.gmsh_env">[docs]</a><span class="nd">@contextmanager</span>
+<div class="viewcode-block" id="gmsh_env"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.gmsh_env">[docs]</a><span class="nd">@contextmanager</span>
 <span class="k">def</span> <span class="nf">gmsh_env</span><span class="p">():</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
@@ -165,7 +159,40 @@
         <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="MeshAlgorithm"><a class="viewcode-back" href="../../api.html#pandamesh.MeshAlgorithm">[docs]</a><span class="k">class</span> <span class="nc">MeshAlgorithm</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<div class="viewcode-block" id="MeshAlgorithm"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.MeshAlgorithm">[docs]</a><span class="k">class</span> <span class="nc">MeshAlgorithm</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Each algorithm has its own advantages and disadvantages.</span>
+
+<span class="sd">    For all 2D unstructured algorithms a Delaunay mesh that contains all</span>
+<span class="sd">    the points of the 1D mesh is initially constructed using a</span>
+<span class="sd">    divide-and-conquer algorithm. Missing edges are recovered using edge</span>
+<span class="sd">    swaps. After this initial step several algorithms can be applied to</span>
+<span class="sd">    generate the final mesh:</span>
+
+<span class="sd">    * The MeshAdapt algorithm is based on local mesh modifications. This</span>
+<span class="sd">      technique makes use of edge swaps, splits, and collapses: long edges</span>
+<span class="sd">      are split, short edges are collapsed, and edges are swapped if a</span>
+<span class="sd">      better geometrical configuration is obtained.</span>
+<span class="sd">    * The Delaunay algorithm is inspired by the work of the GAMMA team at</span>
+<span class="sd">      INRIA. New points are inserted sequentially at the circumcenter of</span>
+<span class="sd">      the element that has the largest adimensional circumradius. The mesh</span>
+<span class="sd">      is then reconnected using an anisotropic Delaunay criterion.</span>
+<span class="sd">    * The Frontal-Delaunay algorithm is inspired by the work of S. Rebay.</span>
+<span class="sd">    * Other experimental algorithms with specific features are also</span>
+<span class="sd">      available. In particular, Frontal-Delaunay for Quads is a variant of</span>
+<span class="sd">      the Frontal-Delaunay algorithm aiming at generating right-angle</span>
+<span class="sd">      triangles suitable for recombination; and BAMG allows to generate</span>
+<span class="sd">      anisotropic triangulations.</span>
+
+<span class="sd">    For very complex curved surfaces the MeshAdapt algorithm is the most robust.</span>
+<span class="sd">    When high element quality is important, the Frontal-Delaunay algorithm should</span>
+<span class="sd">    be tried. For very large meshes of plane surfaces the Delaunay algorithm is</span>
+<span class="sd">    the fastest; it usually also handles complex mesh size fields better than the</span>
+<span class="sd">    Frontal-Delaunay. When the Delaunay or Frontal-Delaunay algorithms fail,</span>
+<span class="sd">    MeshAdapt is automatically triggered. The Automatic algorithm uses</span>
+<span class="sd">    Delaunay for plane surfaces and MeshAdapt for all other surfaces.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">MESH_ADAPT</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">AUTOMATIC</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">INITIAL_MESH_ONLY</span> <span class="o">=</span> <span class="mi">3</span>
@@ -175,29 +202,73 @@
     <span class="n">PACKING_OF_PARALLELLOGRAMS</span> <span class="o">=</span> <span class="mi">9</span></div>
 
 
-<div class="viewcode-block" id="SubdivisionAlgorithm"><a class="viewcode-back" href="../../api.html#pandamesh.SubdivisionAlgorithm">[docs]</a><span class="k">class</span> <span class="nc">SubdivisionAlgorithm</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<div class="viewcode-block" id="SubdivisionAlgorithm"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.SubdivisionAlgorithm">[docs]</a><span class="k">class</span> <span class="nc">SubdivisionAlgorithm</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    All meshes can be subdivided to generate fully quadrangular cells.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">NONE</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">ALL_QUADRANGLES</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">BARYCENTRIC</span> <span class="o">=</span> <span class="mi">3</span></div>
 
 
-<div class="viewcode-block" id="FieldCombination"><a class="viewcode-back" href="../../api.html#pandamesh.FieldCombination">[docs]</a><span class="k">class</span> <span class="nc">FieldCombination</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<div class="viewcode-block" id="FieldCombination"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.FieldCombination">[docs]</a><span class="k">class</span> <span class="nc">FieldCombination</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Controls how cell size fields are combined when they are found at the</span>
+<span class="sd">    same location.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">MIN</span> <span class="o">=</span> <span class="s2">&quot;Min&quot;</span>
     <span class="n">MAX</span> <span class="o">=</span> <span class="s2">&quot;Max&quot;</span>
     <span class="n">MEAN</span> <span class="o">=</span> <span class="s2">&quot;Mean&quot;</span></div>
 
 
-<span class="k">def</span> <span class="nf">coerce_field</span><span class="p">(</span><span class="n">field</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<div class="viewcode-block" id="coerce_field"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.coerce_field">[docs]</a><span class="k">def</span> <span class="nf">coerce_field</span><span class="p">(</span><span class="n">field</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;field must be a dictionary or a valid JSON dictionary string&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
         <span class="n">field</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">field</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">field</span>
+    <span class="k">return</span> <span class="n">field</span></div>
 
 
-<div class="viewcode-block" id="GmshMesher"><a class="viewcode-back" href="../../api.html#pandamesh.GmshMesher">[docs]</a><span class="k">class</span> <span class="nc">GmshMesher</span><span class="p">:</span>
+<div class="viewcode-block" id="GmshMesher"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher">[docs]</a><span class="k">class</span> <span class="nc">GmshMesher</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper for the python bindings to Gmsh. This class must be initialized</span>
+<span class="sd">    with a geopandas GeoDataFrame containing at least one polygon, and a column</span>
+<span class="sd">    named ``&quot;cellsize&quot;``.</span>
+
+<span class="sd">    Optionally, multiple polygons with different cell sizes can be included in</span>
+<span class="sd">    the geodataframe. These can be used to achieve local mesh remfinement.</span>
+
+<span class="sd">    Linestrings and points may also be included. The segments of linestrings</span>
+<span class="sd">    will be directly forced into the triangulation. Points can also be forced</span>
+<span class="sd">    into the triangulation. Unlike Triangle, the cell size values associated</span>
+<span class="sd">    with these geometries **will** be used.</span>
+
+<span class="sd">    Gmsh cannot automatically resolve overlapping polygons, or points</span>
+<span class="sd">    located exactly on segments. During initialization, the geometries of</span>
+<span class="sd">    the geodataframe are checked:</span>
+
+<span class="sd">        * Polygons should not have any overlap with each other.</span>
+<span class="sd">        * Linestrings should not intersect each other.</span>
+<span class="sd">        * Every linestring should be fully contained by a single polygon;</span>
+<span class="sd">          a linestring may not intersect two or more polygons.</span>
+<span class="sd">        * Linestrings and points should not &quot;touch&quot; / be located on</span>
+<span class="sd">          polygon borders.</span>
+<span class="sd">        * Holes in polygons are fully supported, but they most not contain</span>
+<span class="sd">          any linestrings or points.</span>
+
+<span class="sd">    If such cases are detected, the initialization will error.</span>
+
+<span class="sd">    For more details on Gmsh, see:</span>
+<span class="sd">    https://gmsh.info/doc/texinfo/gmsh.html</span>
+
+<span class="sd">    A helpful index can be found near the bottom:</span>
+<span class="sd">    https://gmsh.info/doc/texinfo/gmsh.html#Syntax-index</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_gmsh</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_gmsh</span><span class="p">()</span>
         <span class="n">check_geodataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
         <span class="n">polygons</span><span class="p">,</span> <span class="n">linestrings</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">separate</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
 
@@ -215,25 +286,31 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">mesh_algorithm</span> <span class="o">=</span> <span class="n">MeshAlgorithm</span><span class="o">.</span><span class="n">AUTOMATIC</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">recombine_all</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="c1"># self.force_geometry = True  # not implemented yet, see below</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">characteristic_length_from_boundary</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">characteristic_length_from_points</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">characteristic_length_from_curvature</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mesh_size_extend_from_boundary</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mesh_size_from_points</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mesh_size_from_curvature</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">field_combination</span> <span class="o">=</span> <span class="n">FieldCombination</span><span class="o">.</span><span class="n">MIN</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">subdivision_algorithm</span> <span class="o">=</span> <span class="n">SubdivisionAlgorithm</span><span class="o">.</span><span class="n">NONE</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-<div class="viewcode-block" id="GmshMesher.initialize_gmsh"><a class="viewcode-back" href="../../api.html#pandamesh.GmshMesher.initialize_gmsh">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">initialize_gmsh</span><span class="p">():</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_initialize_gmsh</span><span class="p">():</span>
         <span class="c1"># Calling finalize before will ensure no warning is given about gmsh</span>
         <span class="c1"># already being initialized.</span>
-        <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;General.Terminal&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
+        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;General.Terminal&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<div class="viewcode-block" id="GmshMesher.finalize_gmsh"><a class="viewcode-back" href="../../api.html#pandamesh.GmshMesher.finalize_gmsh">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="GmshMesher.finalize_gmsh"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.finalize_gmsh">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">finalize_gmsh</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finalize Gmsh.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span></div>
 
     <span class="c1"># Properties</span>
@@ -241,6 +318,21 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">mesh_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Can be set to one of :py:class:`pandamesh.MeshAlgorithm`:</span>
+
+<span class="sd">        .. code::</span>
+
+<span class="sd">            MESH_ADAPT = 1</span>
+<span class="sd">            AUTOMATIC = 2</span>
+<span class="sd">            INITIAL_MESH_ONLY = 3</span>
+<span class="sd">            FRONTAL_DELAUNAY = 5</span>
+<span class="sd">            BAMG = 7</span>
+<span class="sd">            FRONTAL_DELAUNAY_FOR_QUADS = 8</span>
+<span class="sd">            PACKING_OF_PARALLELLOGRAMS = 9</span>
+
+<span class="sd">        Each algorithm has its own advantages and disadvantages.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">getNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.Algorithm&quot;</span><span class="p">)</span>
 
     <span class="nd">@mesh_algorithm</span><span class="o">.</span><span class="n">setter</span>
@@ -251,6 +343,10 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">recombine_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply recombination algorithm to all surfaces, ignoring per-surface</span>
+<span class="sd">        spec.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recombine_all</span>
 
     <span class="nd">@recombine_all</span><span class="o">.</span><span class="n">setter</span>
@@ -275,40 +371,67 @@
         <span class="c1"># self._force_geometry = value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">characteristic_length_from_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_characteristic_length_from_boundary</span>
+    <span class="k">def</span> <span class="nf">mesh_size_extend_from_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Forces the mesh size to be extended from the boundary, or not, per</span>
+<span class="sd">        surface.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mesh_size_extend_from_boundary</span>
 
-    <span class="nd">@characteristic_length_from_boundary</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">characteristic_length_from_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="nd">@mesh_size_extend_from_boundary</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">mesh_size_extend_from_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;characteristic_length_from_boundary must be a bool&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_characteristic_length_from_boundary</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.CharacteristicLengthExtendFromBoundary&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;mesh_size_extend_from_boundary must be a bool&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mesh_size_extend_from_boundary</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.MeshSizeExtendFromBoundary&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">characteristic_length_from_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_characteristic_length_from_points</span>
+    <span class="k">def</span> <span class="nf">mesh_size_from_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute mesh element sizes from values given at geometry points.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mesh_size_from_points</span>
 
-    <span class="nd">@characteristic_length_from_points</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">characteristic_length_from_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="nd">@mesh_size_from_points</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">mesh_size_from_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;characteristic_length_from_boundary must be a bool&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_characteristic_length_from_points</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.CharacteristicLengthFromPoints&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;mesh_size_from_points must be a bool&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mesh_size_from_points</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.MeshSizeFromPoints&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">characteristic_length_from_curvature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_characteristic_length_from_curvature</span>
+    <span class="k">def</span> <span class="nf">mesh_size_from_curvature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Automatically compute mesh element sizes from curvature, using the value as</span>
+<span class="sd">        the target number of elements per 2 * Pi radians</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mesh_size_from_curvature</span>
 
-    <span class="nd">@characteristic_length_from_curvature</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">characteristic_length_from_curvature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="nd">@mesh_size_from_curvature</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">mesh_size_from_curvature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Automatically compute mesh element sizes from curvature, using the</span>
+<span class="sd">        value as the target number of elements per 2 * Pi radians.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;characteristic_length_from_curvature must be a bool&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_characteristic_length_from_curvature</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.CharacteristicLengthFromCurvature&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;mesh_size_from_curvature must be a bool&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mesh_size_from_curvature</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.MeshSizeFromCurvature&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">field_combination</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Controls how cell size fields are combined when they are found at the</span>
+<span class="sd">        same location. Can be set to one of</span>
+<span class="sd">        :py:class:`pandamesh.FieldCombination`:</span>
+
+<span class="sd">        .. code::</span>
+
+<span class="sd">            MIN = &quot;Min&quot;</span>
+<span class="sd">            MAX = &quot;Max&quot;</span>
+<span class="sd">            MEAN = &quot;Mean&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_combination</span>
 
     <span class="nd">@field_combination</span><span class="o">.</span><span class="n">setter</span>
@@ -319,7 +442,18 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">subdivision_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_subdivision_algorithm</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        All meshes can be subdivided to generate fully quadrangular cells. Can</span>
+<span class="sd">        be set to one of :py:class:`pandamesh.SubdivisionAlgorithm`:</span>
+
+<span class="sd">        .. code::</span>
+
+<span class="sd">            NONE = 0</span>
+<span class="sd">            ALL_QUADRANGLES = 1</span>
+<span class="sd">            BARYCENTRIC = 3</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subdivision_algorithm</span>
 
     <span class="nd">@subdivision_algorithm</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">subdivision_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
@@ -344,7 +478,10 @@
         <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">setNumbers</span><span class="p">(</span><span class="n">field_id</span><span class="p">,</span> <span class="s2">&quot;FieldsList&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields_list</span><span class="p">)</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">setAsBackgroundMesh</span><span class="p">(</span><span class="n">field_id</span><span class="p">)</span>
 
-<div class="viewcode-block" id="GmshMesher.clear_fields"><a class="viewcode-back" href="../../api.html#pandamesh.GmshMesher.clear_fields">[docs]</a>    <span class="k">def</span> <span class="nf">clear_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="GmshMesher.clear_fields"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.clear_fields">[docs]</a>    <span class="k">def</span> <span class="nf">clear_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clears all cell size fields from the mesher.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">for</span> <span class="n">field_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields_list</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_distance_fields_list</span><span class="p">:</span>
             <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">field_id</span><span class="p">)</span>
@@ -352,9 +489,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_distance_fields_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_current_field_id</span> <span class="o">=</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="GmshMesher.add_distance_field"><a class="viewcode-back" href="../../api.html#pandamesh.GmshMesher.add_distance_field">[docs]</a>    <span class="k">def</span> <span class="nf">add_distance_field</span><span class="p">(</span>
+<div class="viewcode-block" id="GmshMesher.add_distance_field"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.add_distance_field">[docs]</a>    <span class="k">def</span> <span class="nf">add_distance_field</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">minimum_cellsize</span><span class="p">:</span> <span class="nb">float</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a distance field to the mesher.</span>
+
+<span class="sd">        The of geometry of these fields are not forced into the mesh, but they</span>
+<span class="sd">        can be used to specify zones of with cell sizes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        gdf: geopandas.GeoDataFrame</span>
+<span class="sd">            Location and cell size of the fields, as vector data.</span>
+<span class="sd">        minimum_cellsize: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s2">&quot;field&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gdf</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;field column is missing from geodataframe&quot;</span><span class="p">)</span>
 
@@ -386,7 +535,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">gdf</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="GmshMesher.add_structured_field"><a class="viewcode-back" href="../../api.html#pandamesh.GmshMesher.add_structured_field">[docs]</a>    <span class="k">def</span> <span class="nf">add_structured_field</span><span class="p">(</span>
+<div class="viewcode-block" id="GmshMesher.add_structured_field"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.add_structured_field">[docs]</a>    <span class="k">def</span> <span class="nf">add_structured_field</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">cellsize</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span>
         <span class="n">xmin</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -395,6 +544,27 @@
         <span class="n">dy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">outside_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a structured field specifying cell sizes. Gmsh will interpolate between</span>
+<span class="sd">        the points to determine the desired cell size.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        cellsize: FloatArray with shape ``(n_y, n_x``)</span>
+<span class="sd">            Specifies the cell size on a structured grid. The location of this grid</span>
+<span class="sd">            is determined by ``xmin, ymin, dx, dy``.</span>
+<span class="sd">        xmin: float</span>
+<span class="sd">            x-origin.</span>
+<span class="sd">        ymin: float</span>
+<span class="sd">            y-origin.</span>
+<span class="sd">        dx: float</span>
+<span class="sd">            Spacing along the x-axis.</span>
+<span class="sd">        dy: float</span>
+<span class="sd">            Spacing along the y-axis.</span>
+<span class="sd">        outside_value: Union[float, None]</span>
+<span class="sd">            Value outside of the window ``(xmin, xmax)`` and ``(ymin, ymax)``.</span>
+<span class="sd">            Default value is None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">outside_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">set_outside_value</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
@@ -416,13 +586,13 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fields_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field_id</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="GmshMesher.vertices"><a class="viewcode-back" href="../../api.html#pandamesh.GmshMesher.vertices">[docs]</a>    <span class="k">def</span> <span class="nf">vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># getNodes returns: node_tags, coord, parametric_coord</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
         <span class="c1"># Return x and y</span>
-        <span class="k">return</span> <span class="n">vertices</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="n">vertices</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 
-<div class="viewcode-block" id="GmshMesher.faces"><a class="viewcode-back" href="../../api.html#pandamesh.GmshMesher.faces">[docs]</a>    <span class="k">def</span> <span class="nf">faces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_faces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">element_types</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">node_tags</span> <span class="o">=</span> <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">getElements</span><span class="p">()</span>
         <span class="n">tags</span> <span class="o">=</span> <span class="p">{</span><span class="n">etype</span><span class="p">:</span> <span class="n">tags</span> <span class="k">for</span> <span class="n">etype</span><span class="p">,</span> <span class="n">tags</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">element_types</span><span class="p">,</span> <span class="n">node_tags</span><span class="p">)}</span>
         <span class="n">_TRIANGLE</span> <span class="o">=</span> <span class="mi">2</span>
@@ -444,16 +614,31 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No triangles or quads in mesh&quot;</span><span class="p">)</span>
         <span class="c1"># convert to 0-based index</span>
-        <span class="k">return</span> <span class="n">faces</span> <span class="o">-</span> <span class="mi">1</span></div>
+        <span class="k">return</span> <span class="n">faces</span> <span class="o">-</span> <span class="mi">1</span>
 
-<div class="viewcode-block" id="GmshMesher.generate"><a class="viewcode-back" href="../../api.html#pandamesh.GmshMesher.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">FloatArray</span><span class="p">,</span> <span class="n">IntArray</span><span class="p">]:</span>
+<div class="viewcode-block" id="GmshMesher.generate"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">FloatArray</span><span class="p">,</span> <span class="n">IntArray</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate a mesh of triangles or quadrangles.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        vertices: np.ndarray of floats with shape ``(n_vertex, 2)``</span>
+<span class="sd">        faces: np.ndarray of integers with shape ``(n_face, nmax_per_face)``</span>
+<span class="sd">            ``nmax_per_face`` is 3 for exclusively triangles and 4 if</span>
+<span class="sd">            quadrangles are included. A fill value of -1 is used as a last</span>
+<span class="sd">            entry for triangles in that case.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_combine_fields</span><span class="p">()</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">faces</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertices</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_faces</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="GmshMesher.write"><a class="viewcode-back" href="../../api.html#pandamesh.GmshMesher.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
+<div class="viewcode-block" id="GmshMesher.write"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes a gmsh .msh file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        path: Union[str, pathlib.Path</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div></div>
 </pre></div>

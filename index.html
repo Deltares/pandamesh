@@ -39,7 +39,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction" href="introduction.html" />
+    <link rel="next" title="Examples" href="examples/index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -65,19 +65,13 @@
     <div id="navbar-menu" class="collapse navbar-collapse">
       <ul id="navbar-main-elements" class="navbar-nav">
         <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="introduction.html">
-  Introduction
- </a>
-</li>
-
-<li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="examples/index.html">
   Examples
  </a>
 </li>
 
 <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="api.html">
+ <a class="reference internal nav-link" href="api/index.html">
   API Reference
  </a>
 </li>
@@ -129,6 +123,28 @@
    Installation
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#other-projects">
+   Other projects
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pygmsh">
+     pygmsh
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#qgis-gsmh">
+     qgis-gsmh
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#shingle">
+     Shingle
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
 </nav>
@@ -152,13 +168,79 @@
                 
   <section id="pandamesh">
 <h1>Pandamesh<a class="headerlink" href="#pandamesh" title="Permalink to this headline">¶</a></h1>
+<p>This package translates geospatial vector data, presented as <a class="reference external" href="https://geopandas.org/">geopandas</a>
+<a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html">GeoDataFrames</a>, to unstructured meshes using the open source high quality
+mesh generators:</p>
+<ul class="simple">
+<li><p>Christophe Geuzaine and Jean-François Remacle’s <a class="reference external" href="https://gmsh.info/">Gmsh</a></p></li>
+<li><p>Jonathan Shewchuk’s <a class="reference external" href="https://www.cs.cmu.edu/~quake/triangle.html">Triangle</a></p></li>
+</ul>
+<p>utilizing the respective Python API’s, available at:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pypi.org/project/gmsh/">https://pypi.org/project/gmsh/</a></p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/triangle/">https://pypi.org/project/triangle/</a></p></li>
+</ul>
+<p>For completeness, the source code of both projects can be found at:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gitlab.onelab.info/gmsh/gmsh">https://gitlab.onelab.info/gmsh/gmsh</a>, under <code class="docutils literal notranslate"><span class="pre">api/gmsh.py</span></code></p></li>
+<li><p><a class="reference external" href="https://github.com/drufat/triangle">https://github.com/drufat/triangle</a></p></li>
+</ul>
+<p>These APIs are wrapped in two lightweight classes:
+<code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.TriangleMesher</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GmshMesher</span></code>. Both
+are initialized with a GeoDataFrame defining the geometry features of the mesh.
+During initialization, geometries are checked for overlaps and intersections,
+as the mesh generators cannot deal with these.  Generated meshes are returned
+as two numpy arrays: the coordinates of the vertices, and the connectivity of
+the mesh faces to these vertices (as is <a class="reference external" href="https://ugrid-conventions.github.io/ugrid-conventions/">usual</a> for many unstructured grid
+representations).</p>
+<p>GeoPandas is not suited for geometries that “wrap around” around the world.
+Consequently, this package cannot generate meshes for e.g. a sphere. There are
+other packages with suchfunctionality, see below.</p>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install pandamesh</span>
 </pre></div>
 </div>
+</section>
+<section id="other-projects">
+<h2>Other projects<a class="headerlink" href="#other-projects" title="Permalink to this headline">¶</a></h2>
+<p>None of the package below provide a simple scripting based approach to
+converting 2D vector geometries to 2D unstructured grids.</p>
+<p>See also <a class="reference external" href="https://github.com/nschloe/awesome-scientific-computing#meshing">this list</a> for many other mesh generation tools.</p>
+<section id="pygmsh">
+<h3>pygmsh<a class="headerlink" href="#pygmsh" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://github.com/nschloe/pygmsh">pygmsh Python package</a>  provides useful abstractions from Gmsh’s own
+Python interface so you can create complex geometries more easily. It also
+provides tools for 3D operations (e.g. extrusions).</p>
+</section>
+<section id="qgis-gsmh">
+<h3>qgis-gsmh<a class="headerlink" href="#qgis-gsmh" title="Permalink to this headline">¶</a></h3>
+<p>qgis-gmsh generates geometry input files for the GMSH mesh generator and
+converts the Gmsh mesh files to shapefiles that can be imported into QGIS.</p>
+<ul class="simple">
+<li><p>Lambrechts, J., Comblen, R., Legat, V., Geuzaine, C., &amp; Remacle, J. F. (2008).
+Multiscale mesh generation on the sphere. Ocean Dynamics, 58(5-6), 461-473.</p></li>
+<li><p>Remacle, J. F., &amp; Lambrechts, J. (2018). Fast and robust mesh generation on
+the sphere—Application to coastal domains. Computer-Aided Design, 103, 14-23.
+<a class="reference external" href="https://doi.org/10.1016/j.cad.2018.03.002">https://doi.org/10.1016/j.cad.2018.03.002</a></p></li>
+</ul>
+<p>Source: <a class="reference external" href="https://github.com/ccorail/qgis-gmsh">https://github.com/ccorail/qgis-gmsh</a></p>
+</section>
+<section id="shingle">
+<h3>Shingle<a class="headerlink" href="#shingle" title="Permalink to this headline">¶</a></h3>
+<p>Shingle provides generalised self-consistent and automated domain
+discretisation for multi-scale geophysical models.</p>
+<ul class="simple">
+<li><p>Candy, A. S., &amp; Pietrzak, J. D. (2018). Shingle 2.0: generalising
+self-consistent and automated domain discretisation for multi-scale
+geophysical models. Geoscientific Model Development, 11(1), 213-234.
+<a class="reference external" href="https://doi.org/10.5194/gmd-11-213-2018">https://doi.org/10.5194/gmd-11-213-2018</a></p></li>
+</ul>
+<p>Source: <a class="reference external" href="https://github.com/shingleproject/Shingle">https://github.com/shingleproject/Shingle</a>
+Website: <a class="reference external" href="http://shingleproject.org/index_shingle1.0.html">http://shingleproject.org/index_shingle1.0.html</a></p>
 <div class="toctree-wrapper compound">
 </div>
+</section>
 </section>
 </section>
 
@@ -168,10 +250,10 @@
               
               <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="introduction.html" title="next page">
+    <a class='right-next' id="next-link" href="examples/index.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction</p>
+        <p class="prev-next-title">Examples</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

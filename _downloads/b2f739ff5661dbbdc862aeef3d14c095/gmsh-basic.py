@@ -8,12 +8,12 @@ combination with polygon, point, and linestring geometries represented by
 geopandas.
 
 The :py:class:`GmshMesher` supports the geometry show in the basic Triangle
-example. Not all of those are repeated here, rather we focus on some of the
-additional features that Gmsh provides.
+example and has a number of additional features.
 """
 # %%
 import geopandas as gpd
 import matplotlib.pyplot as plt
+import numpy as np
 import shapely.geometry as sg
 
 import pandamesh as pm
@@ -53,7 +53,7 @@ pm.plot(vertices, triangles)
 
 line = sg.LineString([(2.0, 8.0), (8.0, 2.0)])
 gdf = gpd.GeoDataFrame(geometry=[polygon, line])
-gdf["cellsize"] = [2.0, 0.2]
+gdf["cellsize"] = [2.0, 0.5]
 
 fig, (ax0, ax1) = plt.subplots(ncols=2)
 
@@ -78,10 +78,47 @@ pm.plot(vertices, triangles, ax=ax1)
 print(mesher)
 
 # %%
+# The parameters of Gmsh differ from Triangle, but they work the same: they can
+# be altered after initialization to control the triangulation.
+#
+# Forcing points, lines, local refinement
+# ---------------------------------------
+#
+# We can force points and lines into the triangulation:
+
+outer = [(0.0, 0.0), (10.0, 0.0), (10.0, 10.0), (0.0, 10.0)]
+inner = [(3.0, 3.0), (7.0, 3.0), (7.0, 7.0), (3.0, 7.0)]
+donut = sg.Polygon(shell=outer, holes=[inner])
+refined = sg.Polygon(inner)
+
+y = np.arange(0.5, 10.0, 0.5)
+x = np.full(y.size, 1.0)
+points = gpd.points_from_xy(x, y)
+
+line = sg.LineString(
+    [
+        [9.0, 2.0],
+        [9.0, 8.0],
+    ]
+)
+
+gdf = gpd.GeoDataFrame(geometry=[donut, refined, line, *points])
+gdf["cellsize"] = [2.0, 0.5, 2.0] + (len(points) * [2.0])
+
+mesher = pm.GmshMesher(gdf)
+vertices, triangles = mesher.generate()
+
+fig, ax = plt.subplots()
+pm.plot(vertices, triangles, ax=ax)
+gdf.plot(facecolor="none", edgecolor="red", ax=ax)
+
+# %%
 # Quadrilateral meshes
 # --------------------
 #
-# It is also capable of generating quadrilateral (dominant) meshes:
+# One of the features of Gmsh is that it is also capable of generating
+# quadrilateral (dominant) meshes, by recombining triangles. We can achieve
+# this by changing a parameter on the mesher:
 
 gdf = gpd.GeoDataFrame(geometry=[polygon])
 gdf["cellsize"] = 2.0
@@ -99,4 +136,14 @@ pm.plot(vertices, faces)
 # mesh.
 
 mesher.write("my-mesh.msh")
+
 # %%
+# Conclusion
+# ----------
+#
+# In real use, the vector geometries will be more complex, and not based on
+# just a few coordinate pairs. Such cases are presented in the other examples,
+# but the same principles apply: we may use polygons, linestrings and points
+# with associated cell sizes to steer the triangulation; unlike Triangle,
+# for Gmsh cell sizes can associated to linestrings and points, not just
+# polygons.

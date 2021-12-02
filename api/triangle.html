@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Triangle &#8212; pandamesh 0.1.0 documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/theme-deltares.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gmsh" href="gmsh.html" />
+    <link rel="prev" title="API Reference" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+  <nav class="navbar navbar-dark navbar-expand-lg bg-deltares fixed-top bd-navbar shadow" id="navbar-main"><div class="container-xl">
+
+    <a class="navbar-brand" href="../index.html">
+    <p style="color:#fff;font-size:25px;" class="title">pandamesh</p>
+    </a>
+
+    <a class="navbar-brand" href="../index.html">
+    <img src="../_static/pandamesh-low-res.svg" class="logo" alt="logo" />
+    </a>
+  
+    <div id="navbar-menu" class="collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav">
+        <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../examples/index.html">
+  Examples
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="index.html">
+  API Reference
+ </a>
+</li>
+
+        
+      </ul>
+    </div>
+
+
+    <a class="navbar-brand" href="https://www.deltares.nl/en/">
+    <img src="../_static/deltares-white.svg" class="logo" alt="logo" />
+    </a>
+
+</div>
+  </nav>
+
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Triangle
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gmsh.html">
+   Gmsh
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="module-pandamesh.triangle_mesher">
+<span id="triangle"></span><h1>Triangle<a class="headerlink" href="#module-pandamesh.triangle_mesher" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.DelaunayAlgorithm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.triangle_mesher.</span></span><span class="sig-name descname"><span class="pre">DelaunayAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/triangle_mesher.html#DelaunayAlgorithm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.triangle_mesher.DelaunayAlgorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.DelaunayAlgorithm.DIVIDE_AND_CONQUER">
+<span class="sig-name descname"><span class="pre">DIVIDE_AND_CONQUER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#pandamesh.triangle_mesher.DelaunayAlgorithm.DIVIDE_AND_CONQUER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.DelaunayAlgorithm.INCREMENTAL">
+<span class="sig-name descname"><span class="pre">INCREMENTAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'i'</span></em><a class="headerlink" href="#pandamesh.triangle_mesher.DelaunayAlgorithm.INCREMENTAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.DelaunayAlgorithm.SWEEPLINE">
+<span class="sig-name descname"><span class="pre">SWEEPLINE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'F'</span></em><a class="headerlink" href="#pandamesh.triangle_mesher.DelaunayAlgorithm.SWEEPLINE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.TriangleMesher">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.triangle_mesher.</span></span><span class="sig-name descname"><span class="pre">TriangleMesher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">geopandas.geodataframe.GeoDataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/triangle_mesher.html#TriangleMesher"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.triangle_mesher.TriangleMesher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for the python bindings to Triangle. This class must be initialized
+with a geopandas GeoDataFrame containing at least one polygon, and a column
+named <code class="docutils literal notranslate"><span class="pre">&quot;cellsize&quot;</span></code>.</p>
+<p>Optionally, multiple polygons with different cell sizes can be included in
+the geodataframe. These can be used to achieve local mesh remfinement.</p>
+<p>Linestrings and points may also be included. The segments of linestrings
+will be directly forced into the triangulation. Points can also be forced
+into the triangulation. The cell size values associated with these
+geometries willl not be used.</p>
+<p>Triangle cannot automatically resolve overlapping polygons, or points
+located exactly on segments. During initialization, the geometries of
+the geodataframe are checked:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Polygons should not have any overlap with each other.</p></li>
+<li><p>Linestrings should not intersect each other.</p></li>
+<li><p>Every linestring should be fully contained by a single polygon;
+a linestring may not intersect two or more polygons.</p></li>
+<li><p>Linestrings and points should not “touch” / be located on
+polygon borders.</p></li>
+<li><p>Holes in polygons are fully supported, but they most not contain
+any linestrings or points.</p></li>
+</ul>
+</div></blockquote>
+<p>If such cases are detected, the initialization will error.</p>
+<p>For more details on Triangle, see:
+<a class="reference external" href="https://www.cs.cmu.edu/~quake/triangle.defs.html">https://www.cs.cmu.edu/~quake/triangle.defs.html</a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.TriangleMesher.conforming_delaunay">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">conforming_delaunay</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pandamesh.triangle_mesher.TriangleMesher.conforming_delaunay" title="Permalink to this definition">¶</a></dt>
+<dd><p>use this switch if you want all triangles in the
+mesh to be Delaunay, and not just constrained Delaunay; or if you want
+to ensure that all Voronoi vertices lie within the triangulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Conforming Delaunay</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.TriangleMesher.consistency_check">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">consistency_check</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pandamesh.triangle_mesher.TriangleMesher.consistency_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the consistency of the final mesh. Uses exact arithmetic for
+checking, even if <code class="docutils literal notranslate"><span class="pre">suppress_exact_arithmetic</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+Useful if you suspect Triangle is buggy.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.TriangleMesher.delaunay_algorithm">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delaunay_algorithm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pandamesh.triangle_mesher.DelaunayAlgorithm" title="pandamesh.triangle_mesher.DelaunayAlgorithm"><span class="pre">pandamesh.triangle_mesher.DelaunayAlgorithm</span></a></em><a class="headerlink" href="#pandamesh.triangle_mesher.TriangleMesher.delaunay_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default algorithm.</p>
+<p><code class="docutils literal notranslate"><span class="pre">DelaunayAlgoritm.INCREMENTAL</span></code>: Uses the incremental algorithm for
+Delaunay triangulation, rather than the divide-and-conquer algorithm.</p>
+<p><code class="docutils literal notranslate"><span class="pre">DelaunayAlgoritm.SWEEPLINE</span></code>: Uses Steven Fortune’s sweepline
+algorithm for Delaunay triangulation, rather than the
+divide-and-conquer algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">DelaunayAlgoritm.DIVIDE_AND_CONQUER</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.TriangleMesher.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pandamesh/triangle_mesher.html#TriangleMesher.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.triangle_mesher.TriangleMesher.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a mesh of triangles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>vertices</strong> (np.ndarray of floats with shape <code class="docutils literal notranslate"><span class="pre">(n_vertex,</span> <span class="pre">2)</span></code>)</p></li>
+<li><p><strong>triangles</strong> (np.ndarray of integers with shape <code class="docutils literal notranslate"><span class="pre">(n_triangle,</span> <span class="pre">3)</span></code>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.TriangleMesher.maximum_steiner_points">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximum_steiner_points</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pandamesh.triangle_mesher.TriangleMesher.maximum_steiner_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the maximum number of added Steiner points</p>
+<p>See:
+<a class="reference external" href="https://www.cs.cmu.edu/~quake/triangle.S.html">https://www.cs.cmu.edu/~quake/triangle.S.html</a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.TriangleMesher.minimum_angle">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">minimum_angle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pandamesh.triangle_mesher.TriangleMesher.minimum_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum allowed angle for any triangle in the mesh.</p>
+<p>See:
+<a class="reference external" href="https://www.cs.cmu.edu/~quake/triangle.q.html">https://www.cs.cmu.edu/~quake/triangle.q.html</a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pandamesh.triangle_mesher.TriangleMesher.suppress_exact_arithmetic">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">suppress_exact_arithmetic</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pandamesh.triangle_mesher.TriangleMesher.suppress_exact_arithmetic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suppresses exact arithmetic.</p>
+<p>See:
+<a class="reference external" href="https://www.cs.cmu.edu/~quake/triangle.exact.html">https://www.cs.cmu.edu/~quake/triangle.exact.html</a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">API Reference</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="gmsh.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Gmsh</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright Huite Bootsma.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.1.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>
