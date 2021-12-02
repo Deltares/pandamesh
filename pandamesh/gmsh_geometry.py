@@ -167,21 +167,6 @@ def embed_where(gdf: gpd.GeoDataFrame, polygons: gpd.GeoDataFrame) -> gpd.GeoDat
     return tmp[["cellsize", "__polygon_id", "geometry"]]
 
 
-def filter_points(
-    points: gpd.GeoDataFrame, polygons: gpd.GeoDataFrame
-) -> Tuple[gpd.GeoDataFrame, gpd.GeoDataFrame]:
-    if len(points) > 0:
-        embedded = embed_where(points, polygons)
-        intersection = gpd.overlay(points, polygons, how="intersection")
-        overload = intersection[~intersection.index.isin(embedded.index)][
-            ["cellsize_1", "geometry"]
-        ]
-        overload = overload.rename(columns={"cellsize_1": "cellsize"})
-    else:  # Return the dummy
-        embedded = overload = points
-    return embedded, overload
-
-
 def add_geometry(
     polygons: gpd.GeoDataFrame, linestrings: gpd.GeoDataFrame, points: gpd.GeoDataFrame
 ):
@@ -190,7 +175,7 @@ def add_geometry(
 
     # Figure out in which polygon the points and linestrings will be embedded.
     linestrings = embed_where(linestrings, polygons)
-    embedded_points, overload_points = filter_points(points, polygons)
+    embedded_points = embed_where(points, polygons)
 
     # Collect all coordinates, and store the length and type of every element
     index, poly_vertices, poly_cellsizes, polygon_features = collect_polygons(
@@ -201,12 +186,6 @@ def add_geometry(
     )
     vertices = np.concatenate(poly_vertices + line_vertices)
     cellsizes = np.concatenate(poly_cellsizes + line_cellsizes)
-
-    # Identify points that already exists, these do not have to be embedded but
-    # their specified cellsize might have to be taken into account.
-    if len(overload_points) > 0:
-        cellsizes = np.append(cellsizes, overload_points["cellsize"].values)
-        vertices = np.append(vertices, collect_points(overload_points))
 
     # Get the unique vertices, and generate the array of indices pointing to
     # them for every feature

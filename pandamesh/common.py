@@ -189,9 +189,9 @@ def separate(
     if not geom_type.isin(acceptable).all():
         raise TypeError(f"Geometry should be one of {acceptable}")
 
-    polygons = gdf[geom_type == "Polygon"]
-    linestrings = gdf[geom_type == "LineString"]
-    points = gdf[geom_type == "Point"]
+    polygons = gdf[geom_type == "Polygon"].copy()
+    linestrings = gdf[geom_type == "LineString"].copy()
+    points = gdf[geom_type == "Point"].copy()
     # Set crs to None to avoid crs warnings on joins and overlays
     polygons.crs = linestrings.crs = points.crs = None
 

@@ -4,12 +4,6 @@ import pytest
 import shapely.geometry as sg
 
 import pandamesh as pm
-from pandamesh.triangle_mesher import (
-    add_linestrings,
-    add_points,
-    add_polygons,
-    polygon_holes,
-)
 
 outer_coords = np.array([(0.0, 0.0), (10.0, 0.0), (10.0, 10.0), (0.0, 10.0)])
 inner_coords = np.array([(3.0, 3.0), (7.0, 3.0), (7.0, 7.0), (3.0, 7.0)])
@@ -32,112 +26,37 @@ def area(vertices, triangles):
     return 0.5 * np.abs(np.cross(u, v))
 
 
-def test_add_linestrings():
-    series = gpd.GeoSeries(data=[line])
-    vertices, segments = add_linestrings(series)
-    expected = np.unique(line_coords, axis=0)
-    expected_segments = np.array([[0, 1]])
-    assert np.allclose(vertices, expected)
-    assert np.array_equal(segments, expected_segments)
-
-    series = gpd.GeoSeries(data=[inner])
-    vertices, segments = add_linestrings(series)
-    expected = np.unique(inner_coords, axis=0)
-    expected_segments = np.array(
-        [
-            [0, 2],
-            [2, 3],
-            [3, 1],
-            [1, 0],
-        ]
-    )
-    assert np.allclose(vertices, expected)
-    assert np.array_equal(segments, expected_segments)
-
-    series = gpd.GeoSeries(data=[outer])
-    vertices, segments = add_linestrings(series)
-    expected = np.unique(outer_coords, axis=0)
-    assert np.allclose(vertices, expected)
-    assert np.array_equal(segments, expected_segments)
-
-    # Empty should work too
-    series = gpd.GeoSeries(data=[])
-    _, _ = add_linestrings(series)
+def triangle_generate(gdf: gpd.GeoDataFrame):
+    mesher = pm.TriangleMesher(gdf)
+    return mesher.generate()
 
 
-def test_add_polygons():
-    gdf = gpd.GeoDataFrame(geometry=[donut])
-    cellsize = 0.5
-    gdf["cellsize"] = cellsize
-    vertices, segments, regions = add_polygons(gdf)
-    expected = np.unique(
-        np.concatenate([outer_coords, inner_coords]),
-        axis=0,
-    )
-    expected_segments = np.array(
-        [
-            [0, 6],
-            [6, 7],
-            [7, 1],
-            [1, 0],
-            [2, 4],
-            [4, 5],
-            [5, 3],
-            [3, 2],
-        ]
-    )
-    x, y = regions[0, :2]
-    assert np.allclose(vertices, expected)
-    assert np.array_equal(segments, expected_segments)
-    assert regions[0, 2] == 0
-    assert regions[0, 3] == 0.5 * cellsize ** 2
-    assert sg.Point(x, y).within(donut)
+def gmsh_generate(gdf: gpd.GeoDataFrame):
+    mesher = pm.GmshMesher(gdf)
+    return mesher.generate()
 
 
-def test_add_points():
-    xy = np.array(
-        [
-            [0.0, 0.0],
-            [1.0, 1.0],
-        ]
-    )
-    gdf = gpd.GeoDataFrame(geometry=gpd.points_from_xy(xy[:, 0], xy[:, 1]))
-    vertices = add_points(gdf)
-    assert np.allclose(vertices, xy)
-
-
-def test_polygon_holes():
-    polygon = sg.Polygon(outer)
-    gdf = gpd.GeoDataFrame(geometry=[polygon])
-    assert polygon_holes(gdf) is None
-
-    gdf = gpd.GeoDataFrame(geometry=[donut])
-    assert len(polygon_holes(gdf)) == 1
-
-    gdf = gpd.GeoDataFrame(geometry=[donut, refined])
-    assert polygon_holes(gdf) is None
-
-
-def test_triangle_basic():
+@pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
+def test_basic(generate):
     polygon = sg.Polygon(outer)
     gdf = gpd.GeoDataFrame(geometry=[polygon])
     gdf["cellsize"] = 1.0
-    mesher = pm.TriangleMesher(gdf)
-    vertices, triangles = mesher.generate()
+    vertices, triangles = generate(gdf)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, polygon.area)
 
 
-def test_triangle_hole():
+@pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
+def test_hole(generate):
     gdf = gpd.GeoDataFrame(geometry=[donut])
     gdf["cellsize"] = 1.0
-    mesher = pm.TriangleMesher(gdf)
-    vertices, triangles = mesher.generate()
+    vertices, triangles = generate(gdf)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, donut.area)
 
 
-def test_triangle_adjacent_donut():
+@pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
+def test_adjacent_donut(generate):
     inner_coords2 = inner_coords.copy()
     outer_coords2 = outer_coords.copy()
     inner_coords2[:, 0] += 10.0
@@ -148,8 +67,7 @@ def test_triangle_adjacent_donut():
 
     gdf = gpd.GeoDataFrame(geometry=[donut, donut2])
     gdf["cellsize"] = [1.0, 0.5]
-    mesher = pm.TriangleMesher(gdf)
-    vertices, triangles = mesher.generate()
+    vertices, triangles = generate(gdf)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, 2 * donut.area)
 
@@ -162,8 +80,7 @@ def test_triangle_adjacent_donut():
     gdf = gpd.GeoDataFrame(geometry=[donut, donut2, line1, line2, *points])
     gdf["cellsize"] = 1.0
 
-    mesher = pm.TriangleMesher(gdf)
-    vertices, triangles = mesher.generate()
+    vertices, triangles = generate(gdf)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, 2 * donut.area)
 
@@ -197,3 +114,28 @@ def test_triangle_properties():
 
     # Check whether the repr method works
     assert isinstance(mesher.__repr__(), str)
+
+
+def test_gmsh_properties():
+    gdf = gpd.GeoDataFrame(geometry=[donut])
+    gdf["cellsize"] = 1.0
+    mesher = pm.GmshMesher(gdf)
+
+    # Set default values for meshing parameters
+    mesher.mesh_algorithm = pm.MeshAlgorithm.FRONTAL_DELAUNAY
+    mesher.recombine_all = False
+    # mesher.force_geometry = True  # not implemented yet
+    mesher.mesh_size_extend_from_boundary = False
+    mesher.mesh_size_from_points = False
+    mesher.mesh_size_from_curvature = True
+    mesher.field_combination = pm.FieldCombination.MEAN
+    mesher.subdivision_algorithm = pm.SubdivisionAlgorithm.BARYCENTRIC
+
+    assert mesher.mesh_algorithm == pm.MeshAlgorithm.FRONTAL_DELAUNAY
+    assert mesher.recombine_all is False
+    # assert mesher.force_geometry = True  # not implemented yet
+    assert mesher.mesh_size_extend_from_boundary is False
+    assert mesher.mesh_size_from_points is False
+    assert mesher.mesh_size_from_curvature is True
+    assert mesher.field_combination == pm.FieldCombination.MEAN
+    assert mesher.subdivision_algorithm == pm.SubdivisionAlgorithm.BARYCENTRIC
