@@ -27,9 +27,9 @@ as two numpy arrays: the coordinates of the vertices, and the connectivity of
 the mesh faces to these vertices (as is `usual`_ for many unstructured grid
 representations).
 
-GeoPandas is not suited for geometries that "wrap around" around the world.
+GeoPandas is not suited for geometries that "wrap around" the world.
 Consequently, this package cannot generate meshes for e.g. a sphere. There are
-other packages with suchfunctionality, see below.
+other packages with such functionality, see below.
 
 Installation
 ------------
