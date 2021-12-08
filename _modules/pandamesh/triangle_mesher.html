@@ -132,6 +132,7 @@
     <span class="n">invalid_option</span><span class="p">,</span>
     <span class="nb">repr</span><span class="p">,</span>
     <span class="n">separate</span><span class="p">,</span>
+    <span class="n">to_ugrid</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.triangle_geometry</span> <span class="kn">import</span> <span class="n">collect_geometry</span><span class="p">,</span> <span class="n">polygon_holes</span>
 
@@ -321,7 +322,10 @@
             <span class="n">tri</span><span class="p">[</span><span class="s2">&quot;regions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regions</span>
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">triangle</span><span class="o">.</span><span class="n">triangulate</span><span class="p">(</span><span class="n">tri</span><span class="o">=</span><span class="n">tri</span><span class="p">,</span> <span class="n">opts</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;vertices&quot;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;triangles&quot;</span><span class="p">]</span></div></div>
+        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;vertices&quot;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;triangles&quot;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="TriangleMesher.generate_ugrid"><a class="viewcode-back" href="../../api/triangle.html#pandamesh.triangle_mesher.TriangleMesher.generate_ugrid">[docs]</a>    <span class="k">def</span> <span class="nf">generate_ugrid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;xugrid.Ugrid2d&quot;</span><span class="p">:</span>  <span class="c1"># type: ignore # noqa</span>
+        <span class="k">return</span> <span class="n">to_ugrid</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">())</span></div></div>
 </pre></div>
 
               </div>

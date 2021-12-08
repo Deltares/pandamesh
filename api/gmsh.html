@@ -271,7 +271,7 @@ same location. Can be set to one of
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.generate">
-<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.generate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">as_ugrid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.generate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a mesh of triangles or quadrangles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -285,6 +285,11 @@ entry for triangles in that case.</p></li>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.generate_ugrid">
+<span class="sig-name descname"><span class="pre">generate_ugrid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">xugrid.Ugrid2d</span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.generate_ugrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.generate_ugrid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.mesh_algorithm">

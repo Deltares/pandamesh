@@ -138,6 +138,7 @@
     <span class="n">invalid_option</span><span class="p">,</span>
     <span class="nb">repr</span><span class="p">,</span>
     <span class="n">separate</span><span class="p">,</span>
+    <span class="n">to_ugrid</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.gmsh_fields</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">FIELDS</span><span class="p">,</span>
@@ -616,7 +617,7 @@
         <span class="c1"># convert to 0-based index</span>
         <span class="k">return</span> <span class="n">faces</span> <span class="o">-</span> <span class="mi">1</span>
 
-<div class="viewcode-block" id="GmshMesher.generate"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">FloatArray</span><span class="p">,</span> <span class="n">IntArray</span><span class="p">]:</span>
+<div class="viewcode-block" id="GmshMesher.generate"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">as_ugrid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">FloatArray</span><span class="p">,</span> <span class="n">IntArray</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate a mesh of triangles or quadrangles.</span>
 
@@ -631,6 +632,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_combine_fields</span><span class="p">()</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertices</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_faces</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="GmshMesher.generate_ugrid"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.generate_ugrid">[docs]</a>    <span class="k">def</span> <span class="nf">generate_ugrid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;xugrid.Ugrid2d&quot;</span><span class="p">:</span>  <span class="c1"># type: ignore # noqa</span>
+        <span class="k">return</span> <span class="n">to_ugrid</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="GmshMesher.write"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
