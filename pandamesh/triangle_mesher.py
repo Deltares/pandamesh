@@ -11,6 +11,7 @@ from .common import (
     invalid_option,
     repr,
     separate,
+    to_ugrid,
 )
 from .triangle_geometry import collect_geometry, polygon_holes
 
@@ -201,3 +202,6 @@ class TriangleMesher:
 
         result = triangle.triangulate(tri=tri, opts=options)
         return result["vertices"], result["triangles"]
+
+    def generate_ugrid(self) -> "xugrid.Ugrid2d":  # type: ignore # noqa
+        return to_ugrid(*self.generate())

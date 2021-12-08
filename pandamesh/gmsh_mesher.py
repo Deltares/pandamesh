@@ -17,6 +17,7 @@ from .common import (
     invalid_option,
     repr,
     separate,
+    to_ugrid,
 )
 from .gmsh_fields import (
     FIELDS,
@@ -495,7 +496,7 @@ class GmshMesher:
         # convert to 0-based index
         return faces - 1
 
-    def generate(self) -> Tuple[FloatArray, IntArray]:
+    def generate(self, as_ugrid: bool = False) -> Tuple[FloatArray, IntArray]:
         """
         Generate a mesh of triangles or quadrangles.
 
@@ -510,6 +511,9 @@ class GmshMesher:
         self._combine_fields()
         gmsh.model.mesh.generate(dim=2)
         return self._vertices(), self._faces()
+
+    def generate_ugrid(self) -> "xugrid.Ugrid2d":  # type: ignore # noqa
+        return to_ugrid(*self.generate())
 
     def write(self, path: Union[str, pathlib.Path]):
         """

@@ -213,3 +213,13 @@ def to_pygeos(geometry: Any):
             "geometry should be pygeos or shapely type. "
             f"Received instead {type(first).__name__}"
         )
+
+
+def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type: ignore # noqa
+    try:
+        import xugrid
+    except ImportError:
+        raise ImportError(
+            "xugrid must be installed to return generated result a xugrid.Ugrid2d"
+        )
+    return xugrid.Ugrid2d(*vertices.T, -1, faces)
