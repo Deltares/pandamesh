@@ -1,7 +1,8 @@
 Pandamesh
 =========
 
-This package translates geospatial vector data, presented as `geopandas`_
+This package translates geospatial vector data (points, lines of polygons) to
+unstructured meshes. The package converts geospatial data, presented as `geopandas`_
 `GeoDataFrames`_, to unstructured meshes using the open source high quality
 mesh generators:
 
@@ -41,8 +42,10 @@ Installation
 Other projects
 --------------
 
-None of the package below provide a simple scripting based approach to
-converting 2D vector geometries to 2D unstructured grids.
+The package pandamesh is developed because not of the existing python packages provides 
+a simple scripting based apporach to convert 2D vector geometries to 2D ustructured grids. 
+
+Examples of other packages which work with unstructured meshes are listed below.
 
 See also `this list`_ for many other mesh generation tools.
 
