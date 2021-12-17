@@ -168,9 +168,10 @@
                 
   <section id="pandamesh">
 <h1>Pandamesh<a class="headerlink" href="#pandamesh" title="Permalink to this headline">¶</a></h1>
-<p>This package translates geospatial vector data, presented as <a class="reference external" href="https://geopandas.org/">geopandas</a>
-<a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html">GeoDataFrames</a>, to unstructured meshes using the open source high quality
-mesh generators:</p>
+<p>This package translates geospatial vector data (points, lines, or polygons) to
+unstructured meshes. The package converts geospatial data, presented as
+<a class="reference external" href="https://geopandas.org/">geopandas</a> <a class="reference external" href="https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html">GeoDataFrames</a>, to unstructured meshes using the open source
+high quality mesh generators:</p>
 <ul class="simple">
 <li><p>Christophe Geuzaine and Jean-François Remacle’s <a class="reference external" href="https://gmsh.info/">Gmsh</a></p></li>
 <li><p>Jonathan Shewchuk’s <a class="reference external" href="https://www.cs.cmu.edu/~quake/triangle.html">Triangle</a></p></li>
@@ -193,9 +194,9 @@ as the mesh generators cannot deal with these.  Generated meshes are returned
 as two numpy arrays: the coordinates of the vertices, and the connectivity of
 the mesh faces to these vertices (as is <a class="reference external" href="https://ugrid-conventions.github.io/ugrid-conventions/">usual</a> for many unstructured grid
 representations).</p>
-<p>GeoPandas is not suited for geometries that “wrap around” around the world.
+<p>GeoPandas is not suited for geometries that “wrap around” the world.
 Consequently, this package cannot generate meshes for e.g. a sphere. There are
-other packages with suchfunctionality, see below.</p>
+other packages with such functionality, see below.</p>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install pandamesh</span>
@@ -204,8 +205,10 @@ other packages with suchfunctionality, see below.</p>
 </section>
 <section id="other-projects">
 <h2>Other projects<a class="headerlink" href="#other-projects" title="Permalink to this headline">¶</a></h2>
-<p>None of the package below provide a simple scripting based approach to
-converting 2D vector geometries to 2D unstructured grids.</p>
+<p>Pandamesh has been developed because none of the existing packages provide a
+straightforward scripting based approach to converting 2D vector geometries to
+2D unstructured grids.</p>
+<p>Examples of other packages which work with unstructured meshes are listed below.</p>
 <p>See also <a class="reference external" href="https://github.com/nschloe/awesome-scientific-computing#meshing">this list</a> for many other mesh generation tools.</p>
 <section id="pygmsh">
 <h3>pygmsh<a class="headerlink" href="#pygmsh" title="Permalink to this headline">¶</a></h3>
