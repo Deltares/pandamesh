@@ -9,9 +9,10 @@ pandamesh
    :target: https://github.com/psf/black
 
 
-This package translates geospatial vector data, presented as `geopandas`_
-`GeoDataFrames`_, to unstructured meshes using the open source high quality
-mesh generators:
+This package translates geospatial vector data (points, lines, or polygons) to
+unstructured meshes. The package converts geospatial data, presented as
+`geopandas`_ `GeoDataFrames`_, to unstructured meshes using the open source
+high quality mesh generators:
 
 * Christophe Geuzaine and Jean-François Remacle's `Gmsh`_
 * Jonathan Shewchuk's `Triangle`_

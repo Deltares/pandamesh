@@ -1,9 +1,10 @@
 Pandamesh
 =========
 
-This package translates geospatial vector data, presented as `geopandas`_
-`GeoDataFrames`_, to unstructured meshes using the open source high quality
-mesh generators:
+This package translates geospatial vector data (points, lines, or polygons) to
+unstructured meshes. The package converts geospatial data, presented as
+`geopandas`_ `GeoDataFrames`_, to unstructured meshes using the open source
+high quality mesh generators:
 
 * Christophe Geuzaine and Jean-François Remacle's `Gmsh`_
 * Jonathan Shewchuk's `Triangle`_
@@ -27,9 +28,9 @@ as two numpy arrays: the coordinates of the vertices, and the connectivity of
 the mesh faces to these vertices (as is `usual`_ for many unstructured grid
 representations).
 
-GeoPandas is not suited for geometries that "wrap around" around the world.
+GeoPandas is not suited for geometries that "wrap around" the world.
 Consequently, this package cannot generate meshes for e.g. a sphere. There are
-other packages with suchfunctionality, see below.
+other packages with such functionality, see below.
 
 Installation
 ------------
@@ -41,8 +42,11 @@ Installation
 Other projects
 --------------
 
-None of the package below provide a simple scripting based approach to
-converting 2D vector geometries to 2D unstructured grids.
+Pandamesh has been developed because none of the existing packages provide a
+straightforward scripting based approach to converting 2D vector geometries to
+2D unstructured grids.
+
+Examples of other packages which work with unstructured meshes are listed below.
 
 See also `this list`_ for many other mesh generation tools.
 
