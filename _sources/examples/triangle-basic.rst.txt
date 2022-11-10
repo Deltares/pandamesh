@@ -123,8 +123,6 @@ The TriangleMesher class is initialized with a number of default parameters:
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
     TriangleMesher
@@ -335,12 +333,10 @@ distance of 0.5.
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
 
-    <AxesSubplot:>
+    <AxesSubplot: >
 
 
 
@@ -371,12 +367,10 @@ contents of the geodataframe on top of the generated mesh:
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
 
-    <AxesSubplot:>
+    <AxesSubplot: >
 
 
 
@@ -420,12 +414,10 @@ x = 9.0.
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
 
-    <AxesSubplot:>
+    <AxesSubplot: >
 
 
 
@@ -442,28 +434,23 @@ sizes, and linestrings and points to steer the triangulation.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.734 seconds)
+   **Total running time of the script:** ( 0 minutes  1.264 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-basic.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: triangle-basic.py <triangle-basic.py>`
 
-     :download:`Download Python source code: triangle-basic.py <triangle-basic.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: triangle-basic.ipynb <triangle-basic.ipynb>`
+      :download:`Download Jupyter notebook: triangle-basic.ipynb <triangle-basic.ipynb>`
 
 
 .. only:: html

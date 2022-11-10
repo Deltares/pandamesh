@@ -167,8 +167,6 @@ The GmshMesher class is initialized with a number of default parameters:
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
     GmshMesher
@@ -178,7 +176,7 @@ The GmshMesher class is initialized with a number of default parameters:
         fields = Empty GeoDataFrame
     Columns: []
     Index: []
-        tmpdir = <TemporaryDirectory '/tmp/tmpaa_pnjq1'>
+        tmpdir = <TemporaryDirectory '/tmp/tmpabbhxzjq'>
         recombine_all = False
         mesh_size_extend_from_boundary = True
         mesh_size_from_points = True
@@ -241,12 +239,10 @@ We can force points and lines into the triangulation:
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
 
-    <AxesSubplot:>
+    <AxesSubplot: >
 
 
 
@@ -321,28 +317,23 @@ polygons.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.039 seconds)
+   **Total running time of the script:** ( 0 minutes  0.818 seconds)
 
 
 .. _sphx_glr_download_examples_gmsh-basic.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: gmsh-basic.py <gmsh-basic.py>`
 
-     :download:`Download Python source code: gmsh-basic.py <gmsh-basic.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: gmsh-basic.ipynb <gmsh-basic.ipynb>`
+      :download:`Download Jupyter notebook: gmsh-basic.ipynb <gmsh-basic.ipynb>`
 
 
 .. only:: html

@@ -39,15 +39,6 @@ geospatial vector dataset.
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-    /opt/hostedtoolcache/Python/3.9.9/x64/lib/python3.9/site-packages/geopandas/_compat.py:111: UserWarning: The Shapely GEOS version (3.9.1-CAPI-1.14.2) is incompatible with the GEOS version PyGEOS was compiled with (3.10.1-CAPI-1.16.0). Conversions between both will be slow.
-      warnings.warn(
-
 
 
 
@@ -107,12 +98,10 @@ Let's check the polygons for overlap first.
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
 
-    <AxesSubplot:>
+    <AxesSubplot: >
 
 
 
@@ -185,12 +174,10 @@ This creates a clean, and simpler, geometry.
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
 
-    <AxesSubplot:>
+    <AxesSubplot: >
 
 
 
@@ -216,15 +203,6 @@ constant cell size.
    :srcset: /examples/images/sphx_glr_triangle-geospatial_003.png
    :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-    /opt/hostedtoolcache/Python/3.9.9/x64/lib/python3.9/site-packages/pygeos/io.py:85: UserWarning: The shapely GEOS version (3.9.1-CAPI-1.14.2) is incompatible with the PyGEOS GEOS version (3.10.1-CAPI-1.16.0). Conversions between both will be slow
-      warnings.warn(
 
 
 
@@ -268,12 +246,10 @@ ensure that no overlap occurs in the follwing steps:
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
 
-    <AxesSubplot:>
+    <AxesSubplot: >
 
 
 
@@ -320,28 +296,23 @@ opened by e.g. QGIS.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.852 seconds)
+   **Total running time of the script:** ( 0 minutes  2.540 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-geospatial.py:
 
+.. only:: html
 
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
+  .. container:: sphx-glr-footer sphx-glr-footer-example
 
 
+    .. container:: sphx-glr-download sphx-glr-download-python
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+      :download:`Download Python source code: triangle-geospatial.py <triangle-geospatial.py>`
 
-     :download:`Download Python source code: triangle-geospatial.py <triangle-geospatial.py>`
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: triangle-geospatial.ipynb <triangle-geospatial.ipynb>`
+      :download:`Download Jupyter notebook: triangle-geospatial.ipynb <triangle-geospatial.ipynb>`
 
 
 .. only:: html
