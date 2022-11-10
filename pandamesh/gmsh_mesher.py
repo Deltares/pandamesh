@@ -510,6 +510,13 @@ class GmshMesher:
         """
         self._combine_fields()
         gmsh.model.mesh.generate(dim=2)
+
+        # cleaning up of mesh in order to obtain unique elements and nodes
+        gmsh.model.mesh.removeDuplicateElements()
+        gmsh.model.mesh.removeDuplicateNodes()
+        gmsh.model.mesh.renumberElements()
+        gmsh.model.mesh.renumberNodes()
+
         return self._vertices(), self._faces()
 
     def generate_ugrid(self) -> "xugrid.Ugrid2d":  # type: ignore # noqa
