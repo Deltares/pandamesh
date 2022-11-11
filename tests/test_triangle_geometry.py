@@ -83,7 +83,7 @@ def test_add_polygons():
     assert np.allclose(vertices, expected)
     assert np.array_equal(segments, expected_segments)
     assert regions[0, 2] == 0
-    assert regions[0, 3] == 0.5 * cellsize ** 2
+    assert regions[0, 3] == 0.5 * cellsize**2
     assert sg.Point(x, y).within(donut)
 
 
