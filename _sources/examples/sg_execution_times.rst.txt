@@ -6,12 +6,12 @@
 
 Computation times
 =================
-**00:04.352** total execution time for **examples** files:
+**00:03.717** total execution time for **examples** files:
 
 +------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_triangle-basic.py` (``triangle-basic.py``)           | 00:01.744 | 0.0 MB |
+| :ref:`sphx_glr_examples_triangle-geospatial.py` (``triangle-geospatial.py``) | 00:01.533 | 0.0 MB |
 +------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_triangle-geospatial.py` (``triangle-geospatial.py``) | 00:01.507 | 0.0 MB |
+| :ref:`sphx_glr_examples_triangle-basic.py` (``triangle-basic.py``)           | 00:01.321 | 0.0 MB |
 +------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_examples_gmsh-basic.py` (``gmsh-basic.py``)                   | 00:01.101 | 0.0 MB |
+| :ref:`sphx_glr_examples_gmsh-basic.py` (``gmsh-basic.py``)                   | 00:00.864 | 0.0 MB |
 +------------------------------------------------------------------------------+-----------+--------+
