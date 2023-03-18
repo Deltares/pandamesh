@@ -10,7 +10,7 @@ def plot(
     ax=None,
     facecolors: str = "lightgray",
     edgecolors: str = "black",
-    **kwargs
+    **kwargs,
 ) -> None:
     """
     Plot an unstructured mesh

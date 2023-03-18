@@ -6,8 +6,6 @@ from typing import Any, Sequence, Tuple
 
 import geopandas as gpd
 import numpy as np
-import pygeos
-import shapely.geometry as sg
 
 IntArray = np.ndarray
 FloatArray = np.ndarray
@@ -116,10 +114,6 @@ def check_features(features: gpd.GeoSeries, feature_type) -> None:
         * not intersect with other features
 
     """
-    # Note: make sure to call geopandas functions rather than shapely or pygeos
-    # where possible. Otherwise, either conversion is required, or duplicate
-    # implementations, one with shapely and one with pygeos.
-
     # Check valid
     are_simple = features.is_simple
     n_complex = (~are_simple).sum()
@@ -200,19 +194,6 @@ def separate(
     check_points(points.geometry, polygons.geometry)
 
     return polygons, linestrings, points
-
-
-def to_pygeos(geometry: Any):
-    first = next(iter(geometry))
-    if isinstance(first, pygeos.Geometry):
-        return geometry
-    elif isinstance(first, sg.base.BaseGeometry):
-        return pygeos.from_shapely(geometry)
-    else:
-        raise TypeError(
-            "geometry should be pygeos or shapely type. "
-            f"Received instead {type(first).__name__}"
-        )
 
 
 def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type: ignore # noqa

@@ -3,7 +3,6 @@ from enum import Enum
 
 import geopandas as gpd
 import numpy as np
-import pygeos
 import pytest
 import shapely.geometry as sg
 
@@ -235,18 +234,3 @@ def test_separate():
 
     gdf = gpd.GeoDataFrame(geometry=[a, La])
     polygons, linestrings, points = common.separate(gdf)
-
-
-def test_to_pygeos():
-    geometry = [a, c, d, La, Lc, pa]
-    converted = common.to_pygeos(geometry)
-    assert all(isinstance(geom, pygeos.Geometry) for geom in converted)
-
-    geometry = pygeos.points([[0.0, 0.0], [1.0, 1.0]])
-    converted = common.to_pygeos(geometry)
-    assert all(isinstance(geom, pygeos.Geometry) for geom in converted)
-
-    geometry = [[0.0, 0.0], [1.0, 1.0]]
-    msg = "geometry should be pygeos or shapely type. Received instead list"
-    with pytest.raises(TypeError, match=msg):
-        common.to_pygeos(geometry)

@@ -8,9 +8,30 @@ pandamesh
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square
    :target: https://github.com/psf/black
 
-
 This package translates geospatial vector data (points, lines, or polygons) to
-unstructured meshes. The package converts geospatial data, presented as
+unstructured meshes.
+
+.. code:: python
+
+   import geopandas as gpd
+   import pandamesh as pm
+
+   # Get some sample data from geopandas.
+   world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+
+   # Select South America, explode any multi-polygon, and project it to UTM20.
+   south_america = world[world["continent"] == 'South America']
+   south_america = south_america.explode().reset_index().to_crs(epsg=32620)
+
+   # Set a maximum cell size of 500 km and generate a mesh.
+   south_america["cellsize"] = 500_000.0
+   mesher = pm.TriangleMesher(south_america)
+   vertices, faces = mesher.generate()
+   
+.. image:: https://raw.githubusercontent.com/Deltares/pandamesh/main/docs/_static/pandamesh-demo.png
+  :target: https://github.com/deltares/xugrid
+
+The package converts geospatial data, presented as
 `geopandas`_ `GeoDataFrames`_, to unstructured meshes using the open source
 high quality mesh generators:
 
@@ -35,7 +56,7 @@ these.  Generated meshes are returned as two numpy arrays: the coordinates of
 the vertices, and the connectivity of the mesh faces to these vertices (as is
 `usual`_ for many unstructured grid representations).
 
-GeoPandas is not suited for geometries that "wrap around" around the world.
+GeoPandas is not suited for geometries that "wrap around" the world.
 Consequently, this package cannot generate meshes for e.g. a sphere.
 
 Installation

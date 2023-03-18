@@ -46,7 +46,7 @@ class TriangleMesher:
           a linestring may not intersect two or more polygons.
         * Linestrings and points should not "touch" / be located on
           polygon borders.
-        * Holes in polygons are fully supported, but they most not contain
+        * Holes in polygons are fully supported, but they must not contain
           any linestrings or points.
 
     If such cases are detected, the initialization will error.

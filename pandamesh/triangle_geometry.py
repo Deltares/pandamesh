@@ -2,10 +2,10 @@ from typing import Tuple
 
 import geopandas as gpd
 import numpy as np
-import pygeos
+import shapely
 import shapely.geometry as sg
 
-from .common import FloatArray, IntArray, flatten, to_pygeos
+from .common import FloatArray, IntArray, flatten
 
 
 def add_linestrings(linestrings: gpd.GeoSeries) -> Tuple[FloatArray, IntArray]:
@@ -13,9 +13,8 @@ def add_linestrings(linestrings: gpd.GeoSeries) -> Tuple[FloatArray, IntArray]:
         return np.empty((0, 2), dtype=np.float64), np.empty((0, 2), dtype=np.int32)
 
     geometry = linestrings.geometry.values
-    geometry = to_pygeos(geometry)
-    n_vertex = pygeos.get_num_coordinates(geometry)
-    vertices, index = pygeos.get_coordinates(geometry, return_index=True)
+    n_vertex = shapely.get_num_coordinates(geometry)
+    vertices, index = shapely.get_coordinates(geometry, return_index=True)
 
     vertex_numbers = np.arange(n_vertex.sum())
     segments = np.empty((n_vertex.sum() - 1, 2), dtype=np.int32)

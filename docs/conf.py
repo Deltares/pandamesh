@@ -17,7 +17,9 @@ copyright = "Deltares"
 author = "Deltares"
 
 # The full version, including alpha/beta/rc tags
-release = "0.1.0"
+import pandamesh
+
+version = pandamesh.__version__
 
 
 # -- General configuration ---------------------------------------------------
@@ -44,9 +46,6 @@ sphinx_gallery_conf = {
     "abort_on_example_error": True,
     "download_all_examples": False,
 }
-
-# Add any paths that contain templates here, relative to this directory.
-templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -79,32 +78,36 @@ pygments_style = "sphinx"
 #
 html_theme = "pydata_sphinx_theme"
 
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
-# documentation.
-#
-# html_theme_options = {}
-
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 html_css_files = ["theme-deltares.css"]
-
-# Custom sidebar templates, must be a dictionary that maps document names
-# to template names.
-#
-# The default sidebars (for documents that don't match any pattern) are
-# defined by theme itself.  Builtin themes are using these templates by
-# default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
-# 'searchbox.html']``.
-#
-# html_sidebars = {}
-
-# The name of an image file (relative to this directory) to place at the top
-# of the sidebar.
-html_logo = "_static/deltares-white.svg"
-
+html_theme_options = {
+    "show_nav_level": 2,
+    "navbar_align": "content",
+    "use_edit_page_button": False,
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/Deltares/pandamesh",  # required
+            "icon": "https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg",
+            "type": "url",
+        },
+        {
+            "name": "Deltares",
+            "url": "https://www.deltares.nl/en/",
+            "icon": "_static/deltares-blue.svg",
+            "type": "local",
+        },
+    ],
+    "logo": {
+        "text": "pandamesh",
+        "image_light": "pandamesh-logo.svg",
+        "image_dark": "pandamesh-logo.svg",
+    },
+    "navbar_end": ["navbar-icon-links"],  # remove dark mode switch
+}
 
 # -- Extension configuration -------------------------------------------------
 

@@ -1,6 +1,66 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=64.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "pandamesh"
+description = "From geodataframe to mesh"
+license = "MIT"
+readme = { file = "README.rst", content-type = "text/x-rst" }
+version = "0.1.0"
+maintainers = [{ name = "Huite Bootsma", email = "huite.bootsma@deltares.nl" }]
+requires-python = ">=3.8"
+dependencies = [
+    'geopandas',  
+    'gmsh',
+    'triangle',
+]
+classifiers = [
+    'Development Status :: 3 - Alpha',
+    'Intended Audience :: Science/Research',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: Implementation :: CPython',
+    'Topic :: Scientific/Engineering',
+]
+keywords = ['mesh', 'geopandas', 'unstructured grid']
+
+[project.urls]
+Home = "https://github.com/deltares/pandamesh"
+Code = "https://github.com/deltares/pandamesh"
+Issues = "https://github.com/deltares/pandamesh/issues"
+
+[project.optional-dependencies]
+all = [
+    'geopandas',
+    'gmsh',
+    'triangle',
+    'matplotlib',
+    'pooch',
+]
+# pyproject.toml doesn't quite support re-use like setup.cfg did:
+# https://github.com/pypa/setuptools/issues/3221
+docs = [
+    'geopandas',
+    'gmsh',
+    'triangle',
+    'matplotlib',
+    'pooch',
+    'pydata-sphinx-theme',
+    'sphinx',
+    'sphinx-gallery',
+]
+
+[tool.setuptools]
+packages = [
+    "pandamesh",
+]
+license-files = ["LICENSE"]
 
 [tool.isort]
 profile = "black"

@@ -135,7 +135,7 @@ class GmshMesher:
           a linestring may not intersect two or more polygons.
         * Linestrings and points should not "touch" / be located on
           polygon borders.
-        * Holes in polygons are fully supported, but they most not contain
+        * Holes in polygons are fully supported, but they must not contain
           any linestrings or points.
 
     If such cases are detected, the initialization will error.
@@ -496,7 +496,7 @@ class GmshMesher:
         # convert to 0-based index
         return faces - 1
 
-    def generate(self, as_ugrid: bool = False) -> Tuple[FloatArray, IntArray]:
+    def generate(self) -> Tuple[FloatArray, IntArray]:
         """
         Generate a mesh of triangles or quadrangles.
 
