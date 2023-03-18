@@ -38,6 +38,14 @@ Code = "https://github.com/deltares/pandamesh"
 Issues = "https://github.com/deltares/pandamesh/issues"
 
 [project.optional-dependencies]
+all = [
+    'geopandas',
+    'gmsh',
+    'pooch',
+    'triangle',
+    'shapely >= 2.0',
+    'matplotlib',
+]
 # pyproject.toml doesn't quite support re-use like setup.cfg did:
 # https://github.com/pypa/setuptools/issues/3221
 docs = [
