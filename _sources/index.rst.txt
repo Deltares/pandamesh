@@ -22,7 +22,7 @@ unstructured meshes.
    vertices, faces = mesher.generate()
    
 .. image:: https://raw.githubusercontent.com/Deltares/pandamesh/main/docs/_static/pandamesh-demo.png
-  :target: https://github.com/deltares/xugrid
+  :target: https://github.com/deltares/pandamesh
 
 The package converts geospatial data, presented as
 `geopandas`_ `GeoDataFrames`_, to unstructured meshes using the open source
