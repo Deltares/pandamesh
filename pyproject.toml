@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pandamesh"
 description = "From geodataframe to mesh"
-license = "MIT"
+license = { text = "MIT" }
 readme = { file = "README.rst", content-type = "text/x-rst" }
 version = "0.1.0"
 maintainers = [{ name = "Huite Bootsma", email = "huite.bootsma@deltares.nl" }]
