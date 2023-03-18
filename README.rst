@@ -29,7 +29,7 @@ unstructured meshes.
    vertices, faces = mesher.generate()
    
 .. image:: https://raw.githubusercontent.com/Deltares/pandamesh/main/docs/_static/pandamesh-demo.png
-  :target: https://github.com/deltares/xugrid
+  :target: https://github.com/deltares/pandamesh
 
 The package converts geospatial data, presented as
 `geopandas`_ `GeoDataFrames`_, to unstructured meshes using the open source
@@ -71,9 +71,57 @@ Documentation
 
 .. image:: https://img.shields.io/github/workflow/status/deltares/pandamesh/docs?style=flat-square
    :target: https://deltares.github.io/pandamesh/
+   
+Other projects
+--------------
+
+Pandamesh has been developed because none of the existing packages provide a
+straightforward scripting based approach to converting 2D vector geometries to
+2D unstructured grids.
+
+Examples of other packages which work with unstructured meshes are listed below.
+
+See also `this list`_ for many other mesh generation tools.
+
+pygmsh
+******
+
+The `pygmsh Python package`_  provides useful abstractions from Gmsh's own
+Python interface so you can create complex geometries more easily. It also
+provides tools for 3D operations (e.g. extrusions).
+
+qgis-gsmh
+*********
+
+qgis-gmsh generates geometry input files for the GMSH mesh generator and
+converts the Gmsh mesh files to shapefiles that can be imported into QGIS.
+
+* Lambrechts, J., Comblen, R., Legat, V., Geuzaine, C., & Remacle, J. F. (2008).
+  Multiscale mesh generation on the sphere. Ocean Dynamics, 58(5-6), 461-473.
+* Remacle, J. F., & Lambrechts, J. (2018). Fast and robust mesh generation on
+  the sphere—Application to coastal domains. Computer-Aided Design, 103, 14-23.
+  https://doi.org/10.1016/j.cad.2018.03.002  
+
+Source: https://github.com/ccorail/qgis-gmsh
+
+Shingle
+*******
+
+Shingle provides generalised self-consistent and automated domain
+discretisation for multi-scale geophysical models.
+
+* Candy, A. S., & Pietrzak, J. D. (2018). Shingle 2.0: generalising
+  self-consistent and automated domain discretisation for multi-scale
+  geophysical models. Geoscientific Model Development, 11(1), 213-234.
+  https://doi.org/10.5194/gmd-11-213-2018
+
+Source: https://github.com/shingleproject/Shingle 
+Website: http://shingleproject.org/index_shingle1.0.html
 
 .. _geopandas: https://geopandas.org/
 .. _GeoDataFrames: https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html
 .. _Gmsh: https://gmsh.info/
 .. _Triangle: https://www.cs.cmu.edu/~quake/triangle.html
 .. _usual: https://ugrid-conventions.github.io/ugrid-conventions/
+.. _pygmsh Python package: https://github.com/nschloe/pygmsh
+.. _this list: https://github.com/nschloe/awesome-scientific-computing#meshing
