@@ -1,7 +1,7 @@
 pandamesh
 =========
 
-.. image:: https://img.shields.io/github/workflow/status/deltares/pandamesh/ci?style=flat-square
+.. image:: https://img.shields.io/github/actions/workflow/status/deltares/pandamesh/ci.yml?style=flat-square
    :target: https://github.com/deltares/pandamesh/actions?query=workflows%3Aci
 .. image:: https://img.shields.io/codecov/c/github/deltares/pandamesh.svg?style=flat-square
    :target: https://app.codecov.io/gh/deltares/pandamesh
@@ -69,7 +69,7 @@ Installation
 Documentation
 -------------
 
-.. image:: https://img.shields.io/github/workflow/status/deltares/pandamesh/docs?style=flat-square
+.. image:: https://img.shields.io/github/actions/workflow/status/deltares/pandamesh/docs.yml?style=flat-square
    :target: https://deltares.github.io/pandamesh/
    
 Other projects
@@ -116,6 +116,7 @@ discretisation for multi-scale geophysical models.
   https://doi.org/10.5194/gmd-11-213-2018
 
 Source: https://github.com/shingleproject/Shingle 
+
 Website: http://shingleproject.org/index_shingle1.0.html
 
 .. _geopandas: https://geopandas.org/
