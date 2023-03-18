@@ -1,14 +1,15 @@
 import pkg_resources
 
-from .gmsh_mesher import (
+from pandamesh import data
+from pandamesh.gmsh_mesher import (
     FieldCombination,
     GmshMesher,
     MeshAlgorithm,
     SubdivisionAlgorithm,
     gmsh_env,
 )
-from .plot import plot
-from .triangle_mesher import DelaunayAlgorithm, TriangleMesher
+from pandamesh.plot import plot
+from pandamesh.triangle_mesher import DelaunayAlgorithm, TriangleMesher
 
 try:
     __version__ = pkg_resources.get_distribution(__name__).version

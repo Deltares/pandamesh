@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import shapely.geometry as sg
 
-from .common import FloatArray, IntArray, coord_dtype, flatten, separate
+from pandamesh.common import FloatArray, IntArray, coord_dtype, flatten, separate
 
 Z_DEFAULT = 0.0
 POINT_DIM = 0

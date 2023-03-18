@@ -1,6 +1,6 @@
 import numpy as np
 
-from .common import FloatArray, IntArray
+from pandamesh.common import FloatArray, IntArray
 
 
 def plot(

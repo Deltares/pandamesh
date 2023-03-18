@@ -5,7 +5,7 @@ from typing import List, Tuple, Union
 import gmsh
 import numpy as np
 
-from .common import FloatArray
+from pandamesh.common import FloatArray
 
 
 def write_structured_field_file(
