@@ -59,6 +59,7 @@ docs = [
 [tool.setuptools]
 packages = [
     "pandamesh",
+    "pandamesh.data",
 ]
 license-files = ["LICENSE"]
 
