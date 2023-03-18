@@ -17,12 +17,13 @@ import pandamesh as pm
 # Overlap
 # -------
 #
-# We will open a GeoJSON file describing the provinces of the Netherlands, and
-# select only the name and geometry columns. We'll set the coordinate reference
-# system to the Dutch national standard (EPSG:28992). Finally we set the name
-# column to be used as index, so we can select provinces on name.
+# We will get the data of a GeoJSON file describing the provinces of the
+# Netherlands, and select only the name and geometry columns. We'll set the
+# coordinate reference system to the Dutch national standard (EPSG:28992).
+# Finally we set the name column to be used as index, so we can select
+# provinces on name.
 
-provinces = gpd.read_file("data/provinces.geojson").loc[:, ["name", "geometry"]]
+provinces = pm.data.provinces_nl().loc[:, ["name", "geometry"]]
 provinces = provinces.to_crs("epsg:28992")
 provinces.index = provinces["name"]
 gdf = provinces.copy()

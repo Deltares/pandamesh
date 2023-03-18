@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_triangle-geospatial.py>`
+        :ref:`Go to the end <sphx_glr_download_examples_triangle-geospatial.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -42,22 +42,23 @@ geospatial vector dataset.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 17-24
+.. GENERATED FROM PYTHON SOURCE LINES 17-25
 
 Overlap
 -------
 
-We will open a GeoJSON file describing the provinces of the Netherlands, and
-select only the name and geometry columns. We'll set the coordinate reference
-system to the Dutch national standard (EPSG:28992). Finally we set the name
-column to be used as index, so we can select provinces on name.
+We will get the data of a GeoJSON file describing the provinces of the
+Netherlands, and select only the name and geometry columns. We'll set the
+coordinate reference system to the Dutch national standard (EPSG:28992).
+Finally we set the name column to be used as index, so we can select
+provinces on name.
 
-.. GENERATED FROM PYTHON SOURCE LINES 24-30
+.. GENERATED FROM PYTHON SOURCE LINES 25-31
 
 .. code-block:: default
 
 
-    provinces = gpd.read_file("data/provinces.geojson").loc[:, ["name", "geometry"]]
+    provinces = pm.data.provinces_nl().loc[:, ["name", "geometry"]]
     provinces = provinces.to_crs("epsg:28992")
     provinces.index = provinces["name"]
     gdf = provinces.copy()
@@ -69,13 +70,13 @@ column to be used as index, so we can select provinces on name.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 31-34
+.. GENERATED FROM PYTHON SOURCE LINES 32-35
 
 The mesh generation software cannot deal with overlap of polygons. To get rid
 of overlap, we can use the spatial functionality that geopandas provides.
 Let's check the polygons for overlap first.
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-42
+.. GENERATED FROM PYTHON SOURCE LINES 35-43
 
 .. code-block:: default
 
@@ -101,11 +102,11 @@ Let's check the polygons for overlap first.
  .. code-block:: none
 
 
-    <AxesSubplot: >
+    <Axes: >
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-49
+.. GENERATED FROM PYTHON SOURCE LINES 44-50
 
 Clean-up
 --------
@@ -114,7 +115,7 @@ There are many small overlaps visible at the province borders.
 
 We can generate a consistent polygon using a unary union.
 
-.. GENERATED FROM PYTHON SOURCE LINES 49-54
+.. GENERATED FROM PYTHON SOURCE LINES 50-55
 
 .. code-block:: default
 
@@ -130,7 +131,7 @@ We can generate a consistent polygon using a unary union.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 55-71
+.. GENERATED FROM PYTHON SOURCE LINES 56-72
 
 Unfortunately, the province boundaries of this dataset no do align neatly and
 there are a number of small holes present. Some of these holes are not formed
@@ -149,7 +150,7 @@ remove all blemishes by:
 
 This creates a clean, and simpler, geometry.
 
-.. GENERATED FROM PYTHON SOURCE LINES 71-81
+.. GENERATED FROM PYTHON SOURCE LINES 72-82
 
 .. code-block:: default
 
@@ -177,16 +178,16 @@ This creates a clean, and simpler, geometry.
  .. code-block:: none
 
 
-    <AxesSubplot: >
+    <Axes: >
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 82-84
+.. GENERATED FROM PYTHON SOURCE LINES 83-85
 
 Using this clean geometry, we can generate an unstructured grid with a fairly
 constant cell size.
 
-.. GENERATED FROM PYTHON SOURCE LINES 84-89
+.. GENERATED FROM PYTHON SOURCE LINES 85-90
 
 .. code-block:: default
 
@@ -207,7 +208,7 @@ constant cell size.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 90-101
+.. GENERATED FROM PYTHON SOURCE LINES 91-102
 
 Local refinement
 ----------------
@@ -221,7 +222,7 @@ ensure that no overlap occurs in the follwing steps:
 * remove this province from the enveloping polygon;
 * collect the two polygons in a single geodataframe.
 
-.. GENERATED FROM PYTHON SOURCE LINES 101-111
+.. GENERATED FROM PYTHON SOURCE LINES 102-112
 
 .. code-block:: default
 
@@ -249,15 +250,15 @@ ensure that no overlap occurs in the follwing steps:
  .. code-block:: none
 
 
-    <AxesSubplot: >
+    <Axes: >
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 112-113
+.. GENERATED FROM PYTHON SOURCE LINES 113-114
 
 This results in a mesh with a smaller cell size in the province of Utrecht.
 
-.. GENERATED FROM PYTHON SOURCE LINES 113-118
+.. GENERATED FROM PYTHON SOURCE LINES 114-119
 
 .. code-block:: default
 
@@ -278,7 +279,7 @@ This results in a mesh with a smaller cell size in the province of Utrecht.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 119-131
+.. GENERATED FROM PYTHON SOURCE LINES 120-132
 
 Conclusion
 ----------
@@ -296,7 +297,7 @@ opened by e.g. QGIS.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.528 seconds)
+   **Total running time of the script:** ( 0 minutes  1.846 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-geospatial.py:
@@ -304,6 +305,8 @@ opened by e.g. QGIS.
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

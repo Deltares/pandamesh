@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="300.97006pt"
+   version="1.1"
+   viewBox="0 0 432 300.97006"
+   width="432pt"
+   id="svg4651"
+   sodipodi:docname="pandamesh-low-res.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     id="namedview4653"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.52777778"
+     inkscape:cx="557.72954"
+     inkscape:cy="-82.969183"
+     inkscape:window-x="1912"
+     inkscape:window-y="148"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="figure_1" />
+  <metadata
+     id="metadata4601">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:date>2021-11-22T22:01:51.591547</dc:date>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Matplotlib v3.4.3, https://matplotlib.org/</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4605"
+     style="stroke-linecap:butt;stroke-linejoin:round">
+    <style
+       type="text/css"
+       id="style4603">*{stroke-linecap:butt;stroke-linejoin:round;}</style>
+  </defs>
+  <g
+     id="figure_1"
+     style="stroke-linecap:butt;stroke-linejoin:round"
+     transform="translate(0,12.284144)">
+    <circle
+       style="opacity:1;fill:#080c80;fill-opacity:1;stroke:#ffffff;stroke-width:3.22783422;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       id="path5248"
+       cx="222.3158"
+       cy="138.20088"
+       r="148.87111" />
+    <g
+       id="patch_1"
+       style="stroke-linecap:butt;stroke-linejoin:round">
+      <path
+         d="M 0,288 H 432 V 0 H 0 Z"
+         style="fill:none;stroke-linecap:butt;stroke-linejoin:round"
+         id="path4607"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       id="axes_1"
+       style="stroke-linecap:butt;stroke-linejoin:round">
+      <g
+         id="line2d_1"
+         style="stroke-linecap:butt;stroke-linejoin:round">
+        <path
+           clip-path="url(#pc1ccdd3fb3)"
+           d="m 143.78777,111.54912 -16.82502,71.05287 M 143.78777,111.54912 133.20429,79.059137 M 146.50149,216.6102 126.96275,182.60199 M 149.48657,45.050926 133.20429,79.059137 m 32.56457,84.716883 -38.80611,18.82597 m 38.80611,-18.82597 -21.98109,-52.2269 m 21.98109,52.2269 -19.26737,52.83418 m 34.73554,-26.41709 -34.73554,26.41709 m 34.73554,-26.41709 -15.46817,-26.41709 m 19.81011,-97.166317 -52.37468,12.449434 m 52.37468,-12.449434 -41.7912,44.939417 m 41.7912,-44.939417 -36.0924,-21.558777 m 54.27429,156.073394 -57.25937,15.48588 m 57.25937,-15.48588 -22.52383,-10.93121 m 24.15206,-49.19045 -61.60132,-29.45354 m 61.60132,29.45354 -39.62023,22.77336 m 39.62023,-22.77336 -24.15206,49.19045 m 24.15206,-49.19045 -19.81012,-74.392957 m 19.81012,74.392957 -1.62823,60.12166 m 18.18188,14.27131 -18.18188,-14.27131 m 18.72463,40.99204 -75.984,-25.50616 m 75.984,25.50616 -18.72463,-40.99204 m 18.72463,40.99204 -0.54275,-26.72073 m 16.28229,-73.78568 -34.46417,59.51437 m 34.46417,-59.51437 -32.83594,-0.60729 m 35.00691,60.12166 h -36.63514 m 36.63514,0 -18.45326,14.27131 m 18.45326,-14.27131 -17.91051,40.99204 m 17.91051,-40.99204 -2.17097,-59.51437 m 20.62423,-74.392958 -73.27029,-0.607289 m 73.27029,0.607289 -53.46017,73.785668 m 53.46017,-73.785668 -20.62423,74.392958 m 24.42343,47.97587 -24.42343,-47.97587 m 24.42343,47.97587 -22.25246,11.5385 m 43.14806,-23.077 -45.31903,-36.43737 m 45.31903,36.43737 -20.8956,11.5385 M 293.31343,44.443636 258.84926,67.216992 M 297.92674,216.6102 222.48549,242.11636 M 297.92674,216.6102 240.396,201.12432 m 57.53074,15.48588 -35.27828,-27.02438 m 35.27828,27.02438 -14.38268,-38.56288 m 18.18188,-65.89091 -63.50091,29.45354 m 63.50091,-29.45354 -42.87668,-44.939418 m 42.87668,44.939418 -18.18188,65.89091 M 310.13845,79.666426 258.84926,67.216992 m 51.28919,12.449434 -16.82502,-35.22279 m 16.82502,35.22279 -8.41251,32.489984 m 14.11131,71.05287 -32.29319,-5.16196 m 32.29319,5.16196 -17.91051,33.40092 m 17.91051,-33.40092 -14.11131,-71.05287 v 0"
+           style="fill:none;stroke:#ffffff;stroke-width:5;stroke-linecap:square;stroke-linejoin:round"
+           id="path4613"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         id="matplotlib.axis_1"
+         style="stroke-linecap:butt;stroke-linejoin:round" />
+      <g
+         id="matplotlib.axis_2"
+         style="stroke-linecap:butt;stroke-linejoin:round" />
+      <g
+         id="line2d_2"
+         style="stroke-linecap:butt;stroke-linejoin:round" />
+      <g
+         id="patch_5"
+         style="stroke-linecap:butt;stroke-linejoin:round" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4631"
+         style="fill:none;stroke:#ffffff;stroke-width:10;stroke-linecap:butt;stroke-linejoin:round"
+         d="m 165.76886,163.77602 15.46817,26.41709 24.15206,-49.19045 -39.62023,22.77336"
+         clip-path="url(#pc1ccdd3fb3)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4633"
+         style="fill:none;stroke:#ffffff;stroke-width:10;stroke-linecap:butt;stroke-linejoin:round"
+         d="m 238.22503,141.60995 24.42343,47.97587 20.8956,-11.5385 -45.31903,-36.43737"
+         clip-path="url(#pc1ccdd3fb3)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4635"
+         style="fill:none;stroke:#ffffff;stroke-width:10;stroke-linecap:butt;stroke-linejoin:round"
+         d="M 203.76086,201.12432 H 240.396 l -18.45326,14.27131 -18.18188,-14.27131"
+         clip-path="url(#pc1ccdd3fb3)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4637"
+         style="fill:none;stroke:#ffffff;stroke-width:10;stroke-linecap:butt;stroke-linejoin:round"
+         d="m 143.78777,111.54912 -10.58348,-32.489983 16.28228,-34.008211 36.0924,21.558777 -41.7912,44.939417"
+         clip-path="url(#pc1ccdd3fb3)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4639"
+         style="fill:none;stroke:#ffffff;stroke-width:10;stroke-linecap:butt;stroke-linejoin:round"
+         d="m 258.84926,67.216992 34.46417,-22.773356 16.82502,35.22279 -8.41251,32.489984 -42.87668,-44.939418"
+         clip-path="url(#pc1ccdd3fb3)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4641"
+         style="fill:none;stroke:#ffffff;stroke-width:10;stroke-linecap:butt;stroke-linejoin:round"
+         d="m 143.78777,111.54912 -16.82502,71.05287 19.53874,34.00821 75.984,25.50616 75.44125,-25.50616 17.91051,-33.40092 -14.11131,-71.05287 -42.87668,-44.939418 -73.27029,-0.607289 -41.7912,44.939417"
+         clip-path="url(#pc1ccdd3fb3)" />
+    </g>
+  </g>
+  <defs
+     id="defs4649">
+    <clipPath
+       id="pc1ccdd3fb3"
+       style="stroke-linecap:butt;stroke-linejoin:round">
+      <rect
+         height="217.44"
+         width="207.76196"
+         x="117.51902"
+         y="34.560001"
+         id="rect4646"
+         style="stroke-linecap:butt;stroke-linejoin:round" />
+    </clipPath>
+  </defs>
+</svg>

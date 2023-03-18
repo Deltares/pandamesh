@@ -1,9 +1,4 @@
-.bg-deltares {
-    background-color: #080c80;
-}
-
-/* Override the default color set in the original theme */
-.navbar-nav>.active>.nav-link {
-    color: #fff !important;
-    font-weight: 400 !important;
+/* enlarge deltares & github icon size; only works with local/url svg files; not with fa icons */
+img.icon-link-image {
+    height: 2.5em !important;
 }

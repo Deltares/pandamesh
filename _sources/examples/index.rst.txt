@@ -22,7 +22,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
 .. only:: html
 
   .. image:: /examples/images/thumb/sphx_glr_triangle-geospatial_thumb.png
-    :alt: Geospatial Triangle Example
+    :alt:
 
   :ref:`sphx_glr_examples_triangle-geospatial.py`
 
@@ -39,7 +39,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
 .. only:: html
 
   .. image:: /examples/images/thumb/sphx_glr_gmsh-basic_thumb.png
-    :alt: Basic Gmsh Example
+    :alt:
 
   :ref:`sphx_glr_examples_gmsh-basic.py`
 
@@ -56,7 +56,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
 .. only:: html
 
   .. image:: /examples/images/thumb/sphx_glr_triangle-basic_thumb.png
-    :alt: Basic Triangle Example
+    :alt:
 
   :ref:`sphx_glr_examples_triangle-basic.py`
 
