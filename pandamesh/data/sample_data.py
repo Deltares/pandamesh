@@ -2,19 +2,19 @@
 Functions to load sample data.
 """
 import geopandas as gpd
-import pkg_resources
 import pooch
 
 REGISTRY = pooch.create(
     path=pooch.os_cache("pandamesh"),
-    base_url="https://github.com/deltares/xugrid/raw/main/data/",
+    base_url="https://github.com/deltares/pandamesh/raw/main/data/",
     version=None,
     version_dev="main",
     env="PANDAMESH_DATA_DIR",
     registry={
-        "provinces.geojson": "ac6f8bb30aa021a6c79c003de794e55a3636aa66b600722fa1b0d6f60a45caaf",
-    }
+        "provinces-nl.geojson": "7539318974d1d78f35e4c2987287aa81f5ff505f444a2e0f340d804f57c0f8e3",
+    },
 )
+
 
 def provinces_nl():
     """The provinces (including water bodies) of the Netherlands."""
