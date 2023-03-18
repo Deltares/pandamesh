@@ -11,10 +11,10 @@ REGISTRY = pooch.create(
     version=None,
     version_dev="main",
     env="PANDAMESH_DATA_DIR",
+    registry={
+        "provinces.geojson": "ac6f8bb30aa021a6c79c003de794e55a3636aa66b600722fa1b0d6f60a45caaf",
+    }
 )
-with pkg_resources.resource_stream("pandamesh.data", "registry.txt") as registry_file:
-    REGISTRY.load_registry(registry_file)
-
 
 def provinces_nl():
     """The provinces (including water bodies) of the Netherlands."""
