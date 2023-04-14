@@ -209,7 +209,7 @@ constant cell size.
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:45: FutureWarning: Index.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: Index.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
       if not features.index.is_integer():
 
 
@@ -287,7 +287,7 @@ This results in a mesh with a smaller cell size in the province of Utrecht.
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:45: FutureWarning: Index.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: Index.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
       if not features.index.is_integer():
 
 
@@ -311,7 +311,7 @@ opened by e.g. QGIS.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.423 seconds)
+   **Total running time of the script:** ( 0 minutes  1.394 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-geospatial.py:

@@ -104,7 +104,7 @@ in the appropriate manner for triangle.
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:45: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
       if not features.index.is_integer():
 
 
@@ -199,7 +199,7 @@ recreate the mesher.
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:45: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
       if not features.index.is_integer():
 
 
@@ -245,7 +245,7 @@ with a cell size in the geodataframe.
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:45: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
       if not features.index.is_integer():
 
 
@@ -287,7 +287,7 @@ Holes in polygons work as expected:
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:45: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
       if not features.index.is_integer():
 
 
@@ -329,7 +329,7 @@ exactly with the coordinates of the exterior boundary of the inner polygon.
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:45: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
       if not features.index.is_integer():
 
 
@@ -404,7 +404,7 @@ contents of the geodataframe on top of the generated mesh:
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:45: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
       if not features.index.is_integer():
 
     <Axes: >
@@ -453,7 +453,7 @@ x = 9.0.
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:45: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
       if not features.index.is_integer():
 
     <Axes: >
@@ -473,7 +473,7 @@ sizes, and linestrings and points to steer the triangulation.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.272 seconds)
+   **Total running time of the script:** ( 0 minutes  1.307 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-basic.py:
