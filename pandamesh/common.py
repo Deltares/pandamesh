@@ -42,6 +42,11 @@ def check_geodataframe(features: gpd.GeoDataFrame) -> None:
         raise TypeError(
             f"Expected GeoDataFrame, received instead: {type(features).__name__}"
         )
+    if "cellsize" not in features:
+        colnames = list(features.columns)
+        raise ValueError(f'Missing column "cellsize" in columns: {colnames}')
+    if len(features) == 0:
+        raise ValueError("Dataframe is empty")
     if not features.index.is_integer():
         raise ValueError(
             f"geodataframe index is not integer typed, received: {features.index.dtype}"
@@ -186,8 +191,9 @@ def separate(
     polygons = gdf[geom_type == "Polygon"].copy()
     linestrings = gdf[geom_type == "LineString"].copy()
     points = gdf[geom_type == "Point"].copy()
-    # Set crs to None to avoid crs warnings on joins and overlays
-    polygons.crs = linestrings.crs = points.crs = None
+    for df in (polygons, linestrings, points):
+        df["cellsize"] = df["cellsize"].astype(float)
+        df.crs = None
 
     check_polygons(polygons.geometry)
     check_linestrings(linestrings.geometry, polygons.geometry)

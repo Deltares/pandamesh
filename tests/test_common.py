@@ -135,9 +135,17 @@ def test_check_geodataframe():
         common.check_geodataframe([1, 2, 3])
 
     gdf = gpd.GeoDataFrame(geometry=[pa, pb])
+    with pytest.raises(ValueError, match='Missing column "cellsize" in columns'):
+        common.check_geodataframe(gdf)
+
+    gdf["cellsize"] = 1.0
     gdf.index = [0, "1"]
     with pytest.raises(ValueError, match="geodataframe index is not integer typed"):
         common.check_geodataframe(gdf)
+
+    empty = gdf.loc[[]]
+    with pytest.raises(ValueError, match="Dataframe is empty"):
+        common.check_geodataframe(empty)
 
     gdf.index = [0, 0]
     with pytest.raises(ValueError, match="geodataframe index contains duplicates"):
@@ -223,6 +231,7 @@ def test_check_points():
 
 def test_separate():
     gdf = gpd.GeoDataFrame(geometry=[a, c, d, La, Lc, pa])
+    gdf["cellsize"] = 1.0
     polygons, linestrings, points = common.separate(gdf)
     assert isinstance(polygons.geometry.iloc[0], sg.Polygon)
     assert isinstance(linestrings.geometry.iloc[0], sg.LineString)
@@ -230,7 +239,16 @@ def test_separate():
 
     # Make sure it works for single elements
     gdf = gpd.GeoDataFrame(geometry=[a])
+    gdf["cellsize"] = 1.0
     common.separate(gdf)
 
     gdf = gpd.GeoDataFrame(geometry=[a, La])
+    gdf["cellsize"] = 1.0
     polygons, linestrings, points = common.separate(gdf)
+
+    # Make sure cellsize is cast to float
+    gdf = gpd.GeoDataFrame(geometry=[a, La])
+    gdf["cellsize"] = "1"
+    dfs = common.separate(gdf)
+    for df in dfs:
+        assert np.issubdtype(df["cellsize"].dtype, np.floating)
