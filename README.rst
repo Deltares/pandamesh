@@ -71,8 +71,8 @@ Documentation
 
 .. image:: https://img.shields.io/github/actions/workflow/status/deltares/pandamesh/docs.yml?style=flat-square
    :target: https://deltares.github.io/pandamesh/
-   
-Find the documentation here: deltares.github.io/pandamesh/
+
+The documentation can be found `here`_.
    
 Other projects
 --------------
@@ -121,6 +121,7 @@ Source: https://github.com/shingleproject/Shingle
 
 Website: http://shingleproject.org/index_shingle1.0.html
 
+.. _here: https://deltares.github.io/pandamesh/
 .. _geopandas: https://geopandas.org/
 .. _GeoDataFrames: https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.html
 .. _Gmsh: https://gmsh.info/
