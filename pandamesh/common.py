@@ -18,13 +18,13 @@ class MaybeGmsh:
             import gmsh
 
             self.gmsh = gmsh
-            self.success = True
+            self.ok = True
         except ImportError:
             self.gmsh = None
-            self.succes = False
+            self.ok = False
 
     def __getattr__(self, name: str):
-        if self.success:
+        if self.ok:
             return getattr(self.gmsh, name)
         else:
             raise ImportError("Gmsh is required for this functionality")
