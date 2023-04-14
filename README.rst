@@ -72,6 +72,8 @@ Documentation
 .. image:: https://img.shields.io/github/actions/workflow/status/deltares/pandamesh/docs.yml?style=flat-square
    :target: https://deltares.github.io/pandamesh/
    
+Find the documentation here: deltares.github.io/pandamesh/
+   
 Other projects
 --------------
 
