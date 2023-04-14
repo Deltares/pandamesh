@@ -6,7 +6,6 @@ from enum import Enum, IntEnum
 from typing import List, Tuple, Union
 
 import geopandas as gpd
-import gmsh
 import numpy as np
 import pandas as pd
 
@@ -14,6 +13,7 @@ from pandamesh.common import (
     FloatArray,
     IntArray,
     check_geodataframe,
+    gmsh,
     invalid_option,
     repr,
     separate,

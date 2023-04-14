@@ -12,7 +12,6 @@ maintainers = [{ name = "Huite Bootsma", email = "huite.bootsma@deltares.nl" }]
 requires-python = ">=3.8"
 dependencies = [
     'geopandas',  
-    'gmsh',
     'pooch',
     'triangle',
     'shapely >= 2.0',

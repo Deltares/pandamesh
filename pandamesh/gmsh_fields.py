@@ -2,10 +2,9 @@ import pathlib
 import struct
 from typing import List, Tuple, Union
 
-import gmsh
 import numpy as np
 
-from pandamesh.common import FloatArray
+from pandamesh.common import FloatArray, gmsh
 
 
 def write_structured_field_file(

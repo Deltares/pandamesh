@@ -7,6 +7,30 @@ from typing import Any, Sequence, Tuple
 import geopandas as gpd
 import numpy as np
 
+
+class MaybeGmsh:
+    """
+    Gmsh is an optional dependency.
+    """
+
+    def __init__(self):
+        try:
+            import gmsh
+
+            self.gmsh = gmsh
+            self.success = True
+        except ImportError:
+            self.gmsh = None
+            self.succes = False
+
+    def __getattr__(self, name: str):
+        if self.success:
+            return getattr(self.gmsh, name)
+        else:
+            raise ImportError("Gmsh is required for this functionality")
+
+
+gmsh = MaybeGmsh()
 IntArray = np.ndarray
 FloatArray = np.ndarray
 coord_dtype = np.dtype([("x", np.float64), ("y", np.float64)])

@@ -1,12 +1,11 @@
 from typing import List, NamedTuple, Tuple, Union
 
 import geopandas as gpd
-import gmsh
 import numpy as np
 import pandas as pd
 import shapely.geometry as sg
 
-from pandamesh.common import FloatArray, IntArray, coord_dtype, flatten, separate
+from pandamesh.common import FloatArray, IntArray, coord_dtype, flatten, gmsh, separate
 
 Z_DEFAULT = 0.0
 POINT_DIM = 0
