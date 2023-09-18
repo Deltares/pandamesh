@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 
@@ -7,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Gmsh &#8212; pandamesh  documentation</title>
   
@@ -19,30 +18,31 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/theme-deltares.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/theme-deltares.css?v=1c61d878" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=8a448e45"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/gmsh';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -57,6 +57,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -97,7 +106,8 @@
     <span class="fa-solid fa-bars"></span>
   </label>
   
-  <div class="navbar-header-items__start">
+  
+  <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
   
@@ -121,7 +131,6 @@
 </a></div>
     
   </div>
-  
   
   <div class="col-lg-9 navbar-header-items">
     
@@ -159,13 +168,15 @@
       
         <div class="navbar-item navbar-persistent--container">
           
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__kbd-shortcut">Search</span>
+    <span><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
         </div>
       
       
@@ -201,18 +212,20 @@ document.write(`
   
   
     <div class="navbar-persistent--mobile">
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__kbd-shortcut">Search</span>
+    <span><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
     </div>
   
 
   
-    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
       <span class="fa-solid fa-outdent"></span>
     </label>
   
@@ -329,8 +342,8 @@ document.write(`
 
 
 
-<nav aria-label="Breadcrumbs">
-  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
       <a href="../index.html" class="nav-link" aria-label="Home">
@@ -358,32 +371,32 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="module-pandamesh.gmsh_mesher">
-<span id="gmsh"></span><h1>Gmsh<a class="headerlink" href="#module-pandamesh.gmsh_mesher" title="Permalink to this heading">#</a></h1>
+<span id="gmsh"></span><h1>Gmsh<a class="headerlink" href="#module-pandamesh.gmsh_mesher" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.FieldCombination">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">FieldCombination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#FieldCombination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.FieldCombination" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">FieldCombination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#FieldCombination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.FieldCombination" title="Link to this definition">#</a></dt>
 <dd><p>Controls how cell size fields are combined when they are found at the
 same location.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.FieldCombination.MAX">
-<span class="sig-name descname"><span class="pre">MAX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Max'</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.FieldCombination.MAX" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">MAX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Max'</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.FieldCombination.MAX" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.FieldCombination.MEAN">
-<span class="sig-name descname"><span class="pre">MEAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Mean'</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.FieldCombination.MEAN" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">MEAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Mean'</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.FieldCombination.MEAN" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.FieldCombination.MIN">
-<span class="sig-name descname"><span class="pre">MIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Min'</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.FieldCombination.MIN" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">MIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Min'</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.FieldCombination.MIN" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">GmshMesher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">GmshMesher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher" title="Link to this definition">#</a></dt>
 <dd><p>Wrapper for the python bindings to Gmsh. This class must be initialized
 with a geopandas GeoDataFrame containing at least one polygon, and a column
 named <code class="docutils literal notranslate"><span class="pre">&quot;cellsize&quot;</span></code>.</p>
@@ -415,7 +428,7 @@ any linestrings or points.</p></li>
 <a class="reference external" href="https://gmsh.info/doc/texinfo/gmsh.html#Syntax-index">https://gmsh.info/doc/texinfo/gmsh.html#Syntax-index</a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.add_distance_field">
-<span class="sig-name descname"><span class="pre">add_distance_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_cellsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.add_distance_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.add_distance_field" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">add_distance_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_cellsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.add_distance_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.add_distance_field" title="Link to this definition">#</a></dt>
 <dd><p>Add a distance field to the mesher.</p>
 <p>The of geometry of these fields are not forced into the mesh, but they
 can be used to specify zones of with cell sizes.</p>
@@ -431,7 +444,7 @@ can be used to specify zones of with cell sizes.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.add_structured_field">
-<span class="sig-name descname"><span class="pre">add_structured_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cellsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ymin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outside_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.add_structured_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.add_structured_field" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">add_structured_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cellsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ymin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outside_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.add_structured_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.add_structured_field" title="Link to this definition">#</a></dt>
 <dd><p>Add a structured field specifying cell sizes. Gmsh will interpolate between
 the points to determine the desired cell size.</p>
 <dl class="field-list simple">
@@ -452,13 +465,13 @@ Default value is None.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.clear_fields">
-<span class="sig-name descname"><span class="pre">clear_fields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.clear_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.clear_fields" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">clear_fields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.clear_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.clear_fields" title="Link to this definition">#</a></dt>
 <dd><p>Clears all cell size fields from the mesher.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.field_combination">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">field_combination</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.field_combination" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">field_combination</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.field_combination" title="Link to this definition">#</a></dt>
 <dd><p>Controls how cell size fields are combined when they are found at the
 same location. Can be set to one of
 <code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.FieldCombination</span></code>:</p>
@@ -471,18 +484,18 @@ same location. Can be set to one of
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.finalize_gmsh">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">finalize_gmsh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.finalize_gmsh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.finalize_gmsh" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">finalize_gmsh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.finalize_gmsh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.finalize_gmsh" title="Link to this definition">#</a></dt>
 <dd><p>Finalize Gmsh.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.force_geometry">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">force_geometry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.force_geometry" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">force_geometry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.force_geometry" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.generate">
-<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.generate" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.generate" title="Link to this definition">#</a></dt>
 <dd><p>Generate a mesh of triangles or quadrangles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -499,12 +512,12 @@ entry for triangles in that case.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.generate_ugrid">
-<span class="sig-name descname"><span class="pre">generate_ugrid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">xugrid.Ugrid2d</span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.generate_ugrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.generate_ugrid" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">generate_ugrid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">xugrid.Ugrid2d</span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.generate_ugrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.generate_ugrid" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.mesh_algorithm">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_algorithm</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.mesh_algorithm" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_algorithm</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.mesh_algorithm" title="Link to this definition">#</a></dt>
 <dd><p>Can be set to one of <code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.MeshAlgorithm</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MESH_ADAPT</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">AUTOMATIC</span> <span class="o">=</span> <span class="mi">2</span>
@@ -520,34 +533,34 @@ entry for triangles in that case.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.mesh_size_extend_from_boundary">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_size_extend_from_boundary</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.mesh_size_extend_from_boundary" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_size_extend_from_boundary</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.mesh_size_extend_from_boundary" title="Link to this definition">#</a></dt>
 <dd><p>Forces the mesh size to be extended from the boundary, or not, per
 surface.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.mesh_size_from_curvature">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_size_from_curvature</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.mesh_size_from_curvature" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_size_from_curvature</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.mesh_size_from_curvature" title="Link to this definition">#</a></dt>
 <dd><p>Automatically compute mesh element sizes from curvature, using the value as
 the target number of elements per 2 * Pi radians</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.mesh_size_from_points">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_size_from_points</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.mesh_size_from_points" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mesh_size_from_points</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.mesh_size_from_points" title="Link to this definition">#</a></dt>
 <dd><p>Compute mesh element sizes from values given at geometry points.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.recombine_all">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recombine_all</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.recombine_all" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recombine_all</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.recombine_all" title="Link to this definition">#</a></dt>
 <dd><p>Apply recombination algorithm to all surfaces, ignoring per-surface
 spec.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.subdivision_algorithm">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subdivision_algorithm</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.subdivision_algorithm" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subdivision_algorithm</span></span><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.subdivision_algorithm" title="Link to this definition">#</a></dt>
 <dd><p>All meshes can be subdivided to generate fully quadrangular cells. Can
 be set to one of <code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.SubdivisionAlgorithm</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NONE</span> <span class="o">=</span> <span class="mi">0</span>
@@ -559,7 +572,7 @@ be set to one of <code class="xref py py-class docutils literal notranslate"><sp
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.GmshMesher.write">
-<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.write" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#GmshMesher.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.GmshMesher.write" title="Link to this definition">#</a></dt>
 <dd><p>Writes a gmsh .msh file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -572,7 +585,7 @@ be set to one of <code class="xref py py-class docutils literal notranslate"><sp
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.MeshAlgorithm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">MeshAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#MeshAlgorithm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">MeshAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#MeshAlgorithm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm" title="Link to this definition">#</a></dt>
 <dd><p>Each algorithm has its own advantages and disadvantages.</p>
 <p>For all 2D unstructured algorithms a Delaunay mesh that contains all
 the points of the 1D mesh is initially constructed using a
@@ -604,70 +617,70 @@ MeshAdapt is automatically triggered. The Automatic algorithm uses
 Delaunay for plane surfaces and MeshAdapt for all other surfaces.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.MeshAlgorithm.AUTOMATIC">
-<span class="sig-name descname"><span class="pre">AUTOMATIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.AUTOMATIC" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">AUTOMATIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.AUTOMATIC" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.MeshAlgorithm.BAMG">
-<span class="sig-name descname"><span class="pre">BAMG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.BAMG" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">BAMG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.BAMG" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.MeshAlgorithm.FRONTAL_DELAUNAY">
-<span class="sig-name descname"><span class="pre">FRONTAL_DELAUNAY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.FRONTAL_DELAUNAY" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">FRONTAL_DELAUNAY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.FRONTAL_DELAUNAY" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.MeshAlgorithm.FRONTAL_DELAUNAY_FOR_QUADS">
-<span class="sig-name descname"><span class="pre">FRONTAL_DELAUNAY_FOR_QUADS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.FRONTAL_DELAUNAY_FOR_QUADS" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">FRONTAL_DELAUNAY_FOR_QUADS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.FRONTAL_DELAUNAY_FOR_QUADS" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.MeshAlgorithm.INITIAL_MESH_ONLY">
-<span class="sig-name descname"><span class="pre">INITIAL_MESH_ONLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.INITIAL_MESH_ONLY" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">INITIAL_MESH_ONLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.INITIAL_MESH_ONLY" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.MeshAlgorithm.MESH_ADAPT">
-<span class="sig-name descname"><span class="pre">MESH_ADAPT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.MESH_ADAPT" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">MESH_ADAPT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.MESH_ADAPT" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.MeshAlgorithm.PACKING_OF_PARALLELLOGRAMS">
-<span class="sig-name descname"><span class="pre">PACKING_OF_PARALLELLOGRAMS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.PACKING_OF_PARALLELLOGRAMS" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">PACKING_OF_PARALLELLOGRAMS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.MeshAlgorithm.PACKING_OF_PARALLELLOGRAMS" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.SubdivisionAlgorithm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">SubdivisionAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#SubdivisionAlgorithm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.SubdivisionAlgorithm" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">SubdivisionAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#SubdivisionAlgorithm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.SubdivisionAlgorithm" title="Link to this definition">#</a></dt>
 <dd><p>All meshes can be subdivided to generate fully quadrangular cells.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.SubdivisionAlgorithm.ALL_QUADRANGLES">
-<span class="sig-name descname"><span class="pre">ALL_QUADRANGLES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.SubdivisionAlgorithm.ALL_QUADRANGLES" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">ALL_QUADRANGLES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.SubdivisionAlgorithm.ALL_QUADRANGLES" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.SubdivisionAlgorithm.BARYCENTRIC">
-<span class="sig-name descname"><span class="pre">BARYCENTRIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.SubdivisionAlgorithm.BARYCENTRIC" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">BARYCENTRIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.SubdivisionAlgorithm.BARYCENTRIC" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.SubdivisionAlgorithm.NONE">
-<span class="sig-name descname"><span class="pre">NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.SubdivisionAlgorithm.NONE" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#pandamesh.gmsh_mesher.SubdivisionAlgorithm.NONE" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.coerce_field">
-<span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">coerce_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#coerce_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.coerce_field" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">coerce_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#coerce_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.coerce_field" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pandamesh.gmsh_mesher.gmsh_env">
-<span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">gmsh_env</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#gmsh_env"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.gmsh_env" title="Permalink to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pandamesh.gmsh_mesher.</span></span><span class="sig-name descname"><span class="pre">gmsh_env</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pandamesh/gmsh_mesher.html#gmsh_env"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.gmsh_mesher.gmsh_env" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -677,11 +690,10 @@ Delaunay for plane surfaces and MeshAdapt for all other surfaces.</p>
               
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="triangle.html"
@@ -692,10 +704,7 @@ Delaunay for plane surfaces and MeshAdapt for all other surfaces.</p>
         <p class="prev-next-title">Triangle</p>
       </div>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -776,8 +785,8 @@ Delaunay for plane surfaces and MeshAdapt for all other surfaces.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -795,7 +804,7 @@ Delaunay for plane surfaces and MeshAdapt for all other surfaces.</p>
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     <br/>
   </p>
 </div>
@@ -803,10 +812,11 @@ Delaunay for plane surfaces and MeshAdapt for all other surfaces.</p>
     </div>
   
   
+  
     <div class="footer-items__end">
       
         <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.0.
 </p></div>
       
     </div>

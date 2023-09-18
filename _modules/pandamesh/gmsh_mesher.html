@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 
@@ -18,30 +17,31 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
 
   
-  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/theme-deltares.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-deltares.css?v=1c61d878" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/documentation_options.js?v=8a448e45"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pandamesh/gmsh_mesher';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -55,6 +55,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -95,7 +104,8 @@
     <span class="fa-solid fa-bars"></span>
   </label>
   
-  <div class="navbar-header-items__start">
+  
+  <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
   
@@ -119,7 +129,6 @@
 </a></div>
     
   </div>
-  
   
   <div class="col-lg-9 navbar-header-items">
     
@@ -157,13 +166,15 @@
       
         <div class="navbar-item navbar-persistent--container">
           
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__kbd-shortcut">Search</span>
+    <span><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
         </div>
       
       
@@ -199,13 +210,15 @@ document.write(`
   
   
     <div class="navbar-persistent--mobile">
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__kbd-shortcut">Search</span>
+    <span><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
     </div>
   
 
@@ -311,8 +324,8 @@ document.write(`
 
 
 
-<nav aria-label="Breadcrumbs">
-  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
       <a href="../../index.html" class="nav-link" aria-label="Home">
@@ -370,7 +383,9 @@ document.write(`
 <span class="kn">from</span> <span class="nn">pandamesh.gmsh_geometry</span> <span class="kn">import</span> <span class="n">add_field_geometry</span><span class="p">,</span> <span class="n">add_geometry</span>
 
 
-<div class="viewcode-block" id="gmsh_env"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.gmsh_env">[docs]</a><span class="nd">@contextmanager</span>
+<div class="viewcode-block" id="gmsh_env">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.gmsh_env">[docs]</a>
+<span class="nd">@contextmanager</span>
 <span class="k">def</span> <span class="nf">gmsh_env</span><span class="p">():</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
@@ -381,7 +396,10 @@ document.write(`
         <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="MeshAlgorithm"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.MeshAlgorithm">[docs]</a><span class="k">class</span> <span class="nc">MeshAlgorithm</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+
+<div class="viewcode-block" id="MeshAlgorithm">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.MeshAlgorithm">[docs]</a>
+<span class="k">class</span> <span class="nc">MeshAlgorithm</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Each algorithm has its own advantages and disadvantages.</span>
 
@@ -424,7 +442,10 @@ document.write(`
     <span class="n">PACKING_OF_PARALLELLOGRAMS</span> <span class="o">=</span> <span class="mi">9</span></div>
 
 
-<div class="viewcode-block" id="SubdivisionAlgorithm"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.SubdivisionAlgorithm">[docs]</a><span class="k">class</span> <span class="nc">SubdivisionAlgorithm</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SubdivisionAlgorithm">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.SubdivisionAlgorithm">[docs]</a>
+<span class="k">class</span> <span class="nc">SubdivisionAlgorithm</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    All meshes can be subdivided to generate fully quadrangular cells.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -434,7 +455,10 @@ document.write(`
     <span class="n">BARYCENTRIC</span> <span class="o">=</span> <span class="mi">3</span></div>
 
 
-<div class="viewcode-block" id="FieldCombination"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.FieldCombination">[docs]</a><span class="k">class</span> <span class="nc">FieldCombination</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FieldCombination">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.FieldCombination">[docs]</a>
+<span class="k">class</span> <span class="nc">FieldCombination</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Controls how cell size fields are combined when they are found at the</span>
 <span class="sd">    same location.</span>
@@ -445,7 +469,10 @@ document.write(`
     <span class="n">MEAN</span> <span class="o">=</span> <span class="s2">&quot;Mean&quot;</span></div>
 
 
-<div class="viewcode-block" id="coerce_field"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.coerce_field">[docs]</a><span class="k">def</span> <span class="nf">coerce_field</span><span class="p">(</span><span class="n">field</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+
+<div class="viewcode-block" id="coerce_field">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.coerce_field">[docs]</a>
+<span class="k">def</span> <span class="nf">coerce_field</span><span class="p">(</span><span class="n">field</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;field must be a dictionary or a valid JSON dictionary string&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
@@ -453,7 +480,10 @@ document.write(`
     <span class="k">return</span> <span class="n">field</span></div>
 
 
-<div class="viewcode-block" id="GmshMesher"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher">[docs]</a><span class="k">class</span> <span class="nc">GmshMesher</span><span class="p">:</span>
+
+<div class="viewcode-block" id="GmshMesher">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher">[docs]</a>
+<span class="k">class</span> <span class="nc">GmshMesher</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper for the python bindings to Gmsh. This class must be initialized</span>
 <span class="sd">    with a geopandas GeoDataFrame containing at least one polygon, and a column</span>
@@ -528,12 +558,15 @@ document.write(`
         <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;General.Terminal&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<div class="viewcode-block" id="GmshMesher.finalize_gmsh"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.finalize_gmsh">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="GmshMesher.finalize_gmsh">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.finalize_gmsh">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">finalize_gmsh</span><span class="p">():</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finalize Gmsh.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span></div>
+
 
     <span class="c1"># Properties</span>
     <span class="c1"># ----------</span>
@@ -700,7 +733,9 @@ document.write(`
         <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">setNumbers</span><span class="p">(</span><span class="n">field_id</span><span class="p">,</span> <span class="s2">&quot;FieldsList&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fields_list</span><span class="p">)</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">setAsBackgroundMesh</span><span class="p">(</span><span class="n">field_id</span><span class="p">)</span>
 
-<div class="viewcode-block" id="GmshMesher.clear_fields"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.clear_fields">[docs]</a>    <span class="k">def</span> <span class="nf">clear_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="GmshMesher.clear_fields">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.clear_fields">[docs]</a>
+    <span class="k">def</span> <span class="nf">clear_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Clears all cell size fields from the mesher.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -711,7 +746,10 @@ document.write(`
         <span class="bp">self</span><span class="o">.</span><span class="n">_distance_fields_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_current_field_id</span> <span class="o">=</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="GmshMesher.add_distance_field"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.add_distance_field">[docs]</a>    <span class="k">def</span> <span class="nf">add_distance_field</span><span class="p">(</span>
+
+<div class="viewcode-block" id="GmshMesher.add_distance_field">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.add_distance_field">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_distance_field</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">minimum_cellsize</span><span class="p">:</span> <span class="nb">float</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -757,7 +795,10 @@ document.write(`
 
         <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">,</span> <span class="n">gdf</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="GmshMesher.add_structured_field"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.add_structured_field">[docs]</a>    <span class="k">def</span> <span class="nf">add_structured_field</span><span class="p">(</span>
+
+<div class="viewcode-block" id="GmshMesher.add_structured_field">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.add_structured_field">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_structured_field</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">cellsize</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span>
         <span class="n">xmin</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -808,6 +849,7 @@ document.write(`
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fields_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field_id</span><span class="p">)</span></div>
 
+
     <span class="k">def</span> <span class="nf">_vertices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># getNodes returns: node_tags, coord, parametric_coord</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
@@ -838,7 +880,9 @@ document.write(`
         <span class="c1"># convert to 0-based index</span>
         <span class="k">return</span> <span class="n">faces</span> <span class="o">-</span> <span class="mi">1</span>
 
-<div class="viewcode-block" id="GmshMesher.generate"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">FloatArray</span><span class="p">,</span> <span class="n">IntArray</span><span class="p">]:</span>
+<div class="viewcode-block" id="GmshMesher.generate">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.generate">[docs]</a>
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">FloatArray</span><span class="p">,</span> <span class="n">IntArray</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate a mesh of triangles or quadrangles.</span>
 
@@ -861,10 +905,16 @@ document.write(`
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertices</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_faces</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="GmshMesher.generate_ugrid"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.generate_ugrid">[docs]</a>    <span class="k">def</span> <span class="nf">generate_ugrid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;xugrid.Ugrid2d&quot;</span><span class="p">:</span>  <span class="c1"># type: ignore # noqa</span>
+
+<div class="viewcode-block" id="GmshMesher.generate_ugrid">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.generate_ugrid">[docs]</a>
+    <span class="k">def</span> <span class="nf">generate_ugrid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;xugrid.Ugrid2d&quot;</span><span class="p">:</span>  <span class="c1"># type: ignore # noqa</span>
         <span class="k">return</span> <span class="n">to_ugrid</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="GmshMesher.write"><a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
+
+<div class="viewcode-block" id="GmshMesher.write">
+<a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.GmshMesher.write">[docs]</a>
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes a gmsh .msh file</span>
 
@@ -872,23 +922,21 @@ document.write(`
 <span class="sd">        ----------</span>
 <span class="sd">        path: Union[str, pathlib.Path</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">gmsh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div></div>
+        <span class="n">gmsh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+</div>
+
 </pre></div>
 
                 </article>
               
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -906,8 +954,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -925,7 +973,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     <br/>
   </p>
 </div>
@@ -933,10 +981,11 @@ document.write(`
     </div>
   
   
+  
     <div class="footer-items__end">
       
         <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.0.
 </p></div>
       
     </div>

@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 
@@ -7,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Basic Triangle Example &#8212; pandamesh  documentation</title>
   
@@ -19,30 +18,31 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/theme-deltares.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/theme-deltares.css?v=1c61d878" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=8a448e45"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/triangle-basic';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -58,6 +58,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -98,7 +107,8 @@
     <span class="fa-solid fa-bars"></span>
   </label>
   
-  <div class="navbar-header-items__start">
+  
+  <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
   
@@ -122,7 +132,6 @@
 </a></div>
     
   </div>
-  
   
   <div class="col-lg-9 navbar-header-items">
     
@@ -160,13 +169,15 @@
       
         <div class="navbar-item navbar-persistent--container">
           
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__kbd-shortcut">Search</span>
+    <span><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
         </div>
       
       
@@ -202,18 +213,20 @@ document.write(`
   
   
     <div class="navbar-persistent--mobile">
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__kbd-shortcut">Search</span>
+    <span><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
     </div>
   
 
   
-    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
       <span class="fa-solid fa-outdent"></span>
     </label>
   
@@ -331,8 +344,8 @@ document.write(`
 
 
 
-<nav aria-label="Breadcrumbs">
-  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
       <a href="../index.html" class="nav-link" aria-label="Home">
@@ -365,7 +378,7 @@ document.write(`
 to download the full example code</p>
 </div>
 <section class="sphx-glr-example-title" id="basic-triangle-example">
-<span id="sphx-glr-examples-triangle-basic-py"></span><h1>Basic Triangle Example<a class="headerlink" href="#basic-triangle-example" title="Permalink to this heading">#</a></h1>
+<span id="sphx-glr-examples-triangle-basic-py"></span><h1>Basic Triangle Example<a class="headerlink" href="#basic-triangle-example" title="Link to this heading">#</a></h1>
 <p>In this example we’ll create some basic geometries and turn them into meshes.
 to illustrate some of the mesh generation features that Triangle provides in
 combination with polygon, point, and linestring geometries represented by
@@ -379,7 +392,7 @@ geopandas.</p>
 </pre></div>
 </div>
 <section id="a-simple-rectangular-mesh">
-<h2>A simple rectangular mesh<a class="headerlink" href="#a-simple-rectangular-mesh" title="Permalink to this heading">#</a></h2>
+<h2>A simple rectangular mesh<a class="headerlink" href="#a-simple-rectangular-mesh" title="Link to this heading">#</a></h2>
 <p>The most simple example is perhaps a rectangle. We’ll create a vector
 geometry, store this in a geodataframe, and associate a cell size.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">polygon</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span>
@@ -409,7 +422,7 @@ in the appropriate manner for triangle.</p>
 </div>
 </section>
 <section id="defaults">
-<h2>Defaults<a class="headerlink" href="#defaults" title="Permalink to this heading">#</a></h2>
+<h2>Defaults<a class="headerlink" href="#defaults" title="Link to this heading">#</a></h2>
 <p>The TriangleMesher class is initialized with a number of default parameters:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mesher</span><span class="p">)</span>
 </pre></div>
@@ -447,7 +460,7 @@ recreate the mesher.</p>
 </div>
 </section>
 <section id="multiple-cell-size-zones">
-<h2>Multiple cell size zones<a class="headerlink" href="#multiple-cell-size-zones" title="Permalink to this heading">#</a></h2>
+<h2>Multiple cell size zones<a class="headerlink" href="#multiple-cell-size-zones" title="Link to this heading">#</a></h2>
 <p>Multiple zones of cell sizes are supported, as every polygon can be associated
 with a cell size in the geodataframe.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">polygon2</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span>
@@ -472,7 +485,7 @@ with a cell size in the geodataframe.</p>
 </div>
 </section>
 <section id="polygons-with-holes-donut-geometries">
-<h2>Polygons with holes (“donut” geometries)<a class="headerlink" href="#polygons-with-holes-donut-geometries" title="Permalink to this heading">#</a></h2>
+<h2>Polygons with holes (“donut” geometries)<a class="headerlink" href="#polygons-with-holes-donut-geometries" title="Link to this heading">#</a></h2>
 <p>Holes in polygons work as expected:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outer</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)]</span>
 <span class="n">inner</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">)]</span>
@@ -492,7 +505,7 @@ with a cell size in the geodataframe.</p>
 </div>
 </section>
 <section id="local-refinement">
-<h2>Local refinement<a class="headerlink" href="#local-refinement" title="Permalink to this heading">#</a></h2>
+<h2>Local refinement<a class="headerlink" href="#local-refinement" title="Link to this heading">#</a></h2>
 <p>To do local refinement, we need to ensure there is no overlap between the
 polygons. The coordinates of the hole of the outer polygon should match
 exactly with the coordinates of the exterior boundary of the inner polygon.</p>
@@ -512,7 +525,7 @@ exactly with the coordinates of the exterior boundary of the inner polygon.</p>
 </div>
 </section>
 <section id="force-points-into-the-triangulation">
-<h2>Force points into the triangulation<a class="headerlink" href="#force-points-into-the-triangulation" title="Permalink to this heading">#</a></h2>
+<h2>Force points into the triangulation<a class="headerlink" href="#force-points-into-the-triangulation" title="Link to this heading">#</a></h2>
 <p>We may also force points into the triangulation, by adding points to the
 geodataframe. Let’s assume we’d like to a series of points at x=1.0, at a
 distance of 0.5.</p>
@@ -546,7 +559,7 @@ contents of the geodataframe on top of the generated mesh:</p>
 </div>
 </section>
 <section id="force-linestrings-into-the-triangulation">
-<h2>Force linestrings into the triangulation<a class="headerlink" href="#force-linestrings-into-the-triangulation" title="Permalink to this heading">#</a></h2>
+<h2>Force linestrings into the triangulation<a class="headerlink" href="#force-linestrings-into-the-triangulation" title="Link to this heading">#</a></h2>
 <p>We may do the same with linestrings. Here, we will add a vertical line at
 x = 9.0.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">line</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">LineString</span><span class="p">(</span>
@@ -574,12 +587,12 @@ x = 9.0.</p>
 </div>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>In real use, the vector geometries will be more complex, and not based on
 just a few coordinate pairs. Such cases are presented in the other examples,
 but the same principles apply: we may use polygons with associated cell
 sizes, and linestrings and points to steer the triangulation.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.277 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.082 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-triangle-basic-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/901731ce545f172d35561b334a49dd37/triangle-basic.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">triangle-basic.py</span></code></a></p>
@@ -597,11 +610,10 @@ sizes, and linestrings and points to steer the triangulation.</p>
               
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="gmsh-basic.html"
@@ -621,10 +633,7 @@ sizes, and linestrings and points to steer the triangulation.</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -671,8 +680,8 @@ sizes, and linestrings and points to steer the triangulation.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -690,7 +699,7 @@ sizes, and linestrings and points to steer the triangulation.</p>
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     <br/>
   </p>
 </div>
@@ -698,10 +707,11 @@ sizes, and linestrings and points to steer the triangulation.</p>
     </div>
   
   
+  
     <div class="footer-items__end">
       
         <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.0.
 </p></div>
       
     </div>
