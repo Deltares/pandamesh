@@ -220,7 +220,8 @@ def separate(
         df.crs = None
 
     check_polygons(polygons.geometry)
-    check_linestrings(linestrings.geometry, polygons.geometry)
+    # TODO: do a better check, on segments instead of the entire linestring.
+    #check_linestrings(linestrings.geometry, polygons.geometry)
     check_points(points.geometry, polygons.geometry)
 
     return polygons, linestrings, points
