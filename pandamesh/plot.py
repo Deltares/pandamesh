@@ -12,9 +12,7 @@ def plot(
     edgecolors: str = "black",
     **kwargs,
 ) -> None:
-    """
-    Plot an unstructured mesh
-    """
+    """Plot an unstructured mesh"""
     import matplotlib.pyplot as plt
     from matplotlib.collections import PolyCollection
 

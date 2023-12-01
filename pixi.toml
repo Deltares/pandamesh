@@ -1,0 +1,30 @@
+[project]
+name = "pandamesh"
+version = "0.1.3"
+description = "Add a short description here"
+authors = ["Huite Bootsma <huitebootsma@gmail.com>"]
+channels = ["conda-forge"]
+platforms = ["win-64"]
+
+[tasks]
+install = "python -m pip install --no-deps --editable ."
+install-pre-commit = "pre-commit install"
+pre-commit = "pre-commit run --all-files"
+test = { depends_on = ["install"], cmd = "pytest --cov=pandamesh --cov-report xml --cov-report term"}
+docs = { depends_on = ["install"], cmd = "sphinx-build docs docs/_build"}
+all = { depends_on = ["pre-commit", "test", "docs"]}
+
+[dependencies]
+geopandas = "*"
+python-gmsh = "*"
+matplotlib = "*"
+pooch = "*"
+pip = "*"
+pre-commit = "*"
+pydata-sphinx-theme = "*"
+py-triangle = "*"
+pytest = "*"
+pytest-cov = "*"
+shapely = ">=2.0"
+sphinx = "*"
+sphinx-gallery = "*"

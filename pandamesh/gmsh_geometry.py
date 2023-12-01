@@ -112,7 +112,7 @@ def add_polygons(
 def add_points(points: gpd.GeoDataFrame) -> Tuple[IntArray, IntArray]:
     n_points = len(points)
     indices = np.empty(n_points, dtype=np.int64)
-    embedded_in = points["__polygon_id"].values
+    embedded_in = points["__polygon_id"].to_numpy()
     # We have to add points one by one due to the Gmsh addPoint API
     for i, row in enumerate(points.to_dict("records")):
         point = row["geometry"]
@@ -194,7 +194,7 @@ def add_geometry(
     vertex_tags = np.arange(1, len(vertices) + 1)
     tags = vertex_tags[indices]
     # Get the smallest cellsize per vertex
-    cellsizes = pd.Series(cellsizes).groupby(tags).min().values
+    cellsizes = pd.Series(cellsizes).groupby(tags).min().to_numpy()
 
     # Add all unique vertices. This includes vertices for linestrings and polygons.
     add_vertices(vertices, cellsizes, vertex_tags)

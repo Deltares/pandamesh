@@ -16,3 +16,16 @@ try:
 except pkg_resources.DistributionNotFound:
     # package is not installed
     pass
+
+
+__all__ = (
+    "data",
+    "FieldCombination",
+    "GmshMesher",
+    "MeshAlgorithm",
+    "SubdivisionAlgorithm",
+    "gmsh_env",
+    "plot",
+    "DelaunayAlgorithm",
+    "TriangleMesher",
+)

@@ -1,6 +1,4 @@
-"""
-Functions to load sample data.
-"""
+"""Functions to load sample data."""
 import geopandas as gpd
 import pooch
 
@@ -17,6 +15,6 @@ REGISTRY = pooch.create(
 
 
 def provinces_nl():
-    """The provinces (including water bodies) of the Netherlands."""
+    """Return the provinces (including water bodies) of the Netherlands as a GeoDataframe."""
     fname = REGISTRY.fetch("provinces-nl.geojson")
     return gpd.read_file(fname)

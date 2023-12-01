@@ -17,3 +17,12 @@ examples/*
 # Distribution
 build/*
 dist/*
+
+# pixi environments
+.pixi
+
+# coverage
+.coverage
+coverage.xml
+
+sg_execution_times.rst
