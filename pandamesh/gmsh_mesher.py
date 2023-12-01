@@ -101,6 +101,18 @@ class FieldCombination(Enum):
     MEAN = "Mean"
 
 
+class GeneralVerbosity(IntEnum):
+    """Level of information printed."""
+
+    SILENT = 0
+    ERRORS = 1
+    WARNINGS = 2
+    DIRECT = 3
+    INFORMATION = 4
+    STATUS = 5
+    DEBUG = 99
+
+
 def coerce_field(field: Union[dict, str]) -> dict:
     if not isinstance(field, (dict, str)):
         raise TypeError("field must be a dictionary or a valid JSON dictionary string")
@@ -169,6 +181,8 @@ class GmshMesher:
         self.mesh_size_from_curvature = False
         self.field_combination = FieldCombination.MIN
         self.subdivision_algorithm = SubdivisionAlgorithm.NONE
+        self.force_geometry = False
+        self.general_verbosity = GeneralVerbosity.SILENT
 
     def __repr__(self):
         return repr(self)
@@ -233,18 +247,14 @@ class GmshMesher:
         gmsh.option.setNumber("Mesh.RecombineAll", value)
 
     @property
-    def force_geometry(self) -> None:
-        raise NotImplementedError
-        # return self._force_geometry
+    def force_geometry(self) -> bool:
+        return self._force_geometry
 
     @force_geometry.setter
     def force_geometry(self, value: bool) -> None:
-        # Wait for the next release incorporating this change:
-        # https://gitlab.onelab.info/gmsh/gmsh/-/merge_requests/358
-        raise NotImplementedError
-        # if not isinstance(value, bool):
-        #     raise TypeError("force_geometry must be a bool")
-        # self._force_geometry = value
+        if not isinstance(value, bool):
+            raise TypeError("force_geometry must be a bool")
+        self._force_geometry = value
 
     @property
     def mesh_size_extend_from_boundary(self):
@@ -335,6 +345,17 @@ class GmshMesher:
             raise ValueError(invalid_option(value, SubdivisionAlgorithm))
         self._subdivision_algorithm = value
         gmsh.option.setNumber("Mesh.SubdivisionAlgorithm", value)
+
+    @property
+    def general_verbosity(self) -> GeneralVerbosity:
+        return self._general_verbosity
+
+    @general_verbosity.setter
+    def general_verbosity(self, value: GeneralVerbosity) -> None:
+        if value not in GeneralVerbosity:
+            raise ValueError(invalid_option(value, GeneralVerbosity))
+        self._general_verbosity = value
+        gmsh.option.setNumber("General.Verbosity", value)
 
     # Methods
     # -------

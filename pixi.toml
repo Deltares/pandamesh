@@ -1,7 +1,7 @@
 [project]
 name = "pandamesh"
 version = "0.1.3"
-description = "Add a short description here"
+description = "From geodataframe to mesh"
 authors = ["Huite Bootsma <huitebootsma@gmail.com>"]
 channels = ["conda-forge"]
 platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
