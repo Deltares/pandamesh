@@ -31,7 +31,7 @@ example and has a number of additional features.
 
 .. GENERATED FROM PYTHON SOURCE LINES 14-21
 
-.. code-block:: default
+.. code-block:: Python
 
     import geopandas as gpd
     import matplotlib.pyplot as plt
@@ -57,7 +57,7 @@ geometry, store this in a geodataframe, and associate a cell size.
 
 .. GENERATED FROM PYTHON SOURCE LINES 27-39
 
-.. code-block:: default
+.. code-block:: Python
 
 
     polygon = sg.Polygon(
@@ -87,7 +87,7 @@ in the appropriate manner for Gmsh.
 
 .. GENERATED FROM PYTHON SOURCE LINES 44-49
 
-.. code-block:: default
+.. code-block:: Python
 
 
     mesher = pm.GmshMesher(gdf)
@@ -103,13 +103,6 @@ in the appropriate manner for Gmsh.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -121,7 +114,7 @@ and whistles for defining cellsizes.
 
 .. GENERATED FROM PYTHON SOURCE LINES 53-68
 
-.. code-block:: default
+.. code-block:: Python
 
 
     line = sg.LineString([(2.0, 8.0), (8.0, 2.0)])
@@ -147,15 +140,6 @@ and whistles for defining cellsizes.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -172,7 +156,7 @@ The GmshMesher class is initialized with a number of default parameters:
 
 .. GENERATED FROM PYTHON SOURCE LINES 77-80
 
-.. code-block:: default
+.. code-block:: Python
 
 
     print(mesher)
@@ -192,7 +176,7 @@ The GmshMesher class is initialized with a number of default parameters:
         fields = Empty GeoDataFrame
     Columns: []
     Index: []
-        tmpdir = <TemporaryDirectory '/tmp/tmp72p3i0ue'>
+        tmpdir = <TemporaryDirectory '/tmp/tmp67f2c2xs'>
         recombine_all = False
         mesh_size_extend_from_boundary = True
         mesh_size_from_points = True
@@ -215,7 +199,7 @@ We can force points and lines into the triangulation:
 
 .. GENERATED FROM PYTHON SOURCE LINES 88-115
 
-.. code-block:: default
+.. code-block:: Python
 
 
     outer = [(0.0, 0.0), (10.0, 0.0), (10.0, 10.0), (0.0, 10.0)]
@@ -257,8 +241,6 @@ We can force points and lines into the triangulation:
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
     <Axes: >
 
@@ -275,7 +257,7 @@ this by changing a parameter on the mesher:
 
 .. GENERATED FROM PYTHON SOURCE LINES 122-131
 
-.. code-block:: default
+.. code-block:: Python
 
 
     gdf = gpd.GeoDataFrame(geometry=[polygon])
@@ -295,13 +277,6 @@ this by changing a parameter on the mesher:
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -315,7 +290,7 @@ mesh.
 
 .. GENERATED FROM PYTHON SOURCE LINES 137-140
 
-.. code-block:: default
+.. code-block:: Python
 
 
     mesher.write("my-mesh.msh")
@@ -342,7 +317,7 @@ polygons.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.693 seconds)
+   **Total running time of the script:** (0 minutes 0.561 seconds)
 
 
 .. _sphx_glr_download_examples_gmsh-basic.py:
@@ -351,16 +326,13 @@ polygons.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
+      :download:`Download Jupyter notebook: gmsh-basic.ipynb <gmsh-basic.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: gmsh-basic.py <gmsh-basic.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: gmsh-basic.ipynb <gmsh-basic.ipynb>`
 
 
 .. only:: html

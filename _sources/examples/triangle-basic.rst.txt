@@ -28,7 +28,7 @@ geopandas.
 
 .. GENERATED FROM PYTHON SOURCE LINES 11-18
 
-.. code-block:: default
+.. code-block:: Python
 
     import geopandas as gpd
     import matplotlib.pyplot as plt
@@ -54,7 +54,7 @@ geometry, store this in a geodataframe, and associate a cell size.
 
 .. GENERATED FROM PYTHON SOURCE LINES 24-36
 
-.. code-block:: default
+.. code-block:: Python
 
 
     polygon = sg.Polygon(
@@ -84,7 +84,7 @@ in the appropriate manner for triangle.
 
 .. GENERATED FROM PYTHON SOURCE LINES 41-46
 
-.. code-block:: default
+.. code-block:: Python
 
 
     mesher = pm.TriangleMesher(gdf)
@@ -100,13 +100,6 @@ in the appropriate manner for triangle.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -119,7 +112,7 @@ The TriangleMesher class is initialized with a number of default parameters:
 
 .. GENERATED FROM PYTHON SOURCE LINES 51-54
 
-.. code-block:: default
+.. code-block:: Python
 
 
     print(mesher)
@@ -153,7 +146,7 @@ We can change a parameter, and see what effects this has on the mesh:
 
 .. GENERATED FROM PYTHON SOURCE LINES 56-61
 
-.. code-block:: default
+.. code-block:: Python
 
 
     mesher.conforming_delaunay = False
@@ -179,7 +172,7 @@ recreate the mesher.
 
 .. GENERATED FROM PYTHON SOURCE LINES 64-69
 
-.. code-block:: default
+.. code-block:: Python
 
 
     gdf["cellsize"] = 1.0
@@ -195,13 +188,6 @@ recreate the mesher.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -215,7 +201,7 @@ with a cell size in the geodataframe.
 
 .. GENERATED FROM PYTHON SOURCE LINES 75-90
 
-.. code-block:: default
+.. code-block:: Python
 
 
     polygon2 = sg.Polygon(
@@ -241,13 +227,6 @@ with a cell size in the geodataframe.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -260,7 +239,7 @@ Holes in polygons work as expected:
 
 .. GENERATED FROM PYTHON SOURCE LINES 95-107
 
-.. code-block:: default
+.. code-block:: Python
 
 
     outer = [(0.0, 0.0), (10.0, 0.0), (10.0, 10.0), (0.0, 10.0)]
@@ -283,13 +262,6 @@ Holes in polygons work as expected:
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -304,7 +276,7 @@ exactly with the coordinates of the exterior boundary of the inner polygon.
 
 .. GENERATED FROM PYTHON SOURCE LINES 114-124
 
-.. code-block:: default
+.. code-block:: Python
 
 
     refined = sg.Polygon(inner)
@@ -325,13 +297,6 @@ exactly with the coordinates of the exterior boundary of the inner polygon.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -346,7 +311,7 @@ distance of 0.5.
 
 .. GENERATED FROM PYTHON SOURCE LINES 131-140
 
-.. code-block:: default
+.. code-block:: Python
 
 
     y = np.arange(0.5, 10.0, 0.5)
@@ -382,7 +347,7 @@ contents of the geodataframe on top of the generated mesh:
 
 .. GENERATED FROM PYTHON SOURCE LINES 143-150
 
-.. code-block:: default
+.. code-block:: Python
 
 
     mesher = pm.TriangleMesher(gdf)
@@ -404,8 +369,6 @@ contents of the geodataframe on top of the generated mesh:
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
     <Axes: >
 
@@ -421,7 +384,7 @@ x = 9.0.
 
 .. GENERATED FROM PYTHON SOURCE LINES 156-173
 
-.. code-block:: default
+.. code-block:: Python
 
 
     line = sg.LineString(
@@ -453,8 +416,6 @@ x = 9.0.
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
     <Axes: >
 
@@ -473,7 +434,7 @@ sizes, and linestrings and points to steer the triangulation.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.082 seconds)
+   **Total running time of the script:** (0 minutes 0.839 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-basic.py:
@@ -482,16 +443,13 @@ sizes, and linestrings and points to steer the triangulation.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
+      :download:`Download Jupyter notebook: triangle-basic.ipynb <triangle-basic.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: triangle-basic.py <triangle-basic.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: triangle-basic.ipynb <triangle-basic.ipynb>`
 
 
 .. only:: html

@@ -26,7 +26,7 @@ geospatial vector dataset.
 
 .. GENERATED FROM PYTHON SOURCE LINES 9-16
 
-.. code-block:: default
+.. code-block:: Python
 
     import geopandas as gpd
     import matplotlib.pyplot as plt
@@ -55,7 +55,7 @@ provinces on name.
 
 .. GENERATED FROM PYTHON SOURCE LINES 25-31
 
-.. code-block:: default
+.. code-block:: Python
 
 
     provinces = pm.data.provinces_nl().loc[:, ["name", "geometry"]]
@@ -78,7 +78,7 @@ Let's check the polygons for overlap first.
 
 .. GENERATED FROM PYTHON SOURCE LINES 35-43
 
-.. code-block:: default
+.. code-block:: Python
 
 
     overlap = gdf.overlay(gdf, how="intersection", keep_geom_type=True)
@@ -117,7 +117,7 @@ We can generate a consistent polygon using a unary union.
 
 .. GENERATED FROM PYTHON SOURCE LINES 50-55
 
-.. code-block:: default
+.. code-block:: Python
 
 
     union = sg.Polygon(gdf.unary_union)
@@ -152,7 +152,7 @@ This creates a clean, and simpler, geometry.
 
 .. GENERATED FROM PYTHON SOURCE LINES 72-82
 
-.. code-block:: default
+.. code-block:: Python
 
 
     simplified = gdf.copy()
@@ -189,7 +189,7 @@ constant cell size.
 
 .. GENERATED FROM PYTHON SOURCE LINES 85-90
 
-.. code-block:: default
+.. code-block:: Python
 
 
     mesher = pm.TriangleMesher(simplified)
@@ -204,13 +204,6 @@ constant cell size.
    :srcset: /examples/images/sphx_glr_triangle-geospatial_003.png
    :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: Index.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
 
 
@@ -231,7 +224,7 @@ ensure that no overlap occurs in the follwing steps:
 
 .. GENERATED FROM PYTHON SOURCE LINES 102-112
 
-.. code-block:: default
+.. code-block:: Python
 
 
     utrecht = gdf.loc[["Utrecht"]]
@@ -267,7 +260,7 @@ This results in a mesh with a smaller cell size in the province of Utrecht.
 
 .. GENERATED FROM PYTHON SOURCE LINES 114-119
 
-.. code-block:: default
+.. code-block:: Python
 
 
     mesher = pm.TriangleMesher(refined)
@@ -282,13 +275,6 @@ This results in a mesh with a smaller cell size in the province of Utrecht.
    :srcset: /examples/images/sphx_glr_triangle-geospatial_005.png
    :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:74: FutureWarning: Index.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
 
 
@@ -311,7 +297,7 @@ opened by e.g. QGIS.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.331 seconds)
+   **Total running time of the script:** (0 minutes 0.793 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-geospatial.py:
@@ -320,16 +306,13 @@ opened by e.g. QGIS.
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
 
+    .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-
+      :download:`Download Jupyter notebook: triangle-geospatial.ipynb <triangle-geospatial.ipynb>`
 
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: triangle-geospatial.py <triangle-geospatial.py>`
-
-    .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-      :download:`Download Jupyter notebook: triangle-geospatial.ipynb <triangle-geospatial.ipynb>`
 
 
 .. only:: html

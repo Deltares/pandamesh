@@ -1,12 +1,12 @@
 
 :orphan:
 
-.. _sphx_glr_examples_sg_execution_times:
+.. _sphx_glr_sg_execution_times:
 
 
 Computation times
 =================
-**00:02.193** total execution time for 3 files **from examples**:
+**00:02.193** total execution time for 3 files **from all galleries**:
 
 .. container::
 
@@ -32,12 +32,12 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_examples_triangle-basic.py` (``triangle-basic.py``)
+   * - :ref:`sphx_glr_examples_triangle-basic.py` (``../examples/triangle-basic.py``)
      - 00:00.839
      - 0.0
-   * - :ref:`sphx_glr_examples_triangle-geospatial.py` (``triangle-geospatial.py``)
+   * - :ref:`sphx_glr_examples_triangle-geospatial.py` (``../examples/triangle-geospatial.py``)
      - 00:00.793
      - 0.0
-   * - :ref:`sphx_glr_examples_gmsh-basic.py` (``gmsh-basic.py``)
+   * - :ref:`sphx_glr_examples_gmsh-basic.py` (``../examples/gmsh-basic.py``)
      - 00:00.561
      - 0.0
