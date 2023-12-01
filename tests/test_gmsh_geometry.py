@@ -150,7 +150,7 @@ def test_embed_where_points():
     actual = gg.embed_where(points_gdf, polygons)
     assert np.allclose(actual["cellsize"], 0.25)
     assert np.allclose(actual["__polygon_id"], 1)
-    assert (actual.geometry.values == points_embed).all()
+    assert (actual.geometry.to_numpy() == points_embed).all()
 
 
 def test_add_geometry():

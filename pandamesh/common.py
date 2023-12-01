@@ -6,12 +6,11 @@ from typing import Any, Sequence, Tuple
 
 import geopandas as gpd
 import numpy as np
+from pandas.api.types import is_integer_dtype
 
 
 class MaybeGmsh:
-    """
-    Gmsh is an optional dependency.
-    """
+    """Gmsh is an optional dependency."""
 
     def __init__(self):
         try:
@@ -71,7 +70,7 @@ def check_geodataframe(features: gpd.GeoDataFrame) -> None:
         raise ValueError(f'Missing column "cellsize" in columns: {colnames}')
     if len(features) == 0:
         raise ValueError("Dataframe is empty")
-    if not features.index.is_integer():
+    if not is_integer_dtype(features.index):
         raise ValueError(
             f"geodataframe index is not integer typed, received: {features.index.dtype}"
         )
@@ -91,8 +90,8 @@ def overlap_shortlist(features: gpd.GeoSeries) -> Tuple[IntArray, IntArray]:
     df_a = bounds.loc[index_a]
     df_b = bounds.loc[index_b]
     # Convert to dict to get rid of clashing index.
-    a = {k: df_a[k].values for k in df_a}
-    b = {k: df_b[k].values for k in df_b}
+    a = {k: df_a[k].to_numpy() for k in df_a}
+    b = {k: df_b[k].to_numpy() for k in df_b}
     # Touching does not count as overlap here.
     overlap = (
         (a["maxx"] >= b["minx"])
@@ -121,7 +120,7 @@ def intersecting_features(features, feature_type) -> Tuple[IntArray, IntArray]:
     # check.
     a.index = np.arange(len(a))
     b.index = np.arange(len(b))
-    with_overlap = a.intersects(b).values
+    with_overlap = a.intersects(b).to_numpy()
     return index_a[with_overlap], index_b[with_overlap]
 
 
@@ -129,7 +128,7 @@ def check_intersection(features: gpd.GeoSeries, feature_type: str) -> None:
     index_a, index_b = intersecting_features(features, feature_type)
     n_overlap = len(index_a)
     if n_overlap > 0:
-        message = "\n".join([f"{a} with {b}" for a, b, in zip(index_a, index_b)])
+        message = "\n".join([f"{a} with {b}" for a, b in zip(index_a, index_b)])
         raise ValueError(
             f"{n_overlap} cases of intersecting {feature_type} detected:\n{message}"
         )
@@ -167,9 +166,7 @@ def check_linestrings(
     linestrings: gpd.GeoSeries,
     polygons: gpd.GeoSeries,
 ) -> None:
-    """
-    Check whether linestrings are fully contained in a single polygon.
-    """
+    """Check whether linestrings are fully contained in a single polygon."""
     check_features(linestrings, "linestring")
 
     intersects = gpd.GeoDataFrame(geometry=linestrings).sjoin(
@@ -191,9 +188,7 @@ def check_points(
     points: gpd.GeoSeries,
     polygons: gpd.GeoSeries,
 ) -> None:
-    """
-    Check whether points are contained by a polygon.
-    """
+    """Check whether points are contained by a polygon."""
     within = gpd.GeoDataFrame(geometry=points).sjoin(
         df=gpd.GeoDataFrame(geometry=polygons),
         predicate="within",
@@ -221,7 +216,7 @@ def separate(
 
     check_polygons(polygons.geometry)
     # TODO: do a better check, on segments instead of the entire linestring.
-    #check_linestrings(linestrings.geometry, polygons.geometry)
+    # check_linestrings(linestrings.geometry, polygons.geometry)
     check_points(points.geometry, polygons.geometry)
 
     return polygons, linestrings, points

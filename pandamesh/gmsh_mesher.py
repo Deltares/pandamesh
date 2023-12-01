@@ -83,9 +83,7 @@ class MeshAlgorithm(IntEnum):
 
 
 class SubdivisionAlgorithm(IntEnum):
-    """
-    All meshes can be subdivided to generate fully quadrangular cells.
-    """
+    """All meshes can be subdivided to generate fully quadrangular cells."""
 
     NONE = 0
     ALL_QUADRANGLES = 1
@@ -188,9 +186,7 @@ class GmshMesher:
 
     @staticmethod
     def finalize_gmsh():
-        """
-        Finalize Gmsh.
-        """
+        """Finalize Gmsh."""
         gmsh.finalize()
 
     # Properties
@@ -267,9 +263,7 @@ class GmshMesher:
 
     @property
     def mesh_size_from_points(self):
-        """
-        Compute mesh element sizes from values given at geometry points.
-        """
+        """Compute mesh element sizes from values given at geometry points."""
         return self._mesh_size_from_points
 
     @mesh_size_from_points.setter
@@ -359,9 +353,7 @@ class GmshMesher:
         gmsh.model.mesh.field.setAsBackgroundMesh(field_id)
 
     def clear_fields(self) -> None:
-        """
-        Clears all cell size fields from the mesher.
-        """
+        """Clear all cell size fields from the mesher."""
         self.fields = None
         for field_id in self._fields_list + self._distance_fields_list:
             gmsh.model.mesh.field.remove(field_id)
@@ -474,7 +466,7 @@ class GmshMesher:
 
     def _faces(self):
         element_types, _, node_tags = gmsh.model.mesh.getElements()
-        tags = {etype: tags for etype, tags in zip(element_types, node_tags)}
+        tags = dict(zip(element_types, node_tags))
         _TRIANGLE = 2
         _QUAD = 3
         _FILL_VALUE = 0
@@ -524,7 +516,7 @@ class GmshMesher:
 
     def write(self, path: Union[str, pathlib.Path]):
         """
-        Writes a gmsh .msh file
+        Write a gmsh .msh file
 
         Parameters
         ----------

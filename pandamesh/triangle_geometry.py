@@ -12,7 +12,7 @@ def add_linestrings(linestrings: gpd.GeoSeries) -> Tuple[FloatArray, IntArray]:
     if len(linestrings) == 0:
         return np.empty((0, 2), dtype=np.float64), np.empty((0, 2), dtype=np.int32)
 
-    geometry = linestrings.geometry.values
+    geometry = linestrings.geometry.to_numpy()
     n_vertex = shapely.get_num_coordinates(geometry)
     vertices, index = shapely.get_coordinates(geometry, return_index=True)
 
@@ -41,7 +41,7 @@ def add_polygons(
     regions[:, 0] = region_points.x
     regions[:, 1] = region_points.y
     regions[:, 2] = np.arange(n_region)
-    cellsize = polygons[is_region]["cellsize"].values
+    cellsize = polygons[is_region]["cellsize"].to_numpy()
     regions[:, 3] = 0.5 * cellsize * cellsize
 
     boundary = polygons.boundary.explode(index_parts=True).geometry
@@ -61,6 +61,8 @@ def polygon_holes(
     polygons: gpd.GeoDataFrame,
 ):
     """
+    Return a point for every hole in every polygon.
+
     Triangle recognizes holes as a point contained by segments.
     """
     inner_rings = gpd.GeoSeries(flatten(polygons.interiors))
@@ -72,7 +74,7 @@ def polygon_holes(
         gpd.GeoDataFrame(geometry=points), predicate="contains"
     )
     keep = np.full(len(points), True)
-    keep[points_inside["index_right"].values.astype(int)] = False
+    keep[points_inside["index_right"].to_numpy().astype(int)] = False
     points = points[keep]
 
     if len(points) > 0:
