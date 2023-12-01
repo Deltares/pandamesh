@@ -25,7 +25,7 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v2
       - name: Setup Pixi
-        uses: prefix-dev/setup-pixi@v0.3.0
+        uses: prefix-dev/setup-pixi@v0.4.1
       - name: Run Tests
         run: pixi run test
       - name: Publish Code Coverage
