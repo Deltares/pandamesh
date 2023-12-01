@@ -3,6 +3,7 @@ import pkg_resources
 from pandamesh import data
 from pandamesh.gmsh_mesher import (
     FieldCombination,
+    GeneralVerbosity,
     GmshMesher,
     MeshAlgorithm,
     SubdivisionAlgorithm,
@@ -21,6 +22,7 @@ except pkg_resources.DistributionNotFound:
 __all__ = (
     "data",
     "FieldCombination",
+    "GeneralVerbosity",
     "GmshMesher",
     "MeshAlgorithm",
     "SubdivisionAlgorithm",
