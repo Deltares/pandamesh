@@ -21,24 +21,19 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ['3.8', '3.9', '3.10']
     steps:
-      - uses: actions/setup-python@v2
+      - name: Check out repo
+        uses: actions/checkout@v2
+      - name: Setup Pixi
+        uses: prefix-dev/setup-pixi@v0.3.0
+      - name: Run Tests
+        run: pixi run test
+      - name: Publish Code Coverage
+        uses: codecov/codecov-action@v3
+      - name: Build Docs
+        run: pixi run docs
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          python-version: ${{ matrix.python-version }}
-      - uses: actions/checkout@v2
-    
-      # Copied from: https://github.com/nschloe/pygmsh/blob/main/.github/workflows/ci.yml
-      # install gmsh from system -- not sure why this is necessary
-      - name: Install gmsh
-        run: |
-          sudo apt-get install -y python3-gmsh
-
-      - name: Test with tox
-        run: |
-          pip install tox
-          tox -- --cov pandamesh --cov-report xml --cov-report term
-      - uses: codecov/codecov-action@v3
-        if: ${{ matrix.python-version == '3.9' }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/_build
