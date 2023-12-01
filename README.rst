@@ -69,7 +69,7 @@ Installation
 Documentation
 -------------
 
-.. image:: https://img.shields.io/github/actions/workflow/status/deltares/pandamesh/docs.yml?style=flat-square
+.. image:: https://img.shields.io/github/actions/workflow/status/deltares/pandamesh/ci.yml?style=flat-square
    :target: https://deltares.github.io/pandamesh/
 
 The documentation can be found `here`_.
