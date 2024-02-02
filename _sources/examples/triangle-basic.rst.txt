@@ -126,9 +126,9 @@ The TriangleMesher class is initialized with a number of default parameters:
  .. code-block:: none
 
     TriangleMesher
-        vertices = np.ndarray with shape((4, 2))
-        segments = np.ndarray with shape((4, 2))
-        regions = np.ndarray with shape((1, 4))
+        vertices = np.ndarray with shape (4, 2)
+        segments = np.ndarray with shape (4, 2)
+        regions = np.ndarray with shape (1, 4)
         holes = None
         minimum_angle = 20.0
         conforming_delaunay = True
@@ -434,7 +434,7 @@ sizes, and linestrings and points to steer the triangulation.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.931 seconds)
+   **Total running time of the script:** (0 minutes 0.922 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-basic.py:
