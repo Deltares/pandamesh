@@ -4,7 +4,7 @@ import pooch
 
 REGISTRY = pooch.create(
     path=pooch.os_cache("pandamesh"),
-    base_url="https://github.com/deltares/pandamesh/raw/main/data/",
+    base_url="https://github.com/deltares/pandamesh/blob/main/data/",
     version=None,
     version_dev="main",
     env="PANDAMESH_DATA_DIR",
