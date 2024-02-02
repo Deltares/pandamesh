@@ -6,14 +6,12 @@ unstructured meshes.
 
 .. code:: python
 
-   import geopandas as gpd
    import pandamesh as pm
 
-   # Get some sample data from geopandas.
-   world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+   # Get some sample data in geopandas form.
+   south_america = pm.data.south_america()
 
-   # Select South America, explode any multi-polygon, and project it to UTM20.
-   south_america = world[world["continent"] == 'South America']
+   # Explode any multi-polygon, and project it to UTM20.
    south_america = south_america.explode().reset_index().to_crs(epsg=32620)
 
    # Set a maximum cell size of 500 km and generate a mesh.

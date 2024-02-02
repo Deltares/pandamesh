@@ -339,14 +339,12 @@
 <h1>Pandamesh<a class="headerlink" href="#pandamesh" title="Link to this heading">#</a></h1>
 <p>This package translates geospatial vector data (points, lines, or polygons) to
 unstructured meshes.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">pandamesh</span> <span class="k">as</span> <span class="nn">pm</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandamesh</span> <span class="k">as</span> <span class="nn">pm</span>
 
-<span class="c1"># Get some sample data from geopandas.</span>
-<span class="n">world</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">gpd</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;naturalearth_lowres&#39;</span><span class="p">))</span>
+<span class="c1"># Get some sample data in geopandas form.</span>
+<span class="n">south_america</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">south_america</span><span class="p">()</span>
 
-<span class="c1"># Select South America, explode any multi-polygon, and project it to UTM20.</span>
-<span class="n">south_america</span> <span class="o">=</span> <span class="n">world</span><span class="p">[</span><span class="n">world</span><span class="p">[</span><span class="s2">&quot;continent&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;South America&#39;</span><span class="p">]</span>
+<span class="c1"># Explode any multi-polygon, and project it to UTM20.</span>
 <span class="n">south_america</span> <span class="o">=</span> <span class="n">south_america</span><span class="o">.</span><span class="n">explode</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">32620</span><span class="p">)</span>
 
 <span class="c1"># Set a maximum cell size of 500 km and generate a mesh.</span>
