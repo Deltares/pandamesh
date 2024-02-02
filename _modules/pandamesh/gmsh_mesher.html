@@ -570,12 +570,7 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_initialize_gmsh</span><span class="p">():</span>
-        <span class="c1"># Calling finalize before will ensure no warning is given about gmsh</span>
-        <span class="c1"># already being initialized.</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
-        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="k">pass</span>
+        <span class="n">GmshMesher</span><span class="o">.</span><span class="n">finalize_gmsh</span><span class="p">()</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;General.Terminal&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
@@ -584,7 +579,8 @@
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">finalize_gmsh</span><span class="p">():</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Finalize Gmsh.&quot;&quot;&quot;</span>
-        <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span></div>
+        <span class="k">if</span> <span class="n">gmsh</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">gmsh</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span></div>
 
 
     <span class="c1"># Properties</span>
