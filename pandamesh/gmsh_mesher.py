@@ -189,19 +189,15 @@ class GmshMesher:
 
     @staticmethod
     def _initialize_gmsh():
-        # Calling finalize before will ensure no warning is given about gmsh
-        # already being initialized.
-        try:
-            gmsh.finalize()
-        except Exception:
-            pass
+        GmshMesher.finalize_gmsh()
         gmsh.initialize()
         gmsh.option.setNumber("General.Terminal", 1)
 
     @staticmethod
     def finalize_gmsh():
         """Finalize Gmsh."""
-        gmsh.finalize()
+        if gmsh.is_initialized() == 1:
+            gmsh.finalize()
 
     # Properties
     # ----------
