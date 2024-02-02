@@ -2916,6 +2916,86 @@ package:
   size: 70425
   timestamp: 1686490368655
 - platform: linux-64
+  name: editables
+  version: '0.5'
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/editables-0.5-pyhd8ed1ab_0.conda
+  hash:
+    md5: 9873878e2a069bc358b69e9a29c1ecd5
+    sha256: de160a7494e7bc72360eea6a29cbddf194d0a79f45ff417a4de20e6858cf79a9
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 10988
+  timestamp: 1705857085102
+- platform: osx-64
+  name: editables
+  version: '0.5'
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/editables-0.5-pyhd8ed1ab_0.conda
+  hash:
+    md5: 9873878e2a069bc358b69e9a29c1ecd5
+    sha256: de160a7494e7bc72360eea6a29cbddf194d0a79f45ff417a4de20e6858cf79a9
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: osx-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 10988
+  timestamp: 1705857085102
+- platform: osx-arm64
+  name: editables
+  version: '0.5'
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/editables-0.5-pyhd8ed1ab_0.conda
+  hash:
+    md5: 9873878e2a069bc358b69e9a29c1ecd5
+    sha256: de160a7494e7bc72360eea6a29cbddf194d0a79f45ff417a4de20e6858cf79a9
+  build: pyhd8ed1ab_0
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 10988
+  timestamp: 1705857085102
+- platform: win-64
+  name: editables
+  version: '0.5'
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/editables-0.5-pyhd8ed1ab_0.conda
+  hash:
+    md5: 9873878e2a069bc358b69e9a29c1ecd5
+    sha256: de160a7494e7bc72360eea6a29cbddf194d0a79f45ff417a4de20e6858cf79a9
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: win-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 10988
+  timestamp: 1705857085102
+- platform: linux-64
   name: eigen
   version: 3.4.0
   category: main
@@ -6396,6 +6476,114 @@ package:
   license_family: MIT
   size: 1295036
   timestamp: 1699925935335
+- platform: linux-64
+  name: hatchling
+  version: 1.21.1
+  category: main
+  manager: conda
+  dependencies:
+  - editables >=0.3
+  - importlib-metadata
+  - packaging >=21.3
+  - pathspec >=0.10.1
+  - pluggy >=1.0.0
+  - python >=3.7
+  - tomli >=1.2.2
+  - trove-classifiers
+  url: https://conda.anaconda.org/conda-forge/noarch/hatchling-1.21.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: 06f93e43be153b8de3955bdf636cb0ef
+    sha256: ca648490ba47939ff43b880935a4968ea2b18d2c25281129185bb6b4aa7f1c9b
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 58374
+  timestamp: 1706161223269
+- platform: osx-64
+  name: hatchling
+  version: 1.21.1
+  category: main
+  manager: conda
+  dependencies:
+  - editables >=0.3
+  - importlib-metadata
+  - packaging >=21.3
+  - pathspec >=0.10.1
+  - pluggy >=1.0.0
+  - python >=3.7
+  - tomli >=1.2.2
+  - trove-classifiers
+  url: https://conda.anaconda.org/conda-forge/noarch/hatchling-1.21.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: 06f93e43be153b8de3955bdf636cb0ef
+    sha256: ca648490ba47939ff43b880935a4968ea2b18d2c25281129185bb6b4aa7f1c9b
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: osx-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 58374
+  timestamp: 1706161223269
+- platform: osx-arm64
+  name: hatchling
+  version: 1.21.1
+  category: main
+  manager: conda
+  dependencies:
+  - editables >=0.3
+  - importlib-metadata
+  - packaging >=21.3
+  - pathspec >=0.10.1
+  - pluggy >=1.0.0
+  - python >=3.7
+  - tomli >=1.2.2
+  - trove-classifiers
+  url: https://conda.anaconda.org/conda-forge/noarch/hatchling-1.21.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: 06f93e43be153b8de3955bdf636cb0ef
+    sha256: ca648490ba47939ff43b880935a4968ea2b18d2c25281129185bb6b4aa7f1c9b
+  build: pyhd8ed1ab_0
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 58374
+  timestamp: 1706161223269
+- platform: win-64
+  name: hatchling
+  version: 1.21.1
+  category: main
+  manager: conda
+  dependencies:
+  - editables >=0.3
+  - importlib-metadata
+  - packaging >=21.3
+  - pathspec >=0.10.1
+  - pluggy >=1.0.0
+  - python >=3.7
+  - tomli >=1.2.2
+  - trove-classifiers
+  url: https://conda.anaconda.org/conda-forge/noarch/hatchling-1.21.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: 06f93e43be153b8de3955bdf636cb0ef
+    sha256: ca648490ba47939ff43b880935a4968ea2b18d2c25281129185bb6b4aa7f1c9b
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: win-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 58374
+  timestamp: 1706161223269
 - platform: linux-64
   name: hdf4
   version: 4.2.15
@@ -16049,6 +16237,86 @@ package:
   size: 13538431
   timestamp: 1699670949801
 - platform: linux-64
+  name: pathspec
+  version: 0.12.1
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/pathspec-0.12.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: 17064acba08d3686f1135b5ec1b32b12
+    sha256: 4e534e66bfe8b1e035d2169d0e5b185450546b17e36764272863e22e0370be4d
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MPL-2.0
+  license_family: MOZILLA
+  noarch: python
+  size: 41173
+  timestamp: 1702250135032
+- platform: osx-64
+  name: pathspec
+  version: 0.12.1
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/pathspec-0.12.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: 17064acba08d3686f1135b5ec1b32b12
+    sha256: 4e534e66bfe8b1e035d2169d0e5b185450546b17e36764272863e22e0370be4d
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: osx-64
+  build_number: 0
+  license: MPL-2.0
+  license_family: MOZILLA
+  noarch: python
+  size: 41173
+  timestamp: 1702250135032
+- platform: osx-arm64
+  name: pathspec
+  version: 0.12.1
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/pathspec-0.12.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: 17064acba08d3686f1135b5ec1b32b12
+    sha256: 4e534e66bfe8b1e035d2169d0e5b185450546b17e36764272863e22e0370be4d
+  build: pyhd8ed1ab_0
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 0
+  license: MPL-2.0
+  license_family: MOZILLA
+  noarch: python
+  size: 41173
+  timestamp: 1702250135032
+- platform: win-64
+  name: pathspec
+  version: 0.12.1
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/pathspec-0.12.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: 17064acba08d3686f1135b5ec1b32b12
+    sha256: 4e534e66bfe8b1e035d2169d0e5b185450546b17e36764272863e22e0370be4d
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: win-64
+  build_number: 0
+  license: MPL-2.0
+  license_family: MOZILLA
+  noarch: python
+  size: 41173
+  timestamp: 1702250135032
+- platform: linux-64
   name: pcre2
   version: '10.42'
   category: main
@@ -21899,6 +22167,86 @@ package:
   license_family: Apache
   size: 829792
   timestamp: 1695373970360
+- platform: linux-64
+  name: trove-classifiers
+  version: 2024.1.8
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/trove-classifiers-2024.1.8-pyhd8ed1ab_0.conda
+  hash:
+    md5: b120d43603f9b021d252fb7754b35557
+    sha256: ce42c9fc7a07a1586467e4e637f4ddc9e1082f1daacb31c98dc5f4c9f56e4601
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: Apache-2.0
+  license_family: Apache
+  noarch: python
+  size: 18404
+  timestamp: 1704733002526
+- platform: osx-64
+  name: trove-classifiers
+  version: 2024.1.8
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/trove-classifiers-2024.1.8-pyhd8ed1ab_0.conda
+  hash:
+    md5: b120d43603f9b021d252fb7754b35557
+    sha256: ce42c9fc7a07a1586467e4e637f4ddc9e1082f1daacb31c98dc5f4c9f56e4601
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: osx-64
+  build_number: 0
+  license: Apache-2.0
+  license_family: Apache
+  noarch: python
+  size: 18404
+  timestamp: 1704733002526
+- platform: osx-arm64
+  name: trove-classifiers
+  version: 2024.1.8
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/trove-classifiers-2024.1.8-pyhd8ed1ab_0.conda
+  hash:
+    md5: b120d43603f9b021d252fb7754b35557
+    sha256: ce42c9fc7a07a1586467e4e637f4ddc9e1082f1daacb31c98dc5f4c9f56e4601
+  build: pyhd8ed1ab_0
+  arch: aarch64
+  subdir: osx-arm64
+  build_number: 0
+  license: Apache-2.0
+  license_family: Apache
+  noarch: python
+  size: 18404
+  timestamp: 1704733002526
+- platform: win-64
+  name: trove-classifiers
+  version: 2024.1.8
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/trove-classifiers-2024.1.8-pyhd8ed1ab_0.conda
+  hash:
+    md5: b120d43603f9b021d252fb7754b35557
+    sha256: ce42c9fc7a07a1586467e4e637f4ddc9e1082f1daacb31c98dc5f4c9f56e4601
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: win-64
+  build_number: 0
+  license: Apache-2.0
+  license_family: Apache
+  noarch: python
+  size: 18404
+  timestamp: 1704733002526
 - platform: linux-64
   name: typing-extensions
   version: 4.8.0
