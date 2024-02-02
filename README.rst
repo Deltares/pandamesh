@@ -19,7 +19,7 @@ unstructured meshes.
    south_america = pm.data.south_america()
 
    # Explode any multi-polygon, and project it to UTM20.
-   south_america = south_america.explode().reset_index().to_crs(epsg=32620)
+   south_america = south_america.explode(index_parts=True).reset_index().to_crs(epsg=32620)
 
    # Set a maximum cell size of 500 km and generate a mesh.
    south_america["cellsize"] = 500_000.0
