@@ -18,15 +18,23 @@ class MaybeGmsh:
 
             self.gmsh = gmsh
             self.ok = True
+            self.error = None
         except ImportError:
             self.gmsh = None
             self.ok = False
+            self.error = ImportError("Gmsh is required for this functionality")
+        except ValueError:
+            self.gmsh = None
+            self.ok = False
+            self.error = RuntimeError(
+                "Gmsh must run in the main thread of the interpreter"
+            )
 
     def __getattr__(self, name: str):
         if self.ok:
             return getattr(self.gmsh, name)
         else:
-            raise ImportError("Gmsh is required for this functionality")
+            raise self.error
 
 
 gmsh = MaybeGmsh()
