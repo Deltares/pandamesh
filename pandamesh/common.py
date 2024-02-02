@@ -49,7 +49,7 @@ def repr(obj: Any) -> str:
         if k.startswith("_"):
             k = k[1:]
         if isinstance(v, np.ndarray):
-            s = f"    {k} = np.ndarray with shape({v.shape})"
+            s = f"    {k} = np.ndarray with shape {v.shape}"
         else:
             s = f"    {k} = {v}"
         strings.append(s)
