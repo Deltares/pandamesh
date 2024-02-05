@@ -34,6 +34,9 @@ Changed
 - A number of deprecations have been fixed. Most notable is the deprecation
   of ``geopandas.datasets``. The South America geodataframe can now be
   fetched via :func:`pandamesh.data.south_america()`.
+- Checking of intersections of linestrings has currently been disabled:
+  the current implementation is too strict and resulted in too many false
+  positives.
 
 .. _Keep a Changelog: https://keepachangelog.com/en/1.0.0/
 .. _Semantic Versioning: https://semver.org/spec/v2.0.0.html

@@ -10,7 +10,7 @@ from pandamesh.gmsh_mesher import (
 from pandamesh.plot import plot
 from pandamesh.triangle_mesher import DelaunayAlgorithm, TriangleMesher
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 
 __all__ = (
