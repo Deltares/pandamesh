@@ -13,8 +13,10 @@ pre-commit = "pre-commit run --all-files"
 test = { depends_on = ["install"], cmd = "pytest --cov=pandamesh --cov-report xml --cov-report term"}
 docs = { depends_on = ["install"], cmd = "sphinx-build docs docs/_build"}
 all = { depends_on = ["pre-commit", "test", "docs"]}
+pypi-publish = { cmd = "rm --recursive --force dist && python -m build && twine check dist/* && twine upload dist/*" }
 
 [dependencies]
+build = "*"
 geopandas = "*"
 python-gmsh = "*"
 matplotlib = "*"

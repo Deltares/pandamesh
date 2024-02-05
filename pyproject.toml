@@ -46,19 +46,6 @@ all = [
     'shapely >= 2.0',
     'matplotlib',
 ]
-# pyproject.toml doesn't quite support re-use like setup.cfg did:
-# https://github.com/pypa/setuptools/issues/3221
-docs = [
-    'geopandas',
-    'gmsh',
-    'pooch',
-    'triangle',
-    'shapely >= 2.0',
-    'matplotlib',
-    'pydata-sphinx-theme',
-    'sphinx',
-    'sphinx-gallery',
-]
 
 [tool.hatch.version]
 path = "pandamesh/__init__.py"
