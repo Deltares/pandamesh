@@ -2,7 +2,7 @@ import functools
 import operator
 from enum import Enum, IntEnum
 from itertools import combinations
-from typing import Any, Sequence, Tuple
+from typing import Any, Sequence, Tuple, Union
 
 import geopandas as gpd
 import numpy as np
@@ -64,7 +64,7 @@ def _show_options(options: Enum) -> str:
     return "\n".join(map(str, options))
 
 
-def invalid_option(value: Any, options: Enum | IntEnum) -> str:
+def invalid_option(value: Any, options: Union[Enum, IntEnum]) -> str:
     return f"Invalid option: {value}. Valid options are:\n{_show_options(options)}"
 
 
