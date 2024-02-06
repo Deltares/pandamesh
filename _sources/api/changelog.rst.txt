@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog`_, and this project adheres to
 `Semantic Versioning`_.
 
-[0.1.4] 2024-02-05
+[0.1.5] 2024-02-06
 ------------------
 
 Fixed
