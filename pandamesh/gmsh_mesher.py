@@ -29,9 +29,11 @@ from pandamesh.gmsh_geometry import add_field_geometry, add_geometry
 
 
 @contextmanager
-def gmsh_env():
+def gmsh_env(read_config_files: bool = True, interruptible: bool = True):
     try:
-        gmsh.initialize()
+        gmsh.initialize(
+            readConfigFiles=read_config_files, run=False, interruptible=interruptible
+        )
         # There's gotta be a better way to actually raise proper errors...
         gmsh.option.setNumber("General.Terminal", 1)
         yield
@@ -155,10 +157,28 @@ class GmshMesher:
 
     A helpful index can be found near the bottom:
     https://gmsh.info/doc/texinfo/gmsh.html#Syntax-index
+
+    Parameters
+    ----------
+    gdf: gpd.GeoDataFrame
+        GeoDataFrame containing the vector geometry.
+    read_config_files: bool
+        Gmsh initialization option: Read system Gmsh configuration files
+        (gmshrc and gmsh-options).
+    interruptible: bool
+        Gmsh initialization option.
     """
 
-    def __init__(self, gdf: gpd.GeoDataFrame) -> None:
-        self._initialize_gmsh()
+    def __init__(
+        self,
+        gdf: gpd.GeoDataFrame,
+        read_config_files: bool = True,
+        run: bool = False,
+        interruptible: bool = True,
+    ) -> None:
+        self._initialize_gmsh(
+            read_config_files=read_config_files, interruptible=interruptible
+        )
         check_geodataframe(gdf)
         polygons, linestrings, points = separate(gdf)
 
@@ -188,9 +208,11 @@ class GmshMesher:
         return repr(self)
 
     @staticmethod
-    def _initialize_gmsh():
+    def _initialize_gmsh(read_config_files: bool = True, interruptible: bool = True):
         GmshMesher.finalize_gmsh()
-        gmsh.initialize()
+        gmsh.initialize(
+            readConfigFiles=read_config_files, run=False, interruptible=interruptible
+        )
         gmsh.option.setNumber("General.Terminal", 1)
 
     @staticmethod
@@ -201,7 +223,6 @@ class GmshMesher:
 
     # Properties
     # ----------
-
     @property
     def mesh_algorithm(self):
         """

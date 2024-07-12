@@ -139,3 +139,16 @@ def test_gmsh_properties():
     assert mesher.mesh_size_from_curvature is True
     assert mesher.field_combination == pm.FieldCombination.MEAN
     assert mesher.subdivision_algorithm == pm.SubdivisionAlgorithm.BARYCENTRIC
+
+
+@pytest.mark.parametrize("read_config_files", [True, False])
+@pytest.mark.parametrize("interruptible", [True, False])
+def test_gmsh_initialization_kwargs(read_config_files, interruptible):
+    gdf = gpd.GeoDataFrame(geometry=[donut])
+    gdf["cellsize"] = 1.0
+    mesher = pm.GmshMesher(
+        gdf, read_config_files=read_config_files, interruptible=interruptible
+    )
+    vertices, triangles = mesher.generate()
+    mesh_area = area(vertices, triangles).sum()
+    assert np.allclose(mesh_area, donut.area)
