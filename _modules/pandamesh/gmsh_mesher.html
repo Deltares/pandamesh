@@ -390,9 +390,11 @@
 <div class="viewcode-block" id="gmsh_env">
 <a class="viewcode-back" href="../../api/gmsh.html#pandamesh.gmsh_mesher.gmsh_env">[docs]</a>
 <span class="nd">@contextmanager</span>
-<span class="k">def</span> <span class="nf">gmsh_env</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">gmsh_env</span><span class="p">(</span><span class="n">read_config_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">interruptible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+            <span class="n">readConfigFiles</span><span class="o">=</span><span class="n">read_config_files</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">interruptible</span><span class="o">=</span><span class="n">interruptible</span>
+        <span class="p">)</span>
         <span class="c1"># There&#39;s gotta be a better way to actually raise proper errors...</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;General.Terminal&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">yield</span>
@@ -534,10 +536,28 @@
 
 <span class="sd">    A helpful index can be found near the bottom:</span>
 <span class="sd">    https://gmsh.info/doc/texinfo/gmsh.html#Syntax-index</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gdf: gpd.GeoDataFrame</span>
+<span class="sd">        GeoDataFrame containing the vector geometry.</span>
+<span class="sd">    read_config_files: bool</span>
+<span class="sd">        Gmsh initialization option: Read system Gmsh configuration files</span>
+<span class="sd">        (gmshrc and gmsh-options).</span>
+<span class="sd">    interruptible: bool</span>
+<span class="sd">        Gmsh initialization option.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_gmsh</span><span class="p">()</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span>
+        <span class="n">read_config_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">run</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">interruptible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_gmsh</span><span class="p">(</span>
+            <span class="n">read_config_files</span><span class="o">=</span><span class="n">read_config_files</span><span class="p">,</span> <span class="n">interruptible</span><span class="o">=</span><span class="n">interruptible</span>
+        <span class="p">)</span>
         <span class="n">check_geodataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
         <span class="n">polygons</span><span class="p">,</span> <span class="n">linestrings</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">separate</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
 
@@ -567,9 +587,11 @@
         <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_initialize_gmsh</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">_initialize_gmsh</span><span class="p">(</span><span class="n">read_config_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">interruptible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="n">GmshMesher</span><span class="o">.</span><span class="n">finalize_gmsh</span><span class="p">()</span>
-        <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="n">gmsh</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
+            <span class="n">readConfigFiles</span><span class="o">=</span><span class="n">read_config_files</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">interruptible</span><span class="o">=</span><span class="n">interruptible</span>
+        <span class="p">)</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;General.Terminal&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
 <div class="viewcode-block" id="GmshMesher.finalize_gmsh">
@@ -583,7 +605,6 @@
 
     <span class="c1"># Properties</span>
     <span class="c1"># ----------</span>
-
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">mesh_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
