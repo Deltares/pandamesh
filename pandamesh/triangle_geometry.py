@@ -26,6 +26,7 @@ def add_linestrings(linestrings: gpd.GeoSeries) -> Tuple[FloatArray, IntArray]:
     # If the geometry is closed (LinearRings), the final vertex of every
     # feature is discarded, since the repeats will segfault Triangle.
     vertices, inverse = np.unique(vertices, return_inverse=True, axis=0)
+    inverse = inverse.ravel()
     segments = inverse[segments]
 
     return vertices, segments

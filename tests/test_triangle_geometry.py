@@ -22,7 +22,7 @@ def area(vertices, triangles):
     coords = vertices[triangles]
     u = coords[:, 1] - coords[:, 0]
     v = coords[:, 2] - coords[:, 0]
-    return 0.5 * np.abs(np.cross(u, v))
+    return 0.5 * np.abs(u[:, 0] * v[:, 1] - u[:, 1] * v[:, 0])
 
 
 def test_add_linestrings():
