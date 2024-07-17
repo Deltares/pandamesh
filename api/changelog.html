@@ -383,9 +383,25 @@
 <p>The format is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>, and this project adheres to
 <a class="reference external" href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
 <section id="id1">
-<h2>[0.1.5] 2024-02-06<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>[0.1.6] 2024-07-17<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GmshMesher</span></code> now takes <code class="docutils literal notranslate"><span class="pre">read_config_files</span></code> and <code class="docutils literal notranslate"><span class="pre">interruptible</span></code>
+as initialization arguments for <code class="docutils literal notranslate"><span class="pre">gmsh.</span></code>.</p></li>
+</ul>
+</section>
 <section id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Compatibility changes for Numpy 2.0.</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>[0.1.5] 2024-02-06<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>Fixed<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Inside of <code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GmshMesher</span></code> a check now occurs before finalization.
 This keeps <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> from printing (harmless) errors to the console, which
@@ -397,8 +413,8 @@ the entire import of <code class="docutils literal notranslate"><span class="pre
 <code class="docutils literal notranslate"><span class="pre">RuntimeError</span></code>.</p></li>
 </ul>
 </section>
-<section id="added">
-<h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h3>Added<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GeneralVerbosity</span></code> has been added to control the verbosity
 of Gmsh. It can be set via the <code class="xref py py-attr docutils literal notranslate"><span class="pre">GmshMesher.general_verbosity</span></code>
@@ -465,9 +481,14 @@ positives.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">[0.1.5] 2024-02-06</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed">Fixed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">[0.1.6] 2024-07-17</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#added">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">[0.1.5] 2024-02-06</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Added</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changed">Changed</a></li>
 </ul>
 </li>
@@ -517,7 +538,7 @@ positives.</p></li>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.4.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.5.
     <br/>
   </p>
 </div>

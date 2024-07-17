@@ -6,6 +6,21 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog`_, and this project adheres to
 `Semantic Versioning`_.
 
+[0.1.6] 2024-07-17
+------------------
+
+Added
+~~~~~
+
+- :class:`pandamesh.GmshMesher` now takes ``read_config_files`` and ``interruptible``
+  as initialization arguments for ``gmsh.``.
+  
+Fixed
+~~~~~
+
+- Compatibility changes for Numpy 2.0.
+
+
 [0.1.5] 2024-02-06
 ------------------
 
