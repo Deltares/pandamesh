@@ -434,7 +434,7 @@ sizes, and linestrings and points to steer the triangulation.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.648 seconds)
+   **Total running time of the script:** (0 minutes 0.609 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-basic.py:
@@ -450,6 +450,10 @@ sizes, and linestrings and points to steer the triangulation.
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: triangle-basic.py <triangle-basic.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: triangle-basic.zip <triangle-basic.zip>`
 
 
 .. only:: html

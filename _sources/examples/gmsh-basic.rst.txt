@@ -176,7 +176,7 @@ The GmshMesher class is initialized with a number of default parameters:
         fields = Empty GeoDataFrame
     Columns: []
     Index: []
-        tmpdir = <TemporaryDirectory '/tmp/tmpamdp_9_m'>
+        tmpdir = <TemporaryDirectory '/tmp/tmppkaugt6u'>
         recombine_all = False
         mesh_size_extend_from_boundary = True
         mesh_size_from_points = True
@@ -319,7 +319,7 @@ polygons.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.367 seconds)
+   **Total running time of the script:** (0 minutes 0.345 seconds)
 
 
 .. _sphx_glr_download_examples_gmsh-basic.py:
@@ -335,6 +335,10 @@ polygons.
     .. container:: sphx-glr-download sphx-glr-download-python
 
       :download:`Download Python source code: gmsh-basic.py <gmsh-basic.py>`
+
+    .. container:: sphx-glr-download sphx-glr-download-zip
+
+      :download:`Download zipped: gmsh-basic.zip <gmsh-basic.zip>`
 
 
 .. only:: html

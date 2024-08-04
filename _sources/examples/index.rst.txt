@@ -18,7 +18,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll illustrate how to generate a mesh from a &quot;real-world&quot; geospatial vector d...">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll illustrate how to generate a mesh from a &quot;real-world&quot; geospatial vector dataset.">
 
 .. only:: html
 
@@ -35,7 +35,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate som...">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate some of the mesh generation features that Gmsh provides in combination with polygon, point, and linestring geometries represented by geopandas.">
 
 .. only:: html
 
@@ -52,7 +52,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate som...">
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate some of the mesh generation features that Triangle provides in combination with polygon, point, and linestring geometries represented by geopandas.">
 
 .. only:: html
 
