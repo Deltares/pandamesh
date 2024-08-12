@@ -66,10 +66,9 @@ vertices, triangles = mesher.generate()
 pm.plot(vertices, triangles, ax=ax1)
 
 # %%
-# Gmsh allows for specifying cell sizes in a more flexible way. Triangle (left)
-# only supports polygons (regions) with fixed cell sizes and explicitly placed
-# vertices. Gmsh is capable of forcing refinement in a larger zone around
-# features as is visible around the diagonal (right).
+# Gmsh allows for specifying cell sizes not just on polygons (regions) like
+# Triangle (left), but on individual vertices as well, as is visible around the
+# diagonal (right).
 #
 # Defaults
 # --------

@@ -100,13 +100,6 @@ in the appropriate manner for triangle.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -195,13 +188,6 @@ recreate the mesher.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -241,13 +227,6 @@ with a cell size in the geodataframe.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -283,13 +262,6 @@ Holes in polygons work as expected:
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -324,13 +296,6 @@ exactly with the coordinates of the exterior boundary of the inner polygon.
    :srcset: /examples/images/sphx_glr_triangle-basic_006.png
    :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
 
 
@@ -404,8 +369,6 @@ contents of the geodataframe on top of the generated mesh:
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
     <Axes: >
 
@@ -453,57 +416,12 @@ x = 9.0.
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
     <Axes: >
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 174-178
-
-Specify cell size along line string
------------------------------------
-
-Finally, we may also specify the cell size along the line.
-
-.. GENERATED FROM PYTHON SOURCE LINES 178-190
-
-.. code-block:: Python
-
-
-    line = sg.LineString([(2.0, 8.0), (8.0, 2.0)])
-    gdf = gpd.GeoDataFrame(geometry=[polygon, line])
-    gdf["cellsize"] = [2.0, 0.5]
-
-    fig, ax = plt.subplots()
-
-    mesher = pm.TriangleMesher(gdf)
-    vertices, triangles = mesher.generate()
-    pm.plot(vertices, triangles, ax=ax)
-    gdf.plot(facecolor="none", edgecolor="red", ax=ax)
-
-
-
-
-.. image-sg:: /examples/images/sphx_glr_triangle-basic_010.png
-   :alt: triangle basic
-   :srcset: /examples/images/sphx_glr_triangle-basic_010.png
-   :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
-    <Axes: >
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 191-198
+.. GENERATED FROM PYTHON SOURCE LINES 174-181
 
 Conclusion
 ----------
@@ -516,7 +434,7 @@ sizes, and linestrings and points to steer the triangulation.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.695 seconds)
+   **Total running time of the script:** (0 minutes 0.632 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-basic.py:

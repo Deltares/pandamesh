@@ -171,23 +171,6 @@ pm.plot(vertices, triangles, ax=ax)
 gdf.plot(facecolor="none", edgecolor="red", ax=ax)
 
 # %%
-# Specify cell size along line string
-# -----------------------------------
-#
-# Finally, we may also specify the cell size along the line.
-
-line = sg.LineString([(2.0, 8.0), (8.0, 2.0)])
-gdf = gpd.GeoDataFrame(geometry=[polygon, line])
-gdf["cellsize"] = [2.0, 0.5]
-
-fig, ax = plt.subplots()
-
-mesher = pm.TriangleMesher(gdf)
-vertices, triangles = mesher.generate()
-pm.plot(vertices, triangles, ax=ax)
-gdf.plot(facecolor="none", edgecolor="red", ax=ax)
-
-# %%
 # Conclusion
 # ----------
 #
