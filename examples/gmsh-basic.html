@@ -421,7 +421,11 @@ in the appropriate manner for Gmsh.</p>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_gmsh-basic_001.png" srcset="../_images/sphx_glr_gmsh-basic_001.png" alt="gmsh basic" class = "sphx-glr-single-img"/><p>As the name suggests, Triangle only generates triangular meshes. Gmsh is
+<img src="../_images/sphx_glr_gmsh-basic_001.png" srcset="../_images/sphx_glr_gmsh-basic_001.png" alt="gmsh basic" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+  if not features.index.is_integer():
+</pre></div>
+</div>
+<p>As the name suggests, Triangle only generates triangular meshes. Gmsh is
 capable of generating quadrilateral-dominant meshes, and has a lot more bells
 and whistles for defining cellsizes.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">line</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">LineString</span><span class="p">([(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)])</span>
@@ -439,9 +443,16 @@ and whistles for defining cellsizes.</p>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_gmsh-basic_002.png" srcset="../_images/sphx_glr_gmsh-basic_002.png" alt="gmsh basic" class = "sphx-glr-single-img"/><p>Gmsh allows for specifying cell sizes not just on polygons (regions) like
-Triangle (left), but on individual vertices as well, as is visible around the
-diagonal (right).</p>
+<img src="../_images/sphx_glr_gmsh-basic_002.png" srcset="../_images/sphx_glr_gmsh-basic_002.png" alt="gmsh basic" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+  if not features.index.is_integer():
+/home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+  if not features.index.is_integer():
+</pre></div>
+</div>
+<p>Gmsh allows for specifying cell sizes in a more flexible way. Triangle (left)
+only supports polygons (regions) with fixed cell sizes and explicitly placed
+vertices. Gmsh is capable of forcing refinement in a larger zone around
+features as is visible around the diagonal (right).</p>
 </section>
 <section id="defaults">
 <h2>Defaults<a class="headerlink" href="#defaults" title="Link to this heading">#</a></h2>
@@ -456,7 +467,7 @@ diagonal (right).</p>
     fields = Empty GeoDataFrame
 Columns: []
 Index: []
-    tmpdir = &lt;TemporaryDirectory &#39;/tmp/tmp76as3hlo&#39;&gt;
+    tmpdir = &lt;TemporaryDirectory &#39;/tmp/tmp4o9loswg&#39;&gt;
     recombine_all = False
     mesh_size_extend_from_boundary = True
     mesh_size_from_points = True
@@ -500,7 +511,10 @@ be altered after initialization to control the triangulation.</p>
 <span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_gmsh-basic_003.png" srcset="../_images/sphx_glr_gmsh-basic_003.png" alt="gmsh basic" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+<img src="../_images/sphx_glr_gmsh-basic_003.png" srcset="../_images/sphx_glr_gmsh-basic_003.png" alt="gmsh basic" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+  if not features.index.is_integer():
+
+&lt;Axes: &gt;
 </pre></div>
 </div>
 </section>
@@ -518,7 +532,11 @@ this by changing a parameter on the mesher:</p>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_gmsh-basic_004.png" srcset="../_images/sphx_glr_gmsh-basic_004.png" alt="gmsh basic" class = "sphx-glr-single-img"/></section>
+<img src="../_images/sphx_glr_gmsh-basic_004.png" srcset="../_images/sphx_glr_gmsh-basic_004.png" alt="gmsh basic" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+  if not features.index.is_integer():
+</pre></div>
+</div>
+</section>
 <section id="writing-to-file">
 <h2>Writing to file<a class="headerlink" href="#writing-to-file" title="Link to this heading">#</a></h2>
 <p>It’s also possible to use the Python bindings to write a Gmsh <code class="docutils literal notranslate"><span class="pre">.msh</span></code> file.
@@ -536,7 +554,7 @@ but the same principles apply: we may use polygons, linestrings and points
 with associated cell sizes to steer the triangulation; unlike Triangle,
 for Gmsh cell sizes can associated to linestrings and points, not just
 polygons.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.361 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.355 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gmsh-basic-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/4a143ec15d1fb171eec89ca2df70cc01/gmsh-basic.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">gmsh-basic.ipynb</span></code></a></p>

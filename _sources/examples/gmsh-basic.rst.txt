@@ -103,6 +103,13 @@ in the appropriate manner for Gmsh.
    :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+      if not features.index.is_integer():
+
 
 
 
@@ -140,21 +147,31 @@ and whistles for defining cellsizes.
    :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+      if not features.index.is_integer():
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+      if not features.index.is_integer():
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 69-77
 
-Gmsh allows for specifying cell sizes not just on polygons (regions) like
-Triangle (left), but on individual vertices as well, as is visible around the
-diagonal (right).
+.. GENERATED FROM PYTHON SOURCE LINES 69-78
+
+Gmsh allows for specifying cell sizes in a more flexible way. Triangle (left)
+only supports polygons (regions) with fixed cell sizes and explicitly placed
+vertices. Gmsh is capable of forcing refinement in a larger zone around
+features as is visible around the diagonal (right).
 
 Defaults
 --------
 
 The GmshMesher class is initialized with a number of default parameters:
 
-.. GENERATED FROM PYTHON SOURCE LINES 77-80
+.. GENERATED FROM PYTHON SOURCE LINES 78-81
 
 .. code-block:: Python
 
@@ -176,7 +193,7 @@ The GmshMesher class is initialized with a number of default parameters:
         fields = Empty GeoDataFrame
     Columns: []
     Index: []
-        tmpdir = <TemporaryDirectory '/tmp/tmp76as3hlo'>
+        tmpdir = <TemporaryDirectory '/tmp/tmp4o9loswg'>
         recombine_all = False
         mesh_size_extend_from_boundary = True
         mesh_size_from_points = True
@@ -189,7 +206,7 @@ The GmshMesher class is initialized with a number of default parameters:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 81-88
+.. GENERATED FROM PYTHON SOURCE LINES 82-89
 
 The parameters of Gmsh differ from Triangle, but they work the same: they can
 be altered after initialization to control the triangulation.
@@ -199,7 +216,7 @@ Forcing points, lines, local refinement
 
 We can force points and lines into the triangulation:
 
-.. GENERATED FROM PYTHON SOURCE LINES 88-115
+.. GENERATED FROM PYTHON SOURCE LINES 89-116
 
 .. code-block:: Python
 
@@ -243,12 +260,14 @@ We can force points and lines into the triangulation:
 
  .. code-block:: none
 
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+      if not features.index.is_integer():
 
     <Axes: >
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 116-122
+.. GENERATED FROM PYTHON SOURCE LINES 117-123
 
 Quadrilateral meshes
 --------------------
@@ -257,7 +276,7 @@ One of the features of Gmsh is that it is also capable of generating
 quadrilateral (dominant) meshes, by recombining triangles. We can achieve
 this by changing a parameter on the mesher:
 
-.. GENERATED FROM PYTHON SOURCE LINES 122-131
+.. GENERATED FROM PYTHON SOURCE LINES 123-132
 
 .. code-block:: Python
 
@@ -279,10 +298,17 @@ this by changing a parameter on the mesher:
    :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
+      if not features.index.is_integer():
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 132-137
+
+.. GENERATED FROM PYTHON SOURCE LINES 133-138
 
 Writing to file
 ---------------
@@ -290,7 +316,7 @@ It's also possible to use the Python bindings to write a Gmsh ``.msh`` file.
 This file can be opened using the Gmsh GUI to e.g. inspect the generated
 mesh.
 
-.. GENERATED FROM PYTHON SOURCE LINES 137-140
+.. GENERATED FROM PYTHON SOURCE LINES 138-141
 
 .. code-block:: Python
 
@@ -304,7 +330,7 @@ mesh.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 141-150
+.. GENERATED FROM PYTHON SOURCE LINES 142-151
 
 Conclusion
 ----------
@@ -319,7 +345,7 @@ polygons.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.361 seconds)
+   **Total running time of the script:** (0 minutes 0.355 seconds)
 
 
 .. _sphx_glr_download_examples_gmsh-basic.py:
