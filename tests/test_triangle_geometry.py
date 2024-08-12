@@ -35,13 +35,14 @@ def test_add_linestrings():
 
     series = gpd.GeoSeries(data=[inner])
     vertices, segments = tg.add_linestrings(series)
+    vertices, segments = tg.unique_vertices_and_segments(vertices, segments)
     expected = np.unique(inner_coords, axis=0)
     expected_segments = np.array(
         [
             [0, 2],
+            [1, 0],
             [2, 3],
             [3, 1],
-            [1, 0],
         ]
     )
     assert np.allclose(vertices, expected)
@@ -49,6 +50,7 @@ def test_add_linestrings():
 
     series = gpd.GeoSeries(data=[outer])
     vertices, segments = tg.add_linestrings(series)
+    vertices, segments = tg.unique_vertices_and_segments(vertices, segments)
     expected = np.unique(outer_coords, axis=0)
     assert np.allclose(vertices, expected)
     assert np.array_equal(segments, expected_segments)
@@ -63,6 +65,7 @@ def test_add_polygons():
     cellsize = 0.5
     gdf["cellsize"] = cellsize
     vertices, segments, regions = tg.add_polygons(gdf)
+    vertices, segments = tg.unique_vertices_and_segments(vertices, segments)
     expected = np.unique(
         np.concatenate([outer_coords, inner_coords]),
         axis=0,
@@ -70,13 +73,13 @@ def test_add_polygons():
     expected_segments = np.array(
         [
             [0, 6],
-            [6, 7],
-            [7, 1],
             [1, 0],
             [2, 4],
+            [3, 2],
             [4, 5],
             [5, 3],
-            [3, 2],
+            [6, 7],
+            [7, 1],
         ]
     )
     x, y = regions[0, :2]
@@ -109,3 +112,51 @@ def test_polygon_holes():
 
     gdf = gpd.GeoDataFrame(geometry=[donut, refined])
     assert tg.polygon_holes(gdf) is None
+
+
+def test_convert_ring_linestring():
+    # The linestring forms a ring within the outer polygon. During the
+    # conversion, the ring should be converted to a second polygon, and a hole
+    # should be made in the first polygon.
+    outer = [
+        [0.0, 0.0],
+        [10.0, 0.0],
+        [10.0, 10.0],
+        [0.0, 10.0],
+    ]
+    polygon = sg.Polygon(shell=outer)
+    linestring = sg.LineString(
+        [
+            [3.0, 3.0],
+            [7.0, 3.0],
+            [7.0, 7.0],
+            [3.0, 7.0],
+            [3.0, 3.0],
+        ]
+    )
+    polygons = gpd.GeoDataFrame(geometry=[polygon])
+    polygons["cellsize"] = 1.0
+    linestrings = gpd.GeoDataFrame(geometry=[linestring])
+
+    new_polygons = tg.convert_linestring_rings(polygons, linestrings)
+    assert isinstance(new_polygons, gpd.GeoDataFrame)
+    assert np.allclose(new_polygons["cellsize"], 1.0)
+    assert np.allclose(new_polygons.area, [84.0, 16.0])
+
+    # This second case has a hole inside of the linestring ring. The hole
+    # should be preserved.
+    inner = [
+        [4.0, 6.0],
+        [6.0, 6.0],
+        [6.0, 4.0],
+        [4.0, 4.0],
+    ]
+    polygon = sg.Polygon(shell=outer, holes=[inner])
+    polygons = gpd.GeoDataFrame(geometry=[polygon])
+    polygons["cellsize"] = 1.0
+    linestrings = gpd.GeoDataFrame(geometry=[linestring])
+
+    new_polygons = tg.convert_linestring_rings(polygons, linestrings)
+    assert isinstance(new_polygons, gpd.GeoDataFrame)
+    assert np.allclose(new_polygons["cellsize"], 1.0)
+    assert np.allclose(new_polygons.area, [84.0, 12.0])
