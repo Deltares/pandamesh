@@ -1,5 +1,6 @@
 import geopandas as gpd
 import numpy as np
+import shapely
 import shapely.geometry as sg
 
 from pandamesh import triangle_geometry as tg
@@ -160,3 +161,22 @@ def test_convert_ring_linestring():
     assert isinstance(new_polygons, gpd.GeoDataFrame)
     assert np.allclose(new_polygons["cellsize"], 1.0)
     assert np.allclose(new_polygons.area, [84.0, 12.0])
+
+
+def test_segmentize_linestrings():
+    gdf = gpd.GeoDataFrame()
+    actual = tg.segmentize_linestrings(gdf)
+    assert actual is gdf
+
+    gdf = gpd.GeoDataFrame(
+        geometry=[
+            sg.LineString([[0.0, 0.0], [10.0, 0.0]]),
+            sg.LineString([[0.0, 5.0], [10.0, 5.0]]),
+            sg.LineString([[0.0, 10.0], [10.0, 10.0]]),
+        ],
+        data={"cellsize": [np.nan, 1.0, 0.5]},
+    )
+    actual = tg.segmentize_linestrings(gdf)
+    _, index = shapely.get_coordinates(actual.geometry, return_index=True)
+    _, counts = np.unique(index, return_counts=True)
+    assert np.array_equal(counts, [2, 11, 21])

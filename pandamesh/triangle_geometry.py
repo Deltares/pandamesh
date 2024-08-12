@@ -9,6 +9,17 @@ import shapely.geometry as sg
 from pandamesh.common import FloatArray, IntArray, flatten
 
 
+def segmentize_linestrings(linestrings: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    if len(linestrings) == 0:
+        return linestrings
+    condition = linestrings["cellsize"].notnull()
+    segmentized = linestrings.loc[condition].copy()
+    segmentized["geometry"] = segmentized.segmentize(
+        max_segment_length=segmentized["cellsize"]
+    )
+    return pd.concat([linestrings.loc[~condition], segmentized])
+
+
 def add_linestrings(linestrings: gpd.GeoSeries) -> Tuple[FloatArray, IntArray]:
     if len(linestrings) == 0:
         return np.empty((0, 2), dtype=np.float64), np.empty((0, 2), dtype=np.int32)
@@ -141,6 +152,7 @@ def collect_geometry(
 ) -> Tuple[FloatArray, IntArray, FloatArray]:
     if len(polygons) == 0:
         raise ValueError("No polygons provided")
+    linestrings = segmentize_linestrings(linestrings)
     polygons = convert_linestring_rings(polygons, linestrings)
     polygon_vertices, polygon_segments, regions = add_polygons(polygons)
     linestring_vertices, linestring_segments = add_linestrings(linestrings.geometry)

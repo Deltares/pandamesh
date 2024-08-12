@@ -8,7 +8,6 @@ from typing import Any, Sequence, Tuple
 
 import geopandas as gpd
 import numpy as np
-from pandas.api.types import is_integer_dtype
 
 
 class MaybeGmsh:
@@ -80,7 +79,7 @@ def check_geodataframe(features: gpd.GeoDataFrame) -> None:
         raise ValueError(f'Missing column "cellsize" in columns: {colnames}')
     if len(features) == 0:
         raise ValueError("Dataframe is empty")
-    if not is_integer_dtype(features.index):
+    if not features.index.is_integer():
         raise ValueError(
             f"geodataframe index is not integer typed, received: {features.index.dtype}"
         )
