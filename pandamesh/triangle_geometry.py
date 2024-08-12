@@ -2,6 +2,7 @@ from typing import Tuple
 
 import geopandas as gpd
 import numpy as np
+import pandas as pd
 import shapely
 import shapely.geometry as sg
 
@@ -22,12 +23,6 @@ def add_linestrings(linestrings: gpd.GeoSeries) -> Tuple[FloatArray, IntArray]:
     segments[:, 1] = vertex_numbers[1:]
     keep = np.diff(index) == 0
     segments = segments[keep]
-
-    # If the geometry is closed (LinearRings), the final vertex of every
-    # feature is discarded, since the repeats will segfault Triangle.
-    vertices, inverse = np.unique(vertices, return_inverse=True, axis=0)
-    inverse = inverse.ravel()
-    segments = inverse[segments]
 
     return vertices, segments
 
@@ -84,15 +79,74 @@ def polygon_holes(
         return None
 
 
+def _polygon_polygon_difference(
+    a: gpd.GeoDataFrame, b: gpd.GeoDataFrame
+) -> gpd.GeoDataFrame:
+    out = a.copy()
+    out["geometry"] = out["geometry"].difference(b["geometry"].union_all())
+    return out.loc[out.area > 0].copy()
+
+
+def convert_linestring_rings(polygons: gpd.GeoDataFrame, linestrings: gpd.GeoDataFrame):
+    # Check if linestrings contain any rings. Triangle will treat such a ring
+    # as a region on its own.
+    linestring_polygons = linestrings.polygonize()
+    if linestring_polygons.empty:
+        # No rings found
+        return polygons
+
+    # Assign the cell size to the created polygons Do a cheap check: see
+    # whether a representative point falls within the exterior of the polygons.
+    exterior = polygons.copy()
+    exterior["geometry"] = shapely.polygons(polygons.exterior)
+    polygons_inside = exterior.sjoin(
+        gpd.GeoDataFrame(geometry=linestring_polygons.representative_point()),
+        predicate="contains",
+        how="right",
+    )
+    # Set the original geometry back.
+    polygons_inside["geometry"] = linestring_polygons
+    # Any linestring polygon outside will have a cellsize of NaN; remove those
+    # entries.
+    polygons_inside = polygons_inside.loc[polygons_inside["cellsize"].notnull()]
+    # Ensure we burn the polygon holes into the newly created linestrings
+    # polygons.
+    inner_rings = gpd.GeoSeries(flatten(polygons.interiors))
+    interiors = gpd.GeoDataFrame(geometry=[sg.Polygon(ring) for ring in inner_rings])
+    new_polygons = _polygon_polygon_difference(
+        a=polygons_inside.loc[:, ["cellsize", "geometry"]],
+        b=interiors,
+    )
+    # Make room for the new polygons
+    diffed_polygons = _polygon_polygon_difference(
+        a=polygons,
+        b=polygons_inside,
+    )
+    return pd.concat((diffed_polygons, new_polygons))
+
+
+def unique_vertices_and_segments(vertices, segments):
+    # If the geometry is closed (LinearRings), the final vertex of every
+    # feature is discarded, since the repeats will segfault Triangle.
+    vertices, inverse = np.unique(vertices, return_inverse=True, axis=0)
+    inverse = inverse.ravel()
+    segments = inverse[segments]
+    # Now remove duplicated segments.
+    segments = np.unique(segments, axis=0)
+    return vertices, segments
+
+
 def collect_geometry(
     polygons: gpd.GeoDataFrame, linestrings: gpd.GeoDataFrame, points: gpd.GeoDataFrame
 ) -> Tuple[FloatArray, IntArray, FloatArray]:
     if len(polygons) == 0:
         raise ValueError("No polygons provided")
+    polygons = convert_linestring_rings(polygons, linestrings)
     polygon_vertices, polygon_segments, regions = add_polygons(polygons)
     linestring_vertices, linestring_segments = add_linestrings(linestrings.geometry)
     point_vertices = add_points(points)
     linestring_segments += polygon_vertices.shape[0]
     vertices = np.concatenate([polygon_vertices, linestring_vertices, point_vertices])
     segments = np.concatenate([polygon_segments, linestring_segments])
+    vertices, segments = unique_vertices_and_segments(vertices, segments)
     return vertices, segments, regions

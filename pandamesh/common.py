@@ -217,9 +217,9 @@ def separate(
     if not geom_type.isin(acceptable).all():
         raise TypeError(f"Geometry should be one of {acceptable}")
 
-    polygons = gdf[geom_type == "Polygon"].copy()
-    linestrings = gdf[geom_type == "LineString"].copy()
-    points = gdf[geom_type == "Point"].copy()
+    polygons = gdf.loc[geom_type == "Polygon"].copy()
+    linestrings = gdf.loc[geom_type == "LineString"].copy()
+    points = gdf.loc[geom_type == "Point"].copy()
     for df in (polygons, linestrings, points):
         df["cellsize"] = df["cellsize"].astype(float)
         df.crs = None
