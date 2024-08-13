@@ -123,8 +123,10 @@ def convert_linestring_rings(polygons: gpd.GeoDataFrame, linestrings: gpd.GeoDat
     # Ensure we burn the polygon holes into the newly created linestrings
     # polygons.
     new_polygons = polygons_inside.loc[:, ["cellsize", "geometry"]].copy()
-    new_polygons['geometry'] = new_polygons["geometry"].intersection(polygons["geometry"].union_all()) 
-    
+    new_polygons["geometry"] = new_polygons["geometry"].intersection(
+        polygons["geometry"].union_all()
+    )
+
     # Make room for the new polygons
     diffed_polygons = _polygon_polygon_difference(
         a=polygons,
