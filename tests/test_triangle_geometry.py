@@ -140,6 +140,7 @@ def test_convert_ring_linestring__hole():
         [6.0, 6.0],
         [6.0, 4.0],
         [4.0, 4.0],
+        [4.0, 6.0],
     ]
     polygon = sg.Polygon(shell=outer_coords, holes=[inner])
     polygons = gpd.GeoDataFrame(geometry=[polygon])
@@ -152,12 +153,14 @@ def test_convert_ring_linestring__hole():
     assert np.allclose(new_polygons.area, [84.0, 12.0])
 
 
-def test_convert_ring_linestring__nested_hole():
+def test_convert_ring_linestring__nested_ring():
+    # This third case has the ring inside of a nested polygon.
     nested_ring = [
         [4.0, 6.0],
         [6.0, 6.0],
         [6.0, 4.0],
         [4.0, 4.0],
+        [4.0, 6.0],
     ]
     polygon = sg.Polygon(shell=outer_coords, holes=[inner])
     inner_polygon = sg.Polygon(shell=inner_coords)

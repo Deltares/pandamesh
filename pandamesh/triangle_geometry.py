@@ -107,11 +107,11 @@ def convert_linestring_rings(polygons: gpd.GeoDataFrame, linestrings: gpd.GeoDat
         return polygons
 
     # Assign the cell size to the created polygons Do a cheap check: see
-    # whether a representative point falls within the exterior of the polygons.
-    exterior = polygons.copy()
-    exterior["geometry"] = shapely.polygons(polygons.exterior)
-    polygons_inside = exterior.sjoin(
-        gpd.GeoDataFrame(geometry=linestring_polygons.representative_point()),
+    # whether a vertex falls within the polygons.
+    polygons_inside = polygons.sjoin(
+        gpd.GeoDataFrame(
+            geometry=shapely.get_point(linestring_polygons.exterior, index=0)
+        ),
         predicate="contains",
         how="right",
     )
