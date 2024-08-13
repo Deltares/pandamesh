@@ -7,10 +7,12 @@ from pandamesh import triangle_geometry as tg
 
 outer_coords = np.array([(0.0, 0.0), (10.0, 0.0), (10.0, 10.0), (0.0, 10.0)])
 inner_coords = np.array([(3.0, 3.0), (7.0, 3.0), (7.0, 7.0), (3.0, 7.0)])
+ring_coords = np.array([(3.0, 3.0), (7.0, 3.0), (7.0, 7.0), (3.0, 7.0), (3.0, 3.0)])
 line_coords = np.array([(2.0, 8.0), (8.0, 2.0)])
 inner = sg.LinearRing(inner_coords)
 outer = sg.LinearRing(outer_coords)
 line = sg.LineString(line_coords)
+ring = sg.LineString(ring_coords)
 donut = sg.Polygon(outer, holes=[inner])
 refined = sg.Polygon(inner_coords)
 
@@ -119,31 +121,18 @@ def test_convert_ring_linestring():
     # The linestring forms a ring within the outer polygon. During the
     # conversion, the ring should be converted to a second polygon, and a hole
     # should be made in the first polygon.
-    outer = [
-        [0.0, 0.0],
-        [10.0, 0.0],
-        [10.0, 10.0],
-        [0.0, 10.0],
-    ]
-    polygon = sg.Polygon(shell=outer)
-    linestring = sg.LineString(
-        [
-            [3.0, 3.0],
-            [7.0, 3.0],
-            [7.0, 7.0],
-            [3.0, 7.0],
-            [3.0, 3.0],
-        ]
-    )
+    polygon = sg.Polygon(shell=outer_coords)
     polygons = gpd.GeoDataFrame(geometry=[polygon])
     polygons["cellsize"] = 1.0
-    linestrings = gpd.GeoDataFrame(geometry=[linestring])
+    linestrings = gpd.GeoDataFrame(geometry=[ring])
 
     new_polygons = tg.convert_linestring_rings(polygons, linestrings)
     assert isinstance(new_polygons, gpd.GeoDataFrame)
     assert np.allclose(new_polygons["cellsize"], 1.0)
     assert np.allclose(new_polygons.area, [84.0, 16.0])
 
+
+def test_convert_ring_linestring__hole():
     # This second case has a hole inside of the linestring ring. The hole
     # should be preserved.
     inner = [
@@ -152,15 +141,34 @@ def test_convert_ring_linestring():
         [6.0, 4.0],
         [4.0, 4.0],
     ]
-    polygon = sg.Polygon(shell=outer, holes=[inner])
+    polygon = sg.Polygon(shell=outer_coords, holes=[inner])
     polygons = gpd.GeoDataFrame(geometry=[polygon])
     polygons["cellsize"] = 1.0
-    linestrings = gpd.GeoDataFrame(geometry=[linestring])
+    linestrings = gpd.GeoDataFrame(geometry=[ring])
 
     new_polygons = tg.convert_linestring_rings(polygons, linestrings)
     assert isinstance(new_polygons, gpd.GeoDataFrame)
     assert np.allclose(new_polygons["cellsize"], 1.0)
     assert np.allclose(new_polygons.area, [84.0, 12.0])
+
+
+def test_convert_ring_linestring__nested_hole():
+    nested_ring = [
+        [4.0, 6.0],
+        [6.0, 6.0],
+        [6.0, 4.0],
+        [4.0, 4.0],
+    ]
+    polygon = sg.Polygon(shell=outer_coords, holes=[inner])
+    inner_polygon = sg.Polygon(shell=inner_coords)
+    polygons = gpd.GeoDataFrame(geometry=[polygon, inner_polygon])
+    polygons["cellsize"] = 1.0
+    linestrings = gpd.GeoDataFrame(geometry=[sg.LineString(nested_ring)])
+
+    new_polygons = tg.convert_linestring_rings(polygons, linestrings)
+    assert isinstance(new_polygons, gpd.GeoDataFrame)
+    assert np.allclose(new_polygons["cellsize"], 1.0)
+    assert np.allclose(new_polygons.area, [84.0, 12.0, 4.0])
 
 
 def test_segmentize_linestrings():
