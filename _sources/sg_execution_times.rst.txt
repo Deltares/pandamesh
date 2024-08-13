@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:01.553** total execution time for 3 files **from all galleries**:
+**00:01.570** total execution time for 3 files **from all galleries**:
 
 .. container::
 
@@ -33,11 +33,11 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_triangle-basic.py` (``../examples/triangle-basic.py``)
-     - 00:00.682
+     - 00:00.688
      - 0.0
    * - :ref:`sphx_glr_examples_triangle-geospatial.py` (``../examples/triangle-geospatial.py``)
-     - 00:00.529
+     - 00:00.534
      - 0.0
    * - :ref:`sphx_glr_examples_gmsh-basic.py` (``../examples/gmsh-basic.py``)
-     - 00:00.343
+     - 00:00.348
      - 0.0
