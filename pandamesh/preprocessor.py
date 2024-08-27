@@ -6,6 +6,8 @@ import pandas as pd
 import shapely
 from shapely import STRtree
 
+from pandamesh.snapping import snap_nodes
+
 GeometryArray = np.ndarray
 IntArray = np.ndarray
 BoolArray = np.ndarray
@@ -355,7 +357,7 @@ class Preprocessor:
 
         # Check whether points are inside.
         tree = STRtree(self.polygons)
-        _, inside = tree.query(self.points, predicate="inside")
+        inside, _ = tree.query(self.points, predicate="within")
         new_points = self.points[inside]
         new_indexer = self.point_indexer[inside]
 
@@ -368,13 +370,33 @@ class Preprocessor:
             )
         )
         tree = STRtree(geoms=rings)
-        _, too_near = tree.query(new_points, predicate="dwithin", distance=distance)
+        too_near, _ = tree.query(new_points, predicate="dwithin", distance=distance)
         keep = np.full(len(new_points), True)
         keep[too_near] = False
+        return self._copy(points=new_points[keep], point_indexer=new_indexer[keep])
 
-        new_points = new_points[keep]
-        new_indexer = new_indexer[keep]
-        return self._copy(points=new_points, point_indexer=new_indexer)
+    def segmentize(self, distance: Optional[float] = None) -> "Preprocessor":
+        """Convert lines into points."""
+        segmentized = shapely.segmentize(self.lines, distance)
+        new_points_xy, index = shapely.get_coordinates(segmentized, return_index=True)
+        return self._copy(
+            points=np.concatenate((shapely.points(new_points_xy), self.points)),
+            point_indexer=np.concatenate(
+                (self.point_indexer, self.line_indexer[index])
+            ),
+            lines=np.empty(0, dtype=object),
+            line_indexer=np.empty(0, dtype=int),
+        )
+
+    def snap_points(self, distance: float) -> "Preprocessor":
+        """Snap points together that are within tolerance of each other."""
+        if len(self.points) == 0:
+            return self._copy()
+        index = snap_nodes(shapely.get_coordinates(self.points), distance)
+        return self._copy(
+            points=self.points[index],
+            point_indexer=self.point_indexer[index],
+        )
 
     def _copy(
         self,
