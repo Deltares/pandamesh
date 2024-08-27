@@ -11,8 +11,8 @@ from pandamesh.common import (
     invalid_option,
     repr,
     separate,
-    to_ugrid,
 )
+from pandamesh.mesher_base import MesherBase
 from pandamesh.triangle_geometry import collect_geometry, polygon_holes
 
 
@@ -22,7 +22,7 @@ class DelaunayAlgorithm(Enum):
     SWEEPLINE = "F"
 
 
-class TriangleMesher:
+class TriangleMesher(MesherBase):
     """
     Wrapper for the python bindings to Triangle. This class must be initialized
     with a geopandas GeoDataFrame containing at least one polygon, and a column
@@ -202,6 +202,3 @@ class TriangleMesher:
 
         result = triangle.triangulate(tri=tri, opts=options)
         return result["vertices"], result["triangles"]
-
-    def generate_ugrid(self) -> "xugrid.Ugrid2d":  # type: ignore # noqa
-        return to_ugrid(*self.generate())

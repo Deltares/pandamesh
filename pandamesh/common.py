@@ -207,5 +207,5 @@ def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type
     return xugrid.Ugrid2d(*vertices.T, -1, faces)
 
 
-def to_gdf(vertices: FloatArray, faces: IntArray) -> gpd.GeoSeries:
-    return gpd.GeoSeries(shapely.polygons(vertices[faces]))
+def to_gdf(vertices: FloatArray, faces: IntArray) -> gpd.GeoDataFrame:
+    return gpd.GeoDataFrame(geometry=shapely.polygons(vertices[faces]))

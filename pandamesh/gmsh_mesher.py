@@ -17,7 +17,6 @@ from pandamesh.common import (
     invalid_option,
     repr,
     separate,
-    to_ugrid,
 )
 from pandamesh.gmsh_fields import (
     FIELDS,
@@ -26,6 +25,7 @@ from pandamesh.gmsh_fields import (
     validate_field,
 )
 from pandamesh.gmsh_geometry import add_field_geometry, add_geometry
+from pandamesh.mesher_base import MesherBase
 
 
 @contextmanager
@@ -123,7 +123,7 @@ def coerce_field(field: Union[dict, str]) -> dict:
     return field
 
 
-class GmshMesher:
+class GmshMesher(MesherBase):
     """
     Wrapper for the python bindings to Gmsh. This class must be initialized
     with a geopandas GeoDataFrame containing at least one polygon, and a column
@@ -548,9 +548,6 @@ class GmshMesher:
         gmsh.model.mesh.renumberNodes()
 
         return self._vertices(), self._faces()
-
-    def generate_ugrid(self) -> "xugrid.Ugrid2d":  # type: ignore # noqa
-        return to_ugrid(*self.generate())
 
     def write(self, path: Union[str, pathlib.Path]):
         """
