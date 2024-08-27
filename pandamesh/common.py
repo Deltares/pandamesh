@@ -3,11 +3,11 @@ from __future__ import annotations
 import functools
 import operator
 from enum import Enum, IntEnum
-from itertools import combinations
 from typing import Any, Sequence, Tuple
 
 import geopandas as gpd
 import numpy as np
+import shapely
 
 
 class MaybeGmsh:
@@ -87,50 +87,16 @@ def check_geodataframe(features: gpd.GeoDataFrame) -> None:
         raise ValueError("geodataframe index contains duplicates")
 
 
-def overlap_shortlist(features: gpd.GeoSeries) -> Tuple[IntArray, IntArray]:
-    """
-    Create a shortlist of polygons or linestrings indices to check against each
-    other using their bounding boxes.
-    """
-    bounds = features.bounds
-    index_a, index_b = (
-        np.array(index) for index in zip(*combinations(features.index, 2))
-    )
-    df_a = bounds.loc[index_a]
-    df_b = bounds.loc[index_b]
-    # Convert to dict to get rid of clashing index.
-    a = {k: df_a[k].to_numpy() for k in df_a}
-    b = {k: df_b[k].to_numpy() for k in df_b}
-    # Touching does not count as overlap here.
-    overlap = (
-        (a["maxx"] >= b["minx"])
-        & (b["maxx"] >= a["minx"])
-        & (a["maxy"] >= b["miny"])
-        & (b["maxy"] >= a["miny"])
-    )
-    return index_a[overlap], index_b[overlap]
-
-
 def intersecting_features(features, feature_type) -> Tuple[IntArray, IntArray]:
-    # Check all combinations where bounding boxes overlap.
-    index_a, index_b = overlap_shortlist(features)
-    unique = np.unique(np.concatenate([index_a, index_b]))
-
-    # Now do the expensive intersection check.
-    # Polygons that touch are allowed, but they result in intersects() == True.
-    # To avoid this, we create temporary geometries that are slightly smaller
-    # by buffering with a small negative value.
-    shortlist = features.loc[unique]
-    if feature_type == "polygon":
-        shortlist = shortlist.buffer(-1.0e-6)
-    a = shortlist.loc[index_a]
-    b = shortlist.loc[index_b]
-    # Synchronize index so there's a one to one (row to row) intersection
-    # check.
-    a.index = np.arange(len(a))
-    b.index = np.arange(len(b))
-    with_overlap = a.intersects(b).to_numpy()
-    return index_a[with_overlap], index_b[with_overlap]
+    tree = shapely.STRtree(geoms=features)
+    if feature_type == "polygon":  # TODO: might not be necessary
+        target = features.buffer(-1.0e-6)
+    else:
+        target = features
+    i, j = tree.query(geometry=target, predicate="intersects")
+    # Intersection matrix is symmetric, and contains i==j (diagonal)
+    keep = j > i
+    return i[keep], j[keep]
 
 
 def check_intersection(features: gpd.GeoSeries, feature_type: str) -> None:
@@ -239,3 +205,7 @@ def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type
             "xugrid must be installed to return generated result a xugrid.Ugrid2d"
         )
     return xugrid.Ugrid2d(*vertices.T, -1, faces)
+
+
+def to_gdf(vertices: FloatArray, faces: IntArray) -> gpd.GeoSeries:
+    return gpd.GeoSeries(shapely.polygons(vertices[faces]))
