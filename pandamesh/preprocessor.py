@@ -11,15 +11,15 @@ IntArray = np.ndarray
 BoolArray = np.ndarray
 
 
-def collect_exteriors(geometry: GeometryArray) -> List:
-    return list(shapely.get_exterior_ring(geometry))
+def collect_exteriors(geometry: GeometryArray) -> GeometryArray:
+    return shapely.get_exterior_ring(geometry)
 
 
-def collect_interiors(geometry: GeometryArray) -> List:
+def collect_interiors(geometry: GeometryArray) -> GeometryArray:
     interiors = []
     for geom in geometry:
         interiors.extend(geom.interiors)
-    return interiors
+    return np.asarray(interiors)
 
 
 def flatten_geometry(geom):
@@ -122,7 +122,11 @@ def separate(
     type_id = shapely.get_type_id(geometry)
     acceptable = {"Point", "LineString", "LinearRing", "Polygon"}
     if not np.isin(type_id, (0, 1, 2, 3)).all():
-        raise TypeError(f"Geometry should be one of {acceptable}")
+        raise TypeError(
+            f"Geometry should be one of {acceptable}."
+            "Call geopandas.GeoDataFrame.explode() to explode multi-part "
+            "geometries into multiple single geometries."
+        )
     return (
         geometry[type_id == 3],
         geometry[(type_id == 1) | (type_id == 2)],
@@ -268,10 +272,12 @@ class Preprocessor:
         Unify polygons may generate many neighboring sub-polygons with the same
         indexer value. The can be merged with ``.merge_polygons``.
         """
-        rings = (
-            collect_exteriors(self.polygons)
-            + collect_interiors(self.polygons)
-            + list(self.lines)
+        rings = np.concatenate(
+            (
+                collect_exteriors(self.polygons),
+                collect_interiors(self.polygons),
+                self.lines,
+            )
         )
         union = shapely.unary_union(rings, grid_size=self.grid_size)
         polygonized_union = flatten_geometries(list(shapely.polygonize([union]).geoms))
@@ -299,7 +305,12 @@ class Preprocessor:
 
         if distance > 0:
             # Remove lines near to polygon boundaries.
-            rings = collect_exteriors(self.polygons) + collect_interiors(self.polygons)
+            rings = np.concatenate(
+                (
+                    collect_exteriors(self.polygons),
+                    collect_interiors(self.polygons),
+                )
+            )
             exclusion = shapely.unary_union(
                 shapely.buffer(rings, distance=distance, cap_style="flat"),
                 grid_size=self.grid_size,
@@ -349,10 +360,12 @@ class Preprocessor:
         new_indexer = self.point_indexer[inside]
 
         # Check whether points aren't too near.
-        rings = (
-            collect_exteriors(self.polygons)
-            + collect_interiors(self.polygons)
-            + list(self.lines)
+        rings = np.concatenate(
+            (
+                collect_exteriors(self.polygons),
+                collect_interiors(self.polygons),
+                self.lines,
+            )
         )
         tree = STRtree(geoms=rings)
         _, too_near = tree.query(new_points, predicate="dwithin", distance=distance)

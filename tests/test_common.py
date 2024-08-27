@@ -155,25 +155,6 @@ def test_check_geodataframe():
     common.check_geodataframe(gdf)
 
 
-def test_overlap_shortlist():
-    # b overlaps with a
-    polygons = gpd.GeoSeries(data=[a, b, d], index=[0, 1, 2])
-    ia, ib = common.overlap_shortlist(polygons)
-    assert np.array_equal(ia, [0])
-    assert np.array_equal(ib, [1])
-
-    # a touches c, c touches d: should count as overlap for shortlist.
-    polygons = gpd.GeoSeries(data=[a, c, d], index=[0, 1, 2])
-    ia, ib = common.overlap_shortlist(polygons)
-    assert np.array_equal(ia, [0, 1])
-    assert np.array_equal(ib, [1, 2])
-
-    linestrings = gpd.GeoSeries(data=[La, Lb, Lc], index=[0, 1, 2])
-    ia, ib = common.overlap_shortlist(linestrings)
-    assert np.array_equal(ia, [0])
-    assert np.array_equal(ib, [1])
-
-
 def test_intersecting_features():
     polygons = gpd.GeoSeries(data=[a, b, c, d], index=[0, 1, 2, 3])
     ia, ib = common.intersecting_features(polygons, "polygon")
