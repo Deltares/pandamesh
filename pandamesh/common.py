@@ -42,6 +42,7 @@ class MaybeGmsh:
 gmsh = MaybeGmsh()
 IntArray = np.ndarray
 FloatArray = np.ndarray
+GeometryArray = np.ndarray
 coord_dtype = np.dtype([("x", np.float64), ("y", np.float64)])
 
 

@@ -6,11 +6,12 @@ import pandas as pd
 import shapely
 from shapely import STRtree
 
+from pandamesh.common import (
+    BoolArray,
+    GeometryArray,
+    IntArray,
+)
 from pandamesh.snapping import snap_nodes
-
-GeometryArray = np.ndarray
-IntArray = np.ndarray
-BoolArray = np.ndarray
 
 
 def collect_exteriors(geometry: GeometryArray) -> GeometryArray:
@@ -389,7 +390,11 @@ class Preprocessor:
         )
 
     def snap_points(self, distance: float) -> "Preprocessor":
-        """Snap points together that are within tolerance of each other."""
+        """
+        Snap points together that are within tolerance of each other.
+
+        Will use Numba to accelerate the snapping if it is installed.
+        """
         if len(self.points) == 0:
             return self._copy()
         index = snap_nodes(shapely.get_coordinates(self.points), distance)

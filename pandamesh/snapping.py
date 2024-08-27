@@ -4,6 +4,8 @@ import numpy as np
 from scipy import sparse
 from scipy.spatial import KDTree
 
+from pandamesh.common import FloatArray, IntArray
+
 try:
     from numba import njit
 except ImportError:
@@ -14,10 +16,6 @@ except ImportError:
             return func
 
         return decorator
-
-
-FloatArray = np.ndarray
-IntArray = np.ndarray
 
 
 class MatrixCSR(NamedTuple):
