@@ -1,9 +1,20 @@
 from typing import NamedTuple
 
-import numba
 import numpy as np
 from scipy import sparse
 from scipy.spatial import KDTree
+
+try:
+    from numba import njit
+except ImportError:
+
+    def njit(*args, **kwargs):
+        # Dummy decorator when numba is not available.
+        def decorator(func):
+            return func
+
+        return decorator
+
 
 FloatArray = np.ndarray
 IntArray = np.ndarray
@@ -48,7 +59,7 @@ class MatrixCSR(NamedTuple):
         return MatrixCSR(A.data, A.indices, A.indptr, n, m, A.nnz)
 
 
-@numba.njit(inline="always")
+@njit(inline="always")
 def row_slice(A, row: int) -> slice:
     """Return the indices or data slice of a single row."""
     start = A.indptr[row]
@@ -56,12 +67,12 @@ def row_slice(A, row: int) -> slice:
     return slice(start, end)
 
 
-@numba.njit(inline="always")
+@njit(inline="always")
 def columns_and_values(A, slice):
     return zip(A.indices[slice], A.data[slice])
 
 
-@numba.njit(cache=True)
+@njit(cache=True)
 def _snap_to_nearest(A: MatrixCSR, snap_candidates: IntArray, max_distance) -> IntArray:
     """
     Find a closest target for each node.
