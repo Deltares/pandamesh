@@ -3,7 +3,7 @@ from typing import Tuple
 
 import geopandas as gpd
 
-from pandamesh.common import FloatArray, IntArray, to_gdf, to_ugrid
+from pandamesh.common import FloatArray, IntArray, to_geodataframe, to_ugrid
 
 
 class MesherBase(abc.ABC):
@@ -11,7 +11,7 @@ class MesherBase(abc.ABC):
     def generate(self) -> Tuple[FloatArray, IntArray]:
         pass
 
-    def generate_gdf(self) -> gpd.GeoDataFrame:
+    def generate_geodataframe(self) -> gpd.GeoDataFrame:
         """
         Generate a mesh and return it as a geopandas GeoDataFrame.
 
@@ -19,7 +19,7 @@ class MesherBase(abc.ABC):
         -------
         mesh: geopandas.GeoDataFrame
         """
-        return to_gdf(*self.generate())
+        return to_geodataframe(*self.generate())
 
     def generate_ugrid(self) -> "xugrid.Ugrid2d":  # type: ignore # noqa
         """

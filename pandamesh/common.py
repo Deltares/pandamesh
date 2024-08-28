@@ -7,6 +7,7 @@ from typing import Any, Sequence, Tuple
 
 import geopandas as gpd
 import numpy as np
+import pandas as pd
 import shapely
 from pandas.api.types import is_integer_dtype
 
@@ -40,6 +41,7 @@ class MaybeGmsh:
 
 
 gmsh = MaybeGmsh()
+BoolArray = np.ndarray
 IntArray = np.ndarray
 FloatArray = np.ndarray
 GeometryArray = np.ndarray
@@ -61,6 +63,22 @@ def repr(obj: Any) -> str:
 
 def flatten(seq: Sequence[Any]):
     return functools.reduce(operator.concat, seq)
+
+
+def flatten_geometry(geom):
+    """Recursively flatten geometry collections."""
+    if hasattr(geom, "geoms"):
+        return [g for subgeom in geom.geoms for g in flatten_geometry(subgeom)]
+    else:
+        return [geom]
+
+
+def flatten_geometries(geometries: Sequence) -> GeometryArray:
+    """Flatten geometry collections."""
+    flattened = []
+    for geom in geometries:
+        flattened.extend(flatten_geometry(geom))
+    return np.array(flattened)
 
 
 def _show_options(options: Enum) -> str:
@@ -209,5 +227,38 @@ def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type
     return xugrid.Ugrid2d(*vertices.T, -1, faces)
 
 
-def to_gdf(vertices: FloatArray, faces: IntArray) -> gpd.GeoDataFrame:
+def to_geodataframe(vertices: FloatArray, faces: IntArray) -> gpd.GeoDataFrame:
     return gpd.GeoDataFrame(geometry=shapely.polygons(vertices[faces]))
+
+
+class Grouper:
+    """
+    Wrapper around pd.DataFrame().groupby().
+
+    Group by ``a_index``, then iterates over the groups, returning a single
+    value of ``a`` and potentially multiple values for ``b``.
+    """
+
+    def __init__(
+        self,
+        a,
+        a_index,
+        b,
+        b_index,
+    ):
+        self.a = np.asarray(a)
+        self.b = np.asarray(b)
+        self.grouped = iter(
+            pd.DataFrame(data={"a": a_index, "b": b_index}).groupby("a")
+        )
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        try:
+            a_index, group = next(self.grouped)
+            b_index = group["b"]
+            return self.a[a_index], self.b[b_index]
+        except StopIteration:
+            raise StopIteration

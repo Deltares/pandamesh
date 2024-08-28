@@ -1,4 +1,3 @@
-from enum import Enum
 from typing import Tuple, Union
 
 import geopandas as gpd
@@ -13,13 +12,8 @@ from pandamesh.common import (
     separate,
 )
 from pandamesh.mesher_base import MesherBase
+from pandamesh.triangle_enums import DelaunayAlgorithm
 from pandamesh.triangle_geometry import collect_geometry, polygon_holes
-
-
-class DelaunayAlgorithm(Enum):
-    DIVIDE_AND_CONQUER = ""
-    INCREMENTAL = "i"
-    SWEEPLINE = "F"
 
 
 class TriangleMesher(MesherBase):
@@ -29,7 +23,7 @@ class TriangleMesher(MesherBase):
     named ``"cellsize"``.
 
     Optionally, multiple polygons with different cell sizes can be included in
-    the geodataframe. These can be used to achieve local mesh remfinement.
+    the geodataframe. These can be used to achieve local mesh refinement.
 
     Linestrings and points may also be included. The segments of linestrings
     will be directly forced into the triangulation. Points can also be forced
@@ -41,7 +35,8 @@ class TriangleMesher(MesherBase):
     the geodataframe are checked:
 
         * Polygons should not have any overlap with each other.
-        * Linestrings should not intersect each other.
+        * Linestrings should not intersect each other, unless the intersection
+          vertex is present in both.
         * Every linestring should be fully contained by a single polygon;
           a linestring may not intersect two or more polygons.
         * Linestrings and points should not "touch" / be located on
@@ -49,7 +44,8 @@ class TriangleMesher(MesherBase):
         * Holes in polygons are fully supported, but they must not contain
           any linestrings or points.
 
-    If such cases are detected, the initialization will error.
+    If such cases are detected, the initialization will error: use the
+    :class:`pandamesh.Preprocessor` to clean up geometries beforehand.
 
     For more details on Triangle, see:
     https://www.cs.cmu.edu/~quake/triangle.defs.html
@@ -142,14 +138,15 @@ class TriangleMesher(MesherBase):
     @property
     def delaunay_algorithm(self) -> DelaunayAlgorithm:
         """
-        ``DelaunayAlgoritm.DIVIDE_AND_CONQUER``: Default algorithm.
+        Sets the Delaunay algorithm. Can be set to one of:
+        :py:class:`pandamesh.DelaunayAlgorithm`:
 
-        ``DelaunayAlgoritm.INCREMENTAL``: Uses the incremental algorithm for
-        Delaunay triangulation, rather than the divide-and-conquer algorithm.
+        .. code::
 
-        ``DelaunayAlgoritm.SWEEPLINE``: Uses Steven Fortune’s sweepline
-        algorithm for Delaunay triangulation, rather than the
-        divide-and-conquer algorithm.
+            DIVIDE_AND_CONQUER = ""
+            INCREMENTAL = "i"
+            SWEEPLINE = "F"
+
         """
         return self._delaunay_algorithm
 
