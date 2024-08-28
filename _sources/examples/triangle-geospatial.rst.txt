@@ -212,17 +212,15 @@ constant cell size.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: Index.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
 
 
+.. GENERATED FROM PYTHON SOURCE LINES 91-107
 
-.. GENERATED FROM PYTHON SOURCE LINES 91-102
+For real work, buffering and simplifying will likely not suffice.
+
+See the preprocessing example to for an overview of common issues and how to
+apply pandamesh's Preprocessor class to resolve them.
 
 Local refinement
 ----------------
@@ -236,7 +234,7 @@ ensure that no overlap occurs in the follwing steps:
 * remove this province from the enveloping polygon;
 * collect the two polygons in a single geodataframe.
 
-.. GENERATED FROM PYTHON SOURCE LINES 102-112
+.. GENERATED FROM PYTHON SOURCE LINES 107-117
 
 .. code-block:: Python
 
@@ -268,11 +266,11 @@ ensure that no overlap occurs in the follwing steps:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 113-114
+.. GENERATED FROM PYTHON SOURCE LINES 118-119
 
 This results in a mesh with a smaller cell size in the province of Utrecht.
 
-.. GENERATED FROM PYTHON SOURCE LINES 114-119
+.. GENERATED FROM PYTHON SOURCE LINES 119-124
 
 .. code-block:: Python
 
@@ -290,17 +288,10 @@ This results in a mesh with a smaller cell size in the province of Utrecht.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: Index.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
 
 
-
-.. GENERATED FROM PYTHON SOURCE LINES 120-132
+.. GENERATED FROM PYTHON SOURCE LINES 125-137
 
 Conclusion
 ----------
@@ -318,7 +309,7 @@ opened by e.g. QGIS.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.562 seconds)
+   **Total running time of the script:** (0 minutes 0.528 seconds)
 
 
 .. _sphx_glr_download_examples_triangle-geospatial.py:

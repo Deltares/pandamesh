@@ -1,0 +1,6 @@
+﻿pandamesh.Preprocessor.unify\_lines
+===================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: Preprocessor.unify_lines

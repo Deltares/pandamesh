@@ -1,0 +1,1027 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandamesh.preprocessor &#8212; pandamesh  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-deltares.css?v=1c61d878" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pandamesh/preprocessor';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandamesh-logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/pandamesh-logo.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">pandamesh</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Deltares/pandamesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="icon-link-image" alt="GitHub"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.deltares.nl/en/" title="Deltares" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/deltares-blue.svg" class="icon-link-image" alt="Deltares"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Deltares/pandamesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="icon-link-image" alt="GitHub"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.deltares.nl/en/" title="Deltares" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/deltares-blue.svg" class="icon-link-image" alt="Deltares"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">pandamesh.pr...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pandamesh.preprocessor</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">shapely</span>
+<span class="kn">from</span> <span class="nn">shapely</span> <span class="kn">import</span> <span class="n">STRtree</span>
+
+<span class="kn">from</span> <span class="nn">pandamesh.common</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">BoolArray</span><span class="p">,</span>
+    <span class="n">GeometryArray</span><span class="p">,</span>
+    <span class="n">Grouper</span><span class="p">,</span>
+    <span class="n">IntArray</span><span class="p">,</span>
+    <span class="n">flatten_geometries</span><span class="p">,</span>
+    <span class="n">flatten_geometry</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pandamesh.snapping</span> <span class="kn">import</span> <span class="n">snap_nodes</span>
+
+
+<span class="k">def</span> <span class="nf">collect_exteriors</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">shapely</span><span class="o">.</span><span class="n">get_exterior_ring</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">collect_interiors</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
+    <span class="n">interiors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">geometry</span><span class="p">:</span>
+        <span class="n">interiors</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">interiors</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">interiors</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">filter_holes_and_assign_values</span><span class="p">(</span>
+    <span class="n">polygons</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
+    <span class="n">index_original</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
+    <span class="n">index_union</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
+    <span class="n">indexer</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">ascending</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">BoolArray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;union&quot;</span><span class="p">:</span> <span class="n">index_union</span><span class="p">,</span>
+            <span class="s2">&quot;original&quot;</span><span class="p">:</span> <span class="n">index_original</span><span class="p">,</span>
+            <span class="s2">&quot;indexer&quot;</span><span class="p">:</span> <span class="n">indexer</span><span class="p">[</span><span class="n">index_original</span><span class="p">],</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;indexer&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="n">ascending</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;union&quot;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">maintain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">polygons</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">maintain</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;union&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">polygons</span><span class="p">[</span><span class="n">maintain</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;indexer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">locate_polygons</span><span class="p">(</span>
+    <span class="n">new</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
+    <span class="n">old</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
+    <span class="n">indexer</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
+    <span class="n">ascending</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">GeometryArray</span><span class="p">,</span> <span class="n">IntArray</span><span class="p">]:</span>
+    <span class="n">sampling_points</span> <span class="o">=</span> <span class="p">[</span><span class="n">polygon</span><span class="o">.</span><span class="n">representative_point</span><span class="p">()</span> <span class="k">for</span> <span class="n">polygon</span> <span class="ow">in</span> <span class="n">new</span><span class="p">]</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">STRtree</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+    <span class="n">index_union</span><span class="p">,</span> <span class="n">index_original</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">sampling_points</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
+    <span class="n">new_polygons</span><span class="p">,</span> <span class="n">new_indexer</span> <span class="o">=</span> <span class="n">filter_holes_and_assign_values</span><span class="p">(</span>
+        <span class="n">polygons</span><span class="o">=</span><span class="n">new</span><span class="p">,</span>
+        <span class="n">index_original</span><span class="o">=</span><span class="n">index_original</span><span class="p">,</span>
+        <span class="n">index_union</span><span class="o">=</span><span class="n">index_union</span><span class="p">,</span>
+        <span class="n">indexer</span><span class="o">=</span><span class="n">indexer</span><span class="p">,</span>
+        <span class="n">ascending</span><span class="o">=</span><span class="n">ascending</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_polygons</span><span class="p">,</span> <span class="n">new_indexer</span>
+
+
+<span class="k">def</span> <span class="nf">locate_lines</span><span class="p">(</span>
+    <span class="n">new</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
+    <span class="n">old</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
+    <span class="n">indexer</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntArray</span><span class="p">:</span>
+    <span class="n">sampling_points</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">line_interpolate_point</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">STRtree</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+    <span class="n">index_old</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">nearest</span><span class="p">(</span><span class="n">sampling_points</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">indexer</span><span class="p">[</span><span class="n">index_old</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">intersect_lines_with_polygons</span><span class="p">(</span>
+    <span class="n">polygons</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
+    <span class="n">lines</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
+    <span class="n">polygon_index</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
+    <span class="n">line_index</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
+    <span class="n">grid_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
+    <span class="n">new_lines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span><span class="p">,</span> <span class="n">group_polygons</span> <span class="ow">in</span> <span class="n">Grouper</span><span class="p">(</span>
+        <span class="n">a</span><span class="o">=</span><span class="n">lines</span><span class="p">,</span> <span class="n">a_index</span><span class="o">=</span><span class="n">line_index</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">polygons</span><span class="p">,</span> <span class="n">b_index</span><span class="o">=</span><span class="n">polygon_index</span>
+    <span class="p">):</span>
+        <span class="n">new_lines</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+            <span class="n">flatten_geometries</span><span class="p">(</span>
+                <span class="n">shapely</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">group_polygons</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="n">grid_size</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">new_lines</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">merge_polygons</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
+    <span class="n">merged</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">unary_union</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="n">grid_size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">flatten_geometry</span><span class="p">(</span><span class="n">merged</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">separate</span><span class="p">(</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">GeometryArray</span><span class="p">,</span> <span class="n">GeometryArray</span><span class="p">,</span> <span class="n">GeometryArray</span><span class="p">]:</span>
+    <span class="n">type_id</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">get_type_id</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
+    <span class="n">acceptable</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="s2">&quot;LineString&quot;</span><span class="p">,</span> <span class="s2">&quot;LinearRing&quot;</span><span class="p">,</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">}</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">type_id</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Geometry should be one of </span><span class="si">{</span><span class="n">acceptable</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="s2">&quot;Call geopandas.GeoDataFrame.explode() to explode multi-part &quot;</span>
+            <span class="s2">&quot;geometries into multiple single geometries.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">geometry</span><span class="p">[</span><span class="n">type_id</span> <span class="o">==</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="n">geometry</span><span class="p">[(</span><span class="n">type_id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">type_id</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)],</span>
+        <span class="n">geometry</span><span class="p">[</span><span class="n">type_id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="Preprocessor">
+<a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.html#pandamesh.Preprocessor">[docs]</a>
+<span class="k">class</span> <span class="nc">Preprocessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Utilities to clean-up geometries before meshing.</span>
+
+<span class="sd">    Each processing method return a new Preprocessor instance. This enables</span>
+<span class="sd">    method chaining.</span>
+
+<span class="sd">    Note: many methods require exhaustive checking of geometries. Processing</span>
+<span class="sd">    may be slow if your geometry contains thousands of geometries or if it has</span>
+<span class="sd">    excessive detail.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    geometry: np.ndarray of shapely geometries of length N.</span>
+<span class="sd">        Should be points, linestrings, or polygons.</span>
+<span class="sd">    values: np.ndarray of length N, optional</span>
+<span class="sd">        Values associated with the geometries (e.g. cell sizes for meshing).</span>
+<span class="sd">    grid_size: float, optional</span>
+<span class="sd">        Forwarded to shapely operations. If grid_size is nonzero, input</span>
+<span class="sd">        coordinates will be snapped to a precision grid of that size and</span>
+<span class="sd">        resulting coordinates will be snapped to that same grid for shapely</span>
+<span class="sd">        operations such as ``intersection, difference, union``, etc. If 0, the</span>
+<span class="sd">        operations will use double precision coordinates.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    This class allows for method chaining to flexibly combine pre-processing</span>
+<span class="sd">    operations:</span>
+
+<span class="sd">    &gt;&gt;&gt; processed = (</span>
+<span class="sd">    &gt;&gt;&gt;     Preprocessor(geometry=gdf.geometry)</span>
+<span class="sd">    &gt;&gt;&gt;     .interpolate_lines_to_points(distance=5.0)</span>
+<span class="sd">    &gt;&gt;&gt;     .snap_points(distance=2.0)</span>
+<span class="sd">    &gt;&gt;&gt;     .unify_polygons()</span>
+<span class="sd">    &gt;&gt;&gt;     .merge_polygons()</span>
+<span class="sd">    &gt;&gt;&gt;     .clip_points(distance=5.0)</span>
+<span class="sd">    &gt;&gt;&gt;     .to_geodataframe()</span>
+<span class="sd">    &gt;&gt;&gt; )</span>
+
+<span class="sd">    An intermediate result can be checked and inspect by calling ``.to_geodataframe()``</span>
+<span class="sd">    at any time.</span>
+
+<span class="sd">    &gt;&gt;&gt; check = Preprocessor(geometry=gdf.geometry).interpolate_lines_to_points(5.0).to_geodataframe()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Preprocessor.__init__">
+<a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.html#pandamesh.Preprocessor.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">grid_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">separate</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+            <span class="n">v_shape</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">shape</span>
+            <span class="n">g_shape</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">shape</span>
+            <span class="k">if</span> <span class="n">v_shape</span> <span class="o">!=</span> <span class="n">g_shape</span><span class="p">:</span>
+                <span class="k">return</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;geometry and values shape mismatch: </span><span class="si">{</span><span class="n">g_shape</span><span class="si">}</span><span class="s2"> versus &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v_shape</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span> <span class="o">=</span> <span class="n">grid_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_indexers</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_set_indexers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">n_polys</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">)</span>
+        <span class="n">n_lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span>
+        <span class="n">n_point</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">indexer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polygon_indexer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_indexer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">point_indexer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+                <span class="n">indexer</span><span class="p">,</span> <span class="p">[</span><span class="n">n_polys</span><span class="p">,</span> <span class="n">n_polys</span> <span class="o">+</span> <span class="n">n_lines</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polygon_indexer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_polys</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">line_indexer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_polys</span><span class="p">,</span> <span class="n">n_polys</span> <span class="o">+</span> <span class="n">n_lines</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">point_indexer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+                <span class="n">n_polys</span> <span class="o">+</span> <span class="n">n_lines</span><span class="p">,</span> <span class="n">n_polys</span> <span class="o">+</span> <span class="n">n_lines</span> <span class="o">+</span> <span class="n">n_point</span>
+            <span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">_copy_with</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">polygons</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">lines</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">points</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">polygon_indexer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">line_indexer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">point_indexer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a copy except for the provided keywords.</span>
+
+<span class="sd">        Used to return a new object easily to allow method chaining.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_instance</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="n">values</span><span class="p">,</span>
+            <span class="s2">&quot;polygons&quot;</span><span class="p">:</span> <span class="n">polygons</span><span class="p">,</span>
+            <span class="s2">&quot;lines&quot;</span><span class="p">:</span> <span class="n">lines</span><span class="p">,</span>
+            <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="n">points</span><span class="p">,</span>
+            <span class="s2">&quot;polygon_indexer&quot;</span><span class="p">:</span> <span class="n">polygon_indexer</span><span class="p">,</span>
+            <span class="s2">&quot;line_indexer&quot;</span><span class="p">:</span> <span class="n">line_indexer</span><span class="p">,</span>
+            <span class="s2">&quot;point_indexer&quot;</span><span class="p">:</span> <span class="n">point_indexer</span><span class="p">,</span>
+            <span class="s2">&quot;grid_size&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">new_instance</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_instance</span>
+
+<div class="viewcode-block" id="Preprocessor.to_geodataframe">
+<a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.to_geodataframe.html#pandamesh.Preprocessor.to_geodataframe">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_geodataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the processed geometries as a ``geopandas.GeoDataFrame``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        gdf: geopandas.GeoDataFrame</span>
+<span class="sd">            Contains columns geometry and indexer. The indexer column can be</span>
+<span class="sd">            used to (re-)associate the geometry with the original values.</span>
+<span class="sd">            If ``values`` were provided at initialization, a values column will</span>
+<span class="sd">            be added to the geodataframe.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">indexer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">polygon_indexer</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">line_indexer</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">point_indexer</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;indexer&quot;</span><span class="p">:</span> <span class="n">indexer</span><span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">indexer</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+            <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Preprocessor.merge_polygons">
+<a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.merge_polygons.html#pandamesh.Preprocessor.merge_polygons">[docs]</a>
+    <span class="k">def</span> <span class="nf">merge_polygons</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Merge polygons with the same value for indexer (the same value if</span>
+<span class="sd">        ``values`` was provided at initialization).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        processed: pandamesh.Preprocessor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">polygon_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">))</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;polygon_index&quot;</span><span class="p">:</span> <span class="n">polygon_index</span><span class="p">,</span> <span class="s2">&quot;indexer&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">polygon_indexer</span><span class="p">}</span>
+        <span class="p">)</span>
+        <span class="n">merged_index</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">merged</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">value</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;indexer&quot;</span><span class="p">):</span>
+            <span class="n">group_polygons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">[</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;polygon_index&quot;</span><span class="p">]]</span>
+            <span class="n">merged_geometry</span> <span class="o">=</span> <span class="n">merge_polygons</span><span class="p">(</span><span class="n">group_polygons</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="p">)</span>
+            <span class="n">merged</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">merged_geometry</span><span class="p">)</span>
+            <span class="n">merged_index</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">value</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">merged_geometry</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">(</span><span class="n">polygons</span><span class="o">=</span><span class="n">merged</span><span class="p">,</span> <span class="n">polygon_indexer</span><span class="o">=</span><span class="n">merged_index</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Preprocessor.unify_polygons">
+<a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.unify_polygons.html#pandamesh.Preprocessor.unify_polygons">[docs]</a>
+    <span class="k">def</span> <span class="nf">unify_polygons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resolve polygon overlaps and intersections.</span>
+
+<span class="sd">        In overview, this method takes the following steps:</span>
+
+<span class="sd">        1. collect all linear rings (exterior and interior boundaries), as well</span>
+<span class="sd">           as the linestrings.</span>
+<span class="sd">        2. create a unary union of all the linework. This ensures intersections</span>
+<span class="sd">           between lines are represented by a point on the lines.</span>
+<span class="sd">        3. polygonize the union linework. This creates a polygon for each ring that</span>
+<span class="sd">           is encountered, including holes.</span>
+<span class="sd">        4. collect sampling points for the newly created polygons. Use these to</span>
+<span class="sd">           locate in which polygon (or which hole!) the newly created polygon is</span>
+<span class="sd">           located.</span>
+<span class="sd">        5. In case of overlapping polygons, the sampling point may be present</span>
+<span class="sd">           in more than one of the original polygons. We choose the one with</span>
+<span class="sd">           the lowest indexer value or the smallest value in case ``.values``</span>
+<span class="sd">           was provided at initialization if ``first=True``; the highest</span>
+<span class="sd">           indexer value or largest value is taken for ``first=False``.</span>
+<span class="sd">        6. re-associate with the original indexer and discard hole polygons.</span>
+
+<span class="sd">        Unify polygons may generate many neighboring sub-polygons with the same</span>
+<span class="sd">        indexer value. The can be merged with ``.merge_polygons``.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        first: bool, optional</span>
+<span class="sd">            Which value or index to assign in case of polygon overlap.</span>
+
+<span class="sd">            In case ``values`` were provided at initialization:</span>
+
+<span class="sd">            * ``first=True``: take the smallest value among the overlapping</span>
+<span class="sd">              polygons.</span>
+<span class="sd">            * ``first=False``: take the largest value among the</span>
+<span class="sd">              overlapping polygons.</span>
+
+<span class="sd">            If not provided:</span>
+
+<span class="sd">            * ``first=True``: take the first overlapping polygon of the input</span>
+<span class="sd">              geometry.</span>
+<span class="sd">            * ``first=False``: take the last overlapping polygon of the input</span>
+<span class="sd">              geometry.</span>
+
+<span class="sd">            See the examples.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        processed: pandamesh.Preprocessor</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        Resolve overlapping polygons, assigning the smallest cell size values</span>
+<span class="sd">        in case of overlap:</span>
+
+<span class="sd">        &gt;&gt;&gt; processed = (</span>
+<span class="sd">        &gt;&gt;&gt;     pandamesh.Preprocessor(geometry=gdf[&quot;geometry&quot;], values=gdf[&quot;cellsize&quot;])</span>
+<span class="sd">        &gt;&gt;&gt;     .unify_polygons()</span>
+<span class="sd">        &gt;&gt;&gt;     .merge_polygons(first=True)</span>
+<span class="sd">        &gt;&gt;&gt;     .to_geodataframe()</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
+
+<span class="sd">        Assign the largest cell size value instead:</span>
+
+<span class="sd">        &gt;&gt;&gt; processed = (</span>
+<span class="sd">        &gt;&gt;&gt;     pandamesh.Preprocessor(geometry=gdf[&quot;geometry&quot;], values=gdf[&quot;cellsize&quot;])</span>
+<span class="sd">        &gt;&gt;&gt;     .unify_polygons()</span>
+<span class="sd">        &gt;&gt;&gt;     .merge_polygons(first=False)</span>
+<span class="sd">        &gt;&gt;&gt;     .to_geodataframe()</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
+
+<span class="sd">        Alternatively, to control the result of the merging with values, we can</span>
+<span class="sd">        sort the ``gdf`` prior to processing.</span>
+
+<span class="sd">        &gt;&gt;&gt; sorted_gdf = gdf.sort_values([&quot;a&quot;, &quot;b&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; processor = pandamesh.Preprocessor(sorted_gdf[&quot;geometry&quot;])</span>
+
+<span class="sd">        Afterwards, the returned indexer can be used to fetch the data associated</span>
+<span class="sd">        with the merged results.</span>
+
+<span class="sd">        &gt;&gt;&gt; out = processor.to_geodataframe()</span>
+<span class="sd">        &gt;&gt;&gt; processed = geopandas.GeoDataFrame(</span>
+<span class="sd">        &gt;&gt;&gt;     data=sorted_gdf.iloc[out[&quot;indexer&quot;]].loc[[&quot;a&quot;, &quot;b&quot;]],</span>
+<span class="sd">        &gt;&gt;&gt;     geometry=out[&quot;geometry&quot;],</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="n">collect_exteriors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">),</span>
+                <span class="n">collect_interiors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">union</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">unary_union</span><span class="p">(</span><span class="n">rings</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="p">)</span>
+        <span class="n">polygonized_union</span> <span class="o">=</span> <span class="n">flatten_geometries</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">shapely</span><span class="o">.</span><span class="n">polygonize</span><span class="p">([</span><span class="n">union</span><span class="p">])</span><span class="o">.</span><span class="n">geoms</span><span class="p">))</span>
+        <span class="n">new_polygons</span><span class="p">,</span> <span class="n">new_indexer</span> <span class="o">=</span> <span class="n">locate_polygons</span><span class="p">(</span>
+            <span class="n">new</span><span class="o">=</span><span class="n">polygonized_union</span><span class="p">,</span>
+            <span class="n">old</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">,</span>
+            <span class="n">indexer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">polygon_indexer</span><span class="p">,</span>
+            <span class="n">ascending</span><span class="o">=</span><span class="n">first</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">(</span><span class="n">polygons</span><span class="o">=</span><span class="n">new_polygons</span><span class="p">,</span> <span class="n">polygon_indexer</span><span class="o">=</span><span class="n">new_indexer</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Preprocessor.clip_lines">
+<a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.clip_lines.html#pandamesh.Preprocessor.clip_lines">[docs]</a>
+    <span class="k">def</span> <span class="nf">clip_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove line segments that are outside or that are near polygon</span>
+<span class="sd">        segments.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        processed: pandamesh.Preprocessor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">()</span>
+
+        <span class="c1"># Discard line elements outside of the polygons.</span>
+        <span class="n">all_polygons</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">unary_union</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="p">)</span>
+        <span class="n">lines_inside</span> <span class="o">=</span> <span class="n">flatten_geometries</span><span class="p">(</span>
+            <span class="n">shapely</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">,</span> <span class="n">all_polygons</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Remove lines near to polygon boundaries.</span>
+            <span class="n">rings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+                <span class="p">(</span>
+                    <span class="n">collect_exteriors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">),</span>
+                    <span class="n">collect_interiors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">),</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">exclusion</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">unary_union</span><span class="p">(</span>
+                <span class="n">shapely</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">rings</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span> <span class="n">cap_style</span><span class="o">=</span><span class="s2">&quot;flat&quot;</span><span class="p">),</span>
+                <span class="n">grid_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">new_lines</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span>
+                <span class="n">lines_inside</span><span class="p">,</span> <span class="n">exclusion</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span>
+            <span class="p">)</span>
+            <span class="n">new_lines</span> <span class="o">=</span> <span class="n">new_lines</span><span class="p">[</span><span class="o">~</span><span class="n">shapely</span><span class="o">.</span><span class="n">is_empty</span><span class="p">(</span><span class="n">new_lines</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_lines</span> <span class="o">=</span> <span class="n">lines_inside</span>
+
+        <span class="n">new_indexer</span> <span class="o">=</span> <span class="n">locate_lines</span><span class="p">(</span><span class="n">new_lines</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_indexer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">(</span><span class="n">lines</span><span class="o">=</span><span class="n">new_lines</span><span class="p">,</span> <span class="n">line_indexer</span><span class="o">=</span><span class="n">new_indexer</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Preprocessor.unify_lines">
+<a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.unify_lines.html#pandamesh.Preprocessor.unify_lines">[docs]</a>
+    <span class="k">def</span> <span class="nf">unify_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ensure intersections between lines are present.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        processed: pandamesh.Preprocessor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">()</span>
+
+        <span class="n">lines_union</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
+            <span class="n">flatten_geometry</span><span class="p">(</span><span class="n">shapely</span><span class="o">.</span><span class="n">unary_union</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_size</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="n">lines_union</span> <span class="o">=</span> <span class="n">lines_union</span><span class="p">[</span><span class="n">shapely</span><span class="o">.</span><span class="n">get_type_id</span><span class="p">(</span><span class="n">lines_union</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># Sample halfway along the lines</span>
+        <span class="n">sampling_points</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">line_interpolate_point</span><span class="p">(</span>
+            <span class="n">lines_union</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">STRtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span>
+        <span class="n">index_original</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">nearest</span><span class="p">(</span><span class="n">sampling_points</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">(</span>
+            <span class="n">lines</span><span class="o">=</span><span class="n">lines_union</span><span class="p">,</span> <span class="n">line_indexer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">line_indexer</span><span class="p">[</span><span class="n">index_original</span><span class="p">]</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Preprocessor.clip_points">
+<a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.clip_points.html#pandamesh.Preprocessor.clip_points">[docs]</a>
+    <span class="k">def</span> <span class="nf">clip_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove points that are outside of a polygon or near line or</span>
+<span class="sd">        polygon segments.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        distance: float, optional</span>
+<span class="sd">            Minimum distance to a line or polygon segment.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        processed: pandamesh.Preprocessor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">()</span>
+
+        <span class="c1"># Check whether points are inside.</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">STRtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">)</span>
+        <span class="n">inside</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
+        <span class="n">new_points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="n">inside</span><span class="p">]</span>
+        <span class="n">new_indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">point_indexer</span><span class="p">[</span><span class="n">inside</span><span class="p">]</span>
+
+        <span class="c1"># Check whether points aren&#39;t too near.</span>
+        <span class="n">rings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="n">collect_exteriors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">),</span>
+                <span class="n">collect_interiors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">STRtree</span><span class="p">(</span><span class="n">geoms</span><span class="o">=</span><span class="n">rings</span><span class="p">)</span>
+        <span class="n">too_near</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">new_points</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="s2">&quot;dwithin&quot;</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">)</span>
+        <span class="n">keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_points</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">keep</span><span class="p">[</span><span class="n">too_near</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="n">new_points</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">point_indexer</span><span class="o">=</span><span class="n">new_indexer</span><span class="p">[</span><span class="n">keep</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Preprocessor.interpolate_lines_to_points">
+<a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.interpolate_lines_to_points.html#pandamesh.Preprocessor.interpolate_lines_to_points">[docs]</a>
+    <span class="k">def</span> <span class="nf">interpolate_lines_to_points</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">values_as_distance</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert lines into points.</span>
+
+<span class="sd">        This method adds vertices if needed, but it does not discard vertices</span>
+<span class="sd">        that are located close together: ``distance`` is the maximum distance,</span>
+<span class="sd">        not a minimum.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        distance: float, optional</span>
+<span class="sd">            Additional vertices will be added so that all line segments are no</span>
+<span class="sd">            longer than this value. Must be greater than 0.</span>
+<span class="sd">        values_as_distance: bool, optional</span>
+<span class="sd">            If true, ignores the value of ``distance`` and uses ``values``</span>
+<span class="sd">            provided during initialization as the distance instead. Errors if</span>
+<span class="sd">            no values have been provided.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        processed: pandamesh.Preprocessor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">values_as_distance</span><span class="p">:</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">line_indexer</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">distance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;If values_as_distance is False, distance must be provided.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">segmentized</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">segmentize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span>
+        <span class="n">new_points_xy</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">(</span><span class="n">segmentized</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">(</span>
+            <span class="n">points</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">shapely</span><span class="o">.</span><span class="n">points</span><span class="p">(</span><span class="n">new_points_xy</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">)),</span>
+            <span class="n">point_indexer</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">point_indexer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_indexer</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+            <span class="p">),</span>
+            <span class="n">lines</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">),</span>
+            <span class="n">line_indexer</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Preprocessor.snap_points">
+<a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.snap_points.html#pandamesh.Preprocessor.snap_points">[docs]</a>
+    <span class="k">def</span> <span class="nf">snap_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Snap points together that are within tolerance of each other.</span>
+
+<span class="sd">        Will use Numba to accelerate the snapping if it is installed. This may</span>
+<span class="sd">        be significantly faster in case of snapping a large (&gt;10 000) number of points.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        processed: pandamesh.Preprocessor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">()</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">snap_nodes</span><span class="p">(</span><span class="n">shapely</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">),</span> <span class="n">distance</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">(</span>
+            <span class="n">points</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+            <span class="n">point_indexer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">point_indexer</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+        <span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright Deltares.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

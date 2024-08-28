@@ -1,0 +1,6 @@
+﻿pandamesh.Preprocessor.interpolate\_lines\_to\_points
+=====================================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: Preprocessor.interpolate_lines_to_points

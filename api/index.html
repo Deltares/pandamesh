@@ -47,7 +47,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Changelog" href="changelog.html" />
-    <link rel="prev" title="Basic Triangle Example" href="../examples/triangle-basic.html" />
+    <link rel="prev" title="Preprocessing" href="../examples/preprocessing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -318,8 +318,56 @@
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="triangle.html">Triangle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gmsh.html">Gmsh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.html">pandamesh.Preprocessor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.unify_polygons.html">pandamesh.Preprocessor.unify_polygons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.merge_polygons.html">pandamesh.Preprocessor.merge_polygons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.clip_lines.html">pandamesh.Preprocessor.clip_lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.unify_lines.html">pandamesh.Preprocessor.unify_lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.interpolate_lines_to_points.html">pandamesh.Preprocessor.interpolate_lines_to_points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.snap_points.html">pandamesh.Preprocessor.snap_points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.clip_points.html">pandamesh.Preprocessor.clip_points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.to_geodataframe.html">pandamesh.Preprocessor.to_geodataframe</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.html">pandamesh.TriangleMesher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.generate.html">pandamesh.TriangleMesher.generate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.generate_geodataframe.html">pandamesh.TriangleMesher.generate_geodataframe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.generate_ugrid.html">pandamesh.TriangleMesher.generate_ugrid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.minimum_angle.html">pandamesh.TriangleMesher.minimum_angle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.conforming_delaunay.html">pandamesh.TriangleMesher.conforming_delaunay</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.suppress_exact_arithmetic.html">pandamesh.TriangleMesher.suppress_exact_arithmetic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.maximum_steiner_points.html">pandamesh.TriangleMesher.maximum_steiner_points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.delaunay_algorithm.html">pandamesh.TriangleMesher.delaunay_algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.consistency_check.html">pandamesh.TriangleMesher.consistency_check</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.html">pandamesh.GmshMesher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.generate.html">pandamesh.GmshMesher.generate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.generate_geodataframe.html">pandamesh.GmshMesher.generate_geodataframe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.generate_ugrid.html">pandamesh.GmshMesher.generate_ugrid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_algorithm.html">pandamesh.GmshMesher.mesh_algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.recombine_all.html">pandamesh.GmshMesher.recombine_all</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.force_geometry.html">pandamesh.GmshMesher.force_geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_extend_from_boundary.html">pandamesh.GmshMesher.mesh_size_extend_from_boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_points.html">pandamesh.GmshMesher.mesh_size_from_points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_curvature.html">pandamesh.GmshMesher.mesh_size_from_curvature</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.field_combination.html">pandamesh.GmshMesher.field_combination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.subdivision_algorithm.html">pandamesh.GmshMesher.subdivision_algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.general_verbosity.html">pandamesh.GmshMesher.general_verbosity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_distance_field.html">pandamesh.GmshMesher.add_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_structured_field.html">pandamesh.GmshMesher.add_structured_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.write.html">pandamesh.GmshMesher.write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.finalize_gmsh.html">pandamesh.GmshMesher.finalize_gmsh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.gmsh_env.html">pandamesh.gmsh_env</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.DelaunayAlgorithm.html">pandamesh.DelaunayAlgorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.FieldCombination.html">pandamesh.FieldCombination</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GeneralVerbosity.html">pandamesh.GeneralVerbosity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.html">pandamesh.GmshMesher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.MeshAlgorithm.html">pandamesh.MeshAlgorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.SubdivisionAlgorithm.html">pandamesh.SubdivisionAlgorithm</a></li>
 </ul>
 </div>
 </nav></div>
@@ -375,18 +423,177 @@
                 <article class="bd-article">
                   
   <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
+<span id="api"></span><h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
+<p>This page provides an auto-generated summary of pandamesh’s API.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 </div>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="triangle.html">Triangle</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gmsh.html">Gmsh</a></li>
-</ul>
+<section id="preprocessor">
+<h2>Preprocessor<a class="headerlink" href="#preprocessor" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.Preprocessor.html#pandamesh.Preprocessor" title="pandamesh.Preprocessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preprocessor</span></code></a>([geometry, values, grid_size])</p></td>
+<td><p>Utilities to clean-up geometries before meshing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.Preprocessor.unify_polygons.html#pandamesh.Preprocessor.unify_polygons" title="pandamesh.Preprocessor.unify_polygons"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preprocessor.unify_polygons</span></code></a>([first])</p></td>
+<td><p>Resolve polygon overlaps and intersections.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.Preprocessor.merge_polygons.html#pandamesh.Preprocessor.merge_polygons" title="pandamesh.Preprocessor.merge_polygons"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preprocessor.merge_polygons</span></code></a>()</p></td>
+<td><p>Merge polygons with the same value for indexer (the same value if <code class="docutils literal notranslate"><span class="pre">values</span></code> was provided at initialization).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.Preprocessor.clip_lines.html#pandamesh.Preprocessor.clip_lines" title="pandamesh.Preprocessor.clip_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preprocessor.clip_lines</span></code></a>([distance])</p></td>
+<td><p>Remove line segments that are outside or that are near polygon segments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.Preprocessor.unify_lines.html#pandamesh.Preprocessor.unify_lines" title="pandamesh.Preprocessor.unify_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preprocessor.unify_lines</span></code></a>()</p></td>
+<td><p>Ensure intersections between lines are present.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.Preprocessor.interpolate_lines_to_points.html#pandamesh.Preprocessor.interpolate_lines_to_points" title="pandamesh.Preprocessor.interpolate_lines_to_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preprocessor.interpolate_lines_to_points</span></code></a>([...])</p></td>
+<td><p>Convert lines into points.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.Preprocessor.snap_points.html#pandamesh.Preprocessor.snap_points" title="pandamesh.Preprocessor.snap_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preprocessor.snap_points</span></code></a>(distance)</p></td>
+<td><p>Snap points together that are within tolerance of each other.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.Preprocessor.clip_points.html#pandamesh.Preprocessor.clip_points" title="pandamesh.Preprocessor.clip_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preprocessor.clip_points</span></code></a>([distance])</p></td>
+<td><p>Remove points that are outside of a polygon or near line or polygon segments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.Preprocessor.to_geodataframe.html#pandamesh.Preprocessor.to_geodataframe" title="pandamesh.Preprocessor.to_geodataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preprocessor.to_geodataframe</span></code></a>()</p></td>
+<td><p>Return the processed geometries as a <code class="docutils literal notranslate"><span class="pre">geopandas.GeoDataFrame</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
+</section>
+<section id="triangle">
+<h2>Triangle<a class="headerlink" href="#triangle" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher" title="pandamesh.TriangleMesher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher</span></code></a>(gdf)</p></td>
+<td><p>Wrapper for the python bindings to Triangle.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.generate.html#pandamesh.TriangleMesher.generate" title="pandamesh.TriangleMesher.generate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher.generate</span></code></a>()</p></td>
+<td><p>Generate a mesh of triangles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.generate_geodataframe.html#pandamesh.TriangleMesher.generate_geodataframe" title="pandamesh.TriangleMesher.generate_geodataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher.generate_geodataframe</span></code></a>()</p></td>
+<td><p>Generate a mesh and return it as a geopandas GeoDataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.generate_ugrid.html#pandamesh.TriangleMesher.generate_ugrid" title="pandamesh.TriangleMesher.generate_ugrid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher.generate_ugrid</span></code></a>()</p></td>
+<td><p>Generate a mesh and return it as an xugrid Ugrid2d.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.minimum_angle.html#pandamesh.TriangleMesher.minimum_angle" title="pandamesh.TriangleMesher.minimum_angle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher.minimum_angle</span></code></a></p></td>
+<td><p>Minimum allowed angle for any triangle in the mesh.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.conforming_delaunay.html#pandamesh.TriangleMesher.conforming_delaunay" title="pandamesh.TriangleMesher.conforming_delaunay"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher.conforming_delaunay</span></code></a></p></td>
+<td><p>use this switch if you want all triangles in the mesh to be Delaunay, and not just constrained Delaunay; or if you want to ensure that all Voronoi vertices lie within the triangulation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.suppress_exact_arithmetic.html#pandamesh.TriangleMesher.suppress_exact_arithmetic" title="pandamesh.TriangleMesher.suppress_exact_arithmetic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher.suppress_exact_arithmetic</span></code></a></p></td>
+<td><p>Suppresses exact arithmetic.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.maximum_steiner_points.html#pandamesh.TriangleMesher.maximum_steiner_points" title="pandamesh.TriangleMesher.maximum_steiner_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher.maximum_steiner_points</span></code></a></p></td>
+<td><p>Specifies the maximum number of added Steiner points</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.delaunay_algorithm.html#pandamesh.TriangleMesher.delaunay_algorithm" title="pandamesh.TriangleMesher.delaunay_algorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher.delaunay_algorithm</span></code></a></p></td>
+<td><p>Sets the Delaunay algorithm.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.consistency_check.html#pandamesh.TriangleMesher.consistency_check" title="pandamesh.TriangleMesher.consistency_check"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher.consistency_check</span></code></a></p></td>
+<td><p>Check the consistency of the final mesh.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="gmsh">
+<h2>Gmsh<a class="headerlink" href="#gmsh" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher</span></code></a>(gdf[, read_config_files, run, ...])</p></td>
+<td><p>Wrapper for the python bindings to Gmsh.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.generate.html#pandamesh.GmshMesher.generate" title="pandamesh.GmshMesher.generate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.generate</span></code></a>()</p></td>
+<td><p>Generate a mesh of triangles or quadrangles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.generate_geodataframe.html#pandamesh.GmshMesher.generate_geodataframe" title="pandamesh.GmshMesher.generate_geodataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.generate_geodataframe</span></code></a>()</p></td>
+<td><p>Generate a mesh and return it as a geopandas GeoDataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.generate_ugrid.html#pandamesh.GmshMesher.generate_ugrid" title="pandamesh.GmshMesher.generate_ugrid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.generate_ugrid</span></code></a>()</p></td>
+<td><p>Generate a mesh and return it as an xugrid Ugrid2d.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_algorithm.html#pandamesh.GmshMesher.mesh_algorithm" title="pandamesh.GmshMesher.mesh_algorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.mesh_algorithm</span></code></a></p></td>
+<td><p>Can be set to one of <a class="reference internal" href="api/pandamesh.MeshAlgorithm.html#pandamesh.MeshAlgorithm" title="pandamesh.MeshAlgorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.MeshAlgorithm</span></code></a>:</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.recombine_all.html#pandamesh.GmshMesher.recombine_all" title="pandamesh.GmshMesher.recombine_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.recombine_all</span></code></a></p></td>
+<td><p>Apply recombination algorithm to all surfaces, ignoring per-surface spec.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.force_geometry.html#pandamesh.GmshMesher.force_geometry" title="pandamesh.GmshMesher.force_geometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.force_geometry</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_extend_from_boundary.html#pandamesh.GmshMesher.mesh_size_extend_from_boundary" title="pandamesh.GmshMesher.mesh_size_extend_from_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.mesh_size_extend_from_boundary</span></code></a></p></td>
+<td><p>Forces the mesh size to be extended from the boundary, or not, per surface.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_points.html#pandamesh.GmshMesher.mesh_size_from_points" title="pandamesh.GmshMesher.mesh_size_from_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.mesh_size_from_points</span></code></a></p></td>
+<td><p>Compute mesh element sizes from values given at geometry points.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_curvature.html#pandamesh.GmshMesher.mesh_size_from_curvature" title="pandamesh.GmshMesher.mesh_size_from_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.mesh_size_from_curvature</span></code></a></p></td>
+<td><p>Automatically compute mesh element sizes from curvature, using the value as the target number of elements per 2 * Pi radians.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.field_combination.html#pandamesh.GmshMesher.field_combination" title="pandamesh.GmshMesher.field_combination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.field_combination</span></code></a></p></td>
+<td><p>Controls how cell size fields are combined when they are found at the same location.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.subdivision_algorithm.html#pandamesh.GmshMesher.subdivision_algorithm" title="pandamesh.GmshMesher.subdivision_algorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.subdivision_algorithm</span></code></a></p></td>
+<td><p>All meshes can be subdivided to generate fully quadrangular cells.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.general_verbosity.html#pandamesh.GmshMesher.general_verbosity" title="pandamesh.GmshMesher.general_verbosity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.general_verbosity</span></code></a></p></td>
+<td><p>Controls level of information printed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.clear_fields.html#pandamesh.GmshMesher.clear_fields" title="pandamesh.GmshMesher.clear_fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.clear_fields</span></code></a>()</p></td>
+<td><p>Clear all cell size fields from the mesher.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.add_distance_field.html#pandamesh.GmshMesher.add_distance_field" title="pandamesh.GmshMesher.add_distance_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.add_distance_field</span></code></a>(gdf, ...)</p></td>
+<td><p>Add a distance field to the mesher.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.add_structured_field.html#pandamesh.GmshMesher.add_structured_field" title="pandamesh.GmshMesher.add_structured_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.add_structured_field</span></code></a>(cellsize, ...)</p></td>
+<td><p>Add a structured field specifying cell sizes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.write.html#pandamesh.GmshMesher.write" title="pandamesh.GmshMesher.write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.write</span></code></a>(path)</p></td>
+<td><p>Write a gmsh .msh file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.finalize_gmsh.html#pandamesh.GmshMesher.finalize_gmsh" title="pandamesh.GmshMesher.finalize_gmsh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.finalize_gmsh</span></code></a>()</p></td>
+<td><p>Finalize Gmsh.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.gmsh_env.html#pandamesh.gmsh_env" title="pandamesh.gmsh_env"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gmsh_env</span></code></a>([read_config_files, interruptible])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="enumerators">
+<h2>Enumerators<a class="headerlink" href="#enumerators" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.DelaunayAlgorithm.html#pandamesh.DelaunayAlgorithm" title="pandamesh.DelaunayAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DelaunayAlgorithm</span></code></a>(value[, names, module, ...])</p></td>
+<td><p>The type of Delaunay algorithm for Triangle.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.FieldCombination.html#pandamesh.FieldCombination" title="pandamesh.FieldCombination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FieldCombination</span></code></a>(value[, names, module, ...])</p></td>
+<td><p>Controls how cell size fields are combined when they are found at the same location.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GeneralVerbosity.html#pandamesh.GeneralVerbosity" title="pandamesh.GeneralVerbosity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeneralVerbosity</span></code></a>(value[, names, module, ...])</p></td>
+<td><p>Level of information printed.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher</span></code></a>(gdf[, read_config_files, run, ...])</p></td>
+<td><p>Wrapper for the python bindings to Gmsh.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.MeshAlgorithm.html#pandamesh.MeshAlgorithm" title="pandamesh.MeshAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeshAlgorithm</span></code></a>(value[, names, module, ...])</p></td>
+<td><p>Each algorithm has its own advantages and disadvantages.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.SubdivisionAlgorithm.html#pandamesh.SubdivisionAlgorithm" title="pandamesh.SubdivisionAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SubdivisionAlgorithm</span></code></a>(value[, names, module, ...])</p></td>
+<td><p>The default recombination algorithm might leave some triangles in the mesh, if recombining all the triangles leads to badly shaped quads.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 </section>
 
 
@@ -400,12 +607,12 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../examples/triangle-basic.html"
+       href="../examples/preprocessing.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Basic Triangle Example</p>
+        <p class="prev-next-title">Preprocessing</p>
       </div>
     </a>
     <a class="right-next"
@@ -426,6 +633,21 @@
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessor">Preprocessor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#triangle">Triangle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gmsh">Gmsh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enumerators">Enumerators</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

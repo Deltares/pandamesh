@@ -1,0 +1,6 @@
+﻿pandamesh.Preprocessor.merge\_polygons
+======================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: Preprocessor.merge_polygons

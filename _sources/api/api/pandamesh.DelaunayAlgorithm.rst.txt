@@ -1,0 +1,8 @@
+﻿pandamesh.DelaunayAlgorithm
+===========================
+
+.. currentmodule:: pandamesh
+
+.. autoclass:: DelaunayAlgorithm
+   :members:
+   :member-order: bysource

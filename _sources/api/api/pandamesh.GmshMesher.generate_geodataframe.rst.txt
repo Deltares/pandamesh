@@ -1,0 +1,6 @@
+﻿pandamesh.GmshMesher.generate\_geodataframe
+===========================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: GmshMesher.generate_geodataframe

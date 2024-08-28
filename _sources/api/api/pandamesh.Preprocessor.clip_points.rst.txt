@@ -1,0 +1,6 @@
+﻿pandamesh.Preprocessor.clip\_points
+===================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: Preprocessor.clip_points

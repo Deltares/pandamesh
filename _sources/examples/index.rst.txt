@@ -67,6 +67,23 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
     </div>
 
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Raw geospatial vector data is often not ready to use directly in mesh generation:       Polygon data often do not form a valid planar partition: polygons are   overlapping, or neighboring polygons have small gaps between them.  Polygon boundaries or linestring segments intersect each other.  Points may be located on polygon boundaries or lines. Since floating point   numbers are not exact, points seemingly located on a line are computationally   just left or just right of the line and form an extremely thin triangle.  Points may be located extremely close together, thereby generating tiny   triangles.    Such problems either lead to a generated mesh with extremely small elements, or worse, they lead to a crash of the meshing program. Pandamesh provides a Preprocessor class to assist with cleaning up some common faults. ">
+
+.. only:: html
+
+  .. image:: /examples/images/thumb/sphx_glr_preprocessing_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_preprocessing.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Preprocessing</div>
+    </div>
+
+
 .. thumbnail-parent-div-close
 
 .. raw:: html
@@ -80,6 +97,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
    /examples/triangle-geospatial
    /examples/gmsh-basic
    /examples/triangle-basic
+   /examples/preprocessing
 
 
 

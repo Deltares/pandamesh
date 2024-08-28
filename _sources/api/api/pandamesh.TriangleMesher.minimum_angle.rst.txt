@@ -1,0 +1,6 @@
+﻿pandamesh.TriangleMesher.minimum\_angle
+=======================================
+
+.. currentmodule:: pandamesh
+
+.. autoproperty:: TriangleMesher.minimum_angle

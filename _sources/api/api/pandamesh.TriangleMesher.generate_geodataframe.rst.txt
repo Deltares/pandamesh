@@ -1,0 +1,6 @@
+﻿pandamesh.TriangleMesher.generate\_geodataframe
+===============================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: TriangleMesher.generate_geodataframe

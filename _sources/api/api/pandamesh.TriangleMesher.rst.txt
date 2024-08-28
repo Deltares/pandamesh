@@ -1,0 +1,36 @@
+﻿pandamesh.TriangleMesher
+========================
+
+.. currentmodule:: pandamesh
+
+.. autoclass:: TriangleMesher
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TriangleMesher.__init__
+      ~TriangleMesher.generate
+      ~TriangleMesher.generate_geodataframe
+      ~TriangleMesher.generate_ugrid
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TriangleMesher.conforming_delaunay
+      ~TriangleMesher.consistency_check
+      ~TriangleMesher.delaunay_algorithm
+      ~TriangleMesher.maximum_steiner_points
+      ~TriangleMesher.minimum_angle
+      ~TriangleMesher.suppress_exact_arithmetic
+   
+   

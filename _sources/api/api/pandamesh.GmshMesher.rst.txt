@@ -1,0 +1,8 @@
+﻿pandamesh.GmshMesher
+====================
+
+.. currentmodule:: pandamesh
+
+.. autoclass:: GmshMesher
+   :members:
+   :member-order: bysource

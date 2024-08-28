@@ -1,0 +1,8 @@
+﻿pandamesh.SubdivisionAlgorithm
+==============================
+
+.. currentmodule:: pandamesh
+
+.. autoclass:: SubdivisionAlgorithm
+   :members:
+   :member-order: bysource

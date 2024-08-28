@@ -1,0 +1,8 @@
+﻿pandamesh.FieldCombination
+==========================
+
+.. currentmodule:: pandamesh
+
+.. autoclass:: FieldCombination
+   :members:
+   :member-order: bysource

@@ -1,0 +1,6 @@
+﻿pandamesh.TriangleMesher.consistency\_check
+===========================================
+
+.. currentmodule:: pandamesh
+
+.. autoproperty:: TriangleMesher.consistency_check

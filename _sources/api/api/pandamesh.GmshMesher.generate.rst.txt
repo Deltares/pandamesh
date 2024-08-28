@@ -1,0 +1,6 @@
+﻿pandamesh.GmshMesher.generate
+=============================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: GmshMesher.generate

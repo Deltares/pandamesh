@@ -1,0 +1,6 @@
+﻿pandamesh.TriangleMesher.delaunay\_algorithm
+============================================
+
+.. currentmodule:: pandamesh
+
+.. autoproperty:: TriangleMesher.delaunay_algorithm

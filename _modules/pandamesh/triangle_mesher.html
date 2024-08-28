@@ -357,8 +357,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for pandamesh.triangle_mesher</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">triangle</span>
@@ -370,30 +369,22 @@
     <span class="n">invalid_option</span><span class="p">,</span>
     <span class="nb">repr</span><span class="p">,</span>
     <span class="n">separate</span><span class="p">,</span>
-    <span class="n">to_ugrid</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pandamesh.mesher_base</span> <span class="kn">import</span> <span class="n">MesherBase</span>
+<span class="kn">from</span> <span class="nn">pandamesh.triangle_enums</span> <span class="kn">import</span> <span class="n">DelaunayAlgorithm</span>
 <span class="kn">from</span> <span class="nn">pandamesh.triangle_geometry</span> <span class="kn">import</span> <span class="n">collect_geometry</span><span class="p">,</span> <span class="n">polygon_holes</span>
 
 
-<div class="viewcode-block" id="DelaunayAlgorithm">
-<a class="viewcode-back" href="../../api/triangle.html#pandamesh.triangle_mesher.DelaunayAlgorithm">[docs]</a>
-<span class="k">class</span> <span class="nc">DelaunayAlgorithm</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-    <span class="n">DIVIDE_AND_CONQUER</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">INCREMENTAL</span> <span class="o">=</span> <span class="s2">&quot;i&quot;</span>
-    <span class="n">SWEEPLINE</span> <span class="o">=</span> <span class="s2">&quot;F&quot;</span></div>
-
-
-
 <div class="viewcode-block" id="TriangleMesher">
-<a class="viewcode-back" href="../../api/triangle.html#pandamesh.triangle_mesher.TriangleMesher">[docs]</a>
-<span class="k">class</span> <span class="nc">TriangleMesher</span><span class="p">:</span>
+<a class="viewcode-back" href="../../api/api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher">[docs]</a>
+<span class="k">class</span> <span class="nc">TriangleMesher</span><span class="p">(</span><span class="n">MesherBase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper for the python bindings to Triangle. This class must be initialized</span>
 <span class="sd">    with a geopandas GeoDataFrame containing at least one polygon, and a column</span>
 <span class="sd">    named ``&quot;cellsize&quot;``.</span>
 
 <span class="sd">    Optionally, multiple polygons with different cell sizes can be included in</span>
-<span class="sd">    the geodataframe. These can be used to achieve local mesh remfinement.</span>
+<span class="sd">    the geodataframe. These can be used to achieve local mesh refinement.</span>
 
 <span class="sd">    Linestrings and points may also be included. The segments of linestrings</span>
 <span class="sd">    will be directly forced into the triangulation. Points can also be forced</span>
@@ -405,7 +396,8 @@
 <span class="sd">    the geodataframe are checked:</span>
 
 <span class="sd">        * Polygons should not have any overlap with each other.</span>
-<span class="sd">        * Linestrings should not intersect each other.</span>
+<span class="sd">        * Linestrings should not intersect each other, unless the intersection</span>
+<span class="sd">          vertex is present in both.</span>
 <span class="sd">        * Every linestring should be fully contained by a single polygon;</span>
 <span class="sd">          a linestring may not intersect two or more polygons.</span>
 <span class="sd">        * Linestrings and points should not &quot;touch&quot; / be located on</span>
@@ -413,12 +405,15 @@
 <span class="sd">        * Holes in polygons are fully supported, but they must not contain</span>
 <span class="sd">          any linestrings or points.</span>
 
-<span class="sd">    If such cases are detected, the initialization will error.</span>
+<span class="sd">    If such cases are detected, the initialization will error: use the</span>
+<span class="sd">    :class:`pandamesh.Preprocessor` to clean up geometries beforehand.</span>
 
 <span class="sd">    For more details on Triangle, see:</span>
 <span class="sd">    https://www.cs.cmu.edu/~quake/triangle.defs.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="TriangleMesher.__init__">
+<a class="viewcode-back" href="../../api/api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">check_geodataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
         <span class="n">polygons</span><span class="p">,</span> <span class="n">linestrings</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">separate</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
@@ -433,7 +428,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">suppress_exact_arithmetic</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">maximum_steiner_points</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">delaunay_algorithm</span> <span class="o">=</span> <span class="n">DelaunayAlgorithm</span><span class="o">.</span><span class="n">DIVIDE_AND_CONQUER</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">consistency_check</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">consistency_check</span> <span class="o">=</span> <span class="kc">False</span></div>
+
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -506,14 +502,15 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">delaunay_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DelaunayAlgorithm</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        ``DelaunayAlgoritm.DIVIDE_AND_CONQUER``: Default algorithm.</span>
+<span class="sd">        Sets the Delaunay algorithm. Can be set to one of:</span>
+<span class="sd">        :py:class:`pandamesh.DelaunayAlgorithm`:</span>
 
-<span class="sd">        ``DelaunayAlgoritm.INCREMENTAL``: Uses the incremental algorithm for</span>
-<span class="sd">        Delaunay triangulation, rather than the divide-and-conquer algorithm.</span>
+<span class="sd">        .. code::</span>
 
-<span class="sd">        ``DelaunayAlgoritm.SWEEPLINE``: Uses Steven Fortune’s sweepline</span>
-<span class="sd">        algorithm for Delaunay triangulation, rather than the</span>
-<span class="sd">        divide-and-conquer algorithm.</span>
+<span class="sd">            DIVIDE_AND_CONQUER = &quot;&quot;</span>
+<span class="sd">            INCREMENTAL = &quot;i&quot;</span>
+<span class="sd">            SWEEPLINE = &quot;F&quot;</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delaunay_algorithm</span>
 
@@ -539,7 +536,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_consistency_check</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="TriangleMesher.generate">
-<a class="viewcode-back" href="../../api/triangle.html#pandamesh.triangle_mesher.TriangleMesher.generate">[docs]</a>
+<a class="viewcode-back" href="../../api/api/pandamesh.TriangleMesher.generate.html#pandamesh.TriangleMesher.generate">[docs]</a>
     <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">FloatArray</span><span class="p">,</span> <span class="n">IntArray</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate a mesh of triangles.</span>
@@ -568,12 +565,6 @@
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">triangle</span><span class="o">.</span><span class="n">triangulate</span><span class="p">(</span><span class="n">tri</span><span class="o">=</span><span class="n">tri</span><span class="p">,</span> <span class="n">opts</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;vertices&quot;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;triangles&quot;</span><span class="p">]</span></div>
-
-
-<div class="viewcode-block" id="TriangleMesher.generate_ugrid">
-<a class="viewcode-back" href="../../api/triangle.html#pandamesh.triangle_mesher.TriangleMesher.generate_ugrid">[docs]</a>
-    <span class="k">def</span> <span class="nf">generate_ugrid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;xugrid.Ugrid2d&quot;</span><span class="p">:</span>  <span class="c1"># type: ignore # noqa</span>
-        <span class="k">return</span> <span class="n">to_ugrid</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">())</span></div>
 </div>
 
 </pre></div>

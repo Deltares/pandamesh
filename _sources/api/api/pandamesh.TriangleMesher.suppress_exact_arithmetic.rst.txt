@@ -1,0 +1,6 @@
+﻿pandamesh.TriangleMesher.suppress\_exact\_arithmetic
+====================================================
+
+.. currentmodule:: pandamesh
+
+.. autoproperty:: TriangleMesher.suppress_exact_arithmetic

@@ -1,0 +1,6 @@
+﻿pandamesh.GmshMesher.clear\_fields
+==================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: GmshMesher.clear_fields

@@ -1,0 +1,6 @@
+﻿pandamesh.GmshMesher.subdivision\_algorithm
+===========================================
+
+.. currentmodule:: pandamesh
+
+.. autoproperty:: GmshMesher.subdivision_algorithm

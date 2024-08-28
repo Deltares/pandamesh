@@ -1,0 +1,6 @@
+﻿pandamesh.GmshMesher.recombine\_all
+===================================
+
+.. currentmodule:: pandamesh
+
+.. autoproperty:: GmshMesher.recombine_all

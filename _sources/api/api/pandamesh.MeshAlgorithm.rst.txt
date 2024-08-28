@@ -1,0 +1,8 @@
+﻿pandamesh.MeshAlgorithm
+=======================
+
+.. currentmodule:: pandamesh
+
+.. autoclass:: MeshAlgorithm
+   :members:
+   :member-order: bysource

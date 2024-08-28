@@ -1,0 +1,6 @@
+﻿pandamesh.TriangleMesher.generate\_ugrid
+========================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: TriangleMesher.generate_ugrid

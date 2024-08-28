@@ -103,13 +103,6 @@ in the appropriate manner for Gmsh.
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-
 
 
 
@@ -146,15 +139,6 @@ and whistles for defining cellsizes.
    :srcset: /examples/images/sphx_glr_gmsh-basic_002.png
    :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
 
 
@@ -193,7 +177,7 @@ The GmshMesher class is initialized with a number of default parameters:
         fields = Empty GeoDataFrame
     Columns: []
     Index: []
-        tmpdir = <TemporaryDirectory '/tmp/tmpjb599wrs'>
+        tmpdir = <TemporaryDirectory '/tmp/tmp0zomnwa4'>
         recombine_all = False
         mesh_size_extend_from_boundary = True
         mesh_size_from_points = True
@@ -260,8 +244,6 @@ We can force points and lines into the triangulation:
 
  .. code-block:: none
 
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
     <Axes: >
 
@@ -297,13 +279,6 @@ this by changing a parameter on the mesher:
    :srcset: /examples/images/sphx_glr_gmsh-basic_004.png
    :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /home/runner/work/pandamesh/pandamesh/pandamesh/common.py:82: FutureWarning: RangeIndex.is_integer is deprecated. Use pandas.api.types.is_integer_dtype instead.
-      if not features.index.is_integer():
 
 
 
@@ -345,7 +320,7 @@ polygons.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.364 seconds)
+   **Total running time of the script:** (0 minutes 0.355 seconds)
 
 
 .. _sphx_glr_download_examples_gmsh-basic.py:

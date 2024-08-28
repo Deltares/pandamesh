@@ -1,0 +1,6 @@
+﻿pandamesh.GmshMesher.general\_verbosity
+=======================================
+
+.. currentmodule:: pandamesh
+
+.. autoproperty:: GmshMesher.general_verbosity

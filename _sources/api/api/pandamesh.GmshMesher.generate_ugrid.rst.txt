@@ -1,0 +1,6 @@
+﻿pandamesh.GmshMesher.generate\_ugrid
+====================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: GmshMesher.generate_ugrid

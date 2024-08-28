@@ -1,0 +1,6 @@
+﻿pandamesh.Preprocessor.snap\_points
+===================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: Preprocessor.snap_points

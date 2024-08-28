@@ -1,0 +1,6 @@
+﻿pandamesh.GmshMesher.mesh\_size\_from\_points
+=============================================
+
+.. currentmodule:: pandamesh
+
+.. autoproperty:: GmshMesher.mesh_size_from_points

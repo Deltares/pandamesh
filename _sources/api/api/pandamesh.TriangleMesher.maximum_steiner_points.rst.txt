@@ -1,0 +1,6 @@
+﻿pandamesh.TriangleMesher.maximum\_steiner\_points
+=================================================
+
+.. currentmodule:: pandamesh
+
+.. autoproperty:: TriangleMesher.maximum_steiner_points
