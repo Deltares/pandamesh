@@ -89,10 +89,11 @@ def polygon_holes(
             a=interiors,
             a_index=index_interior,
             b=polygons.geometry,
-            b_index=index_interior,
+            b_index=index_inside,
         ):
-            true_holes = shapely.difference(interior, polygons_inside)
-            if shapely.is_empty(true_holes):
+            all_polygons = shapely.unary_union(polygons_inside)
+            true_holes = shapely.difference(interior, all_polygons)
+            if shapely.is_empty(true_holes).all():
                 continue
             hole_points = gpd.GeoSeries(true_holes).representative_point()
             points.append(hole_points)

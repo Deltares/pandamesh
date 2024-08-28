@@ -175,6 +175,7 @@ class Preprocessor:
         values=None,
         grid_size=None,
     ):
+        geometry = np.asarray(geometry)
         self.polygons, self.lines, self.points = separate(geometry)
         if values is not None:
             values = np.asarray(values)
@@ -194,7 +195,7 @@ class Preprocessor:
         n_lines = len(self.lines)
         n_point = len(self.points)
         if self.values is not None:
-            _, indexer = np.unique(self.values, return_inverse=True)
+            self.values, indexer = np.unique(self.values, return_inverse=True)
             self.polygon_indexer, self.line_indexer, self.point_indexer = np.split(
                 indexer, [n_polys, n_polys + n_lines]
             )
@@ -293,9 +294,7 @@ class Preprocessor:
             merged.extend(merged_geometry)
             merged_index.extend([value] * len(merged_geometry))
 
-        return self._copy_with(
-            polygons=merged, polygon_indexer=self.polygon_indexer[merged_index]
-        )
+        return self._copy_with(polygons=merged, polygon_indexer=merged_index)
 
     def unify_polygons(self, first: bool = True) -> "Preprocessor":
         """
@@ -466,7 +465,7 @@ class Preprocessor:
             lines=lines_union, line_indexer=self.line_indexer[index_original]
         )
 
-    def clip_points(self, distance: Optional[float] = None) -> "Preprocessor":
+    def clip_points(self, distance: float = 0.0) -> "Preprocessor":
         """
         Remove points that are outside of a polygon or near line or
         polygon segments.
