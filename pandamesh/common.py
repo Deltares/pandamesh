@@ -228,7 +228,17 @@ def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type
 
 
 def to_geodataframe(vertices: FloatArray, faces: IntArray) -> gpd.GeoDataFrame:
-    return gpd.GeoDataFrame(geometry=shapely.polygons(vertices[faces]))
+    n_face, n_vertex = faces.shape
+    if n_vertex == 3:  # no fill values
+        coordinates = vertices[faces]
+        geometry = shapely.polygons(coordinates)
+    else:  # Possible fill values (-1)
+        valid = faces >= 0
+        n_valid = valid.sum(axis=1)
+        indices = np.repeat(np.arange(n_face), n_valid)
+        coordinates = vertices[faces[valid]]
+        geometry = shapely.polygons(coordinates, indices=indices)
+    return gpd.GeoDataFrame(geometry=geometry)
 
 
 class Grouper:
