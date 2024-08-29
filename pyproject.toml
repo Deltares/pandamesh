@@ -15,6 +15,7 @@ dependencies = [
     'pooch',
     'triangle',
     'shapely >= 2.0',
+    'scipy',
 ]
 classifiers = [
     'Development Status :: 3 - Alpha',
@@ -81,6 +82,7 @@ pydata-sphinx-theme = "*"
 py-triangle = "*"
 pytest = "*"
 pytest-cov = "*"
+scipy = "*"
 shapely = ">=2.0"
 sphinx = "*"
 sphinx-gallery = "*"
@@ -132,7 +134,6 @@ ignore = [
     "PD003",
     "PD004",
 ]
-fixable = ["I"]
 ignore-init-module-imports = true
 
 [tool.ruff.lint.pydocstyle]
