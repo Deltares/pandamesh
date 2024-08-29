@@ -357,7 +357,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for pandamesh.preprocessor</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -368,7 +368,6 @@
 <span class="kn">from</span> <span class="nn">pandamesh.common</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">BoolArray</span><span class="p">,</span>
     <span class="n">GeometryArray</span><span class="p">,</span>
-    <span class="n">Grouper</span><span class="p">,</span>
     <span class="n">IntArray</span><span class="p">,</span>
     <span class="n">flatten_geometries</span><span class="p">,</span>
     <span class="n">flatten_geometry</span><span class="p">,</span>
@@ -417,9 +416,13 @@
     <span class="n">indexer</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
     <span class="n">ascending</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">GeometryArray</span><span class="p">,</span> <span class="n">IntArray</span><span class="p">]:</span>
+    <span class="c1"># new is the partioned unary union of old. Every linear ring will be a</span>
+    <span class="c1"># polygon, this includes holes. Grab a point inside of new, then find out</span>
+    <span class="c1"># where they are located (in which polygon) or even outside (in a hole).</span>
     <span class="n">sampling_points</span> <span class="o">=</span> <span class="p">[</span><span class="n">polygon</span><span class="o">.</span><span class="n">representative_point</span><span class="p">()</span> <span class="k">for</span> <span class="n">polygon</span> <span class="ow">in</span> <span class="n">new</span><span class="p">]</span>
     <span class="n">tree</span> <span class="o">=</span> <span class="n">STRtree</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
     <span class="n">index_union</span><span class="p">,</span> <span class="n">index_original</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">sampling_points</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
+    <span class="c1"># In case of overlaps, there are multiple answers for each union polygon.</span>
     <span class="n">new_polygons</span><span class="p">,</span> <span class="n">new_indexer</span> <span class="o">=</span> <span class="n">filter_holes_and_assign_values</span><span class="p">(</span>
         <span class="n">polygons</span><span class="o">=</span><span class="n">new</span><span class="p">,</span>
         <span class="n">index_original</span><span class="o">=</span><span class="n">index_original</span><span class="p">,</span>
@@ -441,26 +444,7 @@
     <span class="k">return</span> <span class="n">indexer</span><span class="p">[</span><span class="n">index_old</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">intersect_lines_with_polygons</span><span class="p">(</span>
-    <span class="n">polygons</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
-    <span class="n">lines</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
-    <span class="n">polygon_index</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
-    <span class="n">line_index</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
-    <span class="n">grid_size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
-    <span class="n">new_lines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">line</span><span class="p">,</span> <span class="n">group_polygons</span> <span class="ow">in</span> <span class="n">Grouper</span><span class="p">(</span>
-        <span class="n">a</span><span class="o">=</span><span class="n">lines</span><span class="p">,</span> <span class="n">a_index</span><span class="o">=</span><span class="n">line_index</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">polygons</span><span class="p">,</span> <span class="n">b_index</span><span class="o">=</span><span class="n">polygon_index</span>
-    <span class="p">):</span>
-        <span class="n">new_lines</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
-            <span class="n">flatten_geometries</span><span class="p">(</span>
-                <span class="n">shapely</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">group_polygons</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="n">grid_size</span><span class="p">)</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">new_lines</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">merge_polygons</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">merge_polygons</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
     <span class="n">merged</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">unary_union</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="n">grid_size</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">flatten_geometry</span><span class="p">(</span><span class="n">merged</span><span class="p">))</span>
 
@@ -472,7 +456,7 @@
     <span class="n">acceptable</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="s2">&quot;LineString&quot;</span><span class="p">,</span> <span class="s2">&quot;LinearRing&quot;</span><span class="p">,</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">}</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">type_id</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Geometry should be one of </span><span class="si">{</span><span class="n">acceptable</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Geometry should be one of </span><span class="si">{</span><span class="n">acceptable</span><span class="si">}</span><span class="s2">. &quot;</span>
             <span class="s2">&quot;Call geopandas.GeoDataFrame.explode() to explode multi-part &quot;</span>
             <span class="s2">&quot;geometries into multiple single geometries.&quot;</span>
         <span class="p">)</span>
@@ -545,7 +529,7 @@
             <span class="n">v_shape</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">shape</span>
             <span class="n">g_shape</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">shape</span>
             <span class="k">if</span> <span class="n">v_shape</span> <span class="o">!=</span> <span class="n">g_shape</span><span class="p">:</span>
-                <span class="k">return</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="sa">f</span><span class="s2">&quot;geometry and values shape mismatch: </span><span class="si">{</span><span class="n">g_shape</span><span class="si">}</span><span class="s2"> versus &quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v_shape</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
@@ -910,6 +894,8 @@
 <span class="sd">        -------</span>
 <span class="sd">        processed: pandamesh.Preprocessor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">values_as_distance</span><span class="p">:</span>
             <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">line_indexer</span><span class="p">]</span>
