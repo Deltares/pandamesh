@@ -48,7 +48,8 @@ def add_polygons(
     regions[:, 1] = region_points.y
     regions[:, 2] = np.arange(n_region)
     cellsize = polygons[is_region]["cellsize"].to_numpy()
-    regions[:, 3] = 0.5 * cellsize * cellsize
+    # Assume equilateral triangles for cell size to area conversion.
+    regions[:, 3] = 0.25 * np.sqrt(3) * cellsize * cellsize
 
     boundary = polygons.boundary.explode(index_parts=True).geometry
     vertices, segments = add_linestrings(boundary)
