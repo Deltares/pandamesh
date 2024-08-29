@@ -21,7 +21,7 @@ class MesherBase(abc.ABC):
         """
         return to_geodataframe(*self.generate())
 
-    def generate_ugrid(self) -> "xugrid.Ugrid2d":  # type: ignore # noqa
+    def generate_ugrid(self) -> "xugrid.Ugrid2d":  # type: ignore # noqa  pragma: no cover
         """
         Generate a mesh and return it as an xugrid Ugrid2d.
 

@@ -1,4 +1,4 @@
-from typing import Any, List, Optional, Tuple
+from typing import Optional, Tuple
 
 import geopandas as gpd
 import numpy as np
@@ -9,7 +9,6 @@ from shapely import STRtree
 from pandamesh.common import (
     BoolArray,
     GeometryArray,
-    Grouper,
     IntArray,
     flatten_geometries,
     flatten_geometry,
@@ -58,9 +57,13 @@ def locate_polygons(
     indexer: IntArray,
     ascending: bool,
 ) -> Tuple[GeometryArray, IntArray]:
+    # new is the partioned unary union of old. Every linear ring will be a
+    # polygon, this includes holes. Grab a point inside of new, then find out
+    # where they are located (in which polygon) or even outside (in a hole).
     sampling_points = [polygon.representative_point() for polygon in new]
     tree = STRtree(old)
     index_union, index_original = tree.query(sampling_points, predicate="within")
+    # In case of overlaps, there are multiple answers for each union polygon.
     new_polygons, new_indexer = filter_holes_and_assign_values(
         polygons=new,
         index_original=index_original,
@@ -82,26 +85,7 @@ def locate_lines(
     return indexer[index_old]
 
 
-def intersect_lines_with_polygons(
-    polygons: GeometryArray,
-    lines: GeometryArray,
-    polygon_index: IntArray,
-    line_index: IntArray,
-    grid_size: float,
-) -> GeometryArray:
-    new_lines: List[Any] = []
-    for line, group_polygons in Grouper(
-        a=lines, a_index=line_index, b=polygons, b_index=polygon_index
-    ):
-        new_lines.extend(
-            flatten_geometries(
-                shapely.intersection(line, group_polygons, grid_size=grid_size)
-            )
-        )
-    return np.asarray(new_lines)
-
-
-def merge_polygons(geometry: GeometryArray, grid_size=None) -> GeometryArray:
+def merge_polygons(geometry: GeometryArray, grid_size) -> GeometryArray:
     merged = shapely.unary_union(geometry, grid_size=grid_size)
     return np.asarray(flatten_geometry(merged))
 
@@ -113,7 +97,7 @@ def separate(
     acceptable = {"Point", "LineString", "LinearRing", "Polygon"}
     if not np.isin(type_id, (0, 1, 2, 3)).all():
         raise TypeError(
-            f"Geometry should be one of {acceptable}."
+            f"Geometry should be one of {acceptable}. "
             "Call geopandas.GeoDataFrame.explode() to explode multi-part "
             "geometries into multiple single geometries."
         )
@@ -182,7 +166,7 @@ class Preprocessor:
             v_shape = values.shape
             g_shape = geometry.shape
             if v_shape != g_shape:
-                return ValueError(
+                raise ValueError(
                     f"geometry and values shape mismatch: {g_shape} versus "
                     f"{v_shape}"
                 )
@@ -526,6 +510,8 @@ class Preprocessor:
         -------
         processed: pandamesh.Preprocessor
         """
+        if len(self.lines) == 0:
+            return self._copy_with()
 
         if values_as_distance:
             distance = self.values[self.line_indexer]

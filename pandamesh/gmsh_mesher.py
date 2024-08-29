@@ -506,4 +506,4 @@ class GmshMesher(MesherBase):
         ----------
         path: Union[str, pathlib.Path
         """
-        gmsh.write(path)
+        gmsh.write(str(path))

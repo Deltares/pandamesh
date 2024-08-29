@@ -25526,26 +25526,7 @@ packages:
   name: pandamesh
   version: 0.1.6
   path: .
-  sha256: ace1d1f54061bac53abd08126661c45158c6474799a2c9ff0d82e0edb4978473
-  requires_dist:
-  - geopandas
-  - pooch
-  - scipy
-  - shapely>=2.0
-  - triangle
-  - geopandas ; extra == 'all'
-  - gmsh ; extra == 'all'
-  - matplotlib ; extra == 'all'
-  - pooch ; extra == 'all'
-  - shapely>=2.0 ; extra == 'all'
-  - triangle ; extra == 'all'
-  requires_python: '>=3.9'
-  editable: true
-- kind: pypi
-  name: pandamesh
-  version: 0.1.6
-  path: .
-  sha256: ace1d1f54061bac53abd08126661c45158c6474799a2c9ff0d82e0edb4978473
+  sha256: f988582ac65dfe97e56638cb13427fe6a3e2c3e75d0944de88965b7fe555f6f3
   requires_dist:
   - geopandas
   - pooch

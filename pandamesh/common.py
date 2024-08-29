@@ -12,7 +12,7 @@ import shapely
 from pandas.api.types import is_integer_dtype
 
 
-class MaybeGmsh:
+class MaybeGmsh:  # pragma: no cover
     """Gmsh is an optional dependency."""
 
     def __init__(self):
@@ -200,7 +200,11 @@ def separate(
     geom_type = gdf.geom_type
     acceptable = ["Polygon", "LineString", "Point"]
     if not geom_type.isin(acceptable).all():
-        raise TypeError(f"Geometry should be one of {acceptable}")
+        raise TypeError(
+            f"Geometry should be one of {acceptable}. "
+            "Call geopandas.GeoDataFrame.explode() to explode multi-part "
+            "geometries into multiple single geometries."
+        )
 
     polygons = gdf.loc[geom_type == "Polygon"].copy()
     linestrings = gdf.loc[geom_type == "LineString"].copy()
@@ -217,7 +221,7 @@ def separate(
     return polygons, linestrings, points
 
 
-def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type: ignore # noqa
+def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type: ignore # noqa pragma: no cover
     try:
         import xugrid
     except ImportError:
@@ -233,11 +237,18 @@ def to_geodataframe(vertices: FloatArray, faces: IntArray) -> gpd.GeoDataFrame:
         coordinates = vertices[faces]
         geometry = shapely.polygons(coordinates)
     else:  # Possible fill values (-1)
+        # Group them by number of vertices.
         valid = faces >= 0
         n_valid = valid.sum(axis=1)
-        indices = np.repeat(np.arange(n_face), n_valid)
-        coordinates = vertices[faces[valid]]
-        geometry = shapely.polygons(coordinates, indices=indices)
+        grouped_by_n_vertex = pd.DataFrame(
+            {"i": np.arange(n_face), "n": n_valid}
+        ).groupby("n")
+        geometries = []
+        for n_vertex, group in grouped_by_n_vertex:
+            group_faces = faces[group["i"], :n_vertex]
+            group_coordinates = vertices[group_faces]
+            geometries.append(shapely.polygons(group_coordinates))
+        geometry = np.concatenate(geometries)
     return gpd.GeoDataFrame(geometry=geometry)
 
 

@@ -60,6 +60,7 @@ profile = "black"
 [tool.coverage.report]
 exclude_lines = [
   "pragma: no cover",
+   "@abc.abstractmethod",
 ]
 
 [tool.pixi.project]
@@ -133,6 +134,7 @@ ignore = [
     "PD901",
     "PD003",
     "PD004",
+    "PD011",
 ]
 ignore-init-module-imports = true
 

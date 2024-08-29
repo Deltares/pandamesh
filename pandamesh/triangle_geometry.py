@@ -96,7 +96,7 @@ def polygon_holes(
             true_holes = shapely.difference(interior, all_polygons)
             if shapely.is_empty(true_holes).all():
                 continue
-            hole_points = gpd.GeoSeries(true_holes).representative_point()
+            hole_points = gpd.GeoSeries(true_holes).explode().representative_point()
             points.append(hole_points)
 
     points = gpd.GeoSeries(np.concatenate(points))
