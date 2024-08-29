@@ -7,10 +7,10 @@ from scipy.spatial import KDTree
 from pandamesh.common import FloatArray, IntArray
 
 try:
-    from numba import njit
+    from numba import njit  # pragma: no cover
 except ImportError:
 
-    def njit(*args, **kwargs):
+    def njit(*args, **kwargs):  # pragma: no cover
         # Dummy decorator when numba is not available.
         def decorator(func):
             return func

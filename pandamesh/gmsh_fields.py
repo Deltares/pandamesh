@@ -41,7 +41,7 @@ def write_structured_field_file(
         Writes a structured gmsh field file.
     """
     shape = cellsize.shape
-    if cellsize.ndim() != 2:
+    if cellsize.ndim != 2:
         raise ValueError(f"`cellsize` must be 2D. Received an array of shape: {shape}")
     nrow, ncol = shape
     # Flip values around if dx or dy is negative.
