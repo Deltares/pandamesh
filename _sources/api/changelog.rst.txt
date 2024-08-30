@@ -36,6 +36,11 @@ Changed
 - :class:`pandamesh.TriangleMesher` does a cell size to area conversion. This
   previously assumed right-angled triangles. This has been changed to assume
   equilateral triangles instead. This may result in slightly smaller triangles.
+- Mesher properties set with :class:`pandamesh.DelaunayAlgorithm`,
+  :class:`pandamesh.FieldCombination`, :class:`pandamesh.GeneralVerbosity`,
+  :class:`pandamesh.GmshMesher`, :class:`pandamesh.MeshAlgorithm`, or
+  :class:`pandamesh.SubdivisionAlgorithm` will now accept one of these enums,
+  or the enum member name as a string.
 
 [0.1.6] 2024-07-17
 ------------------
