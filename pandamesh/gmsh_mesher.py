@@ -11,6 +11,7 @@ import pandas as pd
 from pandamesh.common import (
     FloatArray,
     IntArray,
+    central_origin,
     check_geodataframe,
     gmsh,
     repr,
@@ -93,7 +94,13 @@ class GmshMesher(MesherBase):
     Parameters
     ----------
     gdf: gpd.GeoDataFrame
-        GeoDataFrame containing the vector geometry.
+        GeoDataFrame containing the vector geometry. Must contain a "cellsize"
+        column.
+    shift_origin: bool, optional, default is True.
+        If True, temporarily shifts the coordinate system origin to the centroid
+        of the geometry's bounding box during mesh generation. This helps mitigate
+        floating-point precision issues. The resulting mesh vertices are
+        automatically translated back to the original coordinate system.
     read_config_files: bool
         Gmsh initialization option: Read system Gmsh configuration files
         (gmshrc and gmsh-options).
@@ -104,14 +111,15 @@ class GmshMesher(MesherBase):
     def __init__(
         self,
         gdf: gpd.GeoDataFrame,
+        shift_origin: bool = True,
         read_config_files: bool = True,
-        run: bool = False,
         interruptible: bool = True,
     ) -> None:
         self._initialize_gmsh(
             read_config_files=read_config_files, interruptible=interruptible
         )
         check_geodataframe(gdf)
+        gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
         polygons, linestrings, points = separate(gdf)
 
         # Include geometry into gmsh
@@ -443,7 +451,10 @@ class GmshMesher(MesherBase):
         # getNodes returns: node_tags, coord, parametric_coord
         _, vertices, _ = gmsh.model.mesh.getNodes()
         # Return x and y
-        return vertices.reshape((-1, 3))[:, :2]
+        vertices = vertices.reshape((-1, 3))[:, :2]
+        vertices[:, 0] += self._xoff
+        vertices[:, 1] += self._yoff
+        return np.ascontiguousarray(vertices)
 
     def _faces(self):
         element_types, _, node_tags = gmsh.model.mesh.getElements()

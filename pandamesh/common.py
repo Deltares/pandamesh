@@ -212,6 +212,20 @@ def separate(
     return polygons, linestrings, points
 
 
+def central_origin(
+    gdf: gpd.GeoDataFrame, shift_origin: bool
+) -> Tuple[gpd.GeoDataFrame, float, float]:
+    if shift_origin:
+        xmin, ymin, xmax, ymax = gdf.total_bounds
+        xoff = 0.5 * (xmin + xmax)
+        yoff = 0.5 * (ymin + ymax)
+        moved = gdf.copy()
+        moved["geometry"] = gdf["geometry"].translate(xoff=-xoff, yoff=-yoff)
+        return moved, xoff, yoff
+    else:
+        return gdf, 0.0, 0.0
+
+
 def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type: ignore # noqa pragma: no cover
     try:
         import xugrid

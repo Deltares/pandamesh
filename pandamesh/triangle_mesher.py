@@ -6,6 +6,7 @@ import triangle
 from pandamesh.common import (
     FloatArray,
     IntArray,
+    central_origin,
     check_geodataframe,
     repr,
     separate,
@@ -48,10 +49,22 @@ class TriangleMesher(MesherBase):
 
     For more details on Triangle, see:
     https://www.cs.cmu.edu/~quake/triangle.defs.html
+
+    Parameters
+    ----------
+    gdf: gpd.GeoDataFrame
+        GeoDataFrame containing the vector geometry. Must contain a "cellsize"
+        column.
+    shift_origin: bool, optional, default is True.
+        If True, temporarily shifts the coordinate system origin to the centroid
+        of the geometry's bounding box during mesh generation. This helps mitigate
+        floating-point precision issues. The resulting mesh vertices are
+        automatically translated back to the original coordinate system.
     """
 
-    def __init__(self, gdf: gpd.GeoDataFrame) -> None:
+    def __init__(self, gdf: gpd.GeoDataFrame, shift_origin: bool = True) -> None:
         check_geodataframe(gdf)
+        gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
         polygons, linestrings, points = separate(gdf)
         self.vertices, self.segments, self.regions = collect_geometry(
             polygons, linestrings, points
@@ -196,4 +209,7 @@ class TriangleMesher(MesherBase):
             tri["regions"] = self.regions
 
         result = triangle.triangulate(tri=tri, opts=options)
-        return result["vertices"], result["triangles"]
+        vertices = result["vertices"]
+        vertices[:, 0] += self._xoff
+        vertices[:, 1] += self._yoff
+        return vertices, result["triangles"]
