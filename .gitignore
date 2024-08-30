@@ -26,3 +26,6 @@ dist/*
 coverage.xml
 
 sg_execution_times.rst
+docs/api/api/*
+
+__pycache__

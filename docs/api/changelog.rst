@@ -6,6 +6,42 @@ All notable changes to this project will be documented in this file.
 The format is based on `Keep a Changelog`_, and this project adheres to
 `Semantic Versioning`_.
 
+Unreleased
+----------
+
+Fixed
+~~~~~
+
+- Previously, :class:`pandamesh.TriangleMesher` would not respect specified
+  cell sizes in areas that are fully bounded by linestrings (rather than
+  polygons), e.g. three separate lines forming a triangular zone. The reason is
+  that Triangle identifies such a zone as a separate region, and the point
+  specifying the maximum area is isolated. This has been fixed by checking
+  whether linestrings form any coincendental polygons, and including these
+  polygons are separate zones.
+
+Added
+~~~~~
+
+- :meth:`pandamesh.TriangleMesher.to_geodataframe()` and
+- :meth:`pandamesh.GmshMesher.to_geodataframe()` have been added to return
+  generated meshes as geodataframes.
+- Added :attr:`pandamesh.MeshAlgorithm.QUASI_STRUCTURED_QUAD` as an option.
+- Added :class:`pandamesh.Preprocessor` to assist in preparing and cleaning
+  geospatial data prior to meshing.
+
+Changed
+~~~~~~~
+
+- :class:`pandamesh.TriangleMesher` does a cell size to area conversion. This
+  previously assumed right-angled triangles. This has been changed to assume
+  equilateral triangles instead. This may result in slightly smaller triangles.
+- Mesher properties set with :class:`pandamesh.DelaunayAlgorithm`,
+  :class:`pandamesh.FieldCombination`, :class:`pandamesh.GeneralVerbosity`,
+  :class:`pandamesh.GmshMesher`, :class:`pandamesh.MeshAlgorithm`, or
+  :class:`pandamesh.SubdivisionAlgorithm` will now accept one of these enums,
+  or the enum member name as a string.
+
 [0.1.6] 2024-07-17
 ------------------
 

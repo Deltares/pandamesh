@@ -12,7 +12,23 @@ inner = sg.LinearRing(inner_coords)
 outer = sg.LinearRing(outer_coords)
 line = sg.LineString(line_coords)
 donut = sg.Polygon(outer, holes=[inner])
-refined = sg.Polygon(inner_coords)
+
+other_inner_coords = np.array([(3.0, 4.0), (7.0, 4.0), (7.0, 6.0), (3.0, 6.0)])
+other_inner = sg.Polygon(other_inner_coords)
+other_hole_coords = np.array(
+    [
+        (7.0, 3.0),
+        (7.0, 4.0),
+        (7.0, 6.0),
+        (7.0, 7.0),
+        (3.0, 7.0),
+        (3.0, 6.0),
+        (3.0, 4.0),
+        (3.0, 3.0),
+    ]
+)
+other_hole = sg.LinearRing(other_hole_coords)
+other_donut = sg.Polygon(outer, holes=[other_hole])
 
 
 def area(vertices, triangles):
@@ -37,6 +53,13 @@ def gmsh_generate(gdf: gpd.GeoDataFrame):
 
 
 @pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
+def test_empty(generate):
+    gdf = gpd.GeoDataFrame(geometry=[line], data={"cellsize": [1.0]})
+    with pytest.raises(ValueError, match="No polygons provided"):
+        generate(gdf)
+
+
+@pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
 def test_basic(generate):
     polygon = sg.Polygon(outer)
     gdf = gpd.GeoDataFrame(geometry=[polygon])
@@ -53,6 +76,15 @@ def test_hole(generate):
     vertices, triangles = generate(gdf)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, donut.area)
+
+
+@pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
+def test_partial_hole(generate):
+    gdf = gpd.GeoDataFrame(geometry=[other_donut, other_inner])
+    gdf["cellsize"] = 1.0
+    vertices, triangles = generate(gdf)
+    mesh_area = area(vertices, triangles).sum()
+    assert np.allclose(mesh_area, other_donut.area + other_inner.area)
 
 
 @pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
@@ -115,6 +147,21 @@ def test_triangle_properties():
     # Check whether the repr method works
     assert isinstance(mesher.__repr__(), str)
 
+    with pytest.raises(TypeError):
+        mesher.conforming_delaunay = "a"
+
+    with pytest.raises(TypeError):
+        mesher.suppress_exact_arithmetic = "a"
+
+    with pytest.raises(TypeError):
+        mesher.maximum_steiner_points = "a"
+
+    with pytest.raises(ValueError):
+        mesher.delaunay_algorithm = "a"
+
+    with pytest.raises(TypeError):
+        mesher.consistency_check = "a"
+
 
 def test_gmsh_properties():
     gdf = gpd.GeoDataFrame(geometry=[donut])
@@ -140,6 +187,42 @@ def test_gmsh_properties():
     assert mesher.field_combination == pm.FieldCombination.MEAN
     assert mesher.subdivision_algorithm == pm.SubdivisionAlgorithm.BARYCENTRIC
 
+    with pytest.raises(ValueError):
+        mesher.mesh_algorithm = "a"
+
+    with pytest.raises(TypeError):
+        mesher.recombine_all = "a"
+
+    with pytest.raises(TypeError):
+        mesher.force_geometry = "a"
+
+    with pytest.raises(TypeError):
+        mesher.mesh_size_extend_from_boundary = "a"
+
+    with pytest.raises(TypeError):
+        mesher.mesh_size_from_points = "a"
+
+    with pytest.raises(TypeError):
+        mesher.mesh_size_from_curvature = "a"
+
+    with pytest.raises(ValueError):
+        mesher.field_combination = "a"
+
+    with pytest.raises(ValueError):
+        mesher.subdivision_algorithm = "a"
+
+    with pytest.raises(ValueError):
+        mesher.general_verbosity = "a"
+
+
+def test_gmsh_write(tmp_path):
+    gdf = gpd.GeoDataFrame(geometry=[donut])
+    gdf["cellsize"] = 1.0
+    mesher = pm.GmshMesher(gdf)
+    path = tmp_path / "a.msh"
+    mesher.write(path)
+    assert path.exists()
+
 
 @pytest.mark.parametrize("read_config_files", [True, False])
 @pytest.mark.parametrize("interruptible", [True, False])
@@ -152,3 +235,23 @@ def test_gmsh_initialization_kwargs(read_config_files, interruptible):
     vertices, triangles = mesher.generate()
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, donut.area)
+
+
+def test_generate_geodataframe():
+    gdf = gpd.GeoDataFrame(geometry=[donut])
+    gdf["cellsize"] = 1.0
+
+    result = pm.TriangleMesher(gdf).generate_geodataframe()
+    assert isinstance(result, gpd.GeoDataFrame)
+    assert np.allclose(result.area.sum(), donut.area)
+
+    mesher = pm.GmshMesher(gdf)
+    result = mesher.generate_geodataframe()
+    assert isinstance(result, gpd.GeoDataFrame)
+    assert np.allclose(result.area.sum(), donut.area)
+
+    # Make sure the geodataframe logic can deal with quads as well.
+    mesher.recombine_all = True
+    result = mesher.generate_geodataframe()
+    assert isinstance(result, gpd.GeoDataFrame)
+    assert np.allclose(result.area.sum(), donut.area)

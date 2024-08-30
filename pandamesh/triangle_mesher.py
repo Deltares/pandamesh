@@ -1,4 +1,3 @@
-from enum import Enum
 from typing import Tuple, Union
 
 import geopandas as gpd
@@ -8,28 +7,22 @@ from pandamesh.common import (
     FloatArray,
     IntArray,
     check_geodataframe,
-    invalid_option,
     repr,
     separate,
-    to_ugrid,
 )
+from pandamesh.mesher_base import MesherBase
+from pandamesh.triangle_enums import DelaunayAlgorithm
 from pandamesh.triangle_geometry import collect_geometry, polygon_holes
 
 
-class DelaunayAlgorithm(Enum):
-    DIVIDE_AND_CONQUER = ""
-    INCREMENTAL = "i"
-    SWEEPLINE = "F"
-
-
-class TriangleMesher:
+class TriangleMesher(MesherBase):
     """
     Wrapper for the python bindings to Triangle. This class must be initialized
     with a geopandas GeoDataFrame containing at least one polygon, and a column
     named ``"cellsize"``.
 
     Optionally, multiple polygons with different cell sizes can be included in
-    the geodataframe. These can be used to achieve local mesh remfinement.
+    the geodataframe. These can be used to achieve local mesh refinement.
 
     Linestrings and points may also be included. The segments of linestrings
     will be directly forced into the triangulation. Points can also be forced
@@ -41,7 +34,8 @@ class TriangleMesher:
     the geodataframe are checked:
 
         * Polygons should not have any overlap with each other.
-        * Linestrings should not intersect each other.
+        * Linestrings should not intersect each other, unless the intersection
+          vertex is present in both.
         * Every linestring should be fully contained by a single polygon;
           a linestring may not intersect two or more polygons.
         * Linestrings and points should not "touch" / be located on
@@ -49,7 +43,8 @@ class TriangleMesher:
         * Holes in polygons are fully supported, but they must not contain
           any linestrings or points.
 
-    If such cases are detected, the initialization will error.
+    If such cases are detected, the initialization will error: use the
+    :class:`pandamesh.Preprocessor` to clean up geometries beforehand.
 
     For more details on Triangle, see:
     https://www.cs.cmu.edu/~quake/triangle.defs.html
@@ -142,21 +137,21 @@ class TriangleMesher:
     @property
     def delaunay_algorithm(self) -> DelaunayAlgorithm:
         """
-        ``DelaunayAlgoritm.DIVIDE_AND_CONQUER``: Default algorithm.
+        Sets the Delaunay algorithm. Can be set to one of:
+        :py:class:`pandamesh.DelaunayAlgorithm`:
 
-        ``DelaunayAlgoritm.INCREMENTAL``: Uses the incremental algorithm for
-        Delaunay triangulation, rather than the divide-and-conquer algorithm.
+        .. code::
 
-        ``DelaunayAlgoritm.SWEEPLINE``: Uses Steven Fortune’s sweepline
-        algorithm for Delaunay triangulation, rather than the
-        divide-and-conquer algorithm.
+            DIVIDE_AND_CONQUER = ""
+            INCREMENTAL = "i"
+            SWEEPLINE = "F"
+
         """
         return self._delaunay_algorithm
 
     @delaunay_algorithm.setter
-    def delaunay_algorithm(self, value: DelaunayAlgorithm):
-        if value not in DelaunayAlgorithm:
-            raise ValueError(invalid_option(value, DelaunayAlgorithm))
+    def delaunay_algorithm(self, value: Union[DelaunayAlgorithm, str]):
+        value = DelaunayAlgorithm.from_value(value)
         self._delaunay_algorithm = value
 
     @property
@@ -202,6 +197,3 @@ class TriangleMesher:
 
         result = triangle.triangulate(tri=tri, opts=options)
         return result["vertices"], result["triangles"]
-
-    def generate_ugrid(self) -> "xugrid.Ugrid2d":  # type: ignore # noqa
-        return to_ugrid(*self.generate())

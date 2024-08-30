@@ -2,15 +2,16 @@ from __future__ import annotations
 
 import functools
 import operator
-from enum import Enum, IntEnum
-from itertools import combinations
 from typing import Any, Sequence, Tuple
 
 import geopandas as gpd
 import numpy as np
+import pandas as pd
+import shapely
+from pandas.api.types import is_integer_dtype
 
 
-class MaybeGmsh:
+class MaybeGmsh:  # pragma: no cover
     """Gmsh is an optional dependency."""
 
     def __init__(self):
@@ -39,8 +40,10 @@ class MaybeGmsh:
 
 
 gmsh = MaybeGmsh()
+BoolArray = np.ndarray
 IntArray = np.ndarray
 FloatArray = np.ndarray
+GeometryArray = np.ndarray
 coord_dtype = np.dtype([("x", np.float64), ("y", np.float64)])
 
 
@@ -61,12 +64,20 @@ def flatten(seq: Sequence[Any]):
     return functools.reduce(operator.concat, seq)
 
 
-def _show_options(options: Enum) -> str:
-    return "\n".join(map(str, options))
+def flatten_geometry(geom):
+    """Recursively flatten geometry collections."""
+    if hasattr(geom, "geoms"):
+        return [g for subgeom in geom.geoms for g in flatten_geometry(subgeom)]
+    else:
+        return [geom]
 
 
-def invalid_option(value: Any, options: Enum | IntEnum) -> str:
-    return f"Invalid option: {value}. Valid options are:\n{_show_options(options)}"
+def flatten_geometries(geometries: Sequence) -> GeometryArray:
+    """Flatten geometry collections."""
+    flattened = []
+    for geom in geometries:
+        flattened.extend(flatten_geometry(geom))
+    return np.array(flattened)
 
 
 def check_geodataframe(features: gpd.GeoDataFrame) -> None:
@@ -79,7 +90,7 @@ def check_geodataframe(features: gpd.GeoDataFrame) -> None:
         raise ValueError(f'Missing column "cellsize" in columns: {colnames}')
     if len(features) == 0:
         raise ValueError("Dataframe is empty")
-    if not features.index.is_integer():
+    if not is_integer_dtype(features.index):
         raise ValueError(
             f"geodataframe index is not integer typed, received: {features.index.dtype}"
         )
@@ -87,50 +98,16 @@ def check_geodataframe(features: gpd.GeoDataFrame) -> None:
         raise ValueError("geodataframe index contains duplicates")
 
 
-def overlap_shortlist(features: gpd.GeoSeries) -> Tuple[IntArray, IntArray]:
-    """
-    Create a shortlist of polygons or linestrings indices to check against each
-    other using their bounding boxes.
-    """
-    bounds = features.bounds
-    index_a, index_b = (
-        np.array(index) for index in zip(*combinations(features.index, 2))
-    )
-    df_a = bounds.loc[index_a]
-    df_b = bounds.loc[index_b]
-    # Convert to dict to get rid of clashing index.
-    a = {k: df_a[k].to_numpy() for k in df_a}
-    b = {k: df_b[k].to_numpy() for k in df_b}
-    # Touching does not count as overlap here.
-    overlap = (
-        (a["maxx"] >= b["minx"])
-        & (b["maxx"] >= a["minx"])
-        & (a["maxy"] >= b["miny"])
-        & (b["maxy"] >= a["miny"])
-    )
-    return index_a[overlap], index_b[overlap]
-
-
 def intersecting_features(features, feature_type) -> Tuple[IntArray, IntArray]:
-    # Check all combinations where bounding boxes overlap.
-    index_a, index_b = overlap_shortlist(features)
-    unique = np.unique(np.concatenate([index_a, index_b]))
-
-    # Now do the expensive intersection check.
-    # Polygons that touch are allowed, but they result in intersects() == True.
-    # To avoid this, we create temporary geometries that are slightly smaller
-    # by buffering with a small negative value.
-    shortlist = features.loc[unique]
-    if feature_type == "polygon":
-        shortlist = shortlist.buffer(-1.0e-6)
-    a = shortlist.loc[index_a]
-    b = shortlist.loc[index_b]
-    # Synchronize index so there's a one to one (row to row) intersection
-    # check.
-    a.index = np.arange(len(a))
-    b.index = np.arange(len(b))
-    with_overlap = a.intersects(b).to_numpy()
-    return index_a[with_overlap], index_b[with_overlap]
+    tree = shapely.STRtree(geoms=features)
+    if feature_type == "polygon":  # TODO: might not be necessary
+        target = features.buffer(-1.0e-6)
+    else:
+        target = features
+    i, j = tree.query(geometry=target, predicate="intersects")
+    # Intersection matrix is symmetric, and contains i==j (diagonal)
+    keep = j > i
+    return i[keep], j[keep]
 
 
 def check_intersection(features: gpd.GeoSeries, feature_type: str) -> None:
@@ -214,7 +191,11 @@ def separate(
     geom_type = gdf.geom_type
     acceptable = ["Polygon", "LineString", "Point"]
     if not geom_type.isin(acceptable).all():
-        raise TypeError(f"Geometry should be one of {acceptable}")
+        raise TypeError(
+            f"Geometry should be one of {acceptable}. "
+            "Call geopandas.GeoDataFrame.explode() to explode multi-part "
+            "geometries into multiple single geometries."
+        )
 
     polygons = gdf.loc[geom_type == "Polygon"].copy()
     linestrings = gdf.loc[geom_type == "LineString"].copy()
@@ -231,7 +212,7 @@ def separate(
     return polygons, linestrings, points
 
 
-def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type: ignore # noqa
+def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type: ignore # noqa pragma: no cover
     try:
         import xugrid
     except ImportError:
@@ -239,3 +220,57 @@ def to_ugrid(vertices: FloatArray, faces: IntArray) -> "xugrid.Ugrid2d":  # type
             "xugrid must be installed to return generated result a xugrid.Ugrid2d"
         )
     return xugrid.Ugrid2d(*vertices.T, -1, faces)
+
+
+def to_geodataframe(vertices: FloatArray, faces: IntArray) -> gpd.GeoDataFrame:
+    n_face, n_vertex = faces.shape
+    if n_vertex == 3:  # no fill values
+        coordinates = vertices[faces]
+        geometry = shapely.polygons(coordinates)
+    else:  # Possible fill values (-1)
+        # Group them by number of vertices.
+        valid = faces >= 0
+        n_valid = valid.sum(axis=1)
+        grouped_by_n_vertex = pd.DataFrame(
+            {"i": np.arange(n_face), "n": n_valid}
+        ).groupby("n")
+        geometries = []
+        for n_vertex, group in grouped_by_n_vertex:
+            group_faces = faces[group["i"], :n_vertex]
+            group_coordinates = vertices[group_faces]
+            geometries.append(shapely.polygons(group_coordinates))
+        geometry = np.concatenate(geometries)
+    return gpd.GeoDataFrame(geometry=geometry)
+
+
+class Grouper:
+    """
+    Wrapper around pd.DataFrame().groupby().
+
+    Group by ``a_index``, then iterates over the groups, returning a single
+    value of ``a`` and potentially multiple values for ``b``.
+    """
+
+    def __init__(
+        self,
+        a,
+        a_index,
+        b,
+        b_index,
+    ):
+        self.a = np.asarray(a)
+        self.b = np.asarray(b)
+        self.grouped = iter(
+            pd.DataFrame(data={"a": a_index, "b": b_index}).groupby("a")
+        )
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        try:
+            a_index, group = next(self.grouped)
+            b_index = group["b"]
+            return self.a[a_index], self.b[b_index]
+        except StopIteration:
+            raise StopIteration

@@ -15,6 +15,7 @@ dependencies = [
     'pooch',
     'triangle',
     'shapely >= 2.0',
+    'scipy',
 ]
 classifiers = [
     'Development Status :: 3 - Alpha',
@@ -59,6 +60,7 @@ profile = "black"
 [tool.coverage.report]
 exclude_lines = [
   "pragma: no cover",
+   "@abc.abstractmethod",
 ]
 
 [tool.pixi.project]
@@ -81,6 +83,7 @@ pydata-sphinx-theme = "*"
 py-triangle = "*"
 pytest = "*"
 pytest-cov = "*"
+scipy = "*"
 shapely = ">=2.0"
 sphinx = "*"
 sphinx-gallery = "*"
@@ -131,8 +134,8 @@ ignore = [
     "PD901",
     "PD003",
     "PD004",
+    "PD011",
 ]
-fixable = ["I"]
 ignore-init-module-imports = true
 
 [tool.ruff.lint.pydocstyle]

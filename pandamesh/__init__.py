@@ -1,14 +1,15 @@
 from pandamesh import data
-from pandamesh.gmsh_mesher import (
+from pandamesh.gmsh_enums import (
     FieldCombination,
     GeneralVerbosity,
-    GmshMesher,
     MeshAlgorithm,
     SubdivisionAlgorithm,
-    gmsh_env,
 )
+from pandamesh.gmsh_mesher import GmshMesher, gmsh_env
 from pandamesh.plot import plot
-from pandamesh.triangle_mesher import DelaunayAlgorithm, TriangleMesher
+from pandamesh.preprocessor import Preprocessor
+from pandamesh.triangle_enums import DelaunayAlgorithm
+from pandamesh.triangle_mesher import TriangleMesher
 
 __version__ = "0.1.6"
 
@@ -24,4 +25,5 @@ __all__ = (
     "plot",
     "DelaunayAlgorithm",
     "TriangleMesher",
+    "Preprocessor",
 )

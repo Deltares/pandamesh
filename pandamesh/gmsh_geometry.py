@@ -169,6 +169,8 @@ def embed_where(gdf: gpd.GeoDataFrame, polygons: gpd.GeoDataFrame) -> gpd.GeoDat
 def add_geometry(
     polygons: gpd.GeoDataFrame, linestrings: gpd.GeoDataFrame, points: gpd.GeoDataFrame
 ):
+    if len(polygons) == 0:
+        raise ValueError("No polygons provided")
     # Assign unique ids
     polygons["__polygon_id"] = np.arange(1, len(polygons) + 1)
 

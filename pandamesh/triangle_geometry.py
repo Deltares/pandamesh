@@ -4,9 +4,8 @@ import geopandas as gpd
 import numpy as np
 import pandas as pd
 import shapely
-import shapely.geometry as sg
 
-from pandamesh.common import FloatArray, IntArray, flatten
+from pandamesh.common import FloatArray, Grouper, IntArray, flatten, flatten_geometry
 
 
 def segmentize_linestrings(linestrings: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
@@ -49,7 +48,8 @@ def add_polygons(
     regions[:, 1] = region_points.y
     regions[:, 2] = np.arange(n_region)
     cellsize = polygons[is_region]["cellsize"].to_numpy()
-    regions[:, 3] = 0.5 * cellsize * cellsize
+    # Assume equilateral triangles for cell size to area conversion.
+    regions[:, 3] = 0.25 * np.sqrt(3) * cellsize * cellsize
 
     boundary = polygons.boundary.explode(index_parts=True).geometry
     vertices, segments = add_linestrings(boundary)
@@ -72,18 +72,34 @@ def polygon_holes(
 
     Triangle recognizes holes as a point contained by segments.
     """
-    inner_rings = gpd.GeoSeries(flatten(polygons.interiors))
-    interiors = gpd.GeoDataFrame(geometry=[sg.Polygon(ring) for ring in inner_rings])
-    points = interiors.representative_point()
-    # Filter the points, if the point can be found in a polygon, it's located
-    # in a refinement zone.
-    points_inside = polygons.sjoin(
-        gpd.GeoDataFrame(geometry=points), predicate="contains"
+    # An interior may be a true hole, or it could be (partially!) filled with
+    # another polygon. Find out if this is the case: get the interiors, and
+    # diff them with any polygon inside.
+    inner_rings = flatten(polygons.interiors)
+    interiors = np.asarray(flatten_geometry(shapely.polygonize(inner_rings)))
+    tree = shapely.STRtree(interiors)
+    index_inside, index_interior = tree.query(
+        polygons.representative_point(), predicate="within"
     )
-    keep = np.full(len(points), True)
-    keep[points_inside["index_right"].to_numpy().astype(int)] = False
-    points = points[keep]
+    nothing_inside = np.full(len(interiors), True)
+    nothing_inside[index_interior] = False
 
+    points = [gpd.GeoSeries(interiors[nothing_inside]).representative_point()]
+    if len(index_inside) > 0:
+        for interior, polygons_inside in Grouper(
+            a=interiors,
+            a_index=index_interior,
+            b=polygons.geometry,
+            b_index=index_inside,
+        ):
+            all_polygons = shapely.unary_union(polygons_inside)
+            true_holes = shapely.difference(interior, all_polygons)
+            if shapely.is_empty(true_holes).all():
+                continue
+            hole_points = gpd.GeoSeries(true_holes).explode().representative_point()
+            points.append(hole_points)
+
+    points = gpd.GeoSeries(np.concatenate(points))
     if len(points) > 0:
         return add_points(points)
     else:

@@ -88,6 +88,11 @@ vertices, triangles = mesher.generate()
 pm.plot(vertices, triangles)
 
 # %%
+# For real work, buffering and simplifying will likely not suffice.
+#
+# See the preprocessing example to for an overview of common issues and how to
+# apply pandamesh's Preprocessor class to resolve them.
+#
 # Local refinement
 # ----------------
 #

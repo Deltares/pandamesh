@@ -2,7 +2,6 @@ import json
 import pathlib
 import tempfile
 from contextlib import contextmanager
-from enum import Enum, IntEnum
 from typing import List, Tuple, Union
 
 import geopandas as gpd
@@ -14,10 +13,14 @@ from pandamesh.common import (
     IntArray,
     check_geodataframe,
     gmsh,
-    invalid_option,
     repr,
     separate,
-    to_ugrid,
+)
+from pandamesh.gmsh_enums import (
+    FieldCombination,
+    GeneralVerbosity,
+    MeshAlgorithm,
+    SubdivisionAlgorithm,
 )
 from pandamesh.gmsh_fields import (
     FIELDS,
@@ -26,6 +29,7 @@ from pandamesh.gmsh_fields import (
     validate_field,
 )
 from pandamesh.gmsh_geometry import add_field_geometry, add_geometry
+from pandamesh.mesher_base import MesherBase
 
 
 @contextmanager
@@ -41,80 +45,6 @@ def gmsh_env(read_config_files: bool = True, interruptible: bool = True):
         gmsh.finalize()
 
 
-class MeshAlgorithm(IntEnum):
-    """
-    Each algorithm has its own advantages and disadvantages.
-
-    For all 2D unstructured algorithms a Delaunay mesh that contains all
-    the points of the 1D mesh is initially constructed using a
-    divide-and-conquer algorithm. Missing edges are recovered using edge
-    swaps. After this initial step several algorithms can be applied to
-    generate the final mesh:
-
-    * The MeshAdapt algorithm is based on local mesh modifications. This
-      technique makes use of edge swaps, splits, and collapses: long edges
-      are split, short edges are collapsed, and edges are swapped if a
-      better geometrical configuration is obtained.
-    * The Delaunay algorithm is inspired by the work of the GAMMA team at
-      INRIA. New points are inserted sequentially at the circumcenter of
-      the element that has the largest adimensional circumradius. The mesh
-      is then reconnected using an anisotropic Delaunay criterion.
-    * The Frontal-Delaunay algorithm is inspired by the work of S. Rebay.
-    * Other experimental algorithms with specific features are also
-      available. In particular, Frontal-Delaunay for Quads is a variant of
-      the Frontal-Delaunay algorithm aiming at generating right-angle
-      triangles suitable for recombination; and BAMG allows to generate
-      anisotropic triangulations.
-
-    For very complex curved surfaces the MeshAdapt algorithm is the most robust.
-    When high element quality is important, the Frontal-Delaunay algorithm should
-    be tried. For very large meshes of plane surfaces the Delaunay algorithm is
-    the fastest; it usually also handles complex mesh size fields better than the
-    Frontal-Delaunay. When the Delaunay or Frontal-Delaunay algorithms fail,
-    MeshAdapt is automatically triggered. The Automatic algorithm uses
-    Delaunay for plane surfaces and MeshAdapt for all other surfaces.
-    """
-
-    MESH_ADAPT = 1
-    AUTOMATIC = 2
-    INITIAL_MESH_ONLY = 3
-    FRONTAL_DELAUNAY = 5
-    BAMG = 7
-    FRONTAL_DELAUNAY_FOR_QUADS = 8
-    PACKING_OF_PARALLELLOGRAMS = 9
-
-
-class SubdivisionAlgorithm(IntEnum):
-    """All meshes can be subdivided to generate fully quadrangular cells."""
-
-    NONE = 0
-    ALL_QUADRANGLES = 1
-    BARYCENTRIC = 3
-
-
-class FieldCombination(Enum):
-    """
-    Controls how cell size fields are combined when they are found at the
-    same location.
-    """
-
-    MIN = "Min"
-    MAX = "Max"
-    MEAN = "Mean"
-
-
-class GeneralVerbosity(IntEnum):
-    """Level of information printed."""
-
-    SILENT = 0
-    ERRORS = 1
-    WARNINGS = 2
-    DIRECT = 3
-    INFORMATION = 4
-    STATUS = 5
-    DEBUG = 99
-
-
 def coerce_field(field: Union[dict, str]) -> dict:
     if not isinstance(field, (dict, str)):
         raise TypeError("field must be a dictionary or a valid JSON dictionary string")
@@ -123,14 +53,14 @@ def coerce_field(field: Union[dict, str]) -> dict:
     return field
 
 
-class GmshMesher:
+class GmshMesher(MesherBase):
     """
     Wrapper for the python bindings to Gmsh. This class must be initialized
     with a geopandas GeoDataFrame containing at least one polygon, and a column
     named ``"cellsize"``.
 
     Optionally, multiple polygons with different cell sizes can be included in
-    the geodataframe. These can be used to achieve local mesh remfinement.
+    the geodataframe. These can be used to achieve local mesh refinement.
 
     Linestrings and points may also be included. The segments of linestrings
     will be directly forced into the triangulation. Points can also be forced
@@ -142,7 +72,8 @@ class GmshMesher:
     the geodataframe are checked:
 
         * Polygons should not have any overlap with each other.
-        * Linestrings should not intersect each other.
+        * Linestrings should not intersect each other, unless the intersection
+          vertex is present in both.
         * Every linestring should be fully contained by a single polygon;
           a linestring may not intersect two or more polygons.
         * Linestrings and points should not "touch" / be located on
@@ -150,7 +81,8 @@ class GmshMesher:
         * Holes in polygons are fully supported, but they must not contain
           any linestrings or points.
 
-    If such cases are detected, the initialization will error.
+    If such cases are detected, the initialization will error: use the
+    :class:`pandamesh.Preprocessor` to clean up geometries beforehand.
 
     For more details on Gmsh, see:
     https://gmsh.info/doc/texinfo/gmsh.html
@@ -195,7 +127,6 @@ class GmshMesher:
         # Set default values for meshing parameters
         self.mesh_algorithm = MeshAlgorithm.AUTOMATIC
         self.recombine_all = False
-        # self.force_geometry = True  # not implemented yet, see below
         self.mesh_size_extend_from_boundary = True
         self.mesh_size_from_points = True
         self.mesh_size_from_curvature = False
@@ -224,7 +155,7 @@ class GmshMesher:
     # Properties
     # ----------
     @property
-    def mesh_algorithm(self):
+    def mesh_algorithm(self) -> MeshAlgorithm:
         """
         Can be set to one of :py:class:`pandamesh.MeshAlgorithm`:
 
@@ -237,19 +168,19 @@ class GmshMesher:
             BAMG = 7
             FRONTAL_DELAUNAY_FOR_QUADS = 8
             PACKING_OF_PARALLELLOGRAMS = 9
+            QUASI_STRUCTURED_QUAD = 11
 
         Each algorithm has its own advantages and disadvantages.
         """
-        return gmsh.option.getNumber("Mesh.Algorithm")
+        return MeshAlgorithm(gmsh.option.getNumber("Mesh.Algorithm"))
 
     @mesh_algorithm.setter
     def mesh_algorithm(self, value: MeshAlgorithm):
-        if value not in MeshAlgorithm:
-            raise ValueError(invalid_option(value, MeshAlgorithm))
+        value = MeshAlgorithm.from_value(value)
         gmsh.option.setNumber("Mesh.Algorithm", value.value)
 
     @property
-    def recombine_all(self):
+    def recombine_all(self) -> bool:
         """
         Apply recombination algorithm to all surfaces, ignoring per-surface
         spec.
@@ -274,7 +205,7 @@ class GmshMesher:
         self._force_geometry = value
 
     @property
-    def mesh_size_extend_from_boundary(self):
+    def mesh_size_extend_from_boundary(self) -> bool:
         """
         Forces the mesh size to be extended from the boundary, or not, per
         surface.
@@ -304,7 +235,7 @@ class GmshMesher:
     def mesh_size_from_curvature(self):
         """
         Automatically compute mesh element sizes from curvature, using the value as
-        the target number of elements per 2 * Pi radians
+        the target number of elements per 2 * Pi radians.
         """
         return self._mesh_size_from_curvature
 
@@ -320,7 +251,7 @@ class GmshMesher:
         gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", value)
 
     @property
-    def field_combination(self):
+    def field_combination(self) -> FieldCombination:
         """
         Controls how cell size fields are combined when they are found at the
         same location. Can be set to one of
@@ -336,13 +267,13 @@ class GmshMesher:
         return self._field_combination
 
     @field_combination.setter
-    def field_combination(self, value):
-        if value not in FieldCombination:
-            raise ValueError(invalid_option(value, FieldCombination))
+    def field_combination(self, value: Union[FieldCombination, str]):
+        value = FieldCombination.from_value(value)
         self._field_combination = value
+        # Value is propagated to gmsh in ._combine_fields()
 
     @property
-    def subdivision_algorithm(self):
+    def subdivision_algorithm(self) -> SubdivisionAlgorithm:
         """
         All meshes can be subdivided to generate fully quadrangular cells. Can
         be set to one of :py:class:`pandamesh.SubdivisionAlgorithm`:
@@ -354,25 +285,37 @@ class GmshMesher:
             BARYCENTRIC = 3
 
         """
-        return self._subdivision_algorithm
+
+        return SubdivisionAlgorithm(gmsh.option.getNumber("Mesh.SubdivisionAlgorithm"))
 
     @subdivision_algorithm.setter
-    def subdivision_algorithm(self, value):
-        if value not in SubdivisionAlgorithm:
-            raise ValueError(invalid_option(value, SubdivisionAlgorithm))
-        self._subdivision_algorithm = value
-        gmsh.option.setNumber("Mesh.SubdivisionAlgorithm", value)
+    def subdivision_algorithm(self, value: Union[SubdivisionAlgorithm, str]):
+        value = SubdivisionAlgorithm.from_value(value)
+        gmsh.option.setNumber("Mesh.SubdivisionAlgorithm", value.value)
 
     @property
     def general_verbosity(self) -> GeneralVerbosity:
-        return self._general_verbosity
+        """
+        Controls level of information printed. Can be set to one of
+        :py:class:`pandamesh.GeneralVerbosity`:
+
+        .. code::
+
+            SILENT = 0
+            ERRORS = 1
+            WARNINGS = 2
+            DIRECT = 3
+            INFORMATION = 4
+            STATUS = 5
+            DEBUG = 99
+
+        """
+        return GeneralVerbosity(gmsh.option.getNumber("General.Verbosity"))
 
     @general_verbosity.setter
-    def general_verbosity(self, value: GeneralVerbosity) -> None:
-        if value not in GeneralVerbosity:
-            raise ValueError(invalid_option(value, GeneralVerbosity))
-        self._general_verbosity = value
-        gmsh.option.setNumber("General.Verbosity", value)
+    def general_verbosity(self, value: Union[GeneralVerbosity, str]) -> None:
+        value = GeneralVerbosity.from_value(value)
+        gmsh.option.setNumber("General.Verbosity", value.value)
 
     # Methods
     # -------
@@ -549,9 +492,6 @@ class GmshMesher:
 
         return self._vertices(), self._faces()
 
-    def generate_ugrid(self) -> "xugrid.Ugrid2d":  # type: ignore # noqa
-        return to_ugrid(*self.generate())
-
     def write(self, path: Union[str, pathlib.Path]):
         """
         Write a gmsh .msh file
@@ -560,4 +500,4 @@ class GmshMesher:
         ----------
         path: Union[str, pathlib.Path
         """
-        gmsh.write(path)
+        gmsh.write(str(path))

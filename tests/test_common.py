@@ -1,19 +1,9 @@
-import textwrap
-from enum import Enum
-
 import geopandas as gpd
 import numpy as np
 import pytest
 import shapely.geometry as sg
 
 from pandamesh import common
-
-
-class Color(Enum):
-    RED = 1
-    GREEN = 2
-    BLUE = 3
-
 
 a = sg.Polygon(
     [
@@ -109,25 +99,36 @@ def test_flatten():
     assert common.flatten([[1], [2, 3]]) == [1, 2, 3]
 
 
-def test_show_options():
-    common._show_options(Color) == textwrap.dedent(
-        """
-        RED
-        GREEN
-        BLUE
-    """
-    )
+def test_flatten_geometry():
+    point = sg.Point(0, 0)
+    assert common.flatten_geometry(point) == [point]
 
+    multi_point = sg.MultiPoint([sg.Point(0, 0), sg.Point(1, 1)])
+    assert common.flatten_geometry(multi_point) == list(multi_point.geoms)
 
-def test_invalid_option():
-    common.invalid_option("YELLOW", Color) == textwrap.dedent(
-        """
-        Invalid option: YELLOW. Valid options are:
-        RED
-        GREEN
-        BLUE
-    """
-    )
+    point = sg.Point(0, 0)
+    line = sg.LineString([(1, 1), (2, 2)])
+    polygon = sg.Polygon([(3, 3), (4, 4), (4, 3)])
+    multi_point = sg.MultiPoint([sg.Point(5, 5), sg.Point(6, 6)])
+
+    collection = sg.GeometryCollection([point, line, polygon, multi_point])
+    expected = [point, line, polygon, sg.Point(5, 5), sg.Point(6, 6)]
+    assert common.flatten_geometry(collection) == expected
+
+    inner_collection = sg.GeometryCollection([point, multi_point])
+    nested_collection = sg.GeometryCollection([inner_collection, line, polygon])
+    expected = [point, sg.Point(5, 5), sg.Point(6, 6), line, polygon]
+    assert common.flatten_geometry(nested_collection) == expected
+
+    # Also test flatten_geometries
+    geometries = [
+        point,
+        sg.GeometryCollection([multi_point]),
+        sg.GeometryCollection([line, polygon]),
+    ]
+    actual = common.flatten_geometries(geometries)
+    assert isinstance(actual, np.ndarray)
+    assert all(actual == expected)
 
 
 def test_check_geodataframe():
@@ -153,25 +154,6 @@ def test_check_geodataframe():
 
     gdf.index = [0, 1]
     common.check_geodataframe(gdf)
-
-
-def test_overlap_shortlist():
-    # b overlaps with a
-    polygons = gpd.GeoSeries(data=[a, b, d], index=[0, 1, 2])
-    ia, ib = common.overlap_shortlist(polygons)
-    assert np.array_equal(ia, [0])
-    assert np.array_equal(ib, [1])
-
-    # a touches c, c touches d: should count as overlap for shortlist.
-    polygons = gpd.GeoSeries(data=[a, c, d], index=[0, 1, 2])
-    ia, ib = common.overlap_shortlist(polygons)
-    assert np.array_equal(ia, [0, 1])
-    assert np.array_equal(ib, [1, 2])
-
-    linestrings = gpd.GeoSeries(data=[La, Lb, Lc], index=[0, 1, 2])
-    ia, ib = common.overlap_shortlist(linestrings)
-    assert np.array_equal(ia, [0])
-    assert np.array_equal(ib, [1])
 
 
 def test_intersecting_features():
@@ -252,3 +234,71 @@ def test_separate():
     dfs = common.separate(gdf)
     for df in dfs:
         assert np.issubdtype(df["cellsize"].dtype, np.floating)
+
+    with pytest.raises(TypeError, match="Geometry should be one of"):
+        gdf = gpd.GeoDataFrame(geometry=[sg.MultiPolygon([a, b])])
+        common.separate(gdf)
+
+
+def test_grouper():
+    a = np.array([1, 2, 3, 4])
+    a_index = np.array([0, 0, 1, 1])
+    b = np.array([10, 20, 30, 40, 50])
+    b_index = np.array([0, 1, 2, 3])
+    with pytest.raises(ValueError, match="All arrays must be of the same length"):
+        grouper = common.Grouper(a, [0, 0, 1], b, b_index)
+
+    grouper = common.Grouper(a, a_index, b, b_index)
+
+    # First group
+    a_val, b_vals = next(grouper)
+    assert a_val == 1
+    assert np.array_equal(b_vals, np.array([10, 20]))
+
+    # Second group
+    a_val, b_vals = next(grouper)
+    assert a_val == 2
+    assert np.array_equal(b_vals, np.array([30, 40]))
+
+    # As iterator
+    grouper = common.Grouper(a, a_index, b, b_index)
+    results = list(grouper)
+    assert results[0][0] == 1
+    assert np.array_equal(results[0][1], np.array([10, 20]))
+    assert results[1][0] == 2
+    assert np.array_equal(results[1][1], np.array([30, 40]))
+
+
+def test_to_geodataframe():
+    # Two triangles
+    vertices = np.array([[0, 0], [1, 0], [0, 1], [1, 1]])
+    faces = np.array([[0, 1, 2], [1, 3, 2]])
+
+    gdf = common.to_geodataframe(vertices, faces)
+    assert isinstance(gdf, gpd.GeoDataFrame)
+    assert len(gdf == 2)
+
+    # Check the coordinates of the first triangle
+    assert np.allclose(
+        np.array(gdf.geometry[0].exterior.coords),
+        np.array([(0, 0), (1, 0), (0, 1), (0, 0)]),
+    )
+
+    # Check the coordinates of the second triangle
+    assert np.allclose(
+        np.array(gdf.geometry[1].exterior.coords),
+        np.array([(1, 0), (1, 1), (0, 1), (1, 0)]),
+    )
+
+    # Define vertices
+    vertices = np.array([[0, 0], [1, 0], [0, 1], [1, 1], [2, 0.5]], dtype=float)
+
+    # Define faces (triangle: 0,1,2 and quadrangle: 1,3,4,2)
+    faces = np.array([[0, 1, 2, -1], [1, 3, 4, 2]], dtype=int)
+
+    # Call the function
+    gdf = common.to_geodataframe(vertices, faces)
+
+    # Assertions
+    assert isinstance(gdf, gpd.GeoDataFrame)
+    assert len(gdf) == 2  # Two polygons (one triangle, one quadrangle)
