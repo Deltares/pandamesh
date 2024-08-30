@@ -33,6 +33,10 @@ def test_check_options():
     with pytest.raises(ValueError, match=re.escape(expected)):
         Color.from_value("YELLOW")
 
-    expected = expected.replace("'YELLOW'", "0")
+    expected = expected.replace("'YELLOW'", "YELLOW")
+    with pytest.raises(AttributeError, match=re.escape(expected)):
+        Color.YELLOW
+
+    expected = expected.replace("YELLOW", "0")
     with pytest.raises(ValueError, match=re.escape(expected)):
         Color.from_value(0)
