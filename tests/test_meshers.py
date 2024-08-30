@@ -31,6 +31,11 @@ other_hole = sg.LinearRing(other_hole_coords)
 other_donut = sg.Polygon(outer, holes=[other_hole])
 
 
+def bounds(vertices):
+    x, y = vertices.T
+    return x.min(), y.min(), x.max(), y.max()
+
+
 def area(vertices, triangles):
     """
     Compute the area of every triangle in the mesh.
@@ -42,53 +47,61 @@ def area(vertices, triangles):
     return 0.5 * np.abs(u[:, 0] * v[:, 1] - u[:, 1] * v[:, 0])
 
 
-def triangle_generate(gdf: gpd.GeoDataFrame):
-    mesher = pm.TriangleMesher(gdf)
+def triangle_generate(gdf: gpd.GeoDataFrame, shift: bool):
+    mesher = pm.TriangleMesher(gdf, shift_origin=shift)
     return mesher.generate()
 
 
-def gmsh_generate(gdf: gpd.GeoDataFrame):
-    mesher = pm.GmshMesher(gdf)
+def gmsh_generate(gdf: gpd.GeoDataFrame, shift: bool):
+    mesher = pm.GmshMesher(gdf, shift_origin=shift)
     return mesher.generate()
 
 
 @pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
-def test_empty(generate):
+@pytest.mark.parametrize("shift", [False, True])
+def test_empty(generate, shift):
     gdf = gpd.GeoDataFrame(geometry=[line], data={"cellsize": [1.0]})
     with pytest.raises(ValueError, match="No polygons provided"):
-        generate(gdf)
+        generate(gdf, shift)
 
 
 @pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
-def test_basic(generate):
+@pytest.mark.parametrize("shift", [False, True])
+def test_basic(generate, shift):
     polygon = sg.Polygon(outer)
     gdf = gpd.GeoDataFrame(geometry=[polygon])
     gdf["cellsize"] = 1.0
-    vertices, triangles = generate(gdf)
+    vertices, triangles = generate(gdf, shift)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, polygon.area)
+    assert np.allclose(bounds(vertices), gdf.total_bounds)
 
 
 @pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
-def test_hole(generate):
+@pytest.mark.parametrize("shift", [False, True])
+def test_hole(generate, shift):
     gdf = gpd.GeoDataFrame(geometry=[donut])
     gdf["cellsize"] = 1.0
-    vertices, triangles = generate(gdf)
+    vertices, triangles = generate(gdf, shift)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, donut.area)
+    assert np.allclose(bounds(vertices), gdf.total_bounds)
 
 
 @pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
-def test_partial_hole(generate):
+@pytest.mark.parametrize("shift", [False, True])
+def test_partial_hole(generate, shift):
     gdf = gpd.GeoDataFrame(geometry=[other_donut, other_inner])
     gdf["cellsize"] = 1.0
-    vertices, triangles = generate(gdf)
+    vertices, triangles = generate(gdf, shift)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, other_donut.area + other_inner.area)
+    assert np.allclose(bounds(vertices), gdf.total_bounds)
 
 
 @pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
-def test_adjacent_donut(generate):
+@pytest.mark.parametrize("shift", [False, True])
+def test_adjacent_donut(generate, shift):
     inner_coords2 = inner_coords.copy()
     outer_coords2 = outer_coords.copy()
     inner_coords2[:, 0] += 10.0
@@ -99,9 +112,10 @@ def test_adjacent_donut(generate):
 
     gdf = gpd.GeoDataFrame(geometry=[donut, donut2])
     gdf["cellsize"] = [1.0, 0.5]
-    vertices, triangles = generate(gdf)
+    vertices, triangles = generate(gdf, shift)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, 2 * donut.area)
+    assert np.allclose(bounds(vertices), gdf.total_bounds)
 
     # With a line at y=8.0 and points in the left polygon, at y=2.0
     line1 = sg.LineString([(0.25, 8.0), (9.75, 8.0)])
@@ -112,9 +126,10 @@ def test_adjacent_donut(generate):
     gdf = gpd.GeoDataFrame(geometry=[donut, donut2, line1, line2, *points])
     gdf["cellsize"] = 1.0
 
-    vertices, triangles = generate(gdf)
+    vertices, triangles = generate(gdf, shift)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, 2 * donut.area)
+    assert np.allclose(bounds(vertices), gdf.total_bounds)
 
 
 def test_triangle_properties():

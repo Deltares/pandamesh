@@ -240,6 +240,19 @@ def test_separate():
         common.separate(gdf)
 
 
+def test_central_origin():
+    gdf = gpd.GeoDataFrame(geometry=[d])
+    back, x, y = common.central_origin(gdf, False)
+    assert gdf is back
+    assert x == 0
+    assert y == 0
+
+    back, x, y = common.central_origin(gdf, True)
+    assert np.allclose(x, 2.5)
+    assert np.allclose(y, 0.5)
+    assert np.array_equal(back.total_bounds, [-0.5, -0.5, 0.5, 0.5])
+
+
 def test_grouper():
     a = np.array([1, 2, 3, 4])
     a_index = np.array([0, 0, 1, 1])
