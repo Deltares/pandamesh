@@ -468,6 +468,10 @@ equilateral triangles instead. This may result in slightly smaller triangles.</p
 <a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GmshMesher</span></code></a>, <a class="reference internal" href="api/pandamesh.MeshAlgorithm.html#pandamesh.MeshAlgorithm" title="pandamesh.MeshAlgorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.MeshAlgorithm</span></code></a>, or
 <a class="reference internal" href="api/pandamesh.SubdivisionAlgorithm.html#pandamesh.SubdivisionAlgorithm" title="pandamesh.SubdivisionAlgorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.SubdivisionAlgorithm</span></code></a> will now accept one of these enums,
 or the enum member name as a string.</p></li>
+<li><p><a class="reference internal" href="api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher" title="pandamesh.TriangleMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.TriangleMesher</span></code></a> and <a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GmshMesher</span></code></a> now take
+a <code class="docutils literal notranslate"><span class="pre">shift_origin</span></code> argument to temporarily shift the coordinate system to the
+centroid of the geometries’ bounding box to mitigate floating point precision
+problems. This is enabled by default.</p></li>
 </ul>
 </section>
 </section>

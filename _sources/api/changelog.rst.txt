@@ -41,6 +41,10 @@ Changed
   :class:`pandamesh.GmshMesher`, :class:`pandamesh.MeshAlgorithm`, or
   :class:`pandamesh.SubdivisionAlgorithm` will now accept one of these enums,
   or the enum member name as a string.
+- :class:`pandamesh.TriangleMesher` and :class:`pandamesh.GmshMesher` now take
+  a ``shift_origin`` argument to temporarily shift the coordinate system to the
+  centroid of the geometries' bounding box to mitigate floating point precision
+  problems. This is enabled by default.
 
 [0.1.6] 2024-07-17
 ------------------

@@ -370,6 +370,7 @@
 <span class="kn">from</span> <span class="nn">pandamesh.common</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">FloatArray</span><span class="p">,</span>
     <span class="n">IntArray</span><span class="p">,</span>
+    <span class="n">central_origin</span><span class="p">,</span>
     <span class="n">check_geodataframe</span><span class="p">,</span>
     <span class="n">gmsh</span><span class="p">,</span>
     <span class="nb">repr</span><span class="p">,</span>
@@ -457,7 +458,13 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    gdf: gpd.GeoDataFrame</span>
-<span class="sd">        GeoDataFrame containing the vector geometry.</span>
+<span class="sd">        GeoDataFrame containing the vector geometry. Must contain a &quot;cellsize&quot;</span>
+<span class="sd">        column.</span>
+<span class="sd">    shift_origin: bool, optional, default is True.</span>
+<span class="sd">        If True, temporarily shifts the coordinate system origin to the centroid</span>
+<span class="sd">        of the geometry&#39;s bounding box during mesh generation. This helps mitigate</span>
+<span class="sd">        floating-point precision issues. The resulting mesh vertices are</span>
+<span class="sd">        automatically translated back to the original coordinate system.</span>
 <span class="sd">    read_config_files: bool</span>
 <span class="sd">        Gmsh initialization option: Read system Gmsh configuration files</span>
 <span class="sd">        (gmshrc and gmsh-options).</span>
@@ -468,14 +475,15 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span>
+        <span class="n">shift_origin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">read_config_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="n">run</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">interruptible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_gmsh</span><span class="p">(</span>
             <span class="n">read_config_files</span><span class="o">=</span><span class="n">read_config_files</span><span class="p">,</span> <span class="n">interruptible</span><span class="o">=</span><span class="n">interruptible</span>
         <span class="p">)</span>
         <span class="n">check_geodataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+        <span class="n">gdf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_yoff</span> <span class="o">=</span> <span class="n">central_origin</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">shift_origin</span><span class="p">)</span>
         <span class="n">polygons</span><span class="p">,</span> <span class="n">linestrings</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">separate</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
 
         <span class="c1"># Include geometry into gmsh</span>
@@ -819,7 +827,10 @@
         <span class="c1"># getNodes returns: node_tags, coord, parametric_coord</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
         <span class="c1"># Return x and y</span>
-        <span class="k">return</span> <span class="n">vertices</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="n">vertices</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">vertices</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xoff</span>
+        <span class="n">vertices</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_yoff</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_faces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">element_types</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">node_tags</span> <span class="o">=</span> <span class="n">gmsh</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">getElements</span><span class="p">()</span>

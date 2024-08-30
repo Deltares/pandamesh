@@ -431,7 +431,7 @@
 <h1>pandamesh.TriangleMesher<a class="headerlink" href="#pandamesh-trianglemesher" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pandamesh.TriangleMesher">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.</span></span><span class="sig-name descname"><span class="pre">TriangleMesher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pandamesh/triangle_mesher.html#TriangleMesher"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.TriangleMesher" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.</span></span><span class="sig-name descname"><span class="pre">TriangleMesher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pandamesh/triangle_mesher.html#TriangleMesher"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.TriangleMesher" title="Link to this definition">#</a></dt>
 <dd><p>Wrapper for the python bindings to Triangle. This class must be initialized
 with a geopandas GeoDataFrame containing at least one polygon, and a column
 named <code class="docutils literal notranslate"><span class="pre">&quot;cellsize&quot;</span></code>.</p>
@@ -461,15 +461,27 @@ any linestrings or points.</p></li>
 <a class="reference internal" href="pandamesh.Preprocessor.html#pandamesh.Preprocessor" title="pandamesh.Preprocessor"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.Preprocessor</span></code></a> to clean up geometries beforehand.</p>
 <p>For more details on Triangle, see:
 <a class="reference external" href="https://www.cs.cmu.edu/~quake/triangle.defs.html">https://www.cs.cmu.edu/~quake/triangle.defs.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gdf</strong> (<em>gpd.GeoDataFrame</em>) – GeoDataFrame containing the vector geometry. Must contain a “cellsize”
+column.</p></li>
+<li><p><strong>shift_origin</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default is True.</em>) – If True, temporarily shifts the coordinate system origin to the centroid
+of the geometry’s bounding box during mesh generation. This helps mitigate
+floating-point precision issues. The resulting mesh vertices are
+automatically translated back to the original coordinate system.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="pandamesh.TriangleMesher.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/pandamesh/triangle_mesher.html#TriangleMesher.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.TriangleMesher.__init__" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/pandamesh/triangle_mesher.html#TriangleMesher.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.TriangleMesher.__init__" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pandamesh.TriangleMesher.__init__" title="pandamesh.TriangleMesher.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(gdf)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pandamesh.TriangleMesher.__init__" title="pandamesh.TriangleMesher.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(gdf[, shift_origin])</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="pandamesh.TriangleMesher.generate.html#pandamesh.TriangleMesher.generate" title="pandamesh.TriangleMesher.generate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate</span></code></a>()</p></td>

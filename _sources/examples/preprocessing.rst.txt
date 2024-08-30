@@ -396,7 +396,7 @@ are inserted, such that the polygons share an edge.
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7efc8e5f5fa0>
+    <matplotlib.collections.PathCollection object at 0x7f59e110e4e0>
 
 
 
@@ -575,7 +575,7 @@ triangles around the line intersection have disappeared:
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7efc8e316540>
+    <matplotlib.collections.PathCollection object at 0x7f59d3b764e0>
 
 
 
@@ -619,7 +619,7 @@ from any polygon boundary by providing a distance to ``clip_lines``:
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7efc8e34f4d0>
+    <matplotlib.collections.PathCollection object at 0x7f59d3b77890>
 
 
 
