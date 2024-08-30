@@ -45,6 +45,15 @@ Triangle
     TriangleMesher.delaunay_algorithm
     TriangleMesher.consistency_check
 
+Triangle Enumerators
+--------------------
+
+.. autosummary::
+   :toctree: api/
+   :template: enums.rst
+
+    DelaunayAlgorithm
+
 Gmsh
 ----
 
@@ -71,14 +80,13 @@ Gmsh
     GmshMesher.finalize_gmsh
     gmsh_env
 
-Enumerators
------------
+Gmsh Enumerators
+----------------
 
 .. autosummary::
    :toctree: api/
    :template: enums.rst
 
-    DelaunayAlgorithm
     FieldCombination
     GeneralVerbosity
     GmshMesher

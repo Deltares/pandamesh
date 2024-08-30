@@ -357,12 +357,12 @@
                 <article class="bd-article">
                   
   <h1>Source code for pandamesh.triangle_enums</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span></span><span class="kn">from</span> <span class="nn">pandamesh.enum_base</span> <span class="kn">import</span> <span class="n">FlexibleEnum</span>
 
 
 <div class="viewcode-block" id="DelaunayAlgorithm">
 <a class="viewcode-back" href="../../api/api/pandamesh.DelaunayAlgorithm.html#pandamesh.DelaunayAlgorithm">[docs]</a>
-<span class="k">class</span> <span class="nc">DelaunayAlgorithm</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">DelaunayAlgorithm</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The type of Delaunay algorithm for Triangle.&quot;&quot;&quot;</span>
 
     <span class="n">DIVIDE_AND_CONQUER</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>

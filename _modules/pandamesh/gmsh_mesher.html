@@ -372,7 +372,6 @@
     <span class="n">IntArray</span><span class="p">,</span>
     <span class="n">check_geodataframe</span><span class="p">,</span>
     <span class="n">gmsh</span><span class="p">,</span>
-    <span class="n">invalid_option</span><span class="p">,</span>
     <span class="nb">repr</span><span class="p">,</span>
     <span class="n">separate</span><span class="p">,</span>
 <span class="p">)</span>
@@ -492,7 +491,6 @@
         <span class="c1"># Set default values for meshing parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mesh_algorithm</span> <span class="o">=</span> <span class="n">MeshAlgorithm</span><span class="o">.</span><span class="n">AUTOMATIC</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">recombine_all</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="c1"># self.force_geometry = True  # not implemented yet, see below</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mesh_size_extend_from_boundary</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mesh_size_from_points</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mesh_size_from_curvature</span> <span class="o">=</span> <span class="kc">False</span>
@@ -524,7 +522,7 @@
     <span class="c1"># Properties</span>
     <span class="c1"># ----------</span>
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">mesh_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">mesh_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MeshAlgorithm</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Can be set to one of :py:class:`pandamesh.MeshAlgorithm`:</span>
 
@@ -541,12 +539,11 @@
 
 <span class="sd">        Each algorithm has its own advantages and disadvantages.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">getNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.Algorithm&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">MeshAlgorithm</span><span class="p">(</span><span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">getNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.Algorithm&quot;</span><span class="p">))</span>
 
     <span class="nd">@mesh_algorithm</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">mesh_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">MeshAlgorithm</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MeshAlgorithm</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">invalid_option</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">MeshAlgorithm</span><span class="p">))</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">MeshAlgorithm</span><span class="o">.</span><span class="n">from_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.Algorithm&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
@@ -621,7 +618,7 @@
         <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.MeshSizeFromCurvature&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">field_combination</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">field_combination</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FieldCombination</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Controls how cell size fields are combined when they are found at the</span>
 <span class="sd">        same location. Can be set to one of</span>
@@ -637,13 +634,13 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_combination</span>
 
     <span class="nd">@field_combination</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">field_combination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FieldCombination</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">invalid_option</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">FieldCombination</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">field_combination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">FieldCombination</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">FieldCombination</span><span class="o">.</span><span class="n">from_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_field_combination</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="c1"># Value is propagated to gmsh in ._combine_fields()</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">subdivision_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">subdivision_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SubdivisionAlgorithm</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        All meshes can be subdivided to generate fully quadrangular cells. Can</span>
 <span class="sd">        be set to one of :py:class:`pandamesh.SubdivisionAlgorithm`:</span>
@@ -655,14 +652,13 @@
 <span class="sd">            BARYCENTRIC = 3</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subdivision_algorithm</span>
+
+        <span class="k">return</span> <span class="n">SubdivisionAlgorithm</span><span class="p">(</span><span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">getNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.SubdivisionAlgorithm&quot;</span><span class="p">))</span>
 
     <span class="nd">@subdivision_algorithm</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">subdivision_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SubdivisionAlgorithm</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">invalid_option</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">SubdivisionAlgorithm</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_subdivision_algorithm</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.SubdivisionAlgorithm&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">subdivision_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">SubdivisionAlgorithm</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">SubdivisionAlgorithm</span><span class="o">.</span><span class="n">from_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;Mesh.SubdivisionAlgorithm&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">general_verbosity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeneralVerbosity</span><span class="p">:</span>
@@ -681,14 +677,12 @@
 <span class="sd">            DEBUG = 99</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_general_verbosity</span>
+        <span class="k">return</span> <span class="n">GeneralVerbosity</span><span class="p">(</span><span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">getNumber</span><span class="p">(</span><span class="s2">&quot;General.Verbosity&quot;</span><span class="p">))</span>
 
     <span class="nd">@general_verbosity</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">general_verbosity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">GeneralVerbosity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">GeneralVerbosity</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">invalid_option</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">GeneralVerbosity</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_general_verbosity</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;General.Verbosity&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">general_verbosity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">GeneralVerbosity</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">GeneralVerbosity</span><span class="o">.</span><span class="n">from_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">gmsh</span><span class="o">.</span><span class="n">option</span><span class="o">.</span><span class="n">setNumber</span><span class="p">(</span><span class="s2">&quot;General.Verbosity&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
     <span class="c1"># Methods</span>
     <span class="c1"># -------</span>

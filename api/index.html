@@ -341,6 +341,9 @@
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.consistency_check.html">pandamesh.TriangleMesher.consistency_check</a></li>
 </ul>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.DelaunayAlgorithm.html">pandamesh.DelaunayAlgorithm</a></li>
+</ul>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.html">pandamesh.GmshMesher</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.generate.html">pandamesh.GmshMesher.generate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.generate_geodataframe.html">pandamesh.GmshMesher.generate_geodataframe</a></li>
@@ -362,7 +365,6 @@
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.gmsh_env.html">pandamesh.gmsh_env</a></li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.DelaunayAlgorithm.html">pandamesh.DelaunayAlgorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.FieldCombination.html">pandamesh.FieldCombination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GeneralVerbosity.html">pandamesh.GeneralVerbosity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.html">pandamesh.GmshMesher</a></li>
@@ -503,6 +505,17 @@
 </table>
 </div>
 </section>
+<section id="triangle-enumerators">
+<h2>Triangle Enumerators<a class="headerlink" href="#triangle-enumerators" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.DelaunayAlgorithm.html#pandamesh.DelaunayAlgorithm" title="pandamesh.DelaunayAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DelaunayAlgorithm</span></code></a>(value[, names, module, ...])</p></td>
+<td><p>The type of Delaunay algorithm for Triangle.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="gmsh">
 <h2>Gmsh<a class="headerlink" href="#gmsh" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
@@ -568,27 +581,24 @@
 </table>
 </div>
 </section>
-<section id="enumerators">
-<h2>Enumerators<a class="headerlink" href="#enumerators" title="Link to this heading">#</a></h2>
+<section id="gmsh-enumerators">
+<h2>Gmsh Enumerators<a class="headerlink" href="#gmsh-enumerators" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.DelaunayAlgorithm.html#pandamesh.DelaunayAlgorithm" title="pandamesh.DelaunayAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DelaunayAlgorithm</span></code></a>(value[, names, module, ...])</p></td>
-<td><p>The type of Delaunay algorithm for Triangle.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.FieldCombination.html#pandamesh.FieldCombination" title="pandamesh.FieldCombination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FieldCombination</span></code></a>(value[, names, module, ...])</p></td>
+<td><p>Controls how cell size fields are combined in Gmsh when they are found at the same location.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.FieldCombination.html#pandamesh.FieldCombination" title="pandamesh.FieldCombination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FieldCombination</span></code></a>(value[, names, module, ...])</p></td>
-<td><p>Controls how cell size fields are combined when they are found at the same location.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GeneralVerbosity.html#pandamesh.GeneralVerbosity" title="pandamesh.GeneralVerbosity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeneralVerbosity</span></code></a>(value[, names, module, ...])</p></td>
+<td><p>Gmsh level of information printed.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GeneralVerbosity.html#pandamesh.GeneralVerbosity" title="pandamesh.GeneralVerbosity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeneralVerbosity</span></code></a>(value[, names, module, ...])</p></td>
-<td><p>Level of information printed.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher</span></code></a>(gdf[, read_config_files, run, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher</span></code></a>(gdf[, read_config_files, run, ...])</p></td>
 <td><p>Wrapper for the python bindings to Gmsh.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.MeshAlgorithm.html#pandamesh.MeshAlgorithm" title="pandamesh.MeshAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeshAlgorithm</span></code></a>(value[, names, module, ...])</p></td>
-<td><p>Each algorithm has its own advantages and disadvantages.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.MeshAlgorithm.html#pandamesh.MeshAlgorithm" title="pandamesh.MeshAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeshAlgorithm</span></code></a>(value[, names, module, ...])</p></td>
+<td><p>Gmsh meshing algorithm.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.SubdivisionAlgorithm.html#pandamesh.SubdivisionAlgorithm" title="pandamesh.SubdivisionAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SubdivisionAlgorithm</span></code></a>(value[, names, module, ...])</p></td>
-<td><p>The default recombination algorithm might leave some triangles in the mesh, if recombining all the triangles leads to badly shaped quads.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.SubdivisionAlgorithm.html#pandamesh.SubdivisionAlgorithm" title="pandamesh.SubdivisionAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SubdivisionAlgorithm</span></code></a>(value[, names, module, ...])</p></td>
+<td><p>Controls how Gmsh recombines triangles to form quads.</p></td>
 </tr>
 </tbody>
 </table>
@@ -644,8 +654,9 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessor">Preprocessor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#triangle">Triangle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#triangle-enumerators">Triangle Enumerators</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gmsh">Gmsh</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enumerators">Enumerators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gmsh-enumerators">Gmsh Enumerators</a></li>
 </ul>
   </nav></div>
 
