@@ -1,19 +1,9 @@
-import textwrap
-from enum import Enum
-
 import geopandas as gpd
 import numpy as np
 import pytest
 import shapely.geometry as sg
 
 from pandamesh import common
-
-
-class Color(Enum):
-    RED = 1
-    GREEN = 2
-    BLUE = 3
-
 
 a = sg.Polygon(
     [
@@ -139,27 +129,6 @@ def test_flatten_geometry():
     actual = common.flatten_geometries(geometries)
     assert isinstance(actual, np.ndarray)
     assert all(actual == expected)
-
-
-def test_show_options():
-    common._show_options(Color) == textwrap.dedent(
-        """
-        RED
-        GREEN
-        BLUE
-    """
-    )
-
-
-def test_invalid_option():
-    common.invalid_option("YELLOW", Color) == textwrap.dedent(
-        """
-        Invalid option: YELLOW. Valid options are:
-        RED
-        GREEN
-        BLUE
-    """
-    )
 
 
 def test_check_geodataframe():

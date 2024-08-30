@@ -13,7 +13,6 @@ from pandamesh.common import (
     IntArray,
     check_geodataframe,
     gmsh,
-    invalid_option,
     repr,
     separate,
 )
@@ -128,7 +127,6 @@ class GmshMesher(MesherBase):
         # Set default values for meshing parameters
         self.mesh_algorithm = MeshAlgorithm.AUTOMATIC
         self.recombine_all = False
-        # self.force_geometry = True  # not implemented yet, see below
         self.mesh_size_extend_from_boundary = True
         self.mesh_size_from_points = True
         self.mesh_size_from_curvature = False
@@ -157,7 +155,7 @@ class GmshMesher(MesherBase):
     # Properties
     # ----------
     @property
-    def mesh_algorithm(self):
+    def mesh_algorithm(self) -> MeshAlgorithm:
         """
         Can be set to one of :py:class:`pandamesh.MeshAlgorithm`:
 
@@ -174,12 +172,11 @@ class GmshMesher(MesherBase):
 
         Each algorithm has its own advantages and disadvantages.
         """
-        return gmsh.option.getNumber("Mesh.Algorithm")
+        return MeshAlgorithm(gmsh.option.getNumber("Mesh.Algorithm"))
 
     @mesh_algorithm.setter
     def mesh_algorithm(self, value: MeshAlgorithm):
-        if value not in MeshAlgorithm:
-            raise ValueError(invalid_option(value, MeshAlgorithm))
+        value = MeshAlgorithm.from_value(value)
         gmsh.option.setNumber("Mesh.Algorithm", value.value)
 
     @property
@@ -254,7 +251,7 @@ class GmshMesher(MesherBase):
         gmsh.option.setNumber("Mesh.MeshSizeFromCurvature", value)
 
     @property
-    def field_combination(self):
+    def field_combination(self) -> FieldCombination:
         """
         Controls how cell size fields are combined when they are found at the
         same location. Can be set to one of
@@ -270,13 +267,13 @@ class GmshMesher(MesherBase):
         return self._field_combination
 
     @field_combination.setter
-    def field_combination(self, value):
-        if value not in FieldCombination:
-            raise ValueError(invalid_option(value, FieldCombination))
+    def field_combination(self, value: Union[FieldCombination, str]):
+        value = FieldCombination.from_value(value)
         self._field_combination = value
+        # Value is propagated to gmsh in ._combine_fields()
 
     @property
-    def subdivision_algorithm(self):
+    def subdivision_algorithm(self) -> SubdivisionAlgorithm:
         """
         All meshes can be subdivided to generate fully quadrangular cells. Can
         be set to one of :py:class:`pandamesh.SubdivisionAlgorithm`:
@@ -288,14 +285,13 @@ class GmshMesher(MesherBase):
             BARYCENTRIC = 3
 
         """
-        return self._subdivision_algorithm
+
+        return SubdivisionAlgorithm(gmsh.option.getNumber("Mesh.SubdivisionAlgorithm"))
 
     @subdivision_algorithm.setter
-    def subdivision_algorithm(self, value):
-        if value not in SubdivisionAlgorithm:
-            raise ValueError(invalid_option(value, SubdivisionAlgorithm))
-        self._subdivision_algorithm = value
-        gmsh.option.setNumber("Mesh.SubdivisionAlgorithm", value)
+    def subdivision_algorithm(self, value: Union[SubdivisionAlgorithm, str]):
+        value = SubdivisionAlgorithm.from_value(value)
+        gmsh.option.setNumber("Mesh.SubdivisionAlgorithm", value.value)
 
     @property
     def general_verbosity(self) -> GeneralVerbosity:
@@ -314,14 +310,12 @@ class GmshMesher(MesherBase):
             DEBUG = 99
 
         """
-        return self._general_verbosity
+        return GeneralVerbosity(gmsh.option.getNumber("General.Verbosity"))
 
     @general_verbosity.setter
-    def general_verbosity(self, value: GeneralVerbosity) -> None:
-        if value not in GeneralVerbosity:
-            raise ValueError(invalid_option(value, GeneralVerbosity))
-        self._general_verbosity = value
-        gmsh.option.setNumber("General.Verbosity", value)
+    def general_verbosity(self, value: Union[GeneralVerbosity, str]) -> None:
+        value = GeneralVerbosity.from_value(value)
+        gmsh.option.setNumber("General.Verbosity", value.value)
 
     # Methods
     # -------

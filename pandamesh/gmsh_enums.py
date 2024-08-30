@@ -1,9 +1,10 @@
-from enum import Enum, IntEnum
+from pandamesh.enum_base import FlexibleEnum
 
 
-class MeshAlgorithm(IntEnum):
+class MeshAlgorithm(FlexibleEnum):
     """
-    Each algorithm has its own advantages and disadvantages.
+    Gmsh meshing algorithm. Each algorithm has its own advantages and
+    disadvantages.
 
     For all 2D unstructured algorithms a Delaunay mesh that contains all
     the points of the 1D mesh is initially constructed using a
@@ -72,8 +73,10 @@ class MeshAlgorithm(IntEnum):
     """
 
 
-class SubdivisionAlgorithm(IntEnum):
+class SubdivisionAlgorithm(FlexibleEnum):
     """
+    Controls how Gmsh recombines triangles to form quads.
+
     The default recombination algorithm might leave some triangles in the mesh,
     if recombining all the triangles leads to badly shaped quads. In such
     cases, to generate full-quad meshes, you can either subdivide the resulting
@@ -101,10 +104,10 @@ class SubdivisionAlgorithm(IntEnum):
     """
 
 
-class FieldCombination(Enum):
+class FieldCombination(FlexibleEnum):
     """
-    Controls how cell size fields are combined when they are found at the
-    same location.
+    Controls how cell size fields are combined in Gmsh when they are found at
+    the same location.
     """
 
     MIN = "Min"
@@ -115,8 +118,8 @@ class FieldCombination(Enum):
     """Use the mean size."""
 
 
-class GeneralVerbosity(IntEnum):
-    """Level of information printed."""
+class GeneralVerbosity(FlexibleEnum):
+    """Gmsh level of information printed."""
 
     SILENT = 0
     """No output is printed. All messages are suppressed."""

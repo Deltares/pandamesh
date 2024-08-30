@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import functools
 import operator
-from enum import Enum, IntEnum
 from typing import Any, Sequence, Tuple
 
 import geopandas as gpd
@@ -79,14 +78,6 @@ def flatten_geometries(geometries: Sequence) -> GeometryArray:
     for geom in geometries:
         flattened.extend(flatten_geometry(geom))
     return np.array(flattened)
-
-
-def _show_options(options: Enum) -> str:
-    return "\n".join(map(str, options))
-
-
-def invalid_option(value: Any, options: Enum | IntEnum) -> str:
-    return f"Invalid option: {value}. Valid options are:\n{_show_options(options)}"
 
 
 def check_geodataframe(features: gpd.GeoDataFrame) -> None:

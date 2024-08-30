@@ -1,7 +1,7 @@
-from enum import Enum
+from pandamesh.enum_base import FlexibleEnum
 
 
-class DelaunayAlgorithm(Enum):
+class DelaunayAlgorithm(FlexibleEnum):
     """The type of Delaunay algorithm for Triangle."""
 
     DIVIDE_AND_CONQUER = ""

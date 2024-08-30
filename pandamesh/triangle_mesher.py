@@ -7,7 +7,6 @@ from pandamesh.common import (
     FloatArray,
     IntArray,
     check_geodataframe,
-    invalid_option,
     repr,
     separate,
 )
@@ -151,9 +150,8 @@ class TriangleMesher(MesherBase):
         return self._delaunay_algorithm
 
     @delaunay_algorithm.setter
-    def delaunay_algorithm(self, value: DelaunayAlgorithm):
-        if value not in DelaunayAlgorithm:
-            raise ValueError(invalid_option(value, DelaunayAlgorithm))
+    def delaunay_algorithm(self, value: Union[DelaunayAlgorithm, str]):
+        value = DelaunayAlgorithm.from_value(value)
         self._delaunay_algorithm = value
 
     @property
