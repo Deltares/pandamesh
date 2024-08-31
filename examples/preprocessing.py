@@ -264,7 +264,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 polygon0_coords = shapely.get_coordinates(resolved.geometry[0])
 
 fig, ax = plt.subplots(figsize=(5, 5))
@@ -283,7 +283,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 polygon0_coords = shapely.get_coordinates(resolved.geometry[0])
 
 fig, ax = plt.subplots(figsize=(5, 5))
@@ -302,7 +302,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 
 fig, ax = plt.subplots(figsize=(5, 5))
 pm.plot(vertices, faces, ax=ax)
@@ -324,7 +324,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 
 fig, ax = plt.subplots(figsize=(5, 5))
 pm.plot(vertices, faces, ax=ax)
@@ -345,7 +345,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 pm.plot(vertices, faces)
 
 # %%
@@ -359,7 +359,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 pm.plot(vertices, faces)
 
 # %%

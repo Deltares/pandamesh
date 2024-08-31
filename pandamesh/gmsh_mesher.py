@@ -651,9 +651,14 @@ class GmshMesher(MesherBase):
         # convert to 0-based index
         return faces - 1
 
-    def generate(self) -> Tuple[FloatArray, IntArray]:
+    def generate(self, finalize: bool = False) -> Tuple[FloatArray, IntArray]:
         """
         Generate a mesh of triangles or quadrangles.
+
+        Parameters
+        ----------
+        finalize: bool, default False
+            Automatically finalize after generating.
 
         Returns
         -------
@@ -674,7 +679,10 @@ class GmshMesher(MesherBase):
         gmsh.model.mesh.renumberElements()
         gmsh.model.mesh.renumberNodes()
 
-        return self._vertices(), self._faces()
+        vertices, faces = self._vertices(), self._faces()
+        if finalize:
+            self.finalize()
+        return vertices, faces
 
     def write(self, path: Union[str, pathlib.Path]):
         """

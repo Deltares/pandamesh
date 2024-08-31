@@ -51,6 +51,9 @@ def test_singleton_gmsh_mesher():
     with pytest.raises(RuntimeError, match="This GmshMesher has been finalized"):
         mesher.generate()
 
+    new_mesher.generate(finalize=True)
+    assert not new_mesher._intialized
+
 
 def bounds(vertices):
     x, y = vertices.T
