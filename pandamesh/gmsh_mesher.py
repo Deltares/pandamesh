@@ -15,6 +15,8 @@ from pandamesh.common import (
     move_origin,
     repr,
     separate_geodataframe,
+    to_geodataframe,
+    to_ugrid,
 )
 from pandamesh.gmsh_enums import (
     FieldCombination,
@@ -31,7 +33,6 @@ from pandamesh.gmsh_fields import (
     ThresholdField,
 )
 from pandamesh.gmsh_geometry import add_distance_geometry, add_geometry
-from pandamesh.mesher_base import MesherBase
 
 
 @contextmanager
@@ -49,7 +50,7 @@ def gmsh_env(read_config_files: bool = True, interruptible: bool = True):
         gmsh.finalize()
 
 
-class GmshMesher(MesherBase):
+class GmshMesher:
     """
     Wrapper for the python bindings to Gmsh. This class must be initialized
     with a geopandas GeoDataFrame containing at least one polygon, and a column
@@ -683,6 +684,36 @@ class GmshMesher(MesherBase):
         if finalize:
             self.finalize()
         return vertices, faces
+
+    def generate_geodataframe(self, finalize: bool = False) -> gpd.GeoDataFrame:
+        """
+        Generate a mesh and return it as a geopandas GeoDataFrame.
+
+        Parameters
+        ----------
+        finalize: bool, default False
+            Automatically finalize after generating.
+
+        Returns
+        -------
+        mesh: geopandas.GeoDataFrame
+        """
+        return to_geodataframe(*self.generate(finalize=finalize))
+
+    def generate_ugrid(self, finalize: bool = False) -> "xugrid.Ugrid2d":  # type: ignore # noqa  pragma: no cover
+        """
+        Generate a mesh and return it as an xugrid Ugrid2d.
+
+        Parameters
+        ----------
+        finalize: bool, default False
+            Automatically finalize after generating.
+
+        Returns
+        -------
+        mesh: xugrid.Ugrid2d
+        """
+        return to_ugrid(*self.generate(finalize=finalize))
 
     def write(self, path: Union[str, pathlib.Path]):
         """

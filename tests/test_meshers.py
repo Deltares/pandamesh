@@ -52,7 +52,7 @@ def test_singleton_gmsh_mesher():
         mesher.generate()
 
     new_mesher.generate(finalize=True)
-    assert not new_mesher._intialized
+    assert not new_mesher._initialized
 
 
 def bounds(vertices):

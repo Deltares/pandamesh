@@ -34,6 +34,8 @@ Added
   :meth:`pandamesh.GmshMesher.add_structured_field`, and
   :meth:`pandamesh.GmshMesher.add_structured_field_from_dataarray` to enable
   Gmsh fields from geometry or from raster data.
+- Added ``finalize`` keyword to :meth:`pandamesh.GmshMesher.generate` to
+  automatically finalize after mesh generation.
 
 Changed
 ~~~~~~~
