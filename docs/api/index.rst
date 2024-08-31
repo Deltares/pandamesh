@@ -75,6 +75,7 @@ Gmsh
     GmshMesher.add_matheval_distance_field
     GmshMesher.add_threshold_distance_field
     GmshMesher.add_structured_field
+    GmshMesher.add_structured_field_from_dataarray
     GmshMesher.fields
     GmshMesher.clear_fields
     GmshMesher.write
