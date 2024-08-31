@@ -11,6 +11,7 @@ line_coords = np.array([(2.0, 8.0), (8.0, 2.0)])
 inner = sg.LinearRing(inner_coords)
 outer = sg.LinearRing(outer_coords)
 line = sg.LineString(line_coords)
+polygon = sg.Polygon(outer)
 donut = sg.Polygon(outer, holes=[inner])
 
 other_inner_coords = np.array([(3.0, 4.0), (7.0, 4.0), (7.0, 6.0), (3.0, 6.0)])
@@ -29,6 +30,29 @@ other_hole_coords = np.array(
 )
 other_hole = sg.LinearRing(other_hole_coords)
 other_donut = sg.Polygon(outer, holes=[other_hole])
+
+
+def test_singleton_gmsh_mesher():
+    pm.GmshMesher.finalize()
+
+    gdf = gpd.GeoDataFrame(geometry=[donut])
+    gdf["cellsize"] = 1.0
+    mesher = pm.GmshMesher(gdf)
+
+    with pytest.raises(
+        RuntimeError, match="Multiple GmshMesher instances are not allowed"
+    ):
+        pm.GmshMesher(gdf)
+
+    mesher.finalize()
+    new_mesher = pm.GmshMesher(gdf)
+    assert isinstance(new_mesher, pm.GmshMesher)
+
+    with pytest.raises(RuntimeError, match="This GmshMesher has been finalized"):
+        mesher.generate()
+
+    new_mesher.generate(finalize=True)
+    assert not new_mesher._initialized
 
 
 def bounds(vertices):
@@ -53,8 +77,9 @@ def triangle_generate(gdf: gpd.GeoDataFrame, shift: bool):
 
 
 def gmsh_generate(gdf: gpd.GeoDataFrame, shift: bool):
-    mesher = pm.GmshMesher(gdf, shift_origin=shift)
-    return mesher.generate()
+    mesher = pm.GmshMesher._force_init(gdf, shift_origin=shift)
+    vertices, faces = mesher.generate()
+    return vertices, faces
 
 
 @pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
@@ -68,7 +93,6 @@ def test_empty(generate, shift):
 @pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
 @pytest.mark.parametrize("shift", [False, True])
 def test_basic(generate, shift):
-    polygon = sg.Polygon(outer)
     gdf = gpd.GeoDataFrame(geometry=[polygon])
     gdf["cellsize"] = 1.0
     vertices, triangles = generate(gdf, shift)
@@ -85,6 +109,17 @@ def test_hole(generate, shift):
     vertices, triangles = generate(gdf, shift)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, donut.area)
+    assert np.allclose(bounds(vertices), gdf.total_bounds)
+
+
+@pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
+@pytest.mark.parametrize("shift", [False, True])
+def test_ring(generate, shift):
+    gdf = gpd.GeoDataFrame(geometry=[polygon, inner])
+    gdf["cellsize"] = 1.0
+    vertices, triangles = generate(gdf, shift)
+    mesh_area = area(vertices, triangles).sum()
+    assert np.allclose(mesh_area, polygon.area)
     assert np.allclose(bounds(vertices), gdf.total_bounds)
 
 
@@ -181,35 +216,35 @@ def test_triangle_properties():
 def test_gmsh_properties():
     gdf = gpd.GeoDataFrame(geometry=[donut])
     gdf["cellsize"] = 1.0
-    mesher = pm.GmshMesher(gdf)
+    mesher = pm.GmshMesher._force_init(gdf)
 
     # Set default values for meshing parameters
     mesher.mesh_algorithm = pm.MeshAlgorithm.FRONTAL_DELAUNAY
     mesher.recombine_all = False
-    # mesher.force_geometry = True  # not implemented yet
     mesher.mesh_size_extend_from_boundary = False
     mesher.mesh_size_from_points = False
     mesher.mesh_size_from_curvature = True
-    mesher.field_combination = pm.FieldCombination.MEAN
+    mesher.field_combination = pm.FieldCombination.MAX
     mesher.subdivision_algorithm = pm.SubdivisionAlgorithm.BARYCENTRIC
+    mesher.general_verbosity = pm.GeneralVerbosity.ERRORS
 
     assert mesher.mesh_algorithm == pm.MeshAlgorithm.FRONTAL_DELAUNAY
     assert mesher.recombine_all is False
-    # assert mesher.force_geometry = True  # not implemented yet
     assert mesher.mesh_size_extend_from_boundary is False
     assert mesher.mesh_size_from_points is False
     assert mesher.mesh_size_from_curvature is True
-    assert mesher.field_combination == pm.FieldCombination.MEAN
+    assert mesher.field_combination == pm.FieldCombination.MAX
     assert mesher.subdivision_algorithm == pm.SubdivisionAlgorithm.BARYCENTRIC
+    assert mesher.general_verbosity == pm.GeneralVerbosity.ERRORS
+
+    # Check whether the repr method works
+    assert isinstance(mesher.__repr__(), str)
 
     with pytest.raises(ValueError):
         mesher.mesh_algorithm = "a"
 
     with pytest.raises(TypeError):
         mesher.recombine_all = "a"
-
-    with pytest.raises(TypeError):
-        mesher.force_geometry = "a"
 
     with pytest.raises(TypeError):
         mesher.mesh_size_extend_from_boundary = "a"
@@ -233,7 +268,7 @@ def test_gmsh_properties():
 def test_gmsh_write(tmp_path):
     gdf = gpd.GeoDataFrame(geometry=[donut])
     gdf["cellsize"] = 1.0
-    mesher = pm.GmshMesher(gdf)
+    mesher = pm.GmshMesher._force_init(gdf)
     path = tmp_path / "a.msh"
     mesher.write(path)
     assert path.exists()
@@ -244,7 +279,7 @@ def test_gmsh_write(tmp_path):
 def test_gmsh_initialization_kwargs(read_config_files, interruptible):
     gdf = gpd.GeoDataFrame(geometry=[donut])
     gdf["cellsize"] = 1.0
-    mesher = pm.GmshMesher(
+    mesher = pm.GmshMesher._force_init(
         gdf, read_config_files=read_config_files, interruptible=interruptible
     )
     vertices, triangles = mesher.generate()
@@ -260,7 +295,7 @@ def test_generate_geodataframe():
     assert isinstance(result, gpd.GeoDataFrame)
     assert np.allclose(result.area.sum(), donut.area)
 
-    mesher = pm.GmshMesher(gdf)
+    mesher = pm.GmshMesher._force_init(gdf)
     result = mesher.generate_geodataframe()
     assert isinstance(result, gpd.GeoDataFrame)
     assert np.allclose(result.area.sum(), donut.area)

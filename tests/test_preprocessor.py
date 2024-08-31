@@ -155,30 +155,6 @@ def test_merge_polyons():
     assert (shapely.get_type_id(merged) == 3).all()
 
 
-def test_separate():
-    point = sg.Point([0.0, 0.0])
-    ring = inner.exterior
-
-    bad = np.array([sg.MultiPolygon([inner, second]), point])
-    with pytest.raises(TypeError, match="Geometry should be one of"):
-        pr.separate(bad)
-
-    geometry = np.array(
-        [
-            point,
-            outer,
-            first_line,
-            ring,
-            inner,
-            second_line,
-        ]
-    )
-    polygons, lines, points = pr.separate(geometry)
-    assert all(polygons == [outer, inner])
-    assert all(lines == [first_line, ring, second_line])
-    assert all(points == [point])
-
-
 def test_preprocessor_init():
     geometry = [outer]
     values = [1.0, 2.0]

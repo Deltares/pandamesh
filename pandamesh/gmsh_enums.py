@@ -114,8 +114,6 @@ class FieldCombination(FlexibleEnum):
     """Use the minimum size."""
     MAX = "Max"
     """Use the maximum size."""
-    MEAN = "Mean"
-    """Use the mean size."""
 
 
 class GeneralVerbosity(FlexibleEnum):

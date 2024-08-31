@@ -9,14 +9,15 @@ from pandamesh.common import (
     central_origin,
     check_geodataframe,
     repr,
-    separate,
+    separate_geodataframe,
+    to_geodataframe,
+    to_ugrid,
 )
-from pandamesh.mesher_base import MesherBase
 from pandamesh.triangle_enums import DelaunayAlgorithm
 from pandamesh.triangle_geometry import collect_geometry, polygon_holes
 
 
-class TriangleMesher(MesherBase):
+class TriangleMesher:
     """
     Wrapper for the python bindings to Triangle. This class must be initialized
     with a geopandas GeoDataFrame containing at least one polygon, and a column
@@ -63,9 +64,9 @@ class TriangleMesher(MesherBase):
     """
 
     def __init__(self, gdf: gpd.GeoDataFrame, shift_origin: bool = True) -> None:
-        check_geodataframe(gdf)
+        check_geodataframe(gdf, {"geometry", "cellsize"}, check_index=True)
         gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
-        polygons, linestrings, points = separate(gdf)
+        polygons, linestrings, points = separate_geodataframe(gdf)
         self.vertices, self.segments, self.regions = collect_geometry(
             polygons, linestrings, points
         )
@@ -213,3 +214,23 @@ class TriangleMesher(MesherBase):
         vertices[:, 0] += self._xoff
         vertices[:, 1] += self._yoff
         return vertices, result["triangles"]
+
+    def generate_geodataframe(self) -> gpd.GeoDataFrame:
+        """
+        Generate a mesh and return it as a geopandas GeoDataFrame.
+
+        Returns
+        -------
+        mesh: geopandas.GeoDataFrame
+        """
+        return to_geodataframe(*self.generate())
+
+    def generate_ugrid(self) -> "xugrid.Ugrid2d":  # type: ignore # noqa  pragma: no cover
+        """
+        Generate a mesh and return it as an xugrid Ugrid2d.
+
+        Returns
+        -------
+        mesh: xugrid.Ugrid2d
+        """
+        return to_ugrid(*self.generate())

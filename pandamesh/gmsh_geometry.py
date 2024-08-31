@@ -3,9 +3,10 @@ from typing import List, NamedTuple, Tuple, Union
 import geopandas as gpd
 import numpy as np
 import pandas as pd
+import shapely
 import shapely.geometry as sg
 
-from pandamesh.common import FloatArray, IntArray, coord_dtype, flatten, gmsh, separate
+from pandamesh.common import FloatArray, IntArray, coord_dtype, gmsh, separate_geometry
 
 Z_DEFAULT = 0.0
 POINT_DIM = 0
@@ -168,7 +169,7 @@ def embed_where(gdf: gpd.GeoDataFrame, polygons: gpd.GeoDataFrame) -> gpd.GeoDat
 
 def add_geometry(
     polygons: gpd.GeoDataFrame, linestrings: gpd.GeoDataFrame, points: gpd.GeoDataFrame
-):
+) -> None:
     if len(polygons) == 0:
         raise ValueError("No polygons provided")
     # Assign unique ids
@@ -220,48 +221,63 @@ def add_geometry(
             gmsh.model.mesh.embed(POINT_DIM, embed_indices, PLANE_DIM, polygon_id)
 
     gmsh.model.geo.synchronize()
+    return
 
 
-def add_field_points(points: gpd.GeoSeries) -> IntArray:
+def add_distance_points(points: gpd.GeoSeries) -> IntArray:
     indices = np.empty(len(points), dtype=np.int64)
-    xy_coords = np.stack((points.x, points.y), axis=1)
-    for i, (x, y) in enumerate(xy_coords):
+    for i, (x, y) in enumerate(shapely.get_coordinates(points)):
         indices[i] = gmsh.model.geo.addPoint(x, y, Z_DEFAULT)
     return indices
 
 
-def add_field_linestring(
-    linestring: sg.LineString, minimum_cellsize: float
+def add_distance_linestring(
+    linestring: sg.LineString,
+    distance: float,
 ) -> IntArray:
-    n_vertices = int(np.ceil(linestring.length / minimum_cellsize))
-    indices = np.empty(n_vertices, dtype=np.int64)
-    for i, distance in enumerate(np.linspace(0.0, linestring.length, n_vertices)):
-        point = linestring.interpolate(distance)
-        indices[i] = gmsh.model.geo.addPoint(point.x, point.y, Z_DEFAULT)
+    # We could add the line as a Gmsh curve, but Gmsh samples along the line
+    # anyway, and the number of points is configured through a discrete
+    # sampling value, rather than some spacing distance. So we might as well
+    # sample ourselves.
+    length = linestring.length
+    n = int(np.ceil(length / distance))
+    interpolated = shapely.get_coordinates(
+        shapely.line_interpolate_point(linestring, distance=np.linspace(0.0, length, n))
+    )
+    indices = np.empty(len(interpolated), dtype=np.int64)
+    for i, (x, y) in enumerate(interpolated):
+        indices[i] = gmsh.model.geo.addPoint(x, y, Z_DEFAULT)
     return indices
 
 
-def add_field_linestrings(
-    linestrings: gpd.GeoSeries, minimum_cellsize: float
+def add_distance_linestrings(
+    linestrings: gpd.GeoSeries,
+    spacing: FloatArray,
 ) -> IntArray:
     indices = [
-        add_field_linestring(linestring, minimum_cellsize) for linestring in linestrings
+        add_distance_linestring(linestring, distance)
+        for linestring, distance in zip(linestrings, spacing)
     ]
     return np.concatenate(indices)
 
 
-def add_field_polygons(polygons: gpd.GeoSeries, minimum_cellsize: float) -> IntArray:
+def add_distance_polygons(polygons: gpd.GeoSeries, spacing: FloatArray) -> IntArray:
     indices = []
-    for exterior in polygons.exteriors:
-        indices.append(add_field_linestring(exterior, minimum_cellsize))
-    for interior in flatten(polygons.interiors):
-        indices.append(add_field_linestring(interior, minimum_cellsize))
+    for polygon, distance in zip(polygons, spacing):
+        indices.append(add_distance_linestring(polygon.exterior, distance))
+        for interior in polygon.interiors:
+            indices.append(add_distance_linestring(interior, distance))
     return np.concatenate(indices)
 
 
-def add_field_geometry(geometry: gpd.GeoSeries, minimum_cellsize: float) -> IntArray:
-    polygons, linestrings, points = separate(geometry)
-    point_nodes = add_field_points(points)
-    linestring_nodes = add_field_linestrings(linestrings, minimum_cellsize)
-    polygon_nodes = add_field_polygons(polygons, minimum_cellsize)
-    return np.concatenate((point_nodes, linestring_nodes, polygon_nodes))
+def add_distance_geometry(geometry: gpd.GeoSeries, spacing: FloatArray) -> IntArray:
+    polygons, lines, points = separate_geometry(geometry)
+    indices = []
+    if len(points) > 0:
+        indices.append(add_distance_points(points))
+    if len(lines) > 0:
+        indices.append(add_distance_linestrings(lines, spacing))
+    if len(polygons) > 0:
+        indices.append(add_distance_polygons(polygons, spacing))
+    gmsh.model.geo.synchronize()
+    return np.concatenate(indices)

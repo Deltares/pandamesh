@@ -1,14 +1,17 @@
-import pathlib
 import struct
-from typing import List, Tuple, Union
+import tempfile
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import List, Optional, Union
 
 import numpy as np
 
-from pandamesh.common import FloatArray, gmsh
+from pandamesh.common import FloatArray, IntArray, gmsh
+from pandamesh.gmsh_enums import FieldCombination
 
 
 def write_structured_field_file(
-    path: Union[pathlib.Path, str],
+    path: Union[Path, str],
     cellsize: FloatArray,
     xmin: float,
     ymin: float,
@@ -56,88 +59,118 @@ def write_structured_field_file(
         f.write(struct.pack("3d", xmin, ymin, 0.0))
         f.write(struct.pack("3d", dx, dy, 1.0))
         f.write(struct.pack("3i", nrow, ncol, 1))
-        cellsize.tofile(f)
+        cellsize.T.tofile(f)
+    return
 
 
-def add_distance_field(
-    nodes_list: List[int],
-    edges_list: List[int],
-    n_nodes_by_edge: int,
-    field_id: int,
-) -> None:
-    gmsh.model.mesh.field.add("Distance", field_id)
-    gmsh.model.mesh.field.setNumbers(field_id, "NodesList", nodes_list)
-    gmsh.model.mesh.field.setNumbers(field_id, "NNodesByEdge", n_nodes_by_edge)
-    gmsh.model.mesh.field.setNumbers(field_id, "EdgesList", edges_list)
-    return None
+class GmshField:
+    def remove_from_gmsh(self):
+        gmsh.model.mesh.field.remove(self.id)
 
 
-def validate_field(field: dict, spec: List[Tuple[str, type]]) -> None:
-    for key, dtype in spec:
-        fieldtype = field["type"]
-        if key not in field:
-            raise KeyError(f'Key "{key}" is missing for field {fieldtype}')
-        if not isinstance(field[key], dtype):
-            raise TypeError(
-                f"Entry {key} must be of type {dtype} for field {fieldtype}, "
-                f"received instead: {type(field[key])}"
+class DistanceFunctionField(GmshField):
+    def remove_from_gmsh(self):
+        self.distance_field.remove_from_gmsh()
+        super().remove_from_gmsh()
+
+
+@dataclass
+class DistanceField(GmshField):
+    point_list: IntArray
+    id: int = field(init=False)
+
+    def __post_init__(self):
+        self.id = gmsh.model.mesh.field.add("Distance")
+        gmsh.model.mesh.field.setNumbers(self.id, "PointsList", self.point_list)
+
+
+@dataclass
+class MathEvalField(DistanceFunctionField):
+    distance_field: DistanceField
+    function: str
+    id: int = field(init=False)
+
+    def __post_init__(self):
+        if "distance" not in self.function:
+            raise ValueError(
+                f"distance not in MathEval field function: {self.function}"
             )
+        self.id = gmsh.model.mesh.field.add("MathEval")
+        distance_function = self.function.replace(
+            "distance", f"F{self.distance_field.id}"
+        )
+        gmsh.model.mesh.field.setString(self.id, "F", distance_function)
 
 
-def add_math_eval_field(field: dict, distance_id: int, field_id: int) -> None:
-    function = field["function"]
-    if "{distance}" not in function:
-        raise ValueError("{distance} not in MathEval field function")
-    gmsh.model.mesh.field.add("MathEval", field_id)
-    distance = f"F{distance_id}"
-    gmsh.model.mesh.field.setString(field_id, "F", function.format(distance=distance))
+@dataclass
+class ThresholdField(DistanceFunctionField):
+    distance_field: DistanceField
+    size_min: float
+    size_max: float
+    dist_min: float
+    dist_max: float
+    sigmoid: bool = False
+    stop_at_dist_max: bool = False
+    id: int = field(init=False)
+
+    def __post_init__(self):
+        self.id = gmsh.model.mesh.field.add("Threshold")
+        gmsh.model.mesh.field.setNumber(self.id, "InField", self.distance_field.id)
+        gmsh.model.mesh.field.setNumber(self.id, "SizeMin", self.size_min)
+        gmsh.model.mesh.field.setNumber(self.id, "SizeMax", self.size_max)
+        gmsh.model.mesh.field.setNumber(self.id, "DistMin", self.dist_min)
+        gmsh.model.mesh.field.setNumber(self.id, "DistMax", self.dist_max)
+        gmsh.model.mesh.field.setNumber(self.id, "Sigmoid", self.sigmoid)
+        gmsh.model.mesh.field.setNumber(self.id, "StopAtDistMax", self.stop_at_dist_max)
 
 
-def add_threshold_field(
-    field: dict,
-    field_id: int,
-    distance_id: int,
-) -> None:
-    gmsh.model.mesh.field.add("Threshold", field_id)
-    gmsh.model.mesh.field.setNumber(field_id, "IField", distance_id)
-    gmsh.model.mesh.field.setNumber(field_id, "LcMin", field["lc_min"])
-    gmsh.model.mesh.field.setNumber(field_id, "LcMax", field["lc_max"])
-    gmsh.model.mesh.field.setNumber(field_id, "DistMin", field["dist_min"])
-    gmsh.model.mesh.field.setNumber(field_id, "DistMax", field["dist_max"])
-    gmsh.model.mesh.field.setNumber(
-        field_id, "StopAtDistMax", field["stop_at_dist_max"]
-    )
-    gmsh.model.mesh.field.setNumber(field_id, "Sigmoid", field["sigmoid"])
+@dataclass
+class StructuredField(GmshField):
+    tmpdir: tempfile.TemporaryDirectory
+    cellsize: FloatArray
+    xmin: float
+    ymin: float
+    dx: float
+    dy: float
+    outside_value: Optional[float] = None
+    id: int = field(init=False)
+    path: str = field(init=False)
+    set_outside_value: bool = field(init=False)
+
+    def __post_init__(self):
+        min_value = self.cellsize.min()
+        if not (min_value > 0):  # will also catch NaN
+            raise ValueError(f"Minimum cellsize must be > 0, received: {min_value}")
+
+        if self.outside_value is not None:
+            self.set_outside_value = True
+            self.outside_value = self.outside_value
+        else:
+            self.set_outside_value = False
+            self.outside_value = -1.0
+
+        self.id = gmsh.model.mesh.field.add("Structured")
+        self.path = Path(self.tmpdir.name) / f"structured_field_{self.id}.dat"
+        write_structured_field_file(
+            self.path, self.cellsize, self.xmin, self.ymin, self.dx, self.dy
+        )
+        gmsh.model.mesh.field.setNumber(self.id, "TextFormat", 0)  # binary
+        gmsh.model.mesh.field.setString(self.id, "FileName", str(self.path))
+        gmsh.model.mesh.field.setNumber(
+            self.id, "SetOutsideValue", self.set_outside_value
+        )
+        gmsh.model.mesh.field.setNumber(self.id, "OutsideValue", self.outside_value)
 
 
-def add_structured_field(
-    cellsize: FloatArray,
-    xmin: float,
-    ymin: float,
-    dx: float,
-    dy: float,
-    outside_value: float,
-    set_outside_value: bool,
-    field_id: int,
-    path: str,
-) -> None:
-    write_structured_field_file(path, cellsize, xmin, ymin, dx, dy)
-    gmsh.model.mesh.field.add("Structured", field_id)
-    gmsh.model.mesh.field.setNumber(field_id, "TextFormat", 0)
-    gmsh.model.mesh.field.setString(field_id, "FileName", path)
+@dataclass
+class CombinationField(GmshField):
+    fields: List[GmshField]
+    combination: FieldCombination
+    id: int = field(init=False)
+    fields_list: List[int] = field(init=False)
 
-
-MATHEVAL_SPEC = [("function", str)]
-
-THRESHOLD_SPEC = [
-    ("dist_max", float),
-    ("dist_min", float),
-    ("lc_max", float),
-    ("lc_min", float),
-    ("sigmoid", bool),
-]
-
-FIELDS = {
-    "matheval": (MATHEVAL_SPEC, add_math_eval_field),
-    "threshold": (THRESHOLD_SPEC, add_threshold_field),
-}
+    def __post_init__(self):
+        self.id = gmsh.model.mesh.field.add(self.combination.value)
+        self.fields_list = [field.id for field in self.fields]
+        gmsh.model.mesh.field.setNumbers(self.id, "FieldsList", self.fields_list)
+        gmsh.model.mesh.field.setAsBackgroundMesh(self.id)

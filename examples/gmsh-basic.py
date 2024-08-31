@@ -1,6 +1,6 @@
 """
 Basic Gmsh Example
-======================
+==================
 
 In this example we'll create some basic geometries and turn them into meshes.
 to illustrate some of the mesh generation features that Gmsh provides in
@@ -17,6 +17,10 @@ import numpy as np
 import shapely.geometry as sg
 
 import pandamesh as pm
+
+# sphinx_gallery_start_ignore
+pm.GmshMesher.finalize()
+# sphinx_gallery_end_ignore
 
 # %%
 # A simple rectangular mesh
@@ -45,6 +49,12 @@ gdf["cellsize"] = 2.0
 mesher = pm.GmshMesher(gdf)
 vertices, triangles = mesher.generate()
 pm.plot(vertices, triangles)
+
+# %%
+# Before we can instantiate another GmshMesher, we need to ``finalize`` the old
+# one.
+
+mesher.finalize()
 
 # %%
 # As the name suggests, Triangle only generates triangular meshes. Gmsh is
@@ -78,6 +88,8 @@ pm.plot(vertices, triangles, ax=ax1)
 
 print(mesher)
 
+mesher.finalize()
+
 # %%
 # The parameters of Gmsh differ from Triangle, but they work the same: they can
 # be altered after initialization to control the triangulation.
@@ -108,12 +120,13 @@ gdf["cellsize"] = [2.0, 0.5, 2.0] + (len(points) * [2.0])
 
 mesher = pm.GmshMesher(gdf)
 vertices, triangles = mesher.generate()
+mesher.finalize()
 
 fig, ax = plt.subplots()
 pm.plot(vertices, triangles, ax=ax)
 gdf.plot(facecolor="none", edgecolor="red", ax=ax)
 
-# %%
+
 # Quadrilateral meshes
 # --------------------
 #
@@ -148,3 +161,5 @@ mesher.write("my-mesh.msh")
 # with associated cell sizes to steer the triangulation; unlike Triangle,
 # for Gmsh cell sizes can associated to linestrings and points, not just
 # polygons.
+
+# %%
