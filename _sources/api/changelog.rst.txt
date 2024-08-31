@@ -29,6 +29,13 @@ Added
 - Added :attr:`pandamesh.MeshAlgorithm.QUASI_STRUCTURED_QUAD` as an option.
 - Added :class:`pandamesh.Preprocessor` to assist in preparing and cleaning
   geospatial data prior to meshing.
+- Added :meth:`pandamesh.GmshMesher.add_threshold_distance_field`,
+  :meth:`pandamesh.GmshMesher.add_matheval_distance_field`,
+  :meth:`pandamesh.GmshMesher.add_structured_field`, and
+  :meth:`pandamesh.GmshMesher.add_structured_field_from_dataarray` to enable
+  Gmsh fields from geometry or from raster data.
+- Added ``finalize`` keyword to :meth:`pandamesh.GmshMesher.generate` to
+  automatically finalize after mesh generation.
 
 Changed
 ~~~~~~~
@@ -45,6 +52,11 @@ Changed
   a ``shift_origin`` argument to temporarily shift the coordinate system to the
   centroid of the geometries' bounding box to mitigate floating point precision
   problems. This is enabled by default.
+- :func:`pandamesh.gmsh_env` now finalizes an existing Gmsh instance prior to
+  initializing Gmsh anew.
+- :class:`pandamesh.TriangleMesher` and :class:`pandamesh.GmshMesher` will now
+  also accept LinearRing geometries (previously only Polygons, LineStrings, and
+  Points).
 
 [0.1.6] 2024-07-17
 ------------------

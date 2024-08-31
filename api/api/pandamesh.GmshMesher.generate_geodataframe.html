@@ -350,17 +350,20 @@
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.generate_ugrid.html">pandamesh.GmshMesher.generate_ugrid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_algorithm.html">pandamesh.GmshMesher.mesh_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.recombine_all.html">pandamesh.GmshMesher.recombine_all</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.force_geometry.html">pandamesh.GmshMesher.force_geometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_extend_from_boundary.html">pandamesh.GmshMesher.mesh_size_extend_from_boundary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_from_points.html">pandamesh.GmshMesher.mesh_size_from_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_from_curvature.html">pandamesh.GmshMesher.mesh_size_from_curvature</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.field_combination.html">pandamesh.GmshMesher.field_combination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.subdivision_algorithm.html">pandamesh.GmshMesher.subdivision_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.general_verbosity.html">pandamesh.GmshMesher.general_verbosity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_distance_field.html">pandamesh.GmshMesher.add_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_matheval_distance_field.html">pandamesh.GmshMesher.add_matheval_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_threshold_distance_field.html">pandamesh.GmshMesher.add_threshold_distance_field</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_structured_field.html">pandamesh.GmshMesher.add_structured_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_structured_field_from_dataarray.html">pandamesh.GmshMesher.add_structured_field_from_dataarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.fields.html">pandamesh.GmshMesher.fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.write.html">pandamesh.GmshMesher.write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.finalize.html">pandamesh.GmshMesher.finalize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.finalize_gmsh.html">pandamesh.GmshMesher.finalize_gmsh</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.gmsh_env.html">pandamesh.gmsh_env</a></li>
 </ul>
@@ -431,14 +434,17 @@
 <h1>pandamesh.GmshMesher.generate_geodataframe<a class="headerlink" href="#pandamesh-gmshmesher-generate-geodataframe" title="Link to this heading">#</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="pandamesh.GmshMesher.generate_geodataframe">
-<span class="sig-prename descclassname"><span class="pre">GmshMesher.</span></span><span class="sig-name descname"><span class="pre">generate_geodataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">GeoDataFrame</span></span></span><a class="headerlink" href="#pandamesh.GmshMesher.generate_geodataframe" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">GmshMesher.</span></span><span class="sig-name descname"><span class="pre">generate_geodataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">GeoDataFrame</span></span></span><a class="reference internal" href="../../_modules/pandamesh/gmsh_mesher.html#GmshMesher.generate_geodataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.GmshMesher.generate_geodataframe" title="Link to this definition">#</a></dt>
 <dd><p>Generate a mesh and return it as a geopandas GeoDataFrame.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>mesh</strong></p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>finalize</strong> (<em>bool</em><em>, </em><em>default False</em>) – Automatically finalize after generating.</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>geopandas.GeoDataFrame</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>mesh</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>geopandas.GeoDataFrame</p>
 </dd>
 </dl>
 </dd></dl>

@@ -350,17 +350,20 @@
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.generate_ugrid.html">pandamesh.GmshMesher.generate_ugrid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_algorithm.html">pandamesh.GmshMesher.mesh_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.recombine_all.html">pandamesh.GmshMesher.recombine_all</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.force_geometry.html">pandamesh.GmshMesher.force_geometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_extend_from_boundary.html">pandamesh.GmshMesher.mesh_size_extend_from_boundary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_points.html">pandamesh.GmshMesher.mesh_size_from_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_curvature.html">pandamesh.GmshMesher.mesh_size_from_curvature</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.field_combination.html">pandamesh.GmshMesher.field_combination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.subdivision_algorithm.html">pandamesh.GmshMesher.subdivision_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.general_verbosity.html">pandamesh.GmshMesher.general_verbosity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_distance_field.html">pandamesh.GmshMesher.add_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_matheval_distance_field.html">pandamesh.GmshMesher.add_matheval_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_threshold_distance_field.html">pandamesh.GmshMesher.add_threshold_distance_field</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_structured_field.html">pandamesh.GmshMesher.add_structured_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_structured_field_from_dataarray.html">pandamesh.GmshMesher.add_structured_field_from_dataarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.fields.html">pandamesh.GmshMesher.fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.write.html">pandamesh.GmshMesher.write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.finalize.html">pandamesh.GmshMesher.finalize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.finalize_gmsh.html">pandamesh.GmshMesher.finalize_gmsh</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.gmsh_env.html">pandamesh.gmsh_env</a></li>
 </ul>
@@ -520,16 +523,16 @@
 <h2>Gmsh<a class="headerlink" href="#gmsh" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher</span></code></a>(gdf[, shift_origin, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Wrapper for the python bindings to Gmsh.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.generate.html#pandamesh.GmshMesher.generate" title="pandamesh.GmshMesher.generate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.generate</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.generate.html#pandamesh.GmshMesher.generate" title="pandamesh.GmshMesher.generate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.generate</span></code></a>([finalize])</p></td>
 <td><p>Generate a mesh of triangles or quadrangles.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.generate_geodataframe.html#pandamesh.GmshMesher.generate_geodataframe" title="pandamesh.GmshMesher.generate_geodataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.generate_geodataframe</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.generate_geodataframe.html#pandamesh.GmshMesher.generate_geodataframe" title="pandamesh.GmshMesher.generate_geodataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.generate_geodataframe</span></code></a>([finalize])</p></td>
 <td><p>Generate a mesh and return it as a geopandas GeoDataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.generate_ugrid.html#pandamesh.GmshMesher.generate_ugrid" title="pandamesh.GmshMesher.generate_ugrid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.generate_ugrid</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.generate_ugrid.html#pandamesh.GmshMesher.generate_ugrid" title="pandamesh.GmshMesher.generate_ugrid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.generate_ugrid</span></code></a>([finalize])</p></td>
 <td><p>Generate a mesh and return it as an xugrid Ugrid2d.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_algorithm.html#pandamesh.GmshMesher.mesh_algorithm" title="pandamesh.GmshMesher.mesh_algorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.mesh_algorithm</span></code></a></p></td>
@@ -538,43 +541,52 @@
 <tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.recombine_all.html#pandamesh.GmshMesher.recombine_all" title="pandamesh.GmshMesher.recombine_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.recombine_all</span></code></a></p></td>
 <td><p>Apply recombination algorithm to all surfaces, ignoring per-surface spec.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.force_geometry.html#pandamesh.GmshMesher.force_geometry" title="pandamesh.GmshMesher.force_geometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.force_geometry</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_extend_from_boundary.html#pandamesh.GmshMesher.mesh_size_extend_from_boundary" title="pandamesh.GmshMesher.mesh_size_extend_from_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.mesh_size_extend_from_boundary</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_extend_from_boundary.html#pandamesh.GmshMesher.mesh_size_extend_from_boundary" title="pandamesh.GmshMesher.mesh_size_extend_from_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.mesh_size_extend_from_boundary</span></code></a></p></td>
 <td><p>Forces the mesh size to be extended from the boundary, or not, per surface.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_points.html#pandamesh.GmshMesher.mesh_size_from_points" title="pandamesh.GmshMesher.mesh_size_from_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.mesh_size_from_points</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_points.html#pandamesh.GmshMesher.mesh_size_from_points" title="pandamesh.GmshMesher.mesh_size_from_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.mesh_size_from_points</span></code></a></p></td>
 <td><p>Compute mesh element sizes from values given at geometry points.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_curvature.html#pandamesh.GmshMesher.mesh_size_from_curvature" title="pandamesh.GmshMesher.mesh_size_from_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.mesh_size_from_curvature</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_curvature.html#pandamesh.GmshMesher.mesh_size_from_curvature" title="pandamesh.GmshMesher.mesh_size_from_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.mesh_size_from_curvature</span></code></a></p></td>
 <td><p>Automatically compute mesh element sizes from curvature, using the value as the target number of elements per 2 * Pi radians.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.field_combination.html#pandamesh.GmshMesher.field_combination" title="pandamesh.GmshMesher.field_combination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.field_combination</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.field_combination.html#pandamesh.GmshMesher.field_combination" title="pandamesh.GmshMesher.field_combination"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.field_combination</span></code></a></p></td>
 <td><p>Controls how cell size fields are combined when they are found at the same location.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.subdivision_algorithm.html#pandamesh.GmshMesher.subdivision_algorithm" title="pandamesh.GmshMesher.subdivision_algorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.subdivision_algorithm</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.subdivision_algorithm.html#pandamesh.GmshMesher.subdivision_algorithm" title="pandamesh.GmshMesher.subdivision_algorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.subdivision_algorithm</span></code></a></p></td>
 <td><p>All meshes can be subdivided to generate fully quadrangular cells.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.general_verbosity.html#pandamesh.GmshMesher.general_verbosity" title="pandamesh.GmshMesher.general_verbosity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.general_verbosity</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.general_verbosity.html#pandamesh.GmshMesher.general_verbosity" title="pandamesh.GmshMesher.general_verbosity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.general_verbosity</span></code></a></p></td>
 <td><p>Controls level of information printed.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.clear_fields.html#pandamesh.GmshMesher.clear_fields" title="pandamesh.GmshMesher.clear_fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.clear_fields</span></code></a>()</p></td>
-<td><p>Clear all cell size fields from the mesher.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.add_matheval_distance_field.html#pandamesh.GmshMesher.add_matheval_distance_field" title="pandamesh.GmshMesher.add_matheval_distance_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.add_matheval_distance_field</span></code></a>(gdf)</p></td>
+<td><p>Add a matheval distance field to the mesher.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.add_distance_field.html#pandamesh.GmshMesher.add_distance_field" title="pandamesh.GmshMesher.add_distance_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.add_distance_field</span></code></a>(gdf, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.add_threshold_distance_field.html#pandamesh.GmshMesher.add_threshold_distance_field" title="pandamesh.GmshMesher.add_threshold_distance_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.add_threshold_distance_field</span></code></a>(gdf)</p></td>
 <td><p>Add a distance field to the mesher.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.add_structured_field.html#pandamesh.GmshMesher.add_structured_field" title="pandamesh.GmshMesher.add_structured_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.add_structured_field</span></code></a>(cellsize, ...)</p></td>
-<td><p>Add a structured field specifying cell sizes.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.add_structured_field.html#pandamesh.GmshMesher.add_structured_field" title="pandamesh.GmshMesher.add_structured_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.add_structured_field</span></code></a>(cellsize, ...)</p></td>
+<td><p>Add an equidistant structured field specifying cell sizes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.add_structured_field_from_dataarray.html#pandamesh.GmshMesher.add_structured_field_from_dataarray" title="pandamesh.GmshMesher.add_structured_field_from_dataarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.add_structured_field_from_dataarray</span></code></a>(da)</p></td>
+<td><p>Add an equidistant structured field specifying cell sizes from an xarray DataArray object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.fields.html#pandamesh.GmshMesher.fields" title="pandamesh.GmshMesher.fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.fields</span></code></a></p></td>
+<td><p>Read-only access to fields.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.clear_fields.html#pandamesh.GmshMesher.clear_fields" title="pandamesh.GmshMesher.clear_fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.clear_fields</span></code></a>()</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.write.html#pandamesh.GmshMesher.write" title="pandamesh.GmshMesher.write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.write</span></code></a>(path)</p></td>
 <td><p>Write a gmsh .msh file</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.finalize_gmsh.html#pandamesh.GmshMesher.finalize_gmsh" title="pandamesh.GmshMesher.finalize_gmsh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.finalize_gmsh</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.finalize.html#pandamesh.GmshMesher.finalize" title="pandamesh.GmshMesher.finalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.finalize</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.finalize_gmsh.html#pandamesh.GmshMesher.finalize_gmsh" title="pandamesh.GmshMesher.finalize_gmsh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher.finalize_gmsh</span></code></a>()</p></td>
 <td><p>Finalize Gmsh.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.gmsh_env.html#pandamesh.gmsh_env" title="pandamesh.gmsh_env"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gmsh_env</span></code></a>([read_config_files, interruptible])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.gmsh_env.html#pandamesh.gmsh_env" title="pandamesh.gmsh_env"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gmsh_env</span></code></a>([read_config_files, interruptible])</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -591,7 +603,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.GeneralVerbosity.html#pandamesh.GeneralVerbosity" title="pandamesh.GeneralVerbosity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeneralVerbosity</span></code></a>(value[, names, module, ...])</p></td>
 <td><p>Gmsh level of information printed.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher</span></code></a>(gdf[, shift_origin, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GmshMesher</span></code></a>(*args, **kwargs)</p></td>
 <td><p>Wrapper for the python bindings to Gmsh.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.MeshAlgorithm.html#pandamesh.MeshAlgorithm" title="pandamesh.MeshAlgorithm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeshAlgorithm</span></code></a>(value[, names, module, ...])</p></td>

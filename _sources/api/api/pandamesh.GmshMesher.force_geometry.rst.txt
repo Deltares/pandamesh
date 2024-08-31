@@ -1,6 +1,0 @@
-﻿pandamesh.GmshMesher.force\_geometry
-====================================
-
-.. currentmodule:: pandamesh
-
-.. autoproperty:: GmshMesher.force_geometry

@@ -29,6 +29,10 @@ import shapely.geometry as sg
 
 import pandamesh as pm
 
+# sphinx_gallery_start_ignore
+pm.GmshMesher.finalize()
+# sphinx_gallery_end_ignore
+
 # %%
 # Polygons
 # --------
@@ -156,7 +160,7 @@ second = sg.Polygon(
 gdf = gpd.GeoDataFrame(geometry=[first, second])
 gdf["cellsize"] = [4.0, 2.0]
 
-vertices, faces = pm.GmshMesher(gdf).generate()
+vertices, faces = pm.GmshMesher(gdf).generate(finalize=True)
 pm.plot(vertices, faces)
 
 # %%
@@ -260,7 +264,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 polygon0_coords = shapely.get_coordinates(resolved.geometry[0])
 
 fig, ax = plt.subplots(figsize=(5, 5))
@@ -279,7 +283,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 polygon0_coords = shapely.get_coordinates(resolved.geometry[0])
 
 fig, ax = plt.subplots(figsize=(5, 5))
@@ -298,7 +302,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 
 fig, ax = plt.subplots(figsize=(5, 5))
 pm.plot(vertices, faces, ax=ax)
@@ -320,7 +324,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 
 fig, ax = plt.subplots(figsize=(5, 5))
 pm.plot(vertices, faces, ax=ax)
@@ -341,7 +345,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 pm.plot(vertices, faces)
 
 # %%
@@ -355,7 +359,7 @@ resolved = (
     .to_geodataframe()
 ).rename(columns={"values": "cellsize"})
 
-vertices, faces = pm.GmshMesher(resolved).generate()
+vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 pm.plot(vertices, faces)
 
 # %%

@@ -350,17 +350,20 @@
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.generate_ugrid.html">pandamesh.GmshMesher.generate_ugrid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_algorithm.html">pandamesh.GmshMesher.mesh_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.recombine_all.html">pandamesh.GmshMesher.recombine_all</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.force_geometry.html">pandamesh.GmshMesher.force_geometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_extend_from_boundary.html">pandamesh.GmshMesher.mesh_size_extend_from_boundary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_from_points.html">pandamesh.GmshMesher.mesh_size_from_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_from_curvature.html">pandamesh.GmshMesher.mesh_size_from_curvature</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.field_combination.html">pandamesh.GmshMesher.field_combination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.subdivision_algorithm.html">pandamesh.GmshMesher.subdivision_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.general_verbosity.html">pandamesh.GmshMesher.general_verbosity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_distance_field.html">pandamesh.GmshMesher.add_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_matheval_distance_field.html">pandamesh.GmshMesher.add_matheval_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_threshold_distance_field.html">pandamesh.GmshMesher.add_threshold_distance_field</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_structured_field.html">pandamesh.GmshMesher.add_structured_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_structured_field_from_dataarray.html">pandamesh.GmshMesher.add_structured_field_from_dataarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.fields.html">pandamesh.GmshMesher.fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.write.html">pandamesh.GmshMesher.write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.finalize.html">pandamesh.GmshMesher.finalize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.finalize_gmsh.html">pandamesh.GmshMesher.finalize_gmsh</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.gmsh_env.html">pandamesh.gmsh_env</a></li>
 </ul>
@@ -446,12 +449,6 @@ the same location.</p>
 <dd><p>Use the maximum size.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="pandamesh.FieldCombination.MEAN">
-<span class="sig-name descname"><span class="pre">MEAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Mean'</span></em><a class="headerlink" href="#pandamesh.FieldCombination.MEAN" title="Link to this definition">#</a></dt>
-<dd><p>Use the mean size.</p>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -505,7 +502,6 @@ the same location.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.FieldCombination"><code class="docutils literal notranslate"><span class="pre">FieldCombination</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.FieldCombination.MIN"><code class="docutils literal notranslate"><span class="pre">FieldCombination.MIN</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.FieldCombination.MAX"><code class="docutils literal notranslate"><span class="pre">FieldCombination.MAX</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.FieldCombination.MEAN"><code class="docutils literal notranslate"><span class="pre">FieldCombination.MEAN</span></code></a></li>
 </ul>
 </li>
 </ul>

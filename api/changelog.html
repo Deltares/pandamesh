@@ -350,17 +350,20 @@
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.generate_ugrid.html">pandamesh.GmshMesher.generate_ugrid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_algorithm.html">pandamesh.GmshMesher.mesh_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.recombine_all.html">pandamesh.GmshMesher.recombine_all</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.force_geometry.html">pandamesh.GmshMesher.force_geometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_extend_from_boundary.html">pandamesh.GmshMesher.mesh_size_extend_from_boundary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_points.html">pandamesh.GmshMesher.mesh_size_from_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.mesh_size_from_curvature.html">pandamesh.GmshMesher.mesh_size_from_curvature</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.field_combination.html">pandamesh.GmshMesher.field_combination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.subdivision_algorithm.html">pandamesh.GmshMesher.subdivision_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.general_verbosity.html">pandamesh.GmshMesher.general_verbosity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_distance_field.html">pandamesh.GmshMesher.add_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_matheval_distance_field.html">pandamesh.GmshMesher.add_matheval_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_threshold_distance_field.html">pandamesh.GmshMesher.add_threshold_distance_field</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_structured_field.html">pandamesh.GmshMesher.add_structured_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.add_structured_field_from_dataarray.html">pandamesh.GmshMesher.add_structured_field_from_dataarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.fields.html">pandamesh.GmshMesher.fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.write.html">pandamesh.GmshMesher.write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.finalize.html">pandamesh.GmshMesher.finalize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.GmshMesher.finalize_gmsh.html">pandamesh.GmshMesher.finalize_gmsh</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.gmsh_env.html">pandamesh.gmsh_env</a></li>
 </ul>
@@ -455,6 +458,13 @@ generated meshes as geodataframes.</p></li>
 <li><p>Added <a class="reference internal" href="api/pandamesh.MeshAlgorithm.html#pandamesh.MeshAlgorithm.QUASI_STRUCTURED_QUAD" title="pandamesh.MeshAlgorithm.QUASI_STRUCTURED_QUAD"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pandamesh.MeshAlgorithm.QUASI_STRUCTURED_QUAD</span></code></a> as an option.</p></li>
 <li><p>Added <a class="reference internal" href="api/pandamesh.Preprocessor.html#pandamesh.Preprocessor" title="pandamesh.Preprocessor"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.Preprocessor</span></code></a> to assist in preparing and cleaning
 geospatial data prior to meshing.</p></li>
+<li><p>Added <a class="reference internal" href="api/pandamesh.GmshMesher.add_threshold_distance_field.html#pandamesh.GmshMesher.add_threshold_distance_field" title="pandamesh.GmshMesher.add_threshold_distance_field"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandamesh.GmshMesher.add_threshold_distance_field()</span></code></a>,
+<a class="reference internal" href="api/pandamesh.GmshMesher.add_matheval_distance_field.html#pandamesh.GmshMesher.add_matheval_distance_field" title="pandamesh.GmshMesher.add_matheval_distance_field"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandamesh.GmshMesher.add_matheval_distance_field()</span></code></a>,
+<a class="reference internal" href="api/pandamesh.GmshMesher.add_structured_field.html#pandamesh.GmshMesher.add_structured_field" title="pandamesh.GmshMesher.add_structured_field"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandamesh.GmshMesher.add_structured_field()</span></code></a>, and
+<a class="reference internal" href="api/pandamesh.GmshMesher.add_structured_field_from_dataarray.html#pandamesh.GmshMesher.add_structured_field_from_dataarray" title="pandamesh.GmshMesher.add_structured_field_from_dataarray"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandamesh.GmshMesher.add_structured_field_from_dataarray()</span></code></a> to enable
+Gmsh fields from geometry or from raster data.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">finalize</span></code> keyword to <a class="reference internal" href="api/pandamesh.GmshMesher.generate.html#pandamesh.GmshMesher.generate" title="pandamesh.GmshMesher.generate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandamesh.GmshMesher.generate()</span></code></a> to
+automatically finalize after mesh generation.</p></li>
 </ul>
 </section>
 <section id="changed">
@@ -472,6 +482,11 @@ or the enum member name as a string.</p></li>
 a <code class="docutils literal notranslate"><span class="pre">shift_origin</span></code> argument to temporarily shift the coordinate system to the
 centroid of the geometries’ bounding box to mitigate floating point precision
 problems. This is enabled by default.</p></li>
+<li><p><a class="reference internal" href="api/pandamesh.gmsh_env.html#pandamesh.gmsh_env" title="pandamesh.gmsh_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandamesh.gmsh_env()</span></code></a> now finalizes an existing Gmsh instance prior to
+initializing Gmsh anew.</p></li>
+<li><p><a class="reference internal" href="api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher" title="pandamesh.TriangleMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.TriangleMesher</span></code></a> and <a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GmshMesher</span></code></a> will now
+also accept LinearRing geometries (previously only Polygons, LineStrings, and
+Points).</p></li>
 </ul>
 </section>
 </section>

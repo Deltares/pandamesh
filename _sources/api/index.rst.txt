@@ -66,17 +66,20 @@ Gmsh
     GmshMesher.generate_ugrid
     GmshMesher.mesh_algorithm
     GmshMesher.recombine_all
-    GmshMesher.force_geometry
     GmshMesher.mesh_size_extend_from_boundary
     GmshMesher.mesh_size_from_points
     GmshMesher.mesh_size_from_curvature
     GmshMesher.field_combination
     GmshMesher.subdivision_algorithm
     GmshMesher.general_verbosity
-    GmshMesher.clear_fields
-    GmshMesher.add_distance_field
+    GmshMesher.add_matheval_distance_field
+    GmshMesher.add_threshold_distance_field
     GmshMesher.add_structured_field
+    GmshMesher.add_structured_field_from_dataarray
+    GmshMesher.fields
+    GmshMesher.clear_fields
     GmshMesher.write
+    GmshMesher.finalize
     GmshMesher.finalize_gmsh
     gmsh_env
 

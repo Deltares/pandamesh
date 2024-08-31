@@ -1,0 +1,6 @@
+﻿pandamesh.GmshMesher.add\_matheval\_distance\_field
+===================================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: GmshMesher.add_matheval_distance_field

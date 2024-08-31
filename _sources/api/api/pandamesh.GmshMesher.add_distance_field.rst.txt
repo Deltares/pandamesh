@@ -1,6 +1,0 @@
-﻿pandamesh.GmshMesher.add\_distance\_field
-=========================================
-
-.. currentmodule:: pandamesh
-
-.. automethod:: GmshMesher.add_distance_field

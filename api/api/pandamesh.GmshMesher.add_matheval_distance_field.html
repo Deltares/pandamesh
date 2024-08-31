@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pandamesh.GmshMesher.add_distance_field &#8212; pandamesh  documentation</title>
+    <title>pandamesh.GmshMesher.add_matheval_distance_field &#8212; pandamesh  documentation</title>
   
   
   
@@ -43,11 +43,11 @@
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/api/pandamesh.GmshMesher.add_distance_field';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/api/pandamesh.GmshMesher.add_matheval_distance_field';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pandamesh.GmshMesher.add_structured_field" href="pandamesh.GmshMesher.add_structured_field.html" />
-    <link rel="prev" title="pandamesh.GmshMesher.clear_fields" href="pandamesh.GmshMesher.clear_fields.html" />
+    <link rel="next" title="pandamesh.GmshMesher.add_threshold_distance_field" href="pandamesh.GmshMesher.add_threshold_distance_field.html" />
+    <link rel="prev" title="pandamesh.GmshMesher.general_verbosity" href="pandamesh.GmshMesher.general_verbosity.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -350,17 +350,20 @@
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.generate_ugrid.html">pandamesh.GmshMesher.generate_ugrid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_algorithm.html">pandamesh.GmshMesher.mesh_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.recombine_all.html">pandamesh.GmshMesher.recombine_all</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.force_geometry.html">pandamesh.GmshMesher.force_geometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_extend_from_boundary.html">pandamesh.GmshMesher.mesh_size_extend_from_boundary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_from_points.html">pandamesh.GmshMesher.mesh_size_from_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_from_curvature.html">pandamesh.GmshMesher.mesh_size_from_curvature</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.field_combination.html">pandamesh.GmshMesher.field_combination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.subdivision_algorithm.html">pandamesh.GmshMesher.subdivision_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.general_verbosity.html">pandamesh.GmshMesher.general_verbosity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">pandamesh.GmshMesher.add_distance_field</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">pandamesh.GmshMesher.add_matheval_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_threshold_distance_field.html">pandamesh.GmshMesher.add_threshold_distance_field</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_structured_field.html">pandamesh.GmshMesher.add_structured_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_structured_field_from_dataarray.html">pandamesh.GmshMesher.add_structured_field_from_dataarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.fields.html">pandamesh.GmshMesher.fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.write.html">pandamesh.GmshMesher.write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.finalize.html">pandamesh.GmshMesher.finalize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.finalize_gmsh.html">pandamesh.GmshMesher.finalize_gmsh</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.gmsh_env.html">pandamesh.gmsh_env</a></li>
 </ul>
@@ -427,22 +430,81 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="pandamesh-gmshmesher-add-distance-field">
-<h1>pandamesh.GmshMesher.add_distance_field<a class="headerlink" href="#pandamesh-gmshmesher-add-distance-field" title="Link to this heading">#</a></h1>
+  <section id="pandamesh-gmshmesher-add-matheval-distance-field">
+<h1>pandamesh.GmshMesher.add_matheval_distance_field<a class="headerlink" href="#pandamesh-gmshmesher-add-matheval-distance-field" title="Link to this heading">#</a></h1>
 <dl class="py method">
-<dt class="sig sig-object py" id="pandamesh.GmshMesher.add_distance_field">
-<span class="sig-prename descclassname"><span class="pre">GmshMesher.</span></span><span class="sig-name descname"><span class="pre">add_distance_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_cellsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/pandamesh/gmsh_mesher.html#GmshMesher.add_distance_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.GmshMesher.add_distance_field" title="Link to this definition">#</a></dt>
-<dd><p>Add a distance field to the mesher.</p>
+<dt class="sig sig-object py" id="pandamesh.GmshMesher.add_matheval_distance_field">
+<span class="sig-prename descclassname"><span class="pre">GmshMesher.</span></span><span class="sig-name descname"><span class="pre">add_matheval_distance_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/pandamesh/gmsh_mesher.html#GmshMesher.add_matheval_distance_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.GmshMesher.add_matheval_distance_field" title="Link to this definition">#</a></dt>
+<dd><p>Add a matheval distance field to the mesher.</p>
 <p>The of geometry of these fields are not forced into the mesh, but they
-can be used to specify zones of with cell sizes.</p>
+are used to specify zones of with cell sizes.</p>
+<p>Uses the MathEval functionality in Gmsh, which relies on the SSCILIB
+math expression evaluator.</p>
+<p><a class="reference external" href="https://gitlab.onelab.info/gmsh/gmsh/-/blob/master/contrib/MathEx/mathex.cpp">https://gitlab.onelab.info/gmsh/gmsh/-/blob/master/contrib/MathEx/mathex.cpp</a></p>
+<p><a class="reference external" href="https://sscilib.sourceforge.net/">https://sscilib.sourceforge.net/</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>gdf</strong> (<em>geopandas.GeoDataFrame</em>) – Location and cell size of the fields, as vector data.</p></li>
-<li><p><strong>minimum_cellsize</strong> (<em>float</em>)</p></li>
-</ul>
+<dd class="field-odd"><p><strong>gdf</strong> (<em>geopandas.GeoDataFrame</em>) – Location of the features to measure distance to. Should contain
+<code class="docutils literal notranslate"><span class="pre">spacing</span></code> column to specify the spacing of interpolated vertices
+along linestrings and polygon boundaries, and a <code class="docutils literal notranslate"><span class="pre">function</span></code> column
+to specify the function to control cell size as a function of
+distance. See the examples.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>Generate a number of points:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">points</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">points</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Add spacing (dummy value for points) and a function:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="p">[</span><span class="s2">&quot;spacing&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="p">[</span><span class="s2">&quot;function&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;max(distance^2, 1.0)&quot;</span>
+</pre></div>
+</div>
+<p>Apply it:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mesher</span><span class="o">.</span><span class="n">add_matheval_distance_field</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following mathematical operators are supported:</p>
+<p>Basic Operators</p>
+<ul class="simple">
+<li><p>Arithmetic: <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">%</span></code> (modulo), <code class="docutils literal notranslate"><span class="pre">^</span></code> (power)</p></li>
+<li><p>Comparison: <code class="docutils literal notranslate"><span class="pre">``&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></li>
+</ul>
+<p>Mathematical Functions</p>
+<ul class="simple">
+<li><p>Absolute value: <code class="docutils literal notranslate"><span class="pre">abs(x)</span></code></p></li>
+<li><p>Square root: <code class="docutils literal notranslate"><span class="pre">sqrt(x)</span></code></p></li>
+<li><p>Exponential: <code class="docutils literal notranslate"><span class="pre">exp(x)</span></code></p></li>
+<li><p>Natural logarithm: <code class="docutils literal notranslate"><span class="pre">log(x)</span></code></p></li>
+<li><p>Base-10 logarithm: <code class="docutils literal notranslate"><span class="pre">log10(x)</span></code></p></li>
+<li><p>Power: <code class="docutils literal notranslate"><span class="pre">pow(x,y)</span></code></p></li>
+</ul>
+<p>Statistical Functions</p>
+<ul class="simple">
+<li><p>Minimum: <code class="docutils literal notranslate"><span class="pre">min(x,</span> <span class="pre">y,</span> <span class="pre">...)</span></code></p></li>
+<li><p>Maximum: <code class="docutils literal notranslate"><span class="pre">max(x,</span> <span class="pre">y,</span> <span class="pre">...)</span></code></p></li>
+<li><p>Sum: <code class="docutils literal notranslate"><span class="pre">sum(x,</span> <span class="pre">y,</span> <span class="pre">...)</span></code></p></li>
+<li><p>Average: <code class="docutils literal notranslate"><span class="pre">med(x,</span> <span class="pre">y,</span> <span class="pre">...)`</span></code></p></li>
+</ul>
+<p>Trigonometric Functions</p>
+<ul class="simple">
+<li><p>Standard: <code class="docutils literal notranslate"><span class="pre">sin(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">cos(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">tan(x)</span></code></p></li>
+<li><p>Inverse: <code class="docutils literal notranslate"><span class="pre">asin(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">acos(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">atan(x)</span></code></p></li>
+<li><p>Hyperbolic: <code class="docutils literal notranslate"><span class="pre">sinh(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">cosh(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">tanh(x)</span></code></p></li>
+</ul>
+<p>Rounding Functions</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">floor(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">ceil(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">round(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">trunc(x)</span></code></p></li>
+</ul>
+<p>Constants</p>
+<ul class="simple">
+<li><p>Pi: <code class="docutils literal notranslate"><span class="pre">pi</span></code></p></li>
+<li><p>Euler’s number: <code class="docutils literal notranslate"><span class="pre">e</span></code></p></li>
+</ul>
 </dd></dl>
 
 </section>
@@ -458,20 +520,20 @@ can be used to specify zones of with cell sizes.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="pandamesh.GmshMesher.clear_fields.html"
+       href="pandamesh.GmshMesher.general_verbosity.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">pandamesh.GmshMesher.clear_fields</p>
+        <p class="prev-next-title">pandamesh.GmshMesher.general_verbosity</p>
       </div>
     </a>
     <a class="right-next"
-       href="pandamesh.GmshMesher.add_structured_field.html"
+       href="pandamesh.GmshMesher.add_threshold_distance_field.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pandamesh.GmshMesher.add_structured_field</p>
+        <p class="prev-next-title">pandamesh.GmshMesher.add_threshold_distance_field</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -493,14 +555,14 @@ can be used to specify zones of with cell sizes.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.GmshMesher.add_distance_field"><code class="docutils literal notranslate"><span class="pre">GmshMesher.add_distance_field()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.GmshMesher.add_matheval_distance_field"><code class="docutils literal notranslate"><span class="pre">GmshMesher.add_matheval_distance_field()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../_sources/api/api/pandamesh.GmshMesher.add_distance_field.rst.txt">
+    <a href="../../_sources/api/api/pandamesh.GmshMesher.add_matheval_distance_field.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

@@ -318,6 +318,7 @@
 <li class="toctree-l1"><a class="reference internal" href="triangle-geospatial.html">Geospatial Triangle Example</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic Gmsh Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="triangle-basic.html">Basic Triangle Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmsh-fields.html">Gmsh Fields Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
 </ul>
 </div>
@@ -422,7 +423,12 @@ in the appropriate manner for Gmsh.</p>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_gmsh-basic_001.png" srcset="../_images/sphx_glr_gmsh-basic_001.png" alt="gmsh basic" class = "sphx-glr-single-img"/><p>As the name suggests, Triangle only generates triangular meshes. Gmsh is
+<img src="../_images/sphx_glr_gmsh-basic_001.png" srcset="../_images/sphx_glr_gmsh-basic_001.png" alt="gmsh basic" class = "sphx-glr-single-img"/><p>Before we can instantiate another GmshMesher, we need to <code class="docutils literal notranslate"><span class="pre">finalize</span></code> the old
+one.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mesher</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>As the name suggests, Triangle only generates triangular meshes. Gmsh is
 capable of generating quadrilateral-dominant meshes, and has a lot more bells
 and whistles for defining cellsizes.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">line</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">LineString</span><span class="p">([(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)])</span>
@@ -449,24 +455,22 @@ features as is visible around the diagonal (right).</p>
 <h2>Defaults<a class="headerlink" href="#defaults" title="Link to this heading">#</a></h2>
 <p>The GmshMesher class is initialized with a number of default parameters:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mesher</span><span class="p">)</span>
+
+<span class="n">mesher</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>GmshMesher
+    initialized = True
     xoff = 5.0
     yoff = 5.0
-    current_field_id = 1
-    fields_list = []
-    distance_fields_list = []
-    fields = Empty GeoDataFrame
-Columns: []
-Index: []
-    tmpdir = &lt;TemporaryDirectory &#39;/tmp/tmpmbs_8jds&#39;&gt;
+    fields = []
+    combination_field = CombinationField(fields=[], combination=&lt;FieldCombination.MIN: &#39;Min&#39;&gt;, id=1, fields_list=[])
+    tmpdir = &lt;TemporaryDirectory &#39;/tmp/tmpnoum0e_z&#39;&gt;
     recombine_all = False
     mesh_size_extend_from_boundary = True
     mesh_size_from_points = True
     mesh_size_from_curvature = False
     field_combination = FieldCombination.MIN
-    force_geometry = False
 </pre></div>
 </div>
 <p>The parameters of Gmsh differ from Triangle, but they work the same: they can
@@ -496,22 +500,21 @@ be altered after initialization to control the triangulation.</p>
 
 <span class="n">mesher</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GmshMesher</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
 <span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span> <span class="o">=</span> <span class="n">mesher</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+<span class="n">mesher</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">triangles</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-</pre></div>
-</div>
-<img src="../_images/sphx_glr_gmsh-basic_003.png" srcset="../_images/sphx_glr_gmsh-basic_003.png" alt="gmsh basic" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
-</pre></div>
-</div>
-</section>
-<section id="quadrilateral-meshes">
-<h2>Quadrilateral meshes<a class="headerlink" href="#quadrilateral-meshes" title="Link to this heading">#</a></h2>
-<p>One of the features of Gmsh is that it is also capable of generating
-quadrilateral (dominant) meshes, by recombining triangles. We can achieve
-this by changing a parameter on the mesher:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="p">[</span><span class="n">polygon</span><span class="p">])</span>
+
+
+<span class="c1"># Quadrilateral meshes</span>
+<span class="c1"># --------------------</span>
+<span class="c1">#</span>
+<span class="c1"># One of the features of Gmsh is that it is also capable of generating</span>
+<span class="c1"># quadrilateral (dominant) meshes, by recombining triangles. We can achieve</span>
+<span class="c1"># this by changing a parameter on the mesher:</span>
+
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="p">[</span><span class="n">polygon</span><span class="p">])</span>
 <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cellsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span>
 <span class="n">mesher</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GmshMesher</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
 <span class="n">mesher</span><span class="o">.</span><span class="n">recombine_all</span> <span class="o">=</span> <span class="kc">True</span>
@@ -520,7 +523,11 @@ this by changing a parameter on the mesher:</p>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_gmsh-basic_004.png" srcset="../_images/sphx_glr_gmsh-basic_004.png" alt="gmsh basic" class = "sphx-glr-single-img"/></section>
+<ul class="sphx-glr-horizontal">
+<li><img src="../_images/sphx_glr_gmsh-basic_003.png" srcset="../_images/sphx_glr_gmsh-basic_003.png" alt="gmsh basic" class = "sphx-glr-multi-img"/></li>
+<li><img src="../_images/sphx_glr_gmsh-basic_004.png" srcset="../_images/sphx_glr_gmsh-basic_004.png" alt="gmsh basic" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
 <section id="writing-to-file">
 <h2>Writing to file<a class="headerlink" href="#writing-to-file" title="Link to this heading">#</a></h2>
 <p>It’s also possible to use the Python bindings to write a Gmsh <code class="docutils literal notranslate"><span class="pre">.msh</span></code> file.
@@ -538,7 +545,7 @@ but the same principles apply: we may use polygons, linestrings and points
 with associated cell sizes to steer the triangulation; unlike Triangle,
 for Gmsh cell sizes can associated to linestrings and points, not just
 polygons.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.350 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.337 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gmsh-basic-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/4a143ec15d1fb171eec89ca2df70cc01/gmsh-basic.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">gmsh-basic.ipynb</span></code></a></p>
@@ -603,7 +610,6 @@ polygons.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-rectangular-mesh">A simple rectangular mesh</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defaults">Defaults</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forcing-points-lines-local-refinement">Forcing points, lines, local refinement</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quadrilateral-meshes">Quadrilateral meshes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-to-file">Writing to file</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>

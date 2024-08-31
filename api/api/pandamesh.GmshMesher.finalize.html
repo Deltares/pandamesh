@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pandamesh.GmshMesher.force_geometry &#8212; pandamesh  documentation</title>
+    <title>pandamesh.GmshMesher.finalize &#8212; pandamesh  documentation</title>
   
   
   
@@ -43,11 +43,11 @@
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/api/pandamesh.GmshMesher.force_geometry';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/api/pandamesh.GmshMesher.finalize';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pandamesh.GmshMesher.mesh_size_extend_from_boundary" href="pandamesh.GmshMesher.mesh_size_extend_from_boundary.html" />
-    <link rel="prev" title="pandamesh.GmshMesher.recombine_all" href="pandamesh.GmshMesher.recombine_all.html" />
+    <link rel="next" title="pandamesh.GmshMesher.finalize_gmsh" href="pandamesh.GmshMesher.finalize_gmsh.html" />
+    <link rel="prev" title="pandamesh.GmshMesher.write" href="pandamesh.GmshMesher.write.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -350,17 +350,20 @@
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.generate_ugrid.html">pandamesh.GmshMesher.generate_ugrid</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_algorithm.html">pandamesh.GmshMesher.mesh_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.recombine_all.html">pandamesh.GmshMesher.recombine_all</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">pandamesh.GmshMesher.force_geometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_extend_from_boundary.html">pandamesh.GmshMesher.mesh_size_extend_from_boundary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_from_points.html">pandamesh.GmshMesher.mesh_size_from_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.mesh_size_from_curvature.html">pandamesh.GmshMesher.mesh_size_from_curvature</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.field_combination.html">pandamesh.GmshMesher.field_combination</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.subdivision_algorithm.html">pandamesh.GmshMesher.subdivision_algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.general_verbosity.html">pandamesh.GmshMesher.general_verbosity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_distance_field.html">pandamesh.GmshMesher.add_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_matheval_distance_field.html">pandamesh.GmshMesher.add_matheval_distance_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_threshold_distance_field.html">pandamesh.GmshMesher.add_threshold_distance_field</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_structured_field.html">pandamesh.GmshMesher.add_structured_field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.add_structured_field_from_dataarray.html">pandamesh.GmshMesher.add_structured_field_from_dataarray</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.fields.html">pandamesh.GmshMesher.fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.clear_fields.html">pandamesh.GmshMesher.clear_fields</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.write.html">pandamesh.GmshMesher.write</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">pandamesh.GmshMesher.finalize</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.GmshMesher.finalize_gmsh.html">pandamesh.GmshMesher.finalize_gmsh</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.gmsh_env.html">pandamesh.gmsh_env</a></li>
 </ul>
@@ -427,11 +430,11 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="pandamesh-gmshmesher-force-geometry">
-<h1>pandamesh.GmshMesher.force_geometry<a class="headerlink" href="#pandamesh-gmshmesher-force-geometry" title="Link to this heading">#</a></h1>
-<dl class="py property">
-<dt class="sig sig-object py" id="pandamesh.GmshMesher.force_geometry">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GmshMesher.</span></span><span class="sig-name descname"><span class="pre">force_geometry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pandamesh.GmshMesher.force_geometry" title="Link to this definition">#</a></dt>
+  <section id="pandamesh-gmshmesher-finalize">
+<h1>pandamesh.GmshMesher.finalize<a class="headerlink" href="#pandamesh-gmshmesher-finalize" title="Link to this heading">#</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="pandamesh.GmshMesher.finalize">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GmshMesher.</span></span><span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/pandamesh/gmsh_mesher.html#GmshMesher.finalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.GmshMesher.finalize" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </section>
@@ -447,20 +450,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="pandamesh.GmshMesher.recombine_all.html"
+       href="pandamesh.GmshMesher.write.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">pandamesh.GmshMesher.recombine_all</p>
+        <p class="prev-next-title">pandamesh.GmshMesher.write</p>
       </div>
     </a>
     <a class="right-next"
-       href="pandamesh.GmshMesher.mesh_size_extend_from_boundary.html"
+       href="pandamesh.GmshMesher.finalize_gmsh.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pandamesh.GmshMesher.mesh_size_extend_from_boundary</p>
+        <p class="prev-next-title">pandamesh.GmshMesher.finalize_gmsh</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -482,14 +485,14 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.GmshMesher.force_geometry"><code class="docutils literal notranslate"><span class="pre">GmshMesher.force_geometry</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.GmshMesher.finalize"><code class="docutils literal notranslate"><span class="pre">GmshMesher.finalize()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../_sources/api/api/pandamesh.GmshMesher.force_geometry.rst.txt">
+    <a href="../../_sources/api/api/pandamesh.GmshMesher.finalize.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

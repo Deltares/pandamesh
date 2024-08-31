@@ -1,0 +1,6 @@
+﻿pandamesh.GmshMesher.add\_structured\_field\_from\_dataarray
+============================================================
+
+.. currentmodule:: pandamesh
+
+.. automethod:: GmshMesher.add_structured_field_from_dataarray
