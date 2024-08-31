@@ -160,7 +160,7 @@ second = sg.Polygon(
 gdf = gpd.GeoDataFrame(geometry=[first, second])
 gdf["cellsize"] = [4.0, 2.0]
 
-vertices, faces = pm.GmshMesher(gdf).generate()
+vertices, faces = pm.GmshMesher(gdf).generate(finalize=True)
 pm.plot(vertices, faces)
 
 # %%
