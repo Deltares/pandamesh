@@ -311,7 +311,6 @@ class GmshMesher(MesherBase):
 
             MIN = "Min"
             MAX = "Max"
-            MEAN = "Mean"
 
         """
         return self._field_combination
@@ -482,7 +481,7 @@ class GmshMesher(MesherBase):
             point_tags = add_distance_geometry(group["geometry"], group["spacing"])
             distance_field = DistanceField(point_tags)
             math_eval_field = MathEvalField(distance_field, function)
-            self._fields.extend((distance_field, math_eval_field))
+            self._fields.append(math_eval_field)
         return
 
     def add_threshold_distance_field(self, gdf: gpd.GeoDataFrame) -> None:
@@ -529,7 +528,7 @@ class GmshMesher(MesherBase):
                 sigmoid=sigmoid,
                 stop_at_dist_max=stop_at_dist_max,
             )
-            self._fields.extend((distance_field, threshold_field))
+            self._fields.append(threshold_field)
 
         return
 

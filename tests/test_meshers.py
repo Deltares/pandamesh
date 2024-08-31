@@ -187,20 +187,18 @@ def test_gmsh_properties():
     # Set default values for meshing parameters
     mesher.mesh_algorithm = pm.MeshAlgorithm.FRONTAL_DELAUNAY
     mesher.recombine_all = False
-    # mesher.force_geometry = True  # not implemented yet
     mesher.mesh_size_extend_from_boundary = False
     mesher.mesh_size_from_points = False
     mesher.mesh_size_from_curvature = True
-    mesher.field_combination = pm.FieldCombination.MEAN
+    mesher.field_combination = pm.FieldCombination.MAX
     mesher.subdivision_algorithm = pm.SubdivisionAlgorithm.BARYCENTRIC
 
     assert mesher.mesh_algorithm == pm.MeshAlgorithm.FRONTAL_DELAUNAY
     assert mesher.recombine_all is False
-    # assert mesher.force_geometry = True  # not implemented yet
     assert mesher.mesh_size_extend_from_boundary is False
     assert mesher.mesh_size_from_points is False
     assert mesher.mesh_size_from_curvature is True
-    assert mesher.field_combination == pm.FieldCombination.MEAN
+    assert mesher.field_combination == pm.FieldCombination.MAX
     assert mesher.subdivision_algorithm == pm.SubdivisionAlgorithm.BARYCENTRIC
 
     with pytest.raises(ValueError):

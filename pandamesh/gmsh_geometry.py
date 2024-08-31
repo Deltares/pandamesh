@@ -239,7 +239,11 @@ def add_distance_linestring(
     # anyway, and the number of points is configured through a discrete
     # sampling value, rather than some spacing distance. So we might as well
     # sample ourselves.
-    interpolated = shapely.line_interpolate_point(linestring, distance=distance)
+    length = linestring.length
+    n = int(np.ceil(length / distance))
+    interpolated = shapely.get_coordinates(
+        shapely.line_interpolate_point(linestring, distance=np.linspace(0.0, length, n))
+    )
     indices = np.empty(len(interpolated), dtype=np.int64)
     for i, (x, y) in enumerate(interpolated):
         indices[i] = gmsh.model.geo.addPoint(x, y, Z_DEFAULT)

@@ -46,6 +46,7 @@ all = [
     'triangle',
     'shapely >= 2.0',
     'matplotlib',
+    'xarray',
 ]
 
 [tool.hatch.version]
@@ -90,6 +91,7 @@ sphinx-gallery = "*"
 hatchling = "*"
 jupyter = "*"
 twine = "*"
+xarray = "*"
 
 [tool.pixi.tasks]
 pre-commit = "pre-commit run --all-files"
