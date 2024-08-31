@@ -53,8 +53,9 @@ def triangle_generate(gdf: gpd.GeoDataFrame, shift: bool):
 
 
 def gmsh_generate(gdf: gpd.GeoDataFrame, shift: bool):
-    mesher = pm.GmshMesher(gdf, shift_origin=shift)
-    return mesher.generate()
+    mesher = pm.GmshMesher.get_instance(gdf, shift_origin=shift)
+    vertices, faces = mesher.generate()
+    return vertices, faces
 
 
 @pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
@@ -181,7 +182,7 @@ def test_triangle_properties():
 def test_gmsh_properties():
     gdf = gpd.GeoDataFrame(geometry=[donut])
     gdf["cellsize"] = 1.0
-    mesher = pm.GmshMesher(gdf)
+    mesher = pm.GmshMesher.get_instance(gdf)
 
     # Set default values for meshing parameters
     mesher.mesh_algorithm = pm.MeshAlgorithm.FRONTAL_DELAUNAY
@@ -209,9 +210,6 @@ def test_gmsh_properties():
         mesher.recombine_all = "a"
 
     with pytest.raises(TypeError):
-        mesher.force_geometry = "a"
-
-    with pytest.raises(TypeError):
         mesher.mesh_size_extend_from_boundary = "a"
 
     with pytest.raises(TypeError):
@@ -233,7 +231,7 @@ def test_gmsh_properties():
 def test_gmsh_write(tmp_path):
     gdf = gpd.GeoDataFrame(geometry=[donut])
     gdf["cellsize"] = 1.0
-    mesher = pm.GmshMesher(gdf)
+    mesher = pm.GmshMesher.get_instance(gdf)
     path = tmp_path / "a.msh"
     mesher.write(path)
     assert path.exists()
@@ -244,7 +242,7 @@ def test_gmsh_write(tmp_path):
 def test_gmsh_initialization_kwargs(read_config_files, interruptible):
     gdf = gpd.GeoDataFrame(geometry=[donut])
     gdf["cellsize"] = 1.0
-    mesher = pm.GmshMesher(
+    mesher = pm.GmshMesher.get_instance(
         gdf, read_config_files=read_config_files, interruptible=interruptible
     )
     vertices, triangles = mesher.generate()
@@ -260,7 +258,7 @@ def test_generate_geodataframe():
     assert isinstance(result, gpd.GeoDataFrame)
     assert np.allclose(result.area.sum(), donut.area)
 
-    mesher = pm.GmshMesher(gdf)
+    mesher = pm.GmshMesher.get_instance(gdf)
     result = mesher.generate_geodataframe()
     assert isinstance(result, gpd.GeoDataFrame)
     assert np.allclose(result.area.sum(), donut.area)

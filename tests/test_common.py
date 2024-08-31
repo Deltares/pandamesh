@@ -1,3 +1,5 @@
+import re
+
 import geopandas as gpd
 import numpy as np
 import pytest
@@ -133,27 +135,30 @@ def test_flatten_geometry():
 
 def test_check_geodataframe():
     with pytest.raises(TypeError, match="Expected GeoDataFrame"):
-        common.check_geodataframe([1, 2, 3])
+        common.check_geodataframe([1, 2, 3], {})
 
     gdf = gpd.GeoDataFrame(geometry=[pa, pb])
-    with pytest.raises(ValueError, match='Missing column "cellsize" in columns'):
-        common.check_geodataframe(gdf)
+    with pytest.raises(
+        ValueError,
+        match=re.escape("These column(s) are required but are missing: cellsize"),
+    ):
+        common.check_geodataframe(gdf, {"cellsize"})
 
     gdf["cellsize"] = 1.0
     gdf.index = [0, "1"]
     with pytest.raises(ValueError, match="geodataframe index is not integer typed"):
-        common.check_geodataframe(gdf)
+        common.check_geodataframe(gdf, {"cellsize"}, check_index=True)
 
     empty = gdf.loc[[]]
     with pytest.raises(ValueError, match="Dataframe is empty"):
-        common.check_geodataframe(empty)
+        common.check_geodataframe(empty, {"cellsize"})
 
     gdf.index = [0, 0]
     with pytest.raises(ValueError, match="geodataframe index contains duplicates"):
-        common.check_geodataframe(gdf)
+        common.check_geodataframe(gdf, {"cellsize"}, check_index=True)
 
     gdf.index = [0, 1]
-    common.check_geodataframe(gdf)
+    common.check_geodataframe(gdf, {"cellsize"}, check_index=True)
 
 
 def test_intersecting_features():
@@ -243,7 +248,7 @@ def test_separate():
 def test_central_origin():
     gdf = gpd.GeoDataFrame(geometry=[d])
     back, x, y = common.central_origin(gdf, False)
-    assert gdf is back
+    assert gdf is not back
     assert x == 0
     assert y == 0
 

@@ -1,12 +1,11 @@
-import json
 import pathlib
 import tempfile
+import threading
 from contextlib import contextmanager
-from typing import List, Tuple, Union
+from typing import Any, Tuple, Union
 
 import geopandas as gpd
 import numpy as np
-import pandas as pd
 
 from pandamesh.common import (
     FloatArray,
@@ -14,6 +13,7 @@ from pandamesh.common import (
     central_origin,
     check_geodataframe,
     gmsh,
+    move_origin,
     repr,
     separate,
 )
@@ -24,12 +24,13 @@ from pandamesh.gmsh_enums import (
     SubdivisionAlgorithm,
 )
 from pandamesh.gmsh_fields import (
-    FIELDS,
-    add_distance_field,
-    add_structured_field,
-    validate_field,
+    CombinationField,
+    DistanceField,
+    MathEvalField,
+    StructuredField,
+    ThresholdField,
 )
-from pandamesh.gmsh_geometry import add_field_geometry, add_geometry
+from pandamesh.gmsh_geometry import add_distance_geometry, add_geometry
 from pandamesh.mesher_base import MesherBase
 
 
@@ -44,14 +45,6 @@ def gmsh_env(read_config_files: bool = True, interruptible: bool = True):
         yield
     finally:
         gmsh.finalize()
-
-
-def coerce_field(field: Union[dict, str]) -> dict:
-    if not isinstance(field, (dict, str)):
-        raise TypeError("field must be a dictionary or a valid JSON dictionary string")
-    if isinstance(str):
-        field = json.loads(field)[0]
-    return field
 
 
 class GmshMesher(MesherBase):
@@ -91,6 +84,13 @@ class GmshMesher(MesherBase):
     A helpful index can be found near the bottom:
     https://gmsh.info/doc/texinfo/gmsh.html#Syntax-index
 
+    .. note::
+
+        This meshers uses the Gmsh Python API, which is global. To avoid a
+        situation where multiple GmshMeshers have been iniatilized and are
+        mutating each other's (global) variables, the ``.finalize()`` method
+        must be called before instantiating a new mesher.
+
     Parameters
     ----------
     gdf: gpd.GeoDataFrame
@@ -108,6 +108,61 @@ class GmshMesher(MesherBase):
         Gmsh initialization option.
     """
 
+    _instance = None
+    _lock = threading.Lock()
+
+    def __new__(cls, *args, **kwargs) -> "GmshMesher":
+        # The Gmsh Python API is unfortunately global. Make sure only one
+        # GmshMesher instance is active at a given time.
+        if cls._instance is not None:
+            raise RuntimeError(
+                f"Singleton class {cls.__name__} is already instantiated. "
+                "Please call .finalize() on other GmshMesher instance prior to "
+                "initializing a new one."
+            )
+        cls._instance = super().__new__(cls)
+        cls._lock.acquire()
+        cls._instance._initialized = True
+        return cls._instance
+
+    @classmethod
+    def finalize(cls) -> None:
+        # Finalize gmsh, release locks.
+        try:
+            cls.finalize_gmsh()
+        finally:
+            if cls._lock.locked():
+                cls._lock.release()
+            if cls._instance is not None:
+                cls._instance._initialized = False
+                cls._instance = None
+
+    def __getattribute__(self, name: str) -> Any:
+        # Make sure to error if finalized has already been called.
+        if name in ("__dict__", "_initialized", "_initialize_gmsh", "finalize"):
+            return super().__getattribute__(name)
+        if not self._initialized:
+            raise RuntimeError("GmshMesher has been finalized")
+        return super().__getattribute__(name)
+
+    @classmethod
+    def get_instance(
+        cls,
+        gdf: gpd.GeoDataFrame,
+        shift_origin: bool = True,
+        read_config_files: bool = True,
+        interruptible: bool = True,
+    ) -> "GmshMesher":
+        """
+        Guarantees a new instance.
+
+        This method ensures that only one instance of GmshMesher exists at a
+        time. If an instance already exists, it is finalized before this method
+        creates a new one.
+        """
+        cls.finalize()
+        return cls(gdf, shift_origin, read_config_files, interruptible)
+
     def __init__(
         self,
         gdf: gpd.GeoDataFrame,
@@ -118,7 +173,7 @@ class GmshMesher(MesherBase):
         self._initialize_gmsh(
             read_config_files=read_config_files, interruptible=interruptible
         )
-        check_geodataframe(gdf)
+        check_geodataframe(gdf, {"geometry", "cellsize"}, check_index=True)
         gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
         polygons, linestrings, points = separate(gdf)
 
@@ -126,10 +181,8 @@ class GmshMesher(MesherBase):
         add_geometry(polygons, linestrings, points)
 
         # Initialize fields parameters
-        self._current_field_id = 0
-        self._fields_list: List[int] = []
-        self._distance_fields_list: List[int] = []
-        self.fields = gpd.GeoDataFrame()
+        self._fields = []
+        self._combination_field = None
         self._tmpdir = tempfile.TemporaryDirectory()
 
         # Set default values for meshing parameters
@@ -140,7 +193,6 @@ class GmshMesher(MesherBase):
         self.mesh_size_from_curvature = False
         self.field_combination = FieldCombination.MIN
         self.subdivision_algorithm = SubdivisionAlgorithm.NONE
-        self.force_geometry = False
         self.general_verbosity = GeneralVerbosity.SILENT
 
     def __repr__(self):
@@ -201,16 +253,6 @@ class GmshMesher(MesherBase):
             raise TypeError("recombine_all must be a bool")
         self._recombine_all = value
         gmsh.option.setNumber("Mesh.RecombineAll", value)
-
-    @property
-    def force_geometry(self) -> bool:
-        return self._force_geometry
-
-    @force_geometry.setter
-    def force_geometry(self, value: bool) -> None:
-        if not isinstance(value, bool):
-            raise TypeError("force_geometry must be a bool")
-        self._force_geometry = value
 
     @property
     def mesh_size_extend_from_boundary(self) -> bool:
@@ -325,34 +367,125 @@ class GmshMesher(MesherBase):
         value = GeneralVerbosity.from_value(value)
         gmsh.option.setNumber("General.Verbosity", value.value)
 
+    @property
+    def fields(self):
+        """
+        Read-only access to fields.
+
+        Use ``.clear_fields`` to remove fields from the mesher.
+        """
+        return self._fields.copy()
+
     # Methods
     # -------
 
-    def _new_field_id(self) -> int:
-        self._current_field_id += 1
-        return self._current_field_id
+    def clear_fields(self):
+        while self._fields:
+            field = self._fields.pop()
+            field.remove_from_gmsh()
+        if self._combination_field is not None:
+            self._combination_field.remove_from_gmsh()
+            self._combination_field = None
 
-    def _combine_fields(self) -> None:
-        # Create a combination field
-        if self.fields is None:
-            return
-        field_id = self._new_field_id()
-        gmsh.model.mesh.field.add(self.field_combination.value, field_id)
-        gmsh.model.mesh.field.setNumbers(field_id, "FieldsList", self._fields_list)
-        gmsh.model.mesh.field.setAsBackgroundMesh(field_id)
+    def add_matheval_distance_field(self, gdf: gpd.GeoDataFrame) -> None:
+        """
+        Add a matheval distance field to the mesher.
 
-    def clear_fields(self) -> None:
-        """Clear all cell size fields from the mesher."""
-        self.fields = None
-        for field_id in self._fields_list + self._distance_fields_list:
-            gmsh.model.mesh.field.remove(field_id)
-        self._fields_list = []
-        self._distance_fields_list = []
-        self._current_field_id = 0
+        The of geometry of these fields are not forced into the mesh, but they
+        are used to specify zones of with cell sizes.
 
-    def add_distance_field(
-        self, gdf: gpd.GeoDataFrame, minimum_cellsize: float
-    ) -> None:
+        Uses the MathEval functionality in Gmsh, which relies on the SSCILIB
+        math expression evaluator.
+
+        https://gitlab.onelab.info/gmsh/gmsh/-/blob/master/contrib/MathEx/mathex.cpp
+
+        https://sscilib.sourceforge.net/
+
+        Parameters
+        ----------
+        gdf: geopandas.GeoDataFrame
+            Location of the features to measure distance to. Should contain
+            ``spacing`` column to specify the spacing of interpolated vertices
+            along linestrings and polygon boundaries, and a ``function`` column
+            to specify the function to control cell size as a function of
+            distance. See the examples.
+
+        Examples
+        --------
+        Generate a number of points:
+
+        >>> x = np.arange(0.0, 10.0)
+        >>> y = np.arange(0.0, 10.0)
+        >>> points = gpd.points_from_xy(x, y)
+        >>> field = gpd.GeoDataFrame(geometry=points)
+
+        Add spacing (dummy value for points) and a function:
+
+        >>> field["spacing"] = np.nan
+        >>> field["function"] = "max(distance^2, 1.0)"
+
+        Apply it:
+
+        >>> mesher.add_matheval_distance_field(field)
+
+        Operators
+        =========
+
+        The following mathematical operators are supported:
+
+        Basic Operators
+        ---------------
+
+        - Arithmetic: ``+``, ``-``, ``*``, ``/``, ``%`` (modulo), ``^`` (power)
+        - Comparison: ````<``, ``>``
+
+        Mathematical Functions
+        ----------------------
+
+        - Absolute value: ``abs(x)``
+        - Square root: ``sqrt(x)``
+        - Exponential: ``exp(x)``
+        - Natural logarithm: ``log(x)``
+        - Base-10 logarithm: ``log10(x)``
+        - Power: ``pow(x,y)``
+
+        Statistical Functions
+        ---------------------
+
+        - Minimum: ``min(x, y, ...)``
+        - Maximum: ``max(x, y, ...)``
+        - Sum: ``sum(x, y, ...)``
+        - Average: ``med(x, y, ...)```
+
+        Trigonometric Functions
+        -----------------------
+
+        - Standard: ``sin(x)``, ``cos(x)``, ``tan(x)``
+        - Inverse: ``asin(x)``, ``acos(x)``, ``atan(x)``
+        - Hyperbolic: ``sinh(x)``, ``cosh(x)``, ``tanh(x)``
+
+        Rounding Functions
+        ------------------
+
+        - ``floor(x)``, ``ceil(x)``, ``round(x)``, ``trunc(x)``
+
+        Constants
+        ---------
+
+        - Pi: ``pi``
+        - Euler's number: ``e``
+        """
+        check_geodataframe(gdf, {"geometry", "function", "spacing"})
+        gdf = move_origin(gdf, xoff=self._xoff, yoff=self._yoff)
+
+        for function, group in gdf.groupby("function"):
+            point_tags = add_distance_geometry(group["geometry"], group["spacing"])
+            distance_field = DistanceField(point_tags)
+            math_eval_field = MathEvalField(distance_field, function)
+            self._fields.extend((distance_field, math_eval_field))
+        return
+
+    def add_threshold_distance_field(self, gdf: gpd.GeoDataFrame) -> None:
         """
         Add a distance field to the mesher.
 
@@ -362,39 +495,43 @@ class GmshMesher(MesherBase):
         Parameters
         ----------
         gdf: geopandas.GeoDataFrame
-            Location and cell size of the fields, as vector data.
-        minimum_cellsize: float
+            Location of the features to measure distance to. Should contain
+            ``spacing`` column to specify the spacing of interpolated vertices
+            along linestrings and polygon boundaries.
         """
-        if "field" not in gdf.columns:
-            raise ValueError("field column is missing from geodataframe")
+        columns = ["size_min", "size_max", "dist_min", "dist_max"]
+        check_geodataframe(gdf, set(columns + ["geometry", "spacing"]))
+        gdf = move_origin(gdf, xoff=self._xoff, yoff=self._yoff)
 
-        # Explode just in case to get rid of multi-elements
-        gdf = gdf.explode()
+        if "sigmoid" not in gdf.columns:
+            gdf["sigmoid"] = False
+        if "stop_at_dist_max" not in gdf.columns:
+            gdf["stop_at_dist_max"] = False
+        columns += ["sigmoid", "stop_at_dist_max"]
 
-        for field, field_gdf in gdf.groupby("field"):
-            distance_id = self._new_field_id()
-            field_id = self._new_field_id()
-            field_dict = coerce_field(field)
-            fieldtype = field_dict["type"].lower()
+        grouped = gdf.groupby(columns)
+        for (
+            size_min,
+            size_max,
+            dist_min,
+            dist_max,
+            sigmoid,
+            stop_at_dist_max,
+        ), group in grouped:
+            point_tags = add_distance_geometry(group["geometry"], group["spacing"])
+            distance_field = DistanceField(point_tags)
+            threshold_field = ThresholdField(
+                distance_field=distance_field,
+                size_min=size_min,
+                size_max=size_max,
+                dist_min=dist_min,
+                dist_max=dist_max,
+                sigmoid=sigmoid,
+                stop_at_dist_max=stop_at_dist_max,
+            )
+            self._fields.extend((distance_field, threshold_field))
 
-            spec, add_field = FIELDS[fieldtype.lower()]
-            try:
-                validate_field(field_dict, spec)
-            except KeyError:
-                raise ValueError(
-                    f'invalid field type {fieldtype}. Allowed are: "MathEval", "Threshold".'
-                )
-
-            # Insert geometry, and create distance field
-            nodes_list = add_field_geometry(field_gdf, minimum_cellsize)
-            add_distance_field(nodes_list, [], 0, distance_id)
-
-            # Add field based on distance field
-            add_field(field_dict, distance_id=distance_id, field_id=field_id)
-            self._fields_list.append(field_id)
-            self._distance_fields_list.append(distance_id)
-
-        self.fields = pd.concat(self.fields, gdf)
+        return
 
     def add_structured_field(
         self,
@@ -406,8 +543,8 @@ class GmshMesher(MesherBase):
         outside_value: Union[float, None] = None,
     ) -> None:
         """
-        Add a structured field specifying cell sizes. Gmsh will interpolate between
-        the points to determine the desired cell size.
+        Add an equidistant structured field specifying cell sizes. Gmsh will
+        interpolate between the points to determine the desired cell size.
 
         Parameters
         ----------
@@ -426,26 +563,68 @@ class GmshMesher(MesherBase):
             Value outside of the window ``(xmin, xmax)`` and ``(ymin, ymax)``.
             Default value is None.
         """
-        if outside_value is not None:
-            set_outside_value = True
-        else:
-            set_outside_value = False
-            outside_value = -1.0
-
-        field_id = self._new_field_id()
-        path = f"{self._tmpdir.name}/structured_field_{field_id}.dat"
-        add_structured_field(
-            cellsize,
-            xmin,
-            ymin,
-            dx,
-            dy,
-            outside_value,
-            set_outside_value,
-            field_id,
-            path,
+        self._fields.append(
+            StructuredField(
+                tmpdir=self._tmpdir,
+                cellsize=cellsize,
+                xmin=xmin - self._xoff,
+                ymin=ymin - self._yoff,
+                dx=dx,
+                dy=dy,
+                outside_value=outside_value,
+            )
         )
-        self._fields_list.append(field_id)
+
+    def add_structured_field_from_dataarray(
+        self,
+        da: "xarray.DataArray",  # noqa: F821
+        outside_value: Union[float, None] = None,
+    ):
+        """
+        Add an equidistant structured field specifying cell sizes from an
+        xarray DataArray object. Gmsh will interpolate between the points to
+        determine the desired cell size.
+
+        Parameters
+        ----------
+        da: xarray.DataArray
+            Values are used as cell sizes. Must have dimensions `("y", "x")`.
+        outside_value: Union[float, None]
+            Value outside of the window ``(xmin, xmax)`` and ``(ymin, ymax)``.
+            Default value is None.
+        """
+        import xarray as xr
+
+        if not isinstance(da, xr.DataArray):
+            raise TypeError(
+                f"da must be xr.DataArray, received instead: {type(da).__name__}"
+            )
+        if not da.dims == ("y", "x"):
+            raise ValueError(f'Dimensions must be ("y", "x"), received: {da.dims}')
+
+        dxs = np.diff(da["x"]) if len(da["x"]) > 0 else np.array([0.0])
+        dys = np.diff(da["y"]) if len(da["y"]) > 0 else np.array([0.0])
+        dx = dxs[0]
+        dy = dys[0]
+
+        if not np.allclose(dxs, dx, atol=1e-4 * dx):
+            raise ValueError("da is not equidistant along x")
+        if not np.allclose(dys, dx, atol=1e-4 * dy):
+            raise ValueError("da is not equidistant along y")
+
+        self.add_structured_field(
+            cellsize=da.to_numpy(),
+            xmin=float(da["x"].min()),
+            ymin=float(da["y"].min()),
+            dx=dx,
+            dy=dy,
+            outside_value=outside_value,
+        )
+
+    def _combine_fields(self) -> None:
+        if self._combination_field is not None:
+            self._combination_field.remove_from_gmsh()
+        self._combination_field = CombinationField(self._fields, self.field_combination)
 
     def _vertices(self):
         # getNodes returns: node_tags, coord, parametric_coord
@@ -492,6 +671,8 @@ class GmshMesher(MesherBase):
             quadrangles are included. A fill value of -1 is used as a last
             entry for triangles in that case.
         """
+        # Remove any previously generated results from gmsh.
+        gmsh.model.mesh.clear()
         self._combine_fields()
         gmsh.model.mesh.generate(dim=2)
 

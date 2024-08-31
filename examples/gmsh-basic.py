@@ -1,6 +1,6 @@
 """
 Basic Gmsh Example
-======================
+==================
 
 In this example we'll create some basic geometries and turn them into meshes.
 to illustrate some of the mesh generation features that Gmsh provides in

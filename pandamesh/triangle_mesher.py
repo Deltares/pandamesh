@@ -63,7 +63,7 @@ class TriangleMesher(MesherBase):
     """
 
     def __init__(self, gdf: gpd.GeoDataFrame, shift_origin: bool = True) -> None:
-        check_geodataframe(gdf)
+        check_geodataframe(gdf, {"geometry", "cellsize"}, check_index=True)
         gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
         polygons, linestrings, points = separate(gdf)
         self.vertices, self.segments, self.regions = collect_geometry(
