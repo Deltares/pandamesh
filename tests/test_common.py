@@ -90,6 +90,15 @@ Lf = sg.LineString(
     ]
 )
 
+Ra = sg.LinearRing(
+    [
+        (0.0, 0.0),
+        (1.0, 0.0),
+        (1.0, 1.0),
+        (0.0, 1.0),
+    ]
+)
+
 
 pa = sg.Point(0.5, 0.5)
 pb = sg.Point(0.5, 1.5)
@@ -216,10 +225,24 @@ def test_check_points():
         common.check_points(points, polygons)
 
 
-def test_separate():
+def test_separate_geometry():
+    bad = np.array([sg.MultiPolygon([a, d])])
+    with pytest.raises(
+        TypeError, match="GeoDataFrame contains unsupported geometry types"
+    ):
+        common.separate_geometry(bad)
+
+    geometry = np.array([a, c, La, Lc, pa, Ra, d])
+    polygons, lines, points = common.separate_geometry(geometry)
+    assert all(polygons == [a, c, d])
+    assert all(lines == [La, Lc, Ra])
+    assert all(points == [pa])
+
+
+def test_separate_geodataframe():
     gdf = gpd.GeoDataFrame(geometry=[a, c, d, La, Lc, pa])
     gdf["cellsize"] = 1.0
-    polygons, linestrings, points = common.separate(gdf)
+    polygons, linestrings, points = common.separate_geodataframe(gdf)
     assert isinstance(polygons.geometry.iloc[0], sg.Polygon)
     assert isinstance(linestrings.geometry.iloc[0], sg.LineString)
     assert isinstance(points.geometry.iloc[0], sg.Point)
@@ -227,22 +250,24 @@ def test_separate():
     # Make sure it works for single elements
     gdf = gpd.GeoDataFrame(geometry=[a])
     gdf["cellsize"] = 1.0
-    common.separate(gdf)
+    common.separate_geodataframe(gdf)
 
     gdf = gpd.GeoDataFrame(geometry=[a, La])
     gdf["cellsize"] = 1.0
-    polygons, linestrings, points = common.separate(gdf)
+    polygons, linestrings, points = common.separate_geodataframe(gdf)
 
     # Make sure cellsize is cast to float
     gdf = gpd.GeoDataFrame(geometry=[a, La])
     gdf["cellsize"] = "1"
-    dfs = common.separate(gdf)
+    dfs = common.separate_geodataframe(gdf)
     for df in dfs:
         assert np.issubdtype(df["cellsize"].dtype, np.floating)
 
-    with pytest.raises(TypeError, match="Geometry should be one of"):
+    with pytest.raises(
+        TypeError, match="GeoDataFrame contains unsupported geometry types"
+    ):
         gdf = gpd.GeoDataFrame(geometry=[sg.MultiPolygon([a, b])])
-        common.separate(gdf)
+        common.separate_geodataframe(gdf)
 
 
 def test_central_origin():

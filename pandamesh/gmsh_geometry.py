@@ -6,7 +6,7 @@ import pandas as pd
 import shapely
 import shapely.geometry as sg
 
-from pandamesh.common import FloatArray, IntArray, coord_dtype, gmsh
+from pandamesh.common import FloatArray, IntArray, coord_dtype, gmsh, separate_geometry
 
 Z_DEFAULT = 0.0
 POINT_DIM = 0
@@ -271,24 +271,12 @@ def add_distance_polygons(polygons: gpd.GeoSeries, spacing: FloatArray) -> IntAr
 
 
 def add_distance_geometry(geometry: gpd.GeoSeries, spacing: FloatArray) -> IntArray:
-    geom_type = geometry.geom_type
-    acceptable = ["Polygon", "LineString", "Point"]
-    if not geom_type.isin(acceptable).all():
-        raise TypeError(
-            f"Geometry should be one of {acceptable}. "
-            "Call geopandas.GeoDataFrame.explode() to explode multi-part "
-            "geometries into multiple single geometries."
-        )
-
-    polygons = geometry.loc[geom_type == "Polygon"].copy()
-    linestrings = geometry.loc[geom_type == "LineString"].copy()
-    points = geometry.loc[geom_type == "Point"].copy()
-
+    polygons, lines, points = separate_geometry(geometry)
     indices = []
     if len(points) > 0:
         indices.append(add_distance_points(points))
-    if len(linestrings) > 0:
-        indices.append(add_distance_linestrings(linestrings, spacing))
+    if len(lines) > 0:
+        indices.append(add_distance_linestrings(lines, spacing))
     if len(polygons) > 0:
         indices.append(add_distance_polygons(polygons, spacing))
     gmsh.model.geo.synchronize()

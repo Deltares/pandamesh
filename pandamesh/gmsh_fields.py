@@ -68,6 +68,12 @@ class GmshField:
         gmsh.model.mesh.field.remove(self.id)
 
 
+class DistanceFunctionField(GmshField):
+    def remove_from_gmsh(self):
+        self.distance_field.remove_from_gmsh()
+        super().remove_from_gmsh()
+
+
 @dataclass
 class DistanceField(GmshField):
     point_list: IntArray
@@ -79,7 +85,7 @@ class DistanceField(GmshField):
 
 
 @dataclass
-class MathEvalField(GmshField):
+class MathEvalField(DistanceFunctionField):
     distance_field: DistanceField
     function: str
     id: int = field(init=False)
@@ -97,7 +103,7 @@ class MathEvalField(GmshField):
 
 
 @dataclass
-class ThresholdField(GmshField):
+class ThresholdField(DistanceFunctionField):
     distance_field: DistanceField
     size_min: float
     size_max: float

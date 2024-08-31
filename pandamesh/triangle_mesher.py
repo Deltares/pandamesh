@@ -9,7 +9,7 @@ from pandamesh.common import (
     central_origin,
     check_geodataframe,
     repr,
-    separate,
+    separate_geodataframe,
 )
 from pandamesh.mesher_base import MesherBase
 from pandamesh.triangle_enums import DelaunayAlgorithm
@@ -65,7 +65,7 @@ class TriangleMesher(MesherBase):
     def __init__(self, gdf: gpd.GeoDataFrame, shift_origin: bool = True) -> None:
         check_geodataframe(gdf, {"geometry", "cellsize"}, check_index=True)
         gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
-        polygons, linestrings, points = separate(gdf)
+        polygons, linestrings, points = separate_geodataframe(gdf)
         self.vertices, self.segments, self.regions = collect_geometry(
             polygons, linestrings, points
         )

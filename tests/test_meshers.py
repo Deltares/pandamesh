@@ -31,6 +31,26 @@ other_hole = sg.LinearRing(other_hole_coords)
 other_donut = sg.Polygon(outer, holes=[other_hole])
 
 
+def test_singleton_gmsh_mesher():
+    pm.GmshMesher.finalize()
+
+    gdf = gpd.GeoDataFrame(geometry=[donut])
+    gdf["cellsize"] = 1.0
+    mesher = pm.GmshMesher(gdf)
+
+    with pytest.raises(
+        RuntimeError, match="Multiple GmshMesher instances are not allowed"
+    ):
+        pm.GmshMesher(gdf)
+
+    mesher.finalize()
+    new_mesher = pm.GmshMesher(gdf)
+    assert isinstance(new_mesher, pm.GmshMesher)
+
+    with pytest.raises(RuntimeError, match="This GmshMesher has been finalized"):
+        mesher.generate()
+
+
 def bounds(vertices):
     x, y = vertices.T
     return x.min(), y.min(), x.max(), y.max()
@@ -53,7 +73,7 @@ def triangle_generate(gdf: gpd.GeoDataFrame, shift: bool):
 
 
 def gmsh_generate(gdf: gpd.GeoDataFrame, shift: bool):
-    mesher = pm.GmshMesher.get_instance(gdf, shift_origin=shift)
+    mesher = pm.GmshMesher._force_init(gdf, shift_origin=shift)
     vertices, faces = mesher.generate()
     return vertices, faces
 
@@ -182,7 +202,7 @@ def test_triangle_properties():
 def test_gmsh_properties():
     gdf = gpd.GeoDataFrame(geometry=[donut])
     gdf["cellsize"] = 1.0
-    mesher = pm.GmshMesher.get_instance(gdf)
+    mesher = pm.GmshMesher._force_init(gdf)
 
     # Set default values for meshing parameters
     mesher.mesh_algorithm = pm.MeshAlgorithm.FRONTAL_DELAUNAY
@@ -192,6 +212,7 @@ def test_gmsh_properties():
     mesher.mesh_size_from_curvature = True
     mesher.field_combination = pm.FieldCombination.MAX
     mesher.subdivision_algorithm = pm.SubdivisionAlgorithm.BARYCENTRIC
+    mesher.general_verbosity = pm.GeneralVerbosity.ERRORS
 
     assert mesher.mesh_algorithm == pm.MeshAlgorithm.FRONTAL_DELAUNAY
     assert mesher.recombine_all is False
@@ -200,6 +221,10 @@ def test_gmsh_properties():
     assert mesher.mesh_size_from_curvature is True
     assert mesher.field_combination == pm.FieldCombination.MAX
     assert mesher.subdivision_algorithm == pm.SubdivisionAlgorithm.BARYCENTRIC
+    assert mesher.general_verbosity == pm.GeneralVerbosity.ERRORS
+
+    # Check whether the repr method works
+    assert isinstance(mesher.__repr__(), str)
 
     with pytest.raises(ValueError):
         mesher.mesh_algorithm = "a"
@@ -229,7 +254,7 @@ def test_gmsh_properties():
 def test_gmsh_write(tmp_path):
     gdf = gpd.GeoDataFrame(geometry=[donut])
     gdf["cellsize"] = 1.0
-    mesher = pm.GmshMesher.get_instance(gdf)
+    mesher = pm.GmshMesher._force_init(gdf)
     path = tmp_path / "a.msh"
     mesher.write(path)
     assert path.exists()
@@ -240,7 +265,7 @@ def test_gmsh_write(tmp_path):
 def test_gmsh_initialization_kwargs(read_config_files, interruptible):
     gdf = gpd.GeoDataFrame(geometry=[donut])
     gdf["cellsize"] = 1.0
-    mesher = pm.GmshMesher.get_instance(
+    mesher = pm.GmshMesher._force_init(
         gdf, read_config_files=read_config_files, interruptible=interruptible
     )
     vertices, triangles = mesher.generate()
@@ -256,7 +281,7 @@ def test_generate_geodataframe():
     assert isinstance(result, gpd.GeoDataFrame)
     assert np.allclose(result.area.sum(), donut.area)
 
-    mesher = pm.GmshMesher.get_instance(gdf)
+    mesher = pm.GmshMesher._force_init(gdf)
     result = mesher.generate_geodataframe()
     assert isinstance(result, gpd.GeoDataFrame)
     assert np.allclose(result.area.sum(), donut.area)

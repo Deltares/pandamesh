@@ -12,6 +12,7 @@ from pandamesh.common import (
     IntArray,
     flatten_geometries,
     flatten_geometry,
+    separate_geometry,
 )
 from pandamesh.snapping import snap_nodes
 
@@ -90,24 +91,6 @@ def merge_polygons(geometry: GeometryArray, grid_size) -> GeometryArray:
     return np.asarray(flatten_geometry(merged))
 
 
-def separate(
-    geometry: GeometryArray,
-) -> Tuple[GeometryArray, GeometryArray, GeometryArray]:
-    type_id = shapely.get_type_id(geometry)
-    acceptable = {"Point", "LineString", "LinearRing", "Polygon"}
-    if not np.isin(type_id, (0, 1, 2, 3)).all():
-        raise TypeError(
-            f"Geometry should be one of {acceptable}. "
-            "Call geopandas.GeoDataFrame.explode() to explode multi-part "
-            "geometries into multiple single geometries."
-        )
-    return (
-        geometry[type_id == 3],
-        geometry[(type_id == 1) | (type_id == 2)],
-        geometry[type_id == 0],
-    )
-
-
 class Preprocessor:
     """
     Utilities to clean-up geometries before meshing.
@@ -160,7 +143,7 @@ class Preprocessor:
         grid_size=None,
     ):
         geometry = np.asarray(geometry)
-        self.polygons, self.lines, self.points = separate(geometry)
+        self.polygons, self.lines, self.points = separate_geometry(geometry)
         if values is not None:
             values = np.asarray(values)
             v_shape = values.shape

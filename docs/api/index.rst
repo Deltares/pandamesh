@@ -78,7 +78,6 @@ Gmsh
     GmshMesher.fields
     GmshMesher.clear_fields
     GmshMesher.write
-    GmshMesher.get_instance
     GmshMesher.finalize
     GmshMesher.finalize_gmsh
     gmsh_env

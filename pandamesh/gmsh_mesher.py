@@ -1,8 +1,7 @@
 import pathlib
 import tempfile
-import threading
 from contextlib import contextmanager
-from typing import Any, Tuple, Union
+from typing import Any, List, Tuple, Union
 
 import geopandas as gpd
 import numpy as np
@@ -15,7 +14,7 @@ from pandamesh.common import (
     gmsh,
     move_origin,
     repr,
-    separate,
+    separate_geodataframe,
 )
 from pandamesh.gmsh_enums import (
     FieldCombination,
@@ -26,6 +25,7 @@ from pandamesh.gmsh_enums import (
 from pandamesh.gmsh_fields import (
     CombinationField,
     DistanceField,
+    GmshField,
     MathEvalField,
     StructuredField,
     ThresholdField,
@@ -36,6 +36,8 @@ from pandamesh.mesher_base import MesherBase
 
 @contextmanager
 def gmsh_env(read_config_files: bool = True, interruptible: bool = True):
+    if gmsh.is_initialized() == 1:
+        gmsh.finalize()
     try:
         gmsh.initialize(
             readConfigFiles=read_config_files, run=False, interruptible=interruptible
@@ -109,30 +111,28 @@ class GmshMesher(MesherBase):
     """
 
     _instance = None
-    _lock = threading.Lock()
 
     def __new__(cls, *args, **kwargs) -> "GmshMesher":
         # The Gmsh Python API is unfortunately global. Make sure only one
         # GmshMesher instance is active at a given time.
         if cls._instance is not None:
             raise RuntimeError(
-                f"Singleton class {cls.__name__} is already instantiated. "
-                "Please call .finalize() on other GmshMesher instance prior to "
-                "initializing a new one."
+                "Multiple GmshMesher instances are not allowed. "
+                "Please use either:\n"
+                "- existing_instance.finalize()\n"
+                "- GmshMesher.finalize()\n"
+                "to clean up before creating a new instance."
             )
         cls._instance = super().__new__(cls)
-        cls._lock.acquire()
         cls._instance._initialized = True
         return cls._instance
 
     @classmethod
     def finalize(cls) -> None:
-        # Finalize gmsh, release locks.
+        # Finalize gmsh, set flag to uninitialized
         try:
             cls.finalize_gmsh()
         finally:
-            if cls._lock.locked():
-                cls._lock.release()
             if cls._instance is not None:
                 cls._instance._initialized = False
                 cls._instance = None
@@ -142,11 +142,11 @@ class GmshMesher(MesherBase):
         if name in ("__dict__", "_initialized", "_initialize_gmsh", "finalize"):
             return super().__getattribute__(name)
         if not self._initialized:
-            raise RuntimeError("GmshMesher has been finalized")
+            raise RuntimeError("This GmshMesher has been finalized")
         return super().__getattribute__(name)
 
     @classmethod
-    def get_instance(
+    def _force_init(
         cls,
         gdf: gpd.GeoDataFrame,
         shift_origin: bool = True,
@@ -159,6 +159,8 @@ class GmshMesher(MesherBase):
         This method ensures that only one instance of GmshMesher exists at a
         time. If an instance already exists, it is finalized before this method
         creates a new one.
+
+        Should be used only for testing.
         """
         cls.finalize()
         return cls(gdf, shift_origin, read_config_files, interruptible)
@@ -175,13 +177,13 @@ class GmshMesher(MesherBase):
         )
         check_geodataframe(gdf, {"geometry", "cellsize"}, check_index=True)
         gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
-        polygons, linestrings, points = separate(gdf)
+        polygons, linestrings, points = separate_geodataframe(gdf)
 
         # Include geometry into gmsh
         add_geometry(polygons, linestrings, points)
 
         # Initialize fields parameters
-        self._fields = []
+        self._fields: List[GmshField] = []
         self._combination_field = None
         self._tmpdir = tempfile.TemporaryDirectory()
 
@@ -427,19 +429,14 @@ class GmshMesher(MesherBase):
 
         >>> mesher.add_matheval_distance_field(field)
 
-        Operators
-        =========
-
         The following mathematical operators are supported:
 
         Basic Operators
-        ---------------
 
         - Arithmetic: ``+``, ``-``, ``*``, ``/``, ``%`` (modulo), ``^`` (power)
         - Comparison: ````<``, ``>``
 
         Mathematical Functions
-        ----------------------
 
         - Absolute value: ``abs(x)``
         - Square root: ``sqrt(x)``
@@ -449,7 +446,6 @@ class GmshMesher(MesherBase):
         - Power: ``pow(x,y)``
 
         Statistical Functions
-        ---------------------
 
         - Minimum: ``min(x, y, ...)``
         - Maximum: ``max(x, y, ...)``
@@ -457,19 +453,16 @@ class GmshMesher(MesherBase):
         - Average: ``med(x, y, ...)```
 
         Trigonometric Functions
-        -----------------------
 
         - Standard: ``sin(x)``, ``cos(x)``, ``tan(x)``
         - Inverse: ``asin(x)``, ``acos(x)``, ``atan(x)``
         - Hyperbolic: ``sinh(x)``, ``cosh(x)``, ``tanh(x)``
 
         Rounding Functions
-        ------------------
 
         - ``floor(x)``, ``ceil(x)``, ``round(x)``, ``trunc(x)``
 
         Constants
-        ---------
 
         - Pi: ``pi``
         - Euler's number: ``e``

@@ -46,6 +46,12 @@ FloatArray = np.ndarray
 GeometryArray = np.ndarray
 coord_dtype = np.dtype([("x", np.float64), ("y", np.float64)])
 
+POINT = shapely.GeometryType.POINT
+LINESTRING = shapely.GeometryType.LINESTRING
+LINEARRING = shapely.GeometryType.LINEARRING
+POLYGON = shapely.GeometryType.POLYGON
+GEOM_NAMES = {v: k for k, v in shapely.GeometryType.__members__.items()}
+
 
 def repr(obj: Any) -> str:
     strings = [type(obj).__name__]
@@ -194,21 +200,47 @@ def check_points(
     return
 
 
-def separate(
-    gdf: gpd.GeoDataFrame,
-) -> Tuple[gpd.GeoDataFrame, gpd.GeoDataFrame, gpd.GeoDataFrame]:
-    geom_type = gdf.geom_type
-    acceptable = ["Polygon", "LineString", "Point"]
-    if not geom_type.isin(acceptable).all():
+def _separate(
+    geometry: GeometryArray,
+) -> Tuple[BoolArray, BoolArray, BoolArray]:
+    geometry_id = shapely.get_type_id(geometry)
+    allowed_types = (POINT, LINESTRING, LINEARRING, POLYGON)
+    if not np.isin(geometry_id, allowed_types).all():
+        received = ", ".join(
+            [GEOM_NAMES[geom_id] for geom_id in np.unique(geometry_id)]
+        )
         raise TypeError(
-            f"Geometry should be one of {acceptable}. "
+            "GeoDataFrame contains unsupported geometry types. Geometry "
+            "should be one of Point, LineString, LinearRing, and Polygon "
+            f"geometries. Received: {received}\n"
             "Call geopandas.GeoDataFrame.explode() to explode multi-part "
             "geometries into multiple single geometries."
         )
+    return (
+        geometry_id == POLYGON,
+        (geometry_id == LINESTRING) | (geometry_id == LINEARRING),
+        geometry_id == POINT,
+    )
 
-    polygons = gdf.loc[geom_type == "Polygon"].copy()
-    linestrings = gdf.loc[geom_type == "LineString"].copy()
-    points = gdf.loc[geom_type == "Point"].copy()
+
+def separate_geometry(
+    geometry: GeometryArray,
+) -> Tuple[GeometryArray, GeometryArray, GeometryArray]:
+    is_polygon, is_line, is_point = _separate(geometry)
+    return (
+        geometry[is_polygon],
+        geometry[is_line],
+        geometry[is_point],
+    )
+
+
+def separate_geodataframe(
+    gdf: gpd.GeoDataFrame,
+) -> Tuple[gpd.GeoDataFrame, gpd.GeoDataFrame, gpd.GeoDataFrame]:
+    is_polygon, is_line, is_point = _separate(gdf["geometry"])
+    polygons = gdf.loc[is_polygon].copy()
+    linestrings = gdf.loc[is_line].copy()
+    points = gdf.loc[is_point].copy()
     for df in (polygons, linestrings, points):
         df["cellsize"] = df["cellsize"].astype(float)
         df.crs = None

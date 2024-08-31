@@ -11,7 +11,7 @@ These field geometries can be added via:
 
 * :meth:`pandamesh.GmshMesher.add_threshold_distance_field()`
 * :meth:`pandamesh.GmshMesher.add_matheval_distance_field()`
-* :meth:`pandamesh.GmshMesher.add_structured_field()
+* :meth:`pandamesh.GmshMesher.add_structured_field()`
 * :meth:`pandamesh.GmshMesher.add_structured_field_from_dataarray()`,
 
 The examples below demonstrate how to set up these distance fields for meshing.
