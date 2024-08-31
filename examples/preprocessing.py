@@ -29,6 +29,10 @@ import shapely.geometry as sg
 
 import pandamesh as pm
 
+# sphinx_gallery_start_ignore
+pm.GmshMesher.finalize()
+# sphinx_gallery_end_ignore
+
 # %%
 # Polygons
 # --------

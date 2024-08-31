@@ -52,6 +52,9 @@ Changed
   problems. This is enabled by default.
 - :func:`pandamesh.gmsh_env` now finalizes an existing Gmsh instance prior to
   initializing Gmsh anew.
+- :class:`pandamesh.TriangleMesher` and :class:`pandamesh.GmshMesher` will now
+  also accept LinearRing geometries (previously only Polygons, LineStrings, and
+  Points).
 
 [0.1.6] 2024-07-17
 ------------------

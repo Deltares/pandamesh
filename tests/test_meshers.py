@@ -11,6 +11,7 @@ line_coords = np.array([(2.0, 8.0), (8.0, 2.0)])
 inner = sg.LinearRing(inner_coords)
 outer = sg.LinearRing(outer_coords)
 line = sg.LineString(line_coords)
+polygon = sg.Polygon(outer)
 donut = sg.Polygon(outer, holes=[inner])
 
 other_inner_coords = np.array([(3.0, 4.0), (7.0, 4.0), (7.0, 6.0), (3.0, 6.0)])
@@ -89,7 +90,6 @@ def test_empty(generate, shift):
 @pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
 @pytest.mark.parametrize("shift", [False, True])
 def test_basic(generate, shift):
-    polygon = sg.Polygon(outer)
     gdf = gpd.GeoDataFrame(geometry=[polygon])
     gdf["cellsize"] = 1.0
     vertices, triangles = generate(gdf, shift)
@@ -106,6 +106,17 @@ def test_hole(generate, shift):
     vertices, triangles = generate(gdf, shift)
     mesh_area = area(vertices, triangles).sum()
     assert np.allclose(mesh_area, donut.area)
+    assert np.allclose(bounds(vertices), gdf.total_bounds)
+
+
+@pytest.mark.parametrize("generate", [triangle_generate, gmsh_generate])
+@pytest.mark.parametrize("shift", [False, True])
+def test_ring(generate, shift):
+    gdf = gpd.GeoDataFrame(geometry=[polygon, inner])
+    gdf["cellsize"] = 1.0
+    vertices, triangles = generate(gdf, shift)
+    mesh_area = area(vertices, triangles).sum()
+    assert np.allclose(mesh_area, polygon.area)
     assert np.allclose(bounds(vertices), gdf.total_bounds)
 
 
