@@ -679,20 +679,22 @@ class GmshMesher:
             quadrangles are included. A fill value of -1 is used as a last
             entry for triangles in that case.
         """
-        # Remove any previously generated results from gmsh.
-        gmsh.model.mesh.clear()
-        self._combine_fields()
-        gmsh.model.mesh.generate(dim=2)
+        try:
+            # Remove any previously generated results from gmsh.
+            gmsh.model.mesh.clear()
+            self._combine_fields()
+            gmsh.model.mesh.generate(dim=2)
 
-        # cleaning up of mesh in order to obtain unique elements and nodes
-        gmsh.model.mesh.removeDuplicateElements()
-        gmsh.model.mesh.removeDuplicateNodes()
-        gmsh.model.mesh.renumberElements()
-        gmsh.model.mesh.renumberNodes()
+            # cleaning up of mesh in order to obtain unique elements and nodes
+            gmsh.model.mesh.removeDuplicateElements()
+            gmsh.model.mesh.removeDuplicateNodes()
+            gmsh.model.mesh.renumberElements()
+            gmsh.model.mesh.renumberNodes()
 
-        vertices, faces = self._vertices(), self._faces()
-        if finalize:
-            self.finalize()
+            vertices, faces = self._vertices(), self._faces()
+        finally:
+            if finalize:
+                self.finalize()
         return vertices, faces
 
     def generate_geodataframe(self, finalize: bool = False) -> gpd.GeoDataFrame:

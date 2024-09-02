@@ -10,7 +10,6 @@ import numpy as np
 import pandas as pd
 import shapely
 from pandas.api.types import is_integer_dtype
-from scipy.spatial import KDTree
 
 
 class MaybeGmsh:  # pragma: no cover
@@ -162,43 +161,24 @@ def check_lines(lines: gpd.GeoSeries) -> None:
     return
 
 
-def compute_intersections(segments, i, j):
+def compute_intersections(segment_linestrings, i: IntArray, j: IntArray):
     check = j > i
-    if not check.any():
-        return np.array([], dtype=float).reshape((-1, 2))
-
     i = i[check]
     j = j[check]
-    seg1 = segments[i]
-    seg2 = segments[j]
 
-    x1, y1 = seg1[:, 0, 0], seg1[:, 0, 1]
-    x2, y2 = seg1[:, 1, 0], seg1[:, 1, 1]
-    x3, y3 = seg2[:, 0, 0], seg2[:, 0, 1]
-    x4, y4 = seg2[:, 1, 0], seg2[:, 1, 1]
-
-    den = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1)
-    num1 = (x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)
-    num2 = (x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)
-
-    mask = np.abs(den) > 1e-8  # Filter out parallel lines
-    t = np.zeros_like(den)
-    u = np.zeros_like(den)
-    t[mask] = num1[mask] / den[mask]
-    u[mask] = num2[mask] / den[mask]
-
-    intersect_mask = (0 <= t) & (t <= 1) & (0 <= u) & (u <= 1)
-    x = x1 + t * (x2 - x1)
-    y = y1 + t * (y2 - y1)
-
-    final_mask = mask & intersect_mask
-    return np.column_stack((x[final_mask], y[final_mask]))
+    intersections = shapely.intersection(
+        segment_linestrings[i],
+        segment_linestrings[j],
+    )
+    coordinates, index = shapely.get_coordinates(intersections, return_index=True)
+    coordinates, unique_index = np.unique(coordinates, return_index=True, axis=0)
+    index = index[unique_index]
+    return i[index], j[index], coordinates
 
 
 def linework_intersections(
     polygons: gpd.GeoSeries,
     lines: gpd.GeoSeries,
-    upper_search_bound: float,
     tolerance: float,
 ) -> FloatArray:
     """Compute intersections between polygon boundary and line segments."""
@@ -206,24 +186,41 @@ def linework_intersections(
     inner_rings = np.array(flatten(polygons.interiors))
     linework = np.concatenate((lines, outer_rings, inner_rings))
 
-    coordinates, index = shapely.get_coordinates(linework, return_index=True)
+    coordinates, line_index = shapely.get_coordinates(linework, return_index=True)
     segments = np.stack((coordinates[:-1, :], coordinates[1:]), axis=1)
-    keep = np.diff(index) == 0
+    keep = np.diff(line_index) == 0
     segments = segments[keep]
+    segment_to_line = line_index[1:][keep]
     segment_linestrings = shapely.linestrings(
         segments.reshape((-1, 2)), indices=np.repeat(np.arange(len(segments)), 2)
     )
 
+    # We only use the STRtree to check bounding boxes. It does return the
+    # intersection result, even if we specify the predicate.
     rtree = shapely.STRtree(segment_linestrings)
     i, j = rtree.query(segment_linestrings)
-    intersections = compute_intersections(segments, i, j)
 
-    vertices = np.unique(coordinates, axis=0)
-    kdtree = KDTree(vertices)
-    distance, index = kdtree.query(
-        intersections, distance_upper_bound=upper_search_bound
-    )
-    return intersections[distance > tolerance]
+    # Compute intersections
+    # Skip self-intersections
+    keep = segment_to_line[i] != segment_to_line[j]
+    i = i[keep]
+    j = j[keep]
+    i, j, intersections = compute_intersections(segment_linestrings, i, j)
+    segments_i = segments[i]
+    segments_j = segments[j]
+
+    # Find minimum squared distance to vertices of intersecting edges. If the
+    # minimum distance is (approximately) zero, the intersection is represented
+    # by a vertex already.
+    distance_i = np.linalg.norm(
+        intersections[:, np.newaxis, :] - segments_i, axis=2
+    ).min(axis=1)
+    distance_j = np.linalg.norm(
+        intersections[:, np.newaxis, :] - segments_j, axis=2
+    ).min(axis=1)
+    tolsquared = tolerance * tolerance
+    unresolved = (distance_i > tolsquared) | (distance_j > tolsquared)
+    return intersections[unresolved]
 
 
 def check_linework(
@@ -234,7 +231,6 @@ def check_linework(
     intersections = linework_intersections(
         polygons.geometry,
         lines.geometry,
-        upper_search_bound=1.0e-3,
         tolerance=1.0e-6,
     )
     n_intersection = len(intersections)
@@ -256,7 +252,11 @@ def check_linework(
 def find_edge_intersections(geometry: gpd.Geoseries) -> gpd.GeoSeries:
     """
     Find all unresolved intersections between polygon boundaries, linestring,
-    and linearring segments.
+    and linearring edges.
+
+    A "resolved" intersection is one where the intersection of two lines is
+    represented by a vertex in both lines. Unresolved means: an intersection
+    which is not represented by an explicit vertex in the geometries.
 
     Parameters
     ----------
@@ -276,7 +276,6 @@ def find_edge_intersections(geometry: gpd.Geoseries) -> gpd.GeoSeries:
     intersections = linework_intersections(
         polygons,
         lines,
-        upper_search_bound=1.0e-3,
         tolerance=1.0e-6,
     )
     return gpd.GeoSeries(gpd.points_from_xy(*intersections.T))

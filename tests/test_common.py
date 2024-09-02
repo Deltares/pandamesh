@@ -195,7 +195,7 @@ def test_check_lines():
 
 
 def test_compute_intersections():
-    segments = np.array(
+    segments = shapely.linestrings(
         [
             [
                 [0.0, 5.0],
@@ -214,20 +214,26 @@ def test_compute_intersections():
     i = np.array([0, 0, 1, 1, 2])
     j = np.array([0, 1, 1, 2, 2])
 
-    actual = common.compute_intersections(segments, i, j)
+    _i, _j, actual = common.compute_intersections(segments, i, j)
+    assert np.array_equal(_i, [0])
+    assert np.array_equal(_j, [1])
     assert np.array_equal(actual, [[5.0, 5.0]])
 
     # No intersections
-    actual = common.compute_intersections(segments, i, i)
+    _i, _j, actual = common.compute_intersections(segments, i, i)
+    assert np.array_equal(_i, [])
+    assert np.array_equal(_j, [])
     assert np.array_equal(actual, np.array([]).reshape((-1, 2)))
 
     i = np.array([0])
     j = np.array([2])
-    actual = common.compute_intersections(segments, i, j)
+    _i, _j, actual = common.compute_intersections(segments, i, j)
+    assert np.array_equal(_i, [])
+    assert np.array_equal(_j, [])
     assert np.array_equal(actual, np.array([]).reshape((-1, 2)))
 
     # Parallel
-    segments = np.array(
+    segments = shapely.linestrings(
         [
             [
                 [0.0, 5.0],
@@ -241,8 +247,16 @@ def test_compute_intersections():
     )
     i = np.array([0])
     j = np.array([1])
-    actual = common.compute_intersections(segments, i, j)
-    assert np.array_equal(actual, np.array([]).reshape((-1, 2)))
+    _i, _j, actual = common.compute_intersections(segments, i, j)
+    assert np.array_equal(_i, [0, 0])
+    assert np.array_equal(_j, [1, 1])
+    expected = np.array(
+        [
+            [3.0, 5.0],
+            [10.0, 5.0],
+        ]
+    )
+    assert np.array_equal(actual, expected)
 
 
 def test_check_polygons():
