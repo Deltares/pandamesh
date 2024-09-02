@@ -436,7 +436,7 @@ exterior of the inner zone.</p>
 <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="p">[</span><span class="n">outer</span><span class="p">,</span> <span class="n">inner</span><span class="p">])</span>
 <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cellsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">gdf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax0</span><span class="p">)</span>
 <span class="n">gdf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
 </pre></div>
@@ -456,7 +456,7 @@ square. We can resolve this as follows:</p>
 <p>Note that the Preprocessor supports method chaining, allowing you to flexibly
 execute a set of operations.</p>
 <p>The resulting geodataframe’s geometries are valid planar partition:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">resolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax0</span><span class="p">)</span>
 <span class="n">resolved</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
 </pre></div>
@@ -476,7 +476,7 @@ be overlapping</p>
 <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="p">[</span><span class="n">outer</span><span class="p">,</span> <span class="n">inner0</span><span class="p">,</span> <span class="n">inner1</span><span class="p">])</span>
 <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cellsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -492,7 +492,7 @@ be overlapping</p>
 
 <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">TriangleMesher</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">resolved</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
 </pre></div>
@@ -511,7 +511,7 @@ into the triangulation. We can rid of these by calling <code class="docutils lit
 
 <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">TriangleMesher</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">resolved</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
 </pre></div>
@@ -552,17 +552,27 @@ Intersections can be resolved using the pandamesh.Preprocessor.
 </pre></div>
 </div>
 <p>At x=10.0, the generated triangles are disconnected.</p>
-<p>We can clearly identify them:</p>
+<p>This is caused by the the fact that the polygons do not share an edge:</p>
+<ul class="simple">
+<li><p>The polygon on the left has an edge from (10.0, 0.0) to (10.0, 10.0)</p></li>
+<li><p>The polygon on the right has an edge from (10.0, 2.0) to (10.0, 8.0)</p></li>
+</ul>
+<p>In fact, the vertices of the right polygon are intersecting the (edge) of the
+left polygon. We can identify these intersections with
+<a class="reference internal" href="../api/api/pandamesh.find_edge_intersections.html#pandamesh.find_edge_intersections" title="pandamesh.find_edge_intersections"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandamesh.find_edge_intersections()</span></code></a>:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">intersections</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">find_edge_intersections</span><span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">intersections</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-
-<span class="c1"># Calling ``.unify_polygons()`` ensures that the vertices of touching polygons</span>
-<span class="c1"># are inserted, such that the polygons share an edge.</span>
-
-<span class="n">resolved</span> <span class="o">=</span> <span class="p">(</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_preprocessing_008.png" srcset="../_images/sphx_glr_preprocessing_008.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">.unify_polygons()</span></code> ensures that the vertices of touching polygons
+are inserted, such that the polygons share an edge.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">resolved</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">pm</span><span class="o">.</span><span class="n">Preprocessor</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">cellsize</span><span class="p">)</span>
     <span class="o">.</span><span class="n">unify_polygons</span><span class="p">()</span>
     <span class="o">.</span><span class="n">to_geodataframe</span><span class="p">()</span>
@@ -571,16 +581,12 @@ Intersections can be resolved using the pandamesh.Preprocessor.
 <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">TriangleMesher</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
 <span class="n">polygon0_coords</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">(</span><span class="n">resolved</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">polygon0_coords</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
-<ul class="sphx-glr-horizontal">
-<li><img src="../_images/sphx_glr_preprocessing_008.png" srcset="../_images/sphx_glr_preprocessing_008.png" alt="preprocessing" class = "sphx-glr-multi-img"/></li>
-<li><img src="../_images/sphx_glr_preprocessing_009.png" srcset="../_images/sphx_glr_preprocessing_009.png" alt="preprocessing" class = "sphx-glr-multi-img"/></li>
-</ul>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7fa0bbfe9b80&gt;
+<img src="../_images/sphx_glr_preprocessing_009.png" srcset="../_images/sphx_glr_preprocessing_009.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7ff9c1f035c0&gt;
 </pre></div>
 </div>
 </section>
@@ -624,7 +630,7 @@ Intersections can be resolved using the pandamesh.Preprocessor.
 <img src="../_images/sphx_glr_preprocessing_010.png" srcset="../_images/sphx_glr_preprocessing_010.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
-<p>We can identify these problematic intersections using
+<p>We can identify these problematic intersections again using
 <a class="reference internal" href="../api/api/pandamesh.find_edge_intersections.html#pandamesh.find_edge_intersections" title="pandamesh.find_edge_intersections"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandamesh.find_edge_intersections()</span></code></a>:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">intersections</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">find_edge_intersections</span><span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -687,12 +693,12 @@ triangles around the line intersection have disappeared:</p>
 <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GmshMesher</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">finalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">polygon0_coords</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">(</span><span class="n">resolved</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">polygon0_coords</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_014.png" srcset="../_images/sphx_glr_preprocessing_014.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7fa0bbc710d0&gt;
+<img src="../_images/sphx_glr_preprocessing_014.png" srcset="../_images/sphx_glr_preprocessing_014.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7ff9c1d6aba0&gt;
 </pre></div>
 </div>
 <p>In some cases, having line segments terminate exactly on polygon boundaries
@@ -708,13 +714,13 @@ from any polygon boundary by providing a distance to <code class="docutils liter
 <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GmshMesher</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">finalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">polygon0_coords</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">(</span><span class="n">resolved</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">resolved</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">polygon0_coords</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_015.png" srcset="../_images/sphx_glr_preprocessing_015.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7fa0bbe2b080&gt;
+<img src="../_images/sphx_glr_preprocessing_015.png" srcset="../_images/sphx_glr_preprocessing_015.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7ff9cf7339b0&gt;
 </pre></div>
 </div>
 <p>Another pragmatic approach is to convert any line into interpolated points.
@@ -728,7 +734,7 @@ Points cannot intersect each other, which sidesteps a large number of problems.<
 
 <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GmshMesher</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">finalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">resolved</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
@@ -751,7 +757,7 @@ the polygon edges.</p>
 
 <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GmshMesher</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">finalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">resolved</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
@@ -807,7 +813,7 @@ to check the intermediate result after clipping but prior to snapping:</p>
     <span class="o">.</span><span class="n">to_geodataframe</span><span class="p">()</span>
 <span class="p">)</span>
 
-<span class="n">check</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">check</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img src="../_images/sphx_glr_preprocessing_020.png" srcset="../_images/sphx_glr_preprocessing_020.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
@@ -818,7 +824,7 @@ relatively costly, such as unifying a large number of detailed polygons. The
 intermediate result can be stored as e.g. a GeoPackage. Then, in a separate
 processing step, the intermediate result can be read again, and other
 processing steps (such as filtering points) can be applied.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.643 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.725 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-preprocessing-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/a977adb4611357edd665dfb42e7a7790/preprocessing.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">preprocessing.ipynb</span></code></a></p>

@@ -95,7 +95,7 @@ exterior of the inner zone.
     gdf = gpd.GeoDataFrame(geometry=[outer, inner])
     gdf["cellsize"] = [2.0, 1.0]
 
-    fig, (ax0, ax1) = plt.subplots(ncols=2, figsize=(10, 5), sharex=True, sharey=True)
+    fig, (ax0, ax1) = plt.subplots(ncols=2, sharex=True, sharey=True)
     gdf.iloc[[0]].plot(ax=ax0)
     gdf.iloc[[1]].plot(ax=ax1)
 
@@ -152,7 +152,7 @@ The resulting geodataframe's geometries are valid planar partition:
 .. code-block:: Python
 
 
-    fig, (ax0, ax1) = plt.subplots(ncols=2, figsize=(10, 5), sharex=True, sharey=True)
+    fig, (ax0, ax1) = plt.subplots(ncols=2, sharex=True, sharey=True)
     resolved.iloc[[0]].plot(ax=ax0)
     resolved.iloc[[1]].plot(ax=ax1)
 
@@ -213,7 +213,7 @@ be overlapping
     gdf = gpd.GeoDataFrame(geometry=[outer, inner0, inner1])
     gdf["cellsize"] = [2.0, 1.0, 1.0]
 
-    fig, ax = plt.subplots(figsize=(5, 5))
+    fig, ax = plt.subplots()
     gdf.plot(ax=ax, facecolor="none")
 
 
@@ -250,7 +250,7 @@ These will also be resolved by ``.unify_polygons``.
 
     vertices, faces = pm.TriangleMesher(resolved).generate()
 
-    fig, ax = plt.subplots(figsize=(5, 5))
+    fig, ax = plt.subplots()
     pm.plot(vertices, faces, ax=ax)
     resolved.plot(ax=ax, facecolor="none", edgecolor="red")
 
@@ -291,7 +291,7 @@ into the triangulation. We can rid of these by calling ``.merge_polygons``:
 
     vertices, faces = pm.TriangleMesher(resolved).generate()
 
-    fig, ax = plt.subplots(figsize=(5, 5))
+    fig, ax = plt.subplots()
     pm.plot(vertices, faces, ax=ax)
     resolved.plot(ax=ax, facecolor="none", edgecolor="red")
 
@@ -367,13 +367,20 @@ share vertices along the boundary.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 167-170
+.. GENERATED FROM PYTHON SOURCE LINES 167-177
 
 At x=10.0, the generated triangles are disconnected.
 
-We can clearly identify them:
+This is caused by the the fact that the polygons do not share an edge:
 
-.. GENERATED FROM PYTHON SOURCE LINES 170-193
+* The polygon on the left has an edge from (10.0, 0.0) to (10.0, 10.0)
+* The polygon on the right has an edge from (10.0, 2.0) to (10.0, 8.0)
+
+In fact, the vertices of the right polygon are intersecting the (edge) of the
+left polygon. We can identify these intersections with
+:func:`pandamesh.find_edge_intersections`:
+
+.. GENERATED FROM PYTHON SOURCE LINES 177-184
 
 .. code-block:: Python
 
@@ -384,8 +391,33 @@ We can clearly identify them:
     pm.plot(vertices, faces, ax=ax)
     intersections.plot(ax=ax)
 
-    # Calling ``.unify_polygons()`` ensures that the vertices of touching polygons
-    # are inserted, such that the polygons share an edge.
+
+
+
+.. image-sg:: /examples/images/sphx_glr_preprocessing_008.png
+   :alt: preprocessing
+   :srcset: /examples/images/sphx_glr_preprocessing_008.png
+   :class: sphx-glr-single-img
+
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+
+    <Axes: >
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 185-187
+
+Calling ``.unify_polygons()`` ensures that the vertices of touching polygons
+are inserted, such that the polygons share an edge.
+
+.. GENERATED FROM PYTHON SOURCE LINES 187-201
+
+.. code-block:: Python
+
 
     resolved = (
         pm.Preprocessor(geometry=gdf.geometry, values=gdf.cellsize)
@@ -396,29 +428,17 @@ We can clearly identify them:
     vertices, faces = pm.TriangleMesher(resolved).generate()
     polygon0_coords = shapely.get_coordinates(resolved.geometry[0])
 
-    fig, ax = plt.subplots(figsize=(5, 5))
+    fig, ax = plt.subplots()
     pm.plot(vertices, faces, ax=ax)
     ax.scatter(*polygon0_coords.T)
 
 
 
 
-.. rst-class:: sphx-glr-horizontal
-
-
-    *
-
-      .. image-sg:: /examples/images/sphx_glr_preprocessing_008.png
-         :alt: preprocessing
-         :srcset: /examples/images/sphx_glr_preprocessing_008.png
-         :class: sphx-glr-multi-img
-
-    *
-
-      .. image-sg:: /examples/images/sphx_glr_preprocessing_009.png
-         :alt: preprocessing
-         :srcset: /examples/images/sphx_glr_preprocessing_009.png
-         :class: sphx-glr-multi-img
+.. image-sg:: /examples/images/sphx_glr_preprocessing_009.png
+   :alt: preprocessing
+   :srcset: /examples/images/sphx_glr_preprocessing_009.png
+   :class: sphx-glr-single-img
 
 
 .. rst-class:: sphx-glr-script-out
@@ -426,18 +446,18 @@ We can clearly identify them:
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7fa0bbfe9b80>
+    <matplotlib.collections.PathCollection object at 0x7ff9c1f035c0>
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 194-198
+.. GENERATED FROM PYTHON SOURCE LINES 202-206
 
 Lines
 -----
 
 Lines may only be only partially present, or present in holes:
 
-.. GENERATED FROM PYTHON SOURCE LINES 198-232
+.. GENERATED FROM PYTHON SOURCE LINES 206-240
 
 .. code-block:: Python
 
@@ -493,12 +513,12 @@ Lines may only be only partially present, or present in holes:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 233-235
+.. GENERATED FROM PYTHON SOURCE LINES 241-243
 
-We can identify these problematic intersections using
+We can identify these problematic intersections again using
 :func:`pandamesh.find_edge_intersections`:
 
-.. GENERATED FROM PYTHON SOURCE LINES 235-241
+.. GENERATED FROM PYTHON SOURCE LINES 243-249
 
 .. code-block:: Python
 
@@ -526,11 +546,11 @@ We can identify these problematic intersections using
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 242-243
+.. GENERATED FROM PYTHON SOURCE LINES 250-251
 
 A first step is to remove line segments that do not fall in any polygon:
 
-.. GENERATED FROM PYTHON SOURCE LINES 243-251
+.. GENERATED FROM PYTHON SOURCE LINES 251-259
 
 .. code-block:: Python
 
@@ -560,14 +580,14 @@ A first step is to remove line segments that do not fall in any polygon:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 252-256
+.. GENERATED FROM PYTHON SOURCE LINES 260-264
 
 However, this doesn't create suitable input for meshing. The ``GmshMesher``
 appears to hang on this input, and Triangle generates a grid with very small
 triangles. Pandamesh errors on these intersections by default, but way may
 proceed:
 
-.. GENERATED FROM PYTHON SOURCE LINES 256-260
+.. GENERATED FROM PYTHON SOURCE LINES 264-268
 
 .. code-block:: Python
 
@@ -596,7 +616,7 @@ proceed:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 261-275
+.. GENERATED FROM PYTHON SOURCE LINES 269-283
 
 A better approach here is to ensure all intersections are present in all
 linework:
@@ -613,7 +633,7 @@ If we plot the vertices of the resolved polygon, we see that the intersection
 vertices have been inserted into the polygon boundaries, and that the tiny
 triangles around the line intersection have disappeared:
 
-.. GENERATED FROM PYTHON SOURCE LINES 275-292
+.. GENERATED FROM PYTHON SOURCE LINES 283-300
 
 .. code-block:: Python
 
@@ -630,7 +650,7 @@ triangles around the line intersection have disappeared:
     vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
     polygon0_coords = shapely.get_coordinates(resolved.geometry[0])
 
-    fig, ax = plt.subplots(figsize=(5, 5))
+    fig, ax = plt.subplots()
     pm.plot(vertices, faces, ax=ax)
     ax.scatter(*polygon0_coords.T)
 
@@ -648,17 +668,17 @@ triangles around the line intersection have disappeared:
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7fa0bbc710d0>
+    <matplotlib.collections.PathCollection object at 0x7ff9c1d6aba0>
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 293-296
+.. GENERATED FROM PYTHON SOURCE LINES 301-304
 
 In some cases, having line segments terminate exactly on polygon boundaries
 still causes trouble. We may also ensure that lines are some distance removed
 from any polygon boundary by providing a distance to ``clip_lines``:
 
-.. GENERATED FROM PYTHON SOURCE LINES 296-312
+.. GENERATED FROM PYTHON SOURCE LINES 304-320
 
 .. code-block:: Python
 
@@ -673,7 +693,7 @@ from any polygon boundary by providing a distance to ``clip_lines``:
     vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
     polygon0_coords = shapely.get_coordinates(resolved.geometry[0])
 
-    fig, ax = plt.subplots(figsize=(5, 5))
+    fig, ax = plt.subplots()
     pm.plot(vertices, faces, ax=ax)
     resolved.plot(facecolor="none", edgecolor="red", ax=ax)
     ax.scatter(*polygon0_coords.T)
@@ -692,16 +712,16 @@ from any polygon boundary by providing a distance to ``clip_lines``:
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7fa0bbe2b080>
+    <matplotlib.collections.PathCollection object at 0x7ff9cf7339b0>
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 313-315
+.. GENERATED FROM PYTHON SOURCE LINES 321-323
 
 Another pragmatic approach is to convert any line into interpolated points.
 Points cannot intersect each other, which sidesteps a large number of problems.
 
-.. GENERATED FROM PYTHON SOURCE LINES 315-329
+.. GENERATED FROM PYTHON SOURCE LINES 323-337
 
 .. code-block:: Python
 
@@ -715,7 +735,7 @@ Points cannot intersect each other, which sidesteps a large number of problems.
 
     vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 
-    fig, ax = plt.subplots(figsize=(5, 5))
+    fig, ax = plt.subplots()
     pm.plot(vertices, faces, ax=ax)
     resolved.plot(facecolor="none", edgecolor="red", ax=ax)
 
@@ -737,7 +757,7 @@ Points cannot intersect each other, which sidesteps a large number of problems.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 330-337
+.. GENERATED FROM PYTHON SOURCE LINES 338-345
 
 Points
 ------
@@ -747,7 +767,7 @@ the polygon edges.
 
 We can remove those points by providing a distance to ``clip_points``.
 
-.. GENERATED FROM PYTHON SOURCE LINES 337-351
+.. GENERATED FROM PYTHON SOURCE LINES 345-359
 
 .. code-block:: Python
 
@@ -761,7 +781,7 @@ We can remove those points by providing a distance to ``clip_points``.
 
     vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 
-    fig, ax = plt.subplots(figsize=(5, 5))
+    fig, ax = plt.subplots()
     pm.plot(vertices, faces, ax=ax)
     resolved.plot(facecolor="none", edgecolor="red", ax=ax)
 
@@ -783,12 +803,12 @@ We can remove those points by providing a distance to ``clip_points``.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 352-354
+.. GENERATED FROM PYTHON SOURCE LINES 360-362
 
 A problem with points is that they may be very close together, thereby
 generating very small triangles. Let's generate 200 random points to illustrate:
 
-.. GENERATED FROM PYTHON SOURCE LINES 354-369
+.. GENERATED FROM PYTHON SOURCE LINES 362-377
 
 .. code-block:: Python
 
@@ -819,12 +839,12 @@ generating very small triangles. Let's generate 200 random points to illustrate:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 370-372
+.. GENERATED FROM PYTHON SOURCE LINES 378-380
 
 We can solve this by snapping points together that are located some distance
 from each other:
 
-.. GENERATED FROM PYTHON SOURCE LINES 372-383
+.. GENERATED FROM PYTHON SOURCE LINES 380-391
 
 .. code-block:: Python
 
@@ -851,7 +871,7 @@ from each other:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 384-397
+.. GENERATED FROM PYTHON SOURCE LINES 392-405
 
 Flexibility and composability
 -----------------------------
@@ -867,7 +887,7 @@ experimenting with various methods. The intermediate output can be checked
 and visualized at any moments, by calling ``to_geodataframe``. For example,
 to check the intermediate result after clipping but prior to snapping:
 
-.. GENERATED FROM PYTHON SOURCE LINES 397-406
+.. GENERATED FROM PYTHON SOURCE LINES 405-414
 
 .. code-block:: Python
 
@@ -878,7 +898,7 @@ to check the intermediate result after clipping but prior to snapping:
         .to_geodataframe()
     )
 
-    check.plot(facecolor="none", edgecolor="red")
+    check.plot(facecolor="none")
 
 
 
@@ -898,7 +918,7 @@ to check the intermediate result after clipping but prior to snapping:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 407-412
+.. GENERATED FROM PYTHON SOURCE LINES 415-420
 
 This also makes it easy to apply the preprocessor in steps. Some steps may be
 relatively costly, such as unifying a large number of detailed polygons. The
@@ -909,7 +929,7 @@ processing steps (such as filtering points) can be applied.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.643 seconds)
+   **Total running time of the script:** (0 minutes 1.725 seconds)
 
 
 .. _sphx_glr_download_examples_preprocessing.py:
