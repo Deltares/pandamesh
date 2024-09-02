@@ -914,7 +914,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">()</span>
-        <span class="n">index</span> <span class="o">=</span> <span class="n">snap_nodes</span><span class="p">(</span><span class="n">shapely</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">),</span> <span class="n">distance</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">snap_nodes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy_with</span><span class="p">(</span>
             <span class="n">points</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
             <span class="n">point_indexer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">point_indexer</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
