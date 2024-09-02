@@ -1,10 +1,9 @@
 from typing import NamedTuple
 
 import numpy as np
-from scipy import sparse
-from scipy.spatial import KDTree
+import shapely
 
-from pandamesh.common import FloatArray, IntArray
+from pandamesh.common import FloatArray, GeometryArray, IntArray
 
 try:
     from numba import njit  # pragma: no cover
@@ -52,9 +51,21 @@ class MatrixCSR(NamedTuple):
     nnz: int
 
     @staticmethod
-    def from_csr_matrix(A: sparse.csr_matrix) -> "MatrixCSR":
-        n, m = A.shape
-        return MatrixCSR(A.data, A.indices, A.indptr, n, m, A.nnz)
+    def from_triplet(
+        row: IntArray, col: IntArray, data: np.ndarray, n: int, m: int
+    ) -> "MatrixCSR":
+        i = np.cumsum(np.bincount(row, minlength=n))
+        indptr = np.empty(i.size + 1, dtype=int)
+        indptr[0] = 0
+        indptr[1:] = i
+        return MatrixCSR(
+            data=data,
+            indices=col,
+            indptr=indptr,
+            n=n,
+            m=m,
+            nnz=data.size,
+        )
 
 
 @njit(inline="always")
@@ -110,7 +121,21 @@ def _snap_to_nearest(A: MatrixCSR, snap_candidates: IntArray, max_distance) -> I
     return visited
 
 
-def snap_nodes(xy: FloatArray, max_snap_distance: float) -> IntArray:
+def distance_matrix(geometry: GeometryArray, max_distance: float) -> MatrixCSR:
+    n = len(geometry)
+    tree = shapely.STRtree(geometry)
+    i, j = tree.query(geometry, distance=max_distance, predicate="dwithin")
+    coords = shapely.get_coordinates(geometry)
+    return MatrixCSR.from_triplet(
+        row=i,
+        col=j,
+        data=np.linalg.norm(coords[i] - coords[j], axis=1),
+        n=n,
+        m=n,
+    )
+
+
+def snap_nodes(points: GeometryArray, max_distance: float) -> IntArray:
     """
     Snap neigbhoring vertices together that are located within a maximum
     snapping distance from each other.
@@ -130,30 +155,26 @@ def snap_nodes(xy: FloatArray, max_snap_distance: float) -> IntArray:
     Parameters
     ----------
     xy: nd array of floats of size (N, 2)
-    max_snap_distance: float
+    max_distance: float
 
     Returns
     -------
-    inverse: 1D nd array of ints of size N
-        Inverse index array: the new vertex number for every old vertex. Is
+    index: 1D array of ints of size M
+        Which nodes to preserve.
     """
     # First, find all the points that lie within max_distance of each other
-    tree = KDTree(xy)
-    distances = tree.sparse_distance_matrix(
-        tree, max_distance=max_snap_distance, output_type="coo_matrix"
-    ).tocsr()
-    should_snap = distances.getnnz(axis=1) > 1
-
+    A = distance_matrix(points, max_distance)
+    should_snap = np.diff(A.indptr) > 1  # equal to: .getnnz(axis=1) > 1
     if should_snap.any():
-        index = np.arange(len(xy))
+        index = np.arange(A.n)
         visited = _snap_to_nearest(
-            A=MatrixCSR.from_csr_matrix(distances),
+            A=A,
             snap_candidates=index[should_snap],
-            max_distance=max_snap_distance,
+            max_distance=max_distance,
         )
         targets = visited < 0  # i.e. still UNVISITED or TARGET valued.
         visited[targets] = index[targets]
         deduplicated = np.unique(visited)
         return deduplicated
     else:
-        return np.arange(len(xy))
+        return np.arange(A.n)

@@ -218,8 +218,7 @@ def linework_intersections(
     distance_j = np.linalg.norm(
         intersections[:, np.newaxis, :] - segments_j, axis=2
     ).min(axis=1)
-    tolsquared = tolerance * tolerance
-    unresolved = (distance_i > tolsquared) | (distance_j > tolsquared)
+    unresolved = (distance_i > tolerance) | (distance_j > tolerance)
     return intersections[unresolved]
 
 
