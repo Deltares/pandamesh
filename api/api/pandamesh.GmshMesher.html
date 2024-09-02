@@ -327,6 +327,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.snap_points.html">pandamesh.Preprocessor.snap_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.clip_points.html">pandamesh.Preprocessor.clip_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.to_geodataframe.html">pandamesh.Preprocessor.to_geodataframe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.find_edge_intersections.html">pandamesh.find_edge_intersections</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.TriangleMesher.html">pandamesh.TriangleMesher</a></li>
@@ -482,6 +483,13 @@ column.</p></li>
 of the geometry’s bounding box during mesh generation. This helps mitigate
 floating-point precision issues. The resulting mesh vertices are
 automatically translated back to the original coordinate system.</p></li>
+<li><p><strong>intersecting_edges</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default is &quot;error&quot;</em>) – <p>String indicating how to report unresolved line segment intersections:</p>
+<ul>
+<li><p>”ignore”: skip check.</p></li>
+<li><p>”warning”: emit a warning.</p></li>
+<li><p>”error”: raise a ValueError.</p></li>
+</ul>
+</p></li>
 <li><p><strong>read_config_files</strong> (<em>bool</em>) – Gmsh initialization option: Read system Gmsh configuration files
 (gmshrc and gmsh-options).</p></li>
 <li><p><strong>interruptible</strong> (<em>bool</em>) – Gmsh initialization option.</p></li>

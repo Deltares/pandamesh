@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pandamesh.Preprocessor.clip_points &#8212; pandamesh  documentation</title>
+    <title>pandamesh.find_edge_intersections &#8212; pandamesh  documentation</title>
   
   
   
@@ -43,11 +43,11 @@
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/api/pandamesh.Preprocessor.clip_points';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/api/pandamesh.find_edge_intersections';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pandamesh.Preprocessor.to_geodataframe" href="pandamesh.Preprocessor.to_geodataframe.html" />
-    <link rel="prev" title="pandamesh.Preprocessor.snap_points" href="pandamesh.Preprocessor.snap_points.html" />
+    <link rel="next" title="pandamesh.TriangleMesher" href="pandamesh.TriangleMesher.html" />
+    <link rel="prev" title="pandamesh.Preprocessor.to_geodataframe" href="pandamesh.Preprocessor.to_geodataframe.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -325,9 +325,9 @@
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.unify_lines.html">pandamesh.Preprocessor.unify_lines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.interpolate_lines_to_points.html">pandamesh.Preprocessor.interpolate_lines_to_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.snap_points.html">pandamesh.Preprocessor.snap_points</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">pandamesh.Preprocessor.clip_points</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.clip_points.html">pandamesh.Preprocessor.clip_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.to_geodataframe.html">pandamesh.Preprocessor.to_geodataframe</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.find_edge_intersections.html">pandamesh.find_edge_intersections</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">pandamesh.find_edge_intersections</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.TriangleMesher.html">pandamesh.TriangleMesher</a></li>
@@ -414,7 +414,7 @@
     
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API Reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">pandamesh.Pr...</li>
+    <li class="breadcrumb-item active" aria-current="page">pandamesh.fi...</li>
   </ul>
 </nav>
 </div>
@@ -431,22 +431,22 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="pandamesh-preprocessor-clip-points">
-<h1>pandamesh.Preprocessor.clip_points<a class="headerlink" href="#pandamesh-preprocessor-clip-points" title="Link to this heading">#</a></h1>
-<dl class="py method">
-<dt class="sig sig-object py" id="pandamesh.Preprocessor.clip_points">
-<span class="sig-prename descclassname"><span class="pre">Preprocessor.</span></span><span class="sig-name descname"><span class="pre">clip_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pandamesh.Preprocessor.html#pandamesh.Preprocessor" title="pandamesh.preprocessor.Preprocessor"><span class="pre">Preprocessor</span></a></span></span><a class="reference internal" href="../../_modules/pandamesh/preprocessor.html#Preprocessor.clip_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.Preprocessor.clip_points" title="Link to this definition">#</a></dt>
-<dd><p>Remove points that are outside of a polygon or near line or
-polygon segments.</p>
+  <section id="pandamesh-find-edge-intersections">
+<h1>pandamesh.find_edge_intersections<a class="headerlink" href="#pandamesh-find-edge-intersections" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="pandamesh.find_edge_intersections">
+<span class="sig-prename descclassname"><span class="pre">pandamesh.</span></span><span class="sig-name descname"><span class="pre">find_edge_intersections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gpd.Geoseries</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">gpd.GeoSeries</span></span></span><a class="reference internal" href="../../_modules/pandamesh/common.html#find_edge_intersections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.find_edge_intersections" title="Link to this definition">#</a></dt>
+<dd><p>Find all unresolved intersections between polygon boundaries, linestring,
+and linearring segments.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>distance</strong> (<em>float</em><em>, </em><em>optional</em>) – Minimum distance to a line or polygon segment.</p>
+<dd class="field-odd"><p><strong>geometry</strong> (<em>gpd.GeoSeries</em>) – Points, lines, polygons.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>processed</strong></p>
+<dd class="field-even"><p><strong>intersections</strong> – Locations (points) of intersections.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="pandamesh.Preprocessor.html#pandamesh.Preprocessor" title="pandamesh.Preprocessor">pandamesh.Preprocessor</a></p>
+<dd class="field-odd"><p>gpd.GeoSeries</p>
 </dd>
 </dl>
 </dd></dl>
@@ -464,20 +464,20 @@ polygon segments.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="pandamesh.Preprocessor.snap_points.html"
+       href="pandamesh.Preprocessor.to_geodataframe.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">pandamesh.Preprocessor.snap_points</p>
+        <p class="prev-next-title">pandamesh.Preprocessor.to_geodataframe</p>
       </div>
     </a>
     <a class="right-next"
-       href="pandamesh.Preprocessor.to_geodataframe.html"
+       href="pandamesh.TriangleMesher.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pandamesh.Preprocessor.to_geodataframe</p>
+        <p class="prev-next-title">pandamesh.TriangleMesher</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -499,14 +499,14 @@ polygon segments.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.Preprocessor.clip_points"><code class="docutils literal notranslate"><span class="pre">Preprocessor.clip_points()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.find_edge_intersections"><code class="docutils literal notranslate"><span class="pre">find_edge_intersections()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../_sources/api/api/pandamesh.Preprocessor.clip_points.rst.txt">
+    <a href="../../_sources/api/api/pandamesh.find_edge_intersections.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

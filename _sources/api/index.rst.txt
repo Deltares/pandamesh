@@ -12,8 +12,8 @@ This page provides an auto-generated summary of pandamesh's API.
 
    changelog
 
-Preprocessor
-------------
+Preprocessing
+-------------
 
 .. autosummary::
    :toctree: api/
@@ -27,6 +27,7 @@ Preprocessor
     Preprocessor.snap_points
     Preprocessor.clip_points
     Preprocessor.to_geodataframe
+    find_edge_intersections
 
 Triangle
 --------

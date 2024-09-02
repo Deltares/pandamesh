@@ -422,14 +422,26 @@
 <span class="sd">        of the geometry&#39;s bounding box during mesh generation. This helps mitigate</span>
 <span class="sd">        floating-point precision issues. The resulting mesh vertices are</span>
 <span class="sd">        automatically translated back to the original coordinate system.</span>
+<span class="sd">    intersecting_edges: str, optional, default is &quot;error&quot;</span>
+<span class="sd">        String indicating how to report unresolved line segment intersections:</span>
+
+<span class="sd">        * &quot;ignore&quot;: skip check.</span>
+<span class="sd">        * &quot;warning&quot;: emit a warning.</span>
+<span class="sd">        * &quot;error&quot;: raise a ValueError.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="TriangleMesher.__init__">
 <a class="viewcode-back" href="../../api/api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">shift_origin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span>
+        <span class="n">shift_origin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">intersecting_edges</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">check_geodataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="s2">&quot;cellsize&quot;</span><span class="p">},</span> <span class="n">check_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">gdf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_yoff</span> <span class="o">=</span> <span class="n">central_origin</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">shift_origin</span><span class="p">)</span>
-        <span class="n">polygons</span><span class="p">,</span> <span class="n">linestrings</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">separate_geodataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span>
+        <span class="n">polygons</span><span class="p">,</span> <span class="n">linestrings</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">separate_geodataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">intersecting_edges</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">regions</span> <span class="o">=</span> <span class="n">collect_geometry</span><span class="p">(</span>
             <span class="n">polygons</span><span class="p">,</span> <span class="n">linestrings</span><span class="p">,</span> <span class="n">points</span>
         <span class="p">)</span>

@@ -327,6 +327,7 @@
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.snap_points.html">pandamesh.Preprocessor.snap_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.clip_points.html">pandamesh.Preprocessor.clip_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.Preprocessor.to_geodataframe.html">pandamesh.Preprocessor.to_geodataframe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/pandamesh.find_edge_intersections.html">pandamesh.find_edge_intersections</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="api/pandamesh.TriangleMesher.html">pandamesh.TriangleMesher</a></li>
@@ -435,8 +436,8 @@
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 </div>
-<section id="preprocessor">
-<h2>Preprocessor<a class="headerlink" href="#preprocessor" title="Link to this heading">#</a></h2>
+<section id="preprocessing">
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.Preprocessor.html#pandamesh.Preprocessor" title="pandamesh.Preprocessor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preprocessor</span></code></a>([geometry, values, grid_size])</p></td>
@@ -466,6 +467,9 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.Preprocessor.to_geodataframe.html#pandamesh.Preprocessor.to_geodataframe" title="pandamesh.Preprocessor.to_geodataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Preprocessor.to_geodataframe</span></code></a>()</p></td>
 <td><p>Return the processed geometries as a <code class="docutils literal notranslate"><span class="pre">geopandas.GeoDataFrame</span></code>.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.find_edge_intersections.html#pandamesh.find_edge_intersections" title="pandamesh.find_edge_intersections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_edge_intersections</span></code></a>(geometry)</p></td>
+<td><p>Find all unresolved intersections between polygon boundaries, linestring, and linearring segments.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -474,7 +478,7 @@
 <h2>Triangle<a class="headerlink" href="#triangle" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher" title="pandamesh.TriangleMesher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher</span></code></a>(gdf[, shift_origin])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher" title="pandamesh.TriangleMesher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher</span></code></a>(gdf[, shift_origin, ...])</p></td>
 <td><p>Wrapper for the python bindings to Triangle.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/pandamesh.TriangleMesher.generate.html#pandamesh.TriangleMesher.generate" title="pandamesh.TriangleMesher.generate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriangleMesher.generate</span></code></a>()</p></td>
@@ -664,7 +668,7 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessor">Preprocessor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#triangle">Triangle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#triangle-enumerators">Triangle Enumerators</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gmsh">Gmsh</a></li>

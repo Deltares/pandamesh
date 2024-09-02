@@ -1,0 +1,6 @@
+﻿pandamesh.find\_edge\_intersections
+===================================
+
+.. currentmodule:: pandamesh
+
+.. autofunction:: find_edge_intersections

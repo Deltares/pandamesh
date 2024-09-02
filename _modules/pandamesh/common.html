@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pandamesh.common &#8212; pandamesh  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-deltares.css?v=1c61d878" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pandamesh/common';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandamesh-logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../_static/pandamesh-logo.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">pandamesh</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Deltares/pandamesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="icon-link-image" alt="GitHub"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.deltares.nl/en/" title="Deltares" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/deltares-blue.svg" class="icon-link-image" alt="Deltares"/></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/Deltares/pandamesh" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="icon-link-image" alt="GitHub"/></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.deltares.nl/en/" title="Deltares" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="../../_static/deltares-blue.svg" class="icon-link-image" alt="Deltares"/></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">pandamesh.common</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pandamesh.common</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">shapely</span>
+<span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">is_integer_dtype</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">KDTree</span>
+
+
+<span class="k">class</span> <span class="nc">MaybeGmsh</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gmsh is an optional dependency.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">gmsh</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">gmsh</span> <span class="o">=</span> <span class="n">gmsh</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ok</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gmsh</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Gmsh is required for this functionality&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gmsh</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="s2">&quot;Gmsh must run in the main thread of the interpreter&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gmsh</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span>
+
+
+<span class="n">gmsh</span> <span class="o">=</span> <span class="n">MaybeGmsh</span><span class="p">()</span>
+<span class="n">BoolArray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="n">IntArray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="n">FloatArray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="n">GeometryArray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="n">coord_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)])</span>
+
+<span class="n">POINT</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">GeometryType</span><span class="o">.</span><span class="n">POINT</span>
+<span class="n">LINESTRING</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">GeometryType</span><span class="o">.</span><span class="n">LINESTRING</span>
+<span class="n">LINEARRING</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">GeometryType</span><span class="o">.</span><span class="n">LINEARRING</span>
+<span class="n">POLYGON</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">GeometryType</span><span class="o">.</span><span class="n">POLYGON</span>
+<span class="n">GEOM_NAMES</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">shapely</span><span class="o">.</span><span class="n">GeometryType</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+
+<span class="k">def</span> <span class="nf">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">strings</span> <span class="o">=</span> <span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;    </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> = np.ndarray with shape </span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;    </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">strings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">seq</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">]):</span>
+    <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">concat</span><span class="p">,</span> <span class="n">seq</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">flatten_geometry</span><span class="p">(</span><span class="n">geom</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Recursively flatten geometry collections.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="s2">&quot;geoms&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">subgeom</span> <span class="ow">in</span> <span class="n">geom</span><span class="o">.</span><span class="n">geoms</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">flatten_geometry</span><span class="p">(</span><span class="n">subgeom</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">geom</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">flatten_geometries</span><span class="p">(</span><span class="n">geometries</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Flatten geometry collections.&quot;&quot;&quot;</span>
+    <span class="n">flattened</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">geometries</span><span class="p">:</span>
+        <span class="n">flattened</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">flatten_geometry</span><span class="p">(</span><span class="n">geom</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">flattened</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">check_geodataframe</span><span class="p">(</span>
+    <span class="n">features</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">required_columns</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">check_index</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected GeoDataFrame, received instead: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Dataframe is empty&quot;</span><span class="p">)</span>
+
+    <span class="n">missing</span> <span class="o">=</span> <span class="n">required_columns</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;These column(s) are required but are missing: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">check_index</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_integer_dtype</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;geodataframe index is not integer typed, received: </span><span class="si">{</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;geodataframe index contains duplicates, call .reset_index()&quot;</span>
+            <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">intersecting_features</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">feature_type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">IntArray</span><span class="p">,</span> <span class="n">IntArray</span><span class="p">]:</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">STRtree</span><span class="p">(</span><span class="n">geoms</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">feature_type</span> <span class="o">==</span> <span class="s2">&quot;polygon&quot;</span><span class="p">:</span>  <span class="c1"># TODO: might not be necessary</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0e-6</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">features</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="s2">&quot;intersects&quot;</span><span class="p">)</span>
+    <span class="c1"># Intersection matrix is symmetric, and contains i==j (diagonal)</span>
+    <span class="n">keep</span> <span class="o">=</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">i</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="n">j</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">check_intersection</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">,</span> <span class="n">feature_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">index_a</span><span class="p">,</span> <span class="n">index_b</span> <span class="o">=</span> <span class="n">intersecting_features</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">feature_type</span><span class="p">)</span>
+    <span class="n">n_overlap</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">index_a</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_overlap</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> with </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">index_a</span><span class="p">,</span> <span class="n">index_b</span><span class="p">)])</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n_overlap</span><span class="si">}</span><span class="s2"> cases of intersecting </span><span class="si">{</span><span class="n">feature_type</span><span class="si">}</span><span class="s2"> detected:</span><span class="se">\n</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">check_features</span><span class="p">(</span><span class="n">features</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">,</span> <span class="n">feature_type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether features are simple.&quot;&quot;&quot;</span>
+    <span class="n">are_simple</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">is_simple</span>
+    <span class="n">n_complex</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">are_simple</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">n_complex</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n_complex</span><span class="si">}</span><span class="s2"> cases of complex </span><span class="si">{</span><span class="n">feature_type</span><span class="si">}</span><span class="s2"> detected: these &quot;</span>
+            <span class="s2">&quot; features contain self intersections&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span>
+
+
+<span class="k">def</span> <span class="nf">check_polygons</span><span class="p">(</span><span class="n">polygons</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">check_features</span><span class="p">(</span><span class="n">polygons</span><span class="p">,</span> <span class="s2">&quot;polygon&quot;</span><span class="p">)</span>
+    <span class="n">check_intersection</span><span class="p">(</span><span class="n">polygons</span><span class="p">,</span> <span class="s2">&quot;polygon&quot;</span><span class="p">)</span>
+    <span class="k">return</span>
+
+
+<span class="k">def</span> <span class="nf">check_lines</span><span class="p">(</span><span class="n">lines</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">check_features</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="s2">&quot;lines&quot;</span><span class="p">)</span>
+    <span class="k">return</span>
+
+
+<span class="k">def</span> <span class="nf">compute_intersections</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+    <span class="n">check</span> <span class="o">=</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">i</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">check</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="n">check</span><span class="p">]</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="p">[</span><span class="n">check</span><span class="p">]</span>
+    <span class="n">seg1</span> <span class="o">=</span> <span class="n">segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">seg2</span> <span class="o">=</span> <span class="n">segments</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+    <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">seg1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">seg1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">seg1</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">seg1</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">x3</span><span class="p">,</span> <span class="n">y3</span> <span class="o">=</span> <span class="n">seg2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">seg2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">x4</span><span class="p">,</span> <span class="n">y4</span> <span class="o">=</span> <span class="n">seg2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">seg2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">den</span> <span class="o">=</span> <span class="p">(</span><span class="n">y4</span> <span class="o">-</span> <span class="n">y3</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">x4</span> <span class="o">-</span> <span class="n">x3</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span>
+    <span class="n">num1</span> <span class="o">=</span> <span class="p">(</span><span class="n">x4</span> <span class="o">-</span> <span class="n">x3</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">y3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">y4</span> <span class="o">-</span> <span class="n">y3</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x3</span><span class="p">)</span>
+    <span class="n">num2</span> <span class="o">=</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">y3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x3</span><span class="p">)</span>
+
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">den</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-8</span>  <span class="c1"># Filter out parallel lines</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">den</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">den</span><span class="p">)</span>
+    <span class="n">t</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">num1</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">/</span> <span class="n">den</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">u</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">num2</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">/</span> <span class="n">den</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+    <span class="n">intersect_mask</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">t</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">u</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">u</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">t</span> <span class="o">*</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">t</span> <span class="o">*</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span>
+
+    <span class="n">final_mask</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">&amp;</span> <span class="n">intersect_mask</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="n">final_mask</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">final_mask</span><span class="p">]))</span>
+
+
+<span class="k">def</span> <span class="nf">linework_intersections</span><span class="p">(</span>
+    <span class="n">polygons</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">,</span>
+    <span class="n">lines</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">,</span>
+    <span class="n">upper_search_bound</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">tolerance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatArray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute intersections between polygon boundary and line segments.&quot;&quot;&quot;</span>
+    <span class="n">outer_rings</span> <span class="o">=</span> <span class="n">polygons</span><span class="o">.</span><span class="n">exterior</span>
+    <span class="n">inner_rings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">flatten</span><span class="p">(</span><span class="n">polygons</span><span class="o">.</span><span class="n">interiors</span><span class="p">))</span>
+    <span class="n">linework</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">lines</span><span class="p">,</span> <span class="n">outer_rings</span><span class="p">,</span> <span class="n">inner_rings</span><span class="p">))</span>
+
+    <span class="n">coordinates</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">(</span><span class="n">linework</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">segments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">coordinates</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="n">segments</span> <span class="o">=</span> <span class="n">segments</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span>
+    <span class="n">segment_linestrings</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">linestrings</span><span class="p">(</span>
+        <span class="n">segments</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">indices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">segments</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">rtree</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">STRtree</span><span class="p">(</span><span class="n">segment_linestrings</span><span class="p">)</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">rtree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">segment_linestrings</span><span class="p">)</span>
+    <span class="n">intersections</span> <span class="o">=</span> <span class="n">compute_intersections</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+    <span class="n">vertices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">kdtree</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span>
+    <span class="n">distance</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">kdtree</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">intersections</span><span class="p">,</span> <span class="n">distance_upper_bound</span><span class="o">=</span><span class="n">upper_search_bound</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">intersections</span><span class="p">[</span><span class="n">distance</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">check_linework</span><span class="p">(</span>
+    <span class="n">polygons</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">,</span>
+    <span class="n">lines</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">,</span>
+    <span class="n">on_unresolved_intersection</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">intersections</span> <span class="o">=</span> <span class="n">linework_intersections</span><span class="p">(</span>
+        <span class="n">polygons</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span>
+        <span class="n">upper_search_bound</span><span class="o">=</span><span class="mf">1.0e-3</span><span class="p">,</span>
+        <span class="n">tolerance</span><span class="o">=</span><span class="mf">1.0e-6</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">n_intersection</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersections</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_intersection</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n_intersection</span><span class="si">}</span><span class="s2"> unresolved intersections between polygon &quot;</span>
+            <span class="s2">&quot;boundary or line segments.</span><span class="se">\n</span><span class="s2">Run &quot;</span>
+            <span class="s2">&quot;pandamesh.find_edge_intersections(gdf.geometry) to identify the &quot;</span>
+            <span class="s2">&quot;intersection locations.</span><span class="se">\n</span><span class="s2">Intersections can be resolved using &quot;</span>
+            <span class="s2">&quot;the pandamesh.Preprocessor.&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">on_unresolved_intersection</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">on_unresolved_intersection</span> <span class="o">==</span> <span class="s2">&quot;warn&quot;</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">return</span>
+
+
+<div class="viewcode-block" id="find_edge_intersections">
+<a class="viewcode-back" href="../../api/api/pandamesh.find_edge_intersections.html#pandamesh.find_edge_intersections">[docs]</a>
+<span class="k">def</span> <span class="nf">find_edge_intersections</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">Geoseries</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find all unresolved intersections between polygon boundaries, linestring,</span>
+<span class="sd">    and linearring segments.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    geometry: gpd.GeoSeries</span>
+<span class="sd">        Points, lines, polygons.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    intersections: gpd.GeoSeries</span>
+<span class="sd">        Locations (points) of intersections.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected geopandas.GeoSeries, received: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="n">polygons</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">separate_geometry</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
+    <span class="n">intersections</span> <span class="o">=</span> <span class="n">linework_intersections</span><span class="p">(</span>
+        <span class="n">polygons</span><span class="p">,</span>
+        <span class="n">lines</span><span class="p">,</span>
+        <span class="n">upper_search_bound</span><span class="o">=</span><span class="mf">1.0e-3</span><span class="p">,</span>
+        <span class="n">tolerance</span><span class="o">=</span><span class="mf">1.0e-6</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">(</span><span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="o">*</span><span class="n">intersections</span><span class="o">.</span><span class="n">T</span><span class="p">))</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">check_points</span><span class="p">(</span>
+    <span class="n">points</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">,</span>
+    <span class="n">polygons</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether points are contained by a polygon.&quot;&quot;&quot;</span>
+    <span class="n">within</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">points</span><span class="p">)</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">polygons</span><span class="p">),</span>
+        <span class="n">predicate</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">n_outside</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">within</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_outside</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n_outside</span><span class="si">}</span><span class="s2"> points detected outside of a polygon&quot;</span><span class="p">)</span>
+    <span class="k">return</span>
+
+
+<span class="k">def</span> <span class="nf">_separate</span><span class="p">(</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">BoolArray</span><span class="p">,</span> <span class="n">BoolArray</span><span class="p">,</span> <span class="n">BoolArray</span><span class="p">]:</span>
+    <span class="n">geometry_id</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">get_type_id</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
+    <span class="n">allowed_types</span> <span class="o">=</span> <span class="p">(</span><span class="n">POINT</span><span class="p">,</span> <span class="n">LINESTRING</span><span class="p">,</span> <span class="n">LINEARRING</span><span class="p">,</span> <span class="n">POLYGON</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">geometry_id</span><span class="p">,</span> <span class="n">allowed_types</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="n">received</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">GEOM_NAMES</span><span class="p">[</span><span class="n">geom_id</span><span class="p">]</span> <span class="k">for</span> <span class="n">geom_id</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">geometry_id</span><span class="p">)]</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;GeoDataFrame contains unsupported geometry types. Geometry &quot;</span>
+            <span class="s2">&quot;should be one of Point, LineString, LinearRing, and Polygon &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;geometries. Received: </span><span class="si">{</span><span class="n">received</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;Call geopandas.GeoDataFrame.explode() to explode multi-part &quot;</span>
+            <span class="s2">&quot;geometries into multiple single geometries.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">geometry_id</span> <span class="o">==</span> <span class="n">POLYGON</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">geometry_id</span> <span class="o">==</span> <span class="n">LINESTRING</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">geometry_id</span> <span class="o">==</span> <span class="n">LINEARRING</span><span class="p">),</span>
+        <span class="n">geometry_id</span> <span class="o">==</span> <span class="n">POINT</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">separate_geometry</span><span class="p">(</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">GeometryArray</span><span class="p">,</span> <span class="n">GeometryArray</span><span class="p">,</span> <span class="n">GeometryArray</span><span class="p">]:</span>
+    <span class="n">is_polygon</span><span class="p">,</span> <span class="n">is_line</span><span class="p">,</span> <span class="n">is_point</span> <span class="o">=</span> <span class="n">_separate</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">geometry</span><span class="p">[</span><span class="n">is_polygon</span><span class="p">],</span>
+        <span class="n">geometry</span><span class="p">[</span><span class="n">is_line</span><span class="p">],</span>
+        <span class="n">geometry</span><span class="p">[</span><span class="n">is_point</span><span class="p">],</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">separate_geodataframe</span><span class="p">(</span>
+    <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span>
+    <span class="n">intersecting_edges</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">]:</span>
+    <span class="n">acceptable</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;warn&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">intersecting_edges</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">acceptable</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;intersecting_edges should be one of </span><span class="si">{</span><span class="n">acceptable</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;received: </span><span class="si">{</span><span class="n">intersecting_edges</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">is_polygon</span><span class="p">,</span> <span class="n">is_line</span><span class="p">,</span> <span class="n">is_point</span> <span class="o">=</span> <span class="n">_separate</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">])</span>
+    <span class="n">polygons</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">is_polygon</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">is_line</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">is_point</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">polygons</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No polygons provided&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">(</span><span class="n">polygons</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;cellsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;cellsize&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">check_polygons</span><span class="p">(</span><span class="n">polygons</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+    <span class="n">check_lines</span><span class="p">(</span><span class="n">lines</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">intersecting_edges</span> <span class="o">!=</span> <span class="s2">&quot;ignore&quot;</span><span class="p">:</span>
+        <span class="n">check_linework</span><span class="p">(</span><span class="n">polygons</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">lines</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">intersecting_edges</span><span class="p">)</span>
+    <span class="n">check_points</span><span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">polygons</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">polygons</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">points</span>
+
+
+<span class="k">def</span> <span class="nf">move_origin</span><span class="p">(</span>
+    <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span>
+    <span class="n">xoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">yoff</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="k">if</span> <span class="n">xoff</span> <span class="o">==</span> <span class="mf">0.0</span> <span class="ow">and</span> <span class="n">yoff</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gdf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">moved</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">moved</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">xoff</span><span class="o">=-</span><span class="n">xoff</span><span class="p">,</span> <span class="n">yoff</span><span class="o">=-</span><span class="n">yoff</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">moved</span>
+
+
+<span class="k">def</span> <span class="nf">central_origin</span><span class="p">(</span>
+    <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">shift_origin</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">shift_origin</span><span class="p">:</span>
+        <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">total_bounds</span>
+        <span class="n">xoff</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">xmin</span> <span class="o">+</span> <span class="n">xmax</span><span class="p">)</span>
+        <span class="n">yoff</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">ymin</span> <span class="o">+</span> <span class="n">ymax</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xoff</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">yoff</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">gdf</span> <span class="o">=</span> <span class="n">move_origin</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">xoff</span><span class="p">,</span> <span class="n">yoff</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gdf</span><span class="p">,</span> <span class="n">xoff</span><span class="p">,</span> <span class="n">yoff</span>
+
+
+<span class="k">def</span> <span class="nf">to_ugrid</span><span class="p">(</span><span class="n">vertices</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">faces</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;xugrid.Ugrid2d&quot;</span><span class="p">:</span>  <span class="c1"># type: ignore # noqa pragma: no cover</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">xugrid</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">&quot;xugrid must be installed to return generated result a xugrid.Ugrid2d&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">xugrid</span><span class="o">.</span><span class="n">Ugrid2d</span><span class="p">(</span><span class="o">*</span><span class="n">vertices</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">faces</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">to_geodataframe</span><span class="p">(</span><span class="n">vertices</span><span class="p">:</span> <span class="n">FloatArray</span><span class="p">,</span> <span class="n">faces</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
+    <span class="n">n_face</span><span class="p">,</span> <span class="n">n_vertex</span> <span class="o">=</span> <span class="n">faces</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">if</span> <span class="n">n_vertex</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># no fill values</span>
+        <span class="n">coordinates</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="n">faces</span><span class="p">]</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">polygons</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># Possible fill values (-1)</span>
+        <span class="c1"># Group them by number of vertices.</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="n">faces</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="n">n_valid</span> <span class="o">=</span> <span class="n">valid</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">grouped_by_n_vertex</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;i&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_face</span><span class="p">),</span> <span class="s2">&quot;n&quot;</span><span class="p">:</span> <span class="n">n_valid</span><span class="p">}</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">)</span>
+        <span class="n">geometries</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">n_vertex</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">grouped_by_n_vertex</span><span class="p">:</span>
+            <span class="n">group_faces</span> <span class="o">=</span> <span class="n">faces</span><span class="p">[</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;i&quot;</span><span class="p">],</span> <span class="p">:</span><span class="n">n_vertex</span><span class="p">]</span>
+            <span class="n">group_coordinates</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="n">group_faces</span><span class="p">]</span>
+            <span class="n">geometries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shapely</span><span class="o">.</span><span class="n">polygons</span><span class="p">(</span><span class="n">group_coordinates</span><span class="p">))</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">geometries</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Grouper</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper around pd.DataFrame().groupby().</span>
+
+<span class="sd">    Group by ``a_index``, then iterates over the groups, returning a single</span>
+<span class="sd">    value of ``a`` and potentially multiple values for ``b``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">a</span><span class="p">,</span>
+        <span class="n">a_index</span><span class="p">,</span>
+        <span class="n">b</span><span class="p">,</span>
+        <span class="n">b_index</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grouped</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">a_index</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">b_index</span><span class="p">})</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">a_index</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grouped</span><span class="p">)</span>
+            <span class="n">b_index</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="n">a_index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="n">b_index</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright Deltares.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
