@@ -466,6 +466,8 @@ geospatial data prior to meshing.</p></li>
 Gmsh fields from geometry or from raster data.</p></li>
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">finalize</span></code> keyword to <a class="reference internal" href="api/pandamesh.GmshMesher.generate.html#pandamesh.GmshMesher.generate" title="pandamesh.GmshMesher.generate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandamesh.GmshMesher.generate()</span></code></a> to
 automatically finalize after mesh generation.</p></li>
+<li><p>Added <a class="reference internal" href="api/pandamesh.find_edge_intersections.html#pandamesh.find_edge_intersections" title="pandamesh.find_edge_intersections"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandamesh.find_edge_intersections()</span></code></a> to locate unresolved
+intersection between polygon boundary, linestring, and linearring edges.</p></li>
 </ul>
 </section>
 <section id="changed">
@@ -488,6 +490,11 @@ initializing Gmsh anew.</p></li>
 <li><p><a class="reference internal" href="api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher" title="pandamesh.TriangleMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.TriangleMesher</span></code></a> and <a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GmshMesher</span></code></a> will now
 also accept LinearRing geometries (previously only Polygons, LineStrings, and
 Points).</p></li>
+<li><p>Added an <code class="docutils literal notranslate"><span class="pre">edge_intersection</span></code> keyword to <a class="reference internal" href="api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher" title="pandamesh.TriangleMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.TriangleMesher</span></code></a>
+and <a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GmshMesher</span></code></a> to control whether to error, warn, or
+ignore unresolved edge intersections of polygon boundaries, linestrings, and
+linearrings. By default, both meshers will now error if unresolved
+intersections are encountered.</p></li>
 </ul>
 </section>
 </section>

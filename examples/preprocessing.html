@@ -541,14 +541,28 @@ share vertices along the boundary.</p>
 <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="p">[</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">])</span>
 <span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cellsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span>
 
-<span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GmshMesher</span><span class="p">(</span><span class="n">gdf</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">finalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">GmshMesher</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">intersecting_edges</span><span class="o">=</span><span class="s2">&quot;warn&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">finalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_007.png" srcset="../_images/sphx_glr_preprocessing_007.png" alt="preprocessing" class = "sphx-glr-single-img"/><p>At x=10.0, the generated triangles are disconnected.</p>
-<p>Calling <code class="docutils literal notranslate"><span class="pre">.unify_polygons()</span></code> ensures that the vertices of touching polygons
-are inserted, such that the polygons share an edge.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">resolved</span> <span class="o">=</span> <span class="p">(</span>
+<img src="../_images/sphx_glr_preprocessing_007.png" srcset="../_images/sphx_glr_preprocessing_007.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/pandamesh/pandamesh/pandamesh/common.py:248: UserWarning: 2 unresolved intersections between polygon boundary or line segments.
+Run pandamesh.find_edge_intersections(gdf.geometry) to identify the intersection locations.
+Intersections can be resolved using the pandamesh.Preprocessor.
+  warnings.warn(msg)
+</pre></div>
+</div>
+<p>At x=10.0, the generated triangles are disconnected.</p>
+<p>We can clearly identify them:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">intersections</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">find_edge_intersections</span><span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">intersections</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="c1"># Calling ``.unify_polygons()`` ensures that the vertices of touching polygons</span>
+<span class="c1"># are inserted, such that the polygons share an edge.</span>
+
+<span class="n">resolved</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">pm</span><span class="o">.</span><span class="n">Preprocessor</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">cellsize</span><span class="p">)</span>
     <span class="o">.</span><span class="n">unify_polygons</span><span class="p">()</span>
     <span class="o">.</span><span class="n">to_geodataframe</span><span class="p">()</span>
@@ -562,7 +576,11 @@ are inserted, such that the polygons share an edge.</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">polygon0_coords</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_008.png" srcset="../_images/sphx_glr_preprocessing_008.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7f5c979fcd70&gt;
+<ul class="sphx-glr-horizontal">
+<li><img src="../_images/sphx_glr_preprocessing_008.png" srcset="../_images/sphx_glr_preprocessing_008.png" alt="preprocessing" class = "sphx-glr-multi-img"/></li>
+<li><img src="../_images/sphx_glr_preprocessing_009.png" srcset="../_images/sphx_glr_preprocessing_009.png" alt="preprocessing" class = "sphx-glr-multi-img"/></li>
+</ul>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7fa0bbfe9b80&gt;
 </pre></div>
 </div>
 </section>
@@ -603,7 +621,7 @@ are inserted, such that the polygons share an edge.</p>
 <span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_009.png" srcset="../_images/sphx_glr_preprocessing_009.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+<img src="../_images/sphx_glr_preprocessing_010.png" srcset="../_images/sphx_glr_preprocessing_010.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
 <p>We can identify these problematic intersections using
@@ -614,7 +632,7 @@ are inserted, such that the polygons share an edge.</p>
 <span class="n">intersections</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_010.png" srcset="../_images/sphx_glr_preprocessing_010.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+<img src="../_images/sphx_glr_preprocessing_011.png" srcset="../_images/sphx_glr_preprocessing_011.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
 <p>A first step is to remove line segments that do not fall in any polygon:</p>
@@ -626,7 +644,7 @@ are inserted, such that the polygons share an edge.</p>
 <span class="n">resolved</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_011.png" srcset="../_images/sphx_glr_preprocessing_011.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+<img src="../_images/sphx_glr_preprocessing_012.png" srcset="../_images/sphx_glr_preprocessing_012.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
 <p>However, this doesn’t create suitable input for meshing. The <code class="docutils literal notranslate"><span class="pre">GmshMesher</span></code>
@@ -637,7 +655,7 @@ proceed:</p>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_012.png" srcset="../_images/sphx_glr_preprocessing_012.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/pandamesh/pandamesh/pandamesh/common.py:252: UserWarning: 1 unresolved intersections between polygon boundary or line segments.
+<img src="../_images/sphx_glr_preprocessing_013.png" srcset="../_images/sphx_glr_preprocessing_013.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/pandamesh/pandamesh/pandamesh/common.py:248: UserWarning: 5 unresolved intersections between polygon boundary or line segments.
 Run pandamesh.find_edge_intersections(gdf.geometry) to identify the intersection locations.
 Intersections can be resolved using the pandamesh.Preprocessor.
   warnings.warn(msg)
@@ -674,7 +692,7 @@ triangles around the line intersection have disappeared:</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">polygon0_coords</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_013.png" srcset="../_images/sphx_glr_preprocessing_013.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7f5c97771850&gt;
+<img src="../_images/sphx_glr_preprocessing_014.png" srcset="../_images/sphx_glr_preprocessing_014.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7fa0bbc710d0&gt;
 </pre></div>
 </div>
 <p>In some cases, having line segments terminate exactly on polygon boundaries
@@ -696,7 +714,7 @@ from any polygon boundary by providing a distance to <code class="docutils liter
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">polygon0_coords</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_014.png" srcset="../_images/sphx_glr_preprocessing_014.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7f5c97771a00&gt;
+<img src="../_images/sphx_glr_preprocessing_015.png" srcset="../_images/sphx_glr_preprocessing_015.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection object at 0x7fa0bbe2b080&gt;
 </pre></div>
 </div>
 <p>Another pragmatic approach is to convert any line into interpolated points.
@@ -715,7 +733,7 @@ Points cannot intersect each other, which sidesteps a large number of problems.<
 <span class="n">resolved</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_015.png" srcset="../_images/sphx_glr_preprocessing_015.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+<img src="../_images/sphx_glr_preprocessing_016.png" srcset="../_images/sphx_glr_preprocessing_016.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
 </section>
@@ -738,7 +756,7 @@ the polygon edges.</p>
 <span class="n">resolved</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_016.png" srcset="../_images/sphx_glr_preprocessing_016.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+<img src="../_images/sphx_glr_preprocessing_017.png" srcset="../_images/sphx_glr_preprocessing_017.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
 <p>A problem with points is that they may be very close together, thereby
@@ -758,7 +776,7 @@ generating very small triangles. Let’s generate 200 random points to illustrat
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_017.png" srcset="../_images/sphx_glr_preprocessing_017.png" alt="preprocessing" class = "sphx-glr-single-img"/><p>We can solve this by snapping points together that are located some distance
+<img src="../_images/sphx_glr_preprocessing_018.png" srcset="../_images/sphx_glr_preprocessing_018.png" alt="preprocessing" class = "sphx-glr-single-img"/><p>We can solve this by snapping points together that are located some distance
 from each other:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">resolved</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">pm</span><span class="o">.</span><span class="n">Preprocessor</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">gdf</span><span class="o">.</span><span class="n">cellsize</span><span class="p">)</span>
@@ -771,7 +789,7 @@ from each other:</p>
 <span class="n">pm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_018.png" srcset="../_images/sphx_glr_preprocessing_018.png" alt="preprocessing" class = "sphx-glr-single-img"/></section>
+<img src="../_images/sphx_glr_preprocessing_019.png" srcset="../_images/sphx_glr_preprocessing_019.png" alt="preprocessing" class = "sphx-glr-single-img"/></section>
 <section id="flexibility-and-composability">
 <h2>Flexibility and composability<a class="headerlink" href="#flexibility-and-composability" title="Link to this heading">#</a></h2>
 <p>The Preprocessor class in Pandamesh is designed with flexibility and
@@ -792,7 +810,7 @@ to check the intermediate result after clipping but prior to snapping:</p>
 <span class="n">check</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="../_images/sphx_glr_preprocessing_019.png" srcset="../_images/sphx_glr_preprocessing_019.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+<img src="../_images/sphx_glr_preprocessing_020.png" srcset="../_images/sphx_glr_preprocessing_020.png" alt="preprocessing" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
 <p>This also makes it easy to apply the preprocessor in steps. Some steps may be
@@ -800,7 +818,7 @@ relatively costly, such as unifying a large number of detailed polygons. The
 intermediate result can be stored as e.g. a GeoPackage. Then, in a separate
 processing step, the intermediate result can be read again, and other
 processing steps (such as filtering points) can be applied.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.544 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.643 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-preprocessing-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/a977adb4611357edd665dfb42e7a7790/preprocessing.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">preprocessing.ipynb</span></code></a></p>

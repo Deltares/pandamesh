@@ -36,6 +36,8 @@ Added
   Gmsh fields from geometry or from raster data.
 - Added ``finalize`` keyword to :meth:`pandamesh.GmshMesher.generate` to
   automatically finalize after mesh generation.
+- Added :func:`pandamesh.find_edge_intersections` to locate unresolved
+  intersection between polygon boundary, linestring, and linearring edges.
 
 Changed
 ~~~~~~~
@@ -57,6 +59,11 @@ Changed
 - :class:`pandamesh.TriangleMesher` and :class:`pandamesh.GmshMesher` will now
   also accept LinearRing geometries (previously only Polygons, LineStrings, and
   Points).
+- Added an ``edge_intersection`` keyword to :class:`pandamesh.TriangleMesher`
+  and :class:`pandamesh.GmshMesher` to control whether to error, warn, or
+  ignore unresolved edge intersections of polygon boundaries, linestrings, and
+  linearrings. By default, both meshers will now error if unresolved
+  intersections are encountered.
 
 [0.1.6] 2024-07-17
 ------------------

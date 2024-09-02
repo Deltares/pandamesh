@@ -160,12 +160,20 @@ second = sg.Polygon(
 gdf = gpd.GeoDataFrame(geometry=[first, second])
 gdf["cellsize"] = [4.0, 2.0]
 
-vertices, faces = pm.GmshMesher(gdf).generate(finalize=True)
+vertices, faces = pm.GmshMesher(gdf, intersecting_edges="warn").generate(finalize=True)
 pm.plot(vertices, faces)
 
 # %%
 # At x=10.0, the generated triangles are disconnected.
 #
+# We can clearly identify them:
+
+intersections = pm.find_edge_intersections(gdf.geometry)
+
+fig, ax = plt.subplots()
+pm.plot(vertices, faces, ax=ax)
+intersections.plot(ax=ax)
+
 # Calling ``.unify_polygons()`` ensures that the vertices of touching polygons
 # are inserted, such that the polygons share an edge.
 
