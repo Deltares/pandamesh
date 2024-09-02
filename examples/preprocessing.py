@@ -63,7 +63,7 @@ inner = sg.Polygon(
 gdf = gpd.GeoDataFrame(geometry=[outer, inner])
 gdf["cellsize"] = [2.0, 1.0]
 
-fig, (ax0, ax1) = plt.subplots(ncols=2, figsize=(10, 5), sharex=True, sharey=True)
+fig, (ax0, ax1) = plt.subplots(ncols=2, sharex=True, sharey=True)
 gdf.iloc[[0]].plot(ax=ax0)
 gdf.iloc[[1]].plot(ax=ax1)
 
@@ -83,7 +83,7 @@ resolved = (
 #
 # The resulting geodataframe's geometries are valid planar partition:
 
-fig, (ax0, ax1) = plt.subplots(ncols=2, figsize=(10, 5), sharex=True, sharey=True)
+fig, (ax0, ax1) = plt.subplots(ncols=2, sharex=True, sharey=True)
 resolved.iloc[[0]].plot(ax=ax0)
 resolved.iloc[[1]].plot(ax=ax1)
 
@@ -102,7 +102,7 @@ inner1 = shapely.affinity.translate(inner, xoff=1.0)
 gdf = gpd.GeoDataFrame(geometry=[outer, inner0, inner1])
 gdf["cellsize"] = [2.0, 1.0, 1.0]
 
-fig, ax = plt.subplots(figsize=(5, 5))
+fig, ax = plt.subplots()
 gdf.plot(ax=ax, facecolor="none")
 # %%
 # These will also be resolved by ``.unify_polygons``.
@@ -115,7 +115,7 @@ resolved = (
 
 vertices, faces = pm.TriangleMesher(resolved).generate()
 
-fig, ax = plt.subplots(figsize=(5, 5))
+fig, ax = plt.subplots()
 pm.plot(vertices, faces, ax=ax)
 resolved.plot(ax=ax, facecolor="none", edgecolor="red")
 
@@ -132,7 +132,7 @@ resolved = (
 
 vertices, faces = pm.TriangleMesher(resolved).generate()
 
-fig, ax = plt.subplots(figsize=(5, 5))
+fig, ax = plt.subplots()
 pm.plot(vertices, faces, ax=ax)
 resolved.plot(ax=ax, facecolor="none", edgecolor="red")
 
@@ -166,7 +166,14 @@ pm.plot(vertices, faces)
 # %%
 # At x=10.0, the generated triangles are disconnected.
 #
-# We can clearly identify them:
+# This is caused by the the fact that the polygons do not share an edge:
+#
+# * The polygon on the left has an edge from (10.0, 0.0) to (10.0, 10.0)
+# * The polygon on the right has an edge from (10.0, 2.0) to (10.0, 8.0)
+#
+# In fact, the vertices of the right polygon are intersecting the (edge) of the
+# left polygon. We can identify these intersections with
+# :func:`pandamesh.find_edge_intersections`:
 
 intersections = pm.find_edge_intersections(gdf.geometry)
 
@@ -174,6 +181,7 @@ fig, ax = plt.subplots()
 pm.plot(vertices, faces, ax=ax)
 intersections.plot(ax=ax)
 
+# %%
 # Calling ``.unify_polygons()`` ensures that the vertices of touching polygons
 # are inserted, such that the polygons share an edge.
 
@@ -186,7 +194,7 @@ resolved = (
 vertices, faces = pm.TriangleMesher(resolved).generate()
 polygon0_coords = shapely.get_coordinates(resolved.geometry[0])
 
-fig, ax = plt.subplots(figsize=(5, 5))
+fig, ax = plt.subplots()
 pm.plot(vertices, faces, ax=ax)
 ax.scatter(*polygon0_coords.T)
 
@@ -230,7 +238,7 @@ gdf["cellsize"] = [2.0, 1.0, 1.0]
 gdf.plot(edgecolor="k")
 
 # %%
-# We can identify these problematic intersections using
+# We can identify these problematic intersections again using
 # :func:`pandamesh.find_edge_intersections`:
 
 intersections = pm.find_edge_intersections(gdf.geometry)
@@ -285,7 +293,7 @@ resolved = (
 vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 polygon0_coords = shapely.get_coordinates(resolved.geometry[0])
 
-fig, ax = plt.subplots(figsize=(5, 5))
+fig, ax = plt.subplots()
 pm.plot(vertices, faces, ax=ax)
 ax.scatter(*polygon0_coords.T)
 
@@ -304,7 +312,7 @@ resolved = (
 vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 polygon0_coords = shapely.get_coordinates(resolved.geometry[0])
 
-fig, ax = plt.subplots(figsize=(5, 5))
+fig, ax = plt.subplots()
 pm.plot(vertices, faces, ax=ax)
 resolved.plot(facecolor="none", edgecolor="red", ax=ax)
 ax.scatter(*polygon0_coords.T)
@@ -322,7 +330,7 @@ resolved = (
 
 vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 
-fig, ax = plt.subplots(figsize=(5, 5))
+fig, ax = plt.subplots()
 pm.plot(vertices, faces, ax=ax)
 resolved.plot(facecolor="none", edgecolor="red", ax=ax)
 
@@ -344,7 +352,7 @@ resolved = (
 
 vertices, faces = pm.GmshMesher(resolved).generate(finalize=True)
 
-fig, ax = plt.subplots(figsize=(5, 5))
+fig, ax = plt.subplots()
 pm.plot(vertices, faces, ax=ax)
 resolved.plot(facecolor="none", edgecolor="red", ax=ax)
 
@@ -401,7 +409,7 @@ check = (
     .to_geodataframe()
 )
 
-check.plot(facecolor="none", edgecolor="red")
+check.plot(facecolor="none")
 
 # %%
 # This also makes it easy to apply the preprocessor in steps. Some steps may be
