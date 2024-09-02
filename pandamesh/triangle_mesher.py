@@ -61,12 +61,24 @@ class TriangleMesher:
         of the geometry's bounding box during mesh generation. This helps mitigate
         floating-point precision issues. The resulting mesh vertices are
         automatically translated back to the original coordinate system.
+    intersecting_edges: str, optional, default is "error"
+        String indicating how to report unresolved line segment intersections:
+
+        * "ignore": skip check.
+        * "warning": emit a warning.
+        * "error": raise a ValueError.
+
     """
 
-    def __init__(self, gdf: gpd.GeoDataFrame, shift_origin: bool = True) -> None:
+    def __init__(
+        self,
+        gdf: gpd.GeoDataFrame,
+        shift_origin: bool = True,
+        intersecting_edges="error",
+    ) -> None:
         check_geodataframe(gdf, {"geometry", "cellsize"}, check_index=True)
         gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
-        polygons, linestrings, points = separate_geodataframe(gdf)
+        polygons, linestrings, points = separate_geodataframe(gdf, intersecting_edges)
         self.vertices, self.segments, self.regions = collect_geometry(
             polygons, linestrings, points
         )

@@ -104,6 +104,12 @@ class GmshMesher:
         of the geometry's bounding box during mesh generation. This helps mitigate
         floating-point precision issues. The resulting mesh vertices are
         automatically translated back to the original coordinate system.
+    intersecting_edges: str, optional, default is "error"
+        String indicating how to report unresolved line segment intersections:
+
+        * "ignore": skip check.
+        * "warning": emit a warning.
+        * "error": raise a ValueError.
     read_config_files: bool
         Gmsh initialization option: Read system Gmsh configuration files
         (gmshrc and gmsh-options).
@@ -151,6 +157,7 @@ class GmshMesher:
         cls,
         gdf: gpd.GeoDataFrame,
         shift_origin: bool = True,
+        intersecting_edges: str = "error",
         read_config_files: bool = True,
         interruptible: bool = True,
     ) -> "GmshMesher":
@@ -164,12 +171,15 @@ class GmshMesher:
         Should be used only for testing.
         """
         cls.finalize()
-        return cls(gdf, shift_origin, read_config_files, interruptible)
+        return cls(
+            gdf, shift_origin, intersecting_edges, read_config_files, interruptible
+        )
 
     def __init__(
         self,
         gdf: gpd.GeoDataFrame,
         shift_origin: bool = True,
+        intersecting_edges="error",
         read_config_files: bool = True,
         interruptible: bool = True,
     ) -> None:
@@ -178,7 +188,7 @@ class GmshMesher:
         )
         check_geodataframe(gdf, {"geometry", "cellsize"}, check_index=True)
         gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
-        polygons, linestrings, points = separate_geodataframe(gdf)
+        polygons, linestrings, points = separate_geodataframe(gdf, intersecting_edges)
 
         # Include geometry into gmsh
         add_geometry(polygons, linestrings, points)

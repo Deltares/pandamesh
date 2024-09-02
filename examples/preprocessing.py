@@ -222,6 +222,15 @@ gdf["cellsize"] = [2.0, 1.0, 1.0]
 gdf.plot(edgecolor="k")
 
 # %%
+# We can identify these problematic intersections using
+# :func:`pandamesh.find_edge_intersections`:
+
+intersections = pm.find_edge_intersections(gdf.geometry)
+fig, ax = plt.subplots()
+gdf.plot(ax=ax, facecolor="none")
+intersections.plot(ax=ax)
+
+# %%
 # A first step is to remove line segments that do not fall in any polygon:
 
 resolved = (
@@ -234,9 +243,10 @@ resolved.plot(edgecolor="k")
 # %%
 # However, this doesn't create suitable input for meshing. The ``GmshMesher``
 # appears to hang on this input, and Triangle generates a grid with very small
-# triangles:
+# triangles. Pandamesh errors on these intersections by default, but way may
+# proceed:
 
-vertices, faces = pm.TriangleMesher(resolved).generate()
+vertices, faces = pm.TriangleMesher(resolved, intersecting_edges="warn").generate()
 pm.plot(vertices, faces)
 
 # %%

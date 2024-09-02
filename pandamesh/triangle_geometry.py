@@ -165,8 +165,6 @@ def unique_vertices_and_segments(vertices, segments):
 def collect_geometry(
     polygons: gpd.GeoDataFrame, linestrings: gpd.GeoDataFrame, points: gpd.GeoDataFrame
 ) -> Tuple[FloatArray, IntArray, FloatArray]:
-    if len(polygons) == 0:
-        raise ValueError("No polygons provided")
     linestrings = segmentize_linestrings(linestrings)
     polygons = convert_linestring_rings(polygons, linestrings)
     polygon_vertices, polygon_segments, regions = add_polygons(polygons)
