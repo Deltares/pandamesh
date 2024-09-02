@@ -2,7 +2,7 @@ import os
 
 import numpy as np
 import pytest
-from scipy import sparse
+import shapely
 
 from pandamesh.snapping import MatrixCSR, columns_and_values, row_slice, snap_nodes
 
@@ -15,9 +15,8 @@ def numba_enabled() -> bool:
 def csr_matrix():
     i = np.repeat(np.arange(5), 2)
     j = np.arange(10)
-    weights = np.full(10, 0.5)
-    A = sparse.csr_matrix((weights, (i, j)))
-    return MatrixCSR.from_csr_matrix(A)
+    v = np.full(10, 0.5)
+    return MatrixCSR.from_triplet(i, j, v, 5, 10)
 
 
 @pytest.mark.skipif(
@@ -45,7 +44,7 @@ def test_columns_and_values(csr_matrix):
 def test_snap__three_points_horizontal():
     x = np.array([0.0, 1.0, 2.0])
     y = np.zeros_like(x)
-    xy = np.column_stack((x, y))
+    xy = shapely.points(x, y)
     index = snap_nodes(xy, 0.1)
     assert np.array_equal(index, [0, 1, 2])
 
@@ -58,7 +57,7 @@ def test_snap__three_points_horizontal():
 
 def test_snap__three_points_diagonal():
     x = y = np.array([0.0, 1.0, 1.5])
-    xy = np.column_stack((x, y))
+    xy = shapely.points(x, y)
     index = snap_nodes(xy, 0.1)
     assert np.array_equal(index, [0, 1, 2])
 

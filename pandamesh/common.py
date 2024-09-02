@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import functools
 import operator
+import warnings
 from typing import Any, Sequence, Set, Tuple
 
 import geopandas as gpd
@@ -126,6 +127,8 @@ def intersecting_features(features, feature_type) -> Tuple[IntArray, IntArray]:
 
 
 def check_intersection(features: gpd.GeoSeries, feature_type: str) -> None:
+    if len(features) <= 1:
+        return
     index_a, index_b = intersecting_features(features, feature_type)
     n_overlap = len(index_a)
     if n_overlap > 0:
@@ -136,14 +139,7 @@ def check_intersection(features: gpd.GeoSeries, feature_type: str) -> None:
 
 
 def check_features(features: gpd.GeoSeries, feature_type) -> None:
-    """
-    Features should:
-
-        * be simple: no self-intersection
-        * not intersect with other features
-
-    """
-    # Check valid
+    """Check whether features are simple."""
     are_simple = features.is_simple
     n_complex = (~are_simple).sum()
     if n_complex > 0:
@@ -151,38 +147,137 @@ def check_features(features: gpd.GeoSeries, feature_type) -> None:
             f"{n_complex} cases of complex {feature_type} detected: these "
             " features contain self intersections"
         )
-
-    if len(features) <= 1:
-        return
-
-    check_intersection(features, feature_type)
     return
 
 
 def check_polygons(polygons: gpd.GeoSeries) -> None:
     check_features(polygons, "polygon")
-
-
-def check_linestrings(
-    linestrings: gpd.GeoSeries,
-    polygons: gpd.GeoSeries,
-) -> None:
-    """Check whether linestrings are fully contained in a single polygon."""
-    check_features(linestrings, "linestring")
-
-    intersects = gpd.GeoDataFrame(geometry=linestrings).sjoin(
-        df=gpd.GeoDataFrame(geometry=polygons),
-        predicate="within",
-    )
-    n_diff = len(linestrings) - len(intersects)
-    if n_diff != 0:
-        raise ValueError(
-            "The same linestring detected in multiple polygons or "
-            "linestring detected outside of any polygon; "
-            "a linestring must be fully contained by a single polygon."
-        )
-
+    check_intersection(polygons, "polygon")
     return
+
+
+def check_lines(lines: gpd.GeoSeries) -> None:
+    check_features(lines, "lines")
+    return
+
+
+def compute_intersections(segment_linestrings, i: IntArray, j: IntArray):
+    check = j > i
+    i = i[check]
+    j = j[check]
+
+    intersections = shapely.intersection(
+        segment_linestrings[i],
+        segment_linestrings[j],
+    )
+    coordinates, index = shapely.get_coordinates(intersections, return_index=True)
+    coordinates, unique_index = np.unique(coordinates, return_index=True, axis=0)
+    index = index[unique_index]
+    return i[index], j[index], coordinates
+
+
+def linework_intersections(
+    polygons: gpd.GeoSeries,
+    lines: gpd.GeoSeries,
+    tolerance: float,
+) -> FloatArray:
+    """Compute intersections between polygon boundary and line segments."""
+    outer_rings = polygons.exterior
+    inner_rings = np.array(flatten(polygons.interiors))
+    linework = np.concatenate((lines, outer_rings, inner_rings))
+
+    coordinates, line_index = shapely.get_coordinates(linework, return_index=True)
+    segments = np.stack((coordinates[:-1, :], coordinates[1:]), axis=1)
+    keep = np.diff(line_index) == 0
+    segments = segments[keep]
+    segment_to_line = line_index[1:][keep]
+    segment_linestrings = shapely.linestrings(
+        segments.reshape((-1, 2)), indices=np.repeat(np.arange(len(segments)), 2)
+    )
+
+    # We only use the STRtree to check bounding boxes. It does return the
+    # intersection result, even if we specify the predicate.
+    rtree = shapely.STRtree(segment_linestrings)
+    i, j = rtree.query(segment_linestrings)
+
+    # Compute intersections
+    # Skip self-intersections
+    keep = segment_to_line[i] != segment_to_line[j]
+    i = i[keep]
+    j = j[keep]
+    i, j, intersections = compute_intersections(segment_linestrings, i, j)
+    segments_i = segments[i]
+    segments_j = segments[j]
+
+    # Find minimum squared distance to vertices of intersecting edges. If the
+    # minimum distance is (approximately) zero, the intersection is represented
+    # by a vertex already.
+    distance_i = np.linalg.norm(
+        intersections[:, np.newaxis, :] - segments_i, axis=2
+    ).min(axis=1)
+    distance_j = np.linalg.norm(
+        intersections[:, np.newaxis, :] - segments_j, axis=2
+    ).min(axis=1)
+    unresolved = (distance_i > tolerance) | (distance_j > tolerance)
+    return intersections[unresolved]
+
+
+def check_linework(
+    polygons: gpd.GeoSeries,
+    lines: gpd.GeoSeries,
+    on_unresolved_intersection: str,
+) -> None:
+    intersections = linework_intersections(
+        polygons.geometry,
+        lines.geometry,
+        tolerance=1.0e-6,
+    )
+    n_intersection = len(intersections)
+    if n_intersection > 0:
+        msg = (
+            f"{n_intersection} unresolved intersections between polygon "
+            "boundary or line segments.\nRun "
+            "pandamesh.find_edge_intersections(gdf.geometry) to identify the "
+            "intersection locations.\nIntersections can be resolved using "
+            "the pandamesh.Preprocessor."
+        )
+        if on_unresolved_intersection == "error":
+            raise ValueError(msg)
+        elif on_unresolved_intersection == "warn":
+            warnings.warn(msg)
+    return
+
+
+def find_edge_intersections(geometry: gpd.Geoseries) -> gpd.GeoSeries:
+    """
+    Find all unresolved intersections between polygon boundaries, linestring,
+    and linearring edges.
+
+    A "resolved" intersection is one where the intersection of two lines is
+    represented by a vertex in both lines. Unresolved means: an intersection
+    which is not represented by an explicit vertex in the geometries.
+
+    Parameters
+    ----------
+    geometry: gpd.GeoSeries
+        Points, lines, polygons.
+
+    Returns
+    -------
+    intersections: gpd.GeoSeries
+        Locations (points) of intersections.
+    """
+    if not isinstance(geometry, gpd.GeoSeries):
+        raise TypeError(
+            f"Expected geopandas.GeoSeries, received: {type(geometry).__name__}"
+        )
+    polygons, lines, _ = separate_geometry(geometry)
+    intersections = linework_intersections(
+        polygons,
+        lines,
+        tolerance=1.0e-6,
+    )
+    return gpd.GeoSeries(gpd.points_from_xy(*intersections.T))
 
 
 def check_points(
@@ -236,21 +331,34 @@ def separate_geometry(
 
 def separate_geodataframe(
     gdf: gpd.GeoDataFrame,
+    intersecting_edges: str,
 ) -> Tuple[gpd.GeoDataFrame, gpd.GeoDataFrame, gpd.GeoDataFrame]:
+    acceptable = ("error", "warn", "ignore")
+    if intersecting_edges not in acceptable:
+        raise ValueError(
+            f"intersecting_edges should be one of {acceptable}, "
+            f"received: {intersecting_edges}"
+        )
+
     is_polygon, is_line, is_point = _separate(gdf["geometry"])
     polygons = gdf.loc[is_polygon].copy()
-    linestrings = gdf.loc[is_line].copy()
+    lines = gdf.loc[is_line].copy()
     points = gdf.loc[is_point].copy()
-    for df in (polygons, linestrings, points):
+
+    if len(polygons) == 0:
+        raise ValueError("No polygons provided")
+
+    for df in (polygons, lines, points):
         df["cellsize"] = df["cellsize"].astype(float)
         df.crs = None
 
     check_polygons(polygons.geometry)
-    # TODO: do a better check, on segments instead of the entire linestring.
-    # check_linestrings(linestrings.geometry, polygons.geometry)
+    check_lines(lines.geometry)
+    if intersecting_edges != "ignore":
+        check_linework(polygons.geometry, lines.geometry, intersecting_edges)
     check_points(points.geometry, polygons.geometry)
 
-    return polygons, linestrings, points
+    return polygons, lines, points
 
 
 def move_origin(

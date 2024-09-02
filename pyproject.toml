@@ -15,7 +15,6 @@ dependencies = [
     'pooch',
     'triangle',
     'shapely >= 2.0',
-    'scipy',
 ]
 classifiers = [
     'Development Status :: 3 - Alpha',
@@ -72,7 +71,7 @@ platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
 pandamesh = { path = ".", editable = true }
 
 [tool.pixi.dependencies]
-build = "*"
+python-build = "*"
 geopandas = "*"
 python-gmsh = "*"
 matplotlib = "*"
@@ -84,7 +83,6 @@ pydata-sphinx-theme = "*"
 py-triangle = "*"
 pytest = "*"
 pytest-cov = "*"
-scipy = "*"
 shapely = ">=2.0"
 sphinx = "*"
 sphinx-gallery = "*"

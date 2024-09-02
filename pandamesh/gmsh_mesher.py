@@ -104,6 +104,12 @@ class GmshMesher:
         of the geometry's bounding box during mesh generation. This helps mitigate
         floating-point precision issues. The resulting mesh vertices are
         automatically translated back to the original coordinate system.
+    intersecting_edges: str, optional, default is "error"
+        String indicating how to report unresolved line segment intersections:
+
+        * "ignore": skip check.
+        * "warning": emit a warning.
+        * "error": raise a ValueError.
     read_config_files: bool
         Gmsh initialization option: Read system Gmsh configuration files
         (gmshrc and gmsh-options).
@@ -151,6 +157,7 @@ class GmshMesher:
         cls,
         gdf: gpd.GeoDataFrame,
         shift_origin: bool = True,
+        intersecting_edges: str = "error",
         read_config_files: bool = True,
         interruptible: bool = True,
     ) -> "GmshMesher":
@@ -164,12 +171,15 @@ class GmshMesher:
         Should be used only for testing.
         """
         cls.finalize()
-        return cls(gdf, shift_origin, read_config_files, interruptible)
+        return cls(
+            gdf, shift_origin, intersecting_edges, read_config_files, interruptible
+        )
 
     def __init__(
         self,
         gdf: gpd.GeoDataFrame,
         shift_origin: bool = True,
+        intersecting_edges="error",
         read_config_files: bool = True,
         interruptible: bool = True,
     ) -> None:
@@ -178,7 +188,7 @@ class GmshMesher:
         )
         check_geodataframe(gdf, {"geometry", "cellsize"}, check_index=True)
         gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
-        polygons, linestrings, points = separate_geodataframe(gdf)
+        polygons, linestrings, points = separate_geodataframe(gdf, intersecting_edges)
 
         # Include geometry into gmsh
         add_geometry(polygons, linestrings, points)
@@ -669,20 +679,22 @@ class GmshMesher:
             quadrangles are included. A fill value of -1 is used as a last
             entry for triangles in that case.
         """
-        # Remove any previously generated results from gmsh.
-        gmsh.model.mesh.clear()
-        self._combine_fields()
-        gmsh.model.mesh.generate(dim=2)
+        try:
+            # Remove any previously generated results from gmsh.
+            gmsh.model.mesh.clear()
+            self._combine_fields()
+            gmsh.model.mesh.generate(dim=2)
 
-        # cleaning up of mesh in order to obtain unique elements and nodes
-        gmsh.model.mesh.removeDuplicateElements()
-        gmsh.model.mesh.removeDuplicateNodes()
-        gmsh.model.mesh.renumberElements()
-        gmsh.model.mesh.renumberNodes()
+            # cleaning up of mesh in order to obtain unique elements and nodes
+            gmsh.model.mesh.removeDuplicateElements()
+            gmsh.model.mesh.removeDuplicateNodes()
+            gmsh.model.mesh.renumberElements()
+            gmsh.model.mesh.renumberNodes()
 
-        vertices, faces = self._vertices(), self._faces()
-        if finalize:
-            self.finalize()
+            vertices, faces = self._vertices(), self._faces()
+        finally:
+            if finalize:
+                self.finalize()
         return vertices, faces
 
     def generate_geodataframe(self, finalize: bool = False) -> gpd.GeoDataFrame:

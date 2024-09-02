@@ -3,6 +3,7 @@ import re
 import geopandas as gpd
 import numpy as np
 import pytest
+import shapely
 import shapely.geometry as sg
 
 from pandamesh import common
@@ -182,30 +183,80 @@ def test_intersecting_features():
     assert np.array_equal(ib, [1])
 
 
-def test_check_linestrings():
-    polygons = gpd.GeoSeries(data=[a, c, d], index=[0, 1, 2])
-
+def test_check_lines():
     # Complex (self-intersecting) linestring
     linestrings = gpd.GeoSeries(data=[La, Lb, Lc, Le], index=[0, 1, 2, 3])
-    with pytest.raises(ValueError, match="1 cases of complex linestring detected"):
-        common.check_linestrings(linestrings, polygons)
-
-    # Linestrings intersecting with each other
-    linestrings = gpd.GeoSeries(data=[La, Lb, Lc], index=[0, 1, 2])
-    with pytest.raises(ValueError, match="1 cases of intersecting linestring detected"):
-        common.check_linestrings(linestrings, polygons)
-
-    # Ld present in multiple polygons
-    linestrings = gpd.GeoSeries(data=[La, Ld], index=[0, 1])
-    with pytest.raises(
-        ValueError, match="The same linestring detected in multiple polygons or"
-    ):
-        common.check_linestrings(linestrings, polygons)
+    with pytest.raises(ValueError, match="1 cases of complex lines detected"):
+        common.check_lines(linestrings)
 
     # Valid input
-    polygons = gpd.GeoSeries(data=[a, c, d], index=[0, 1, 2])
     linestrings = gpd.GeoSeries(data=[La, Lc], index=[0, 1])
-    common.check_linestrings(linestrings, polygons)
+    common.check_lines(linestrings)
+
+
+def test_compute_intersections():
+    segments = shapely.linestrings(
+        [
+            [
+                [0.0, 5.0],
+                [10.0, 5.0],
+            ],
+            [
+                [5.0, 0.0],
+                [5.0, 10.0],
+            ],
+            [
+                [0.0, -5.0],
+                [10.0, -5.0],
+            ],
+        ]
+    )
+    i = np.array([0, 0, 1, 1, 2])
+    j = np.array([0, 1, 1, 2, 2])
+
+    _i, _j, actual = common.compute_intersections(segments, i, j)
+    assert np.array_equal(_i, [0])
+    assert np.array_equal(_j, [1])
+    assert np.array_equal(actual, [[5.0, 5.0]])
+
+    # No intersections
+    _i, _j, actual = common.compute_intersections(segments, i, i)
+    assert np.array_equal(_i, [])
+    assert np.array_equal(_j, [])
+    assert np.array_equal(actual, np.array([]).reshape((-1, 2)))
+
+    i = np.array([0])
+    j = np.array([2])
+    _i, _j, actual = common.compute_intersections(segments, i, j)
+    assert np.array_equal(_i, [])
+    assert np.array_equal(_j, [])
+    assert np.array_equal(actual, np.array([]).reshape((-1, 2)))
+
+    # Parallel
+    segments = shapely.linestrings(
+        [
+            [
+                [0.0, 5.0],
+                [10.0, 5.0],
+            ],
+            [
+                [3.0, 5.0],
+                [13.0, 5.0],
+            ],
+        ]
+    )
+    i = np.array([0])
+    j = np.array([1])
+    _i, _j, actual = common.compute_intersections(segments, i, j)
+    assert np.array_equal(_i, [0, 0])
+    assert np.array_equal(_j, [1, 1])
+    expected = np.array(
+        [
+            [3.0, 5.0],
+            [10.0, 5.0],
+        ]
+    )
+    assert np.array_equal(actual, expected)
 
 
 def test_check_polygons():
@@ -242,7 +293,13 @@ def test_separate_geometry():
 def test_separate_geodataframe():
     gdf = gpd.GeoDataFrame(geometry=[a, c, d, La, Lc, pa])
     gdf["cellsize"] = 1.0
-    polygons, linestrings, points = common.separate_geodataframe(gdf)
+
+    with pytest.raises(ValueError, match="intersecting_edges should be one of"):
+        common.separate_geodataframe(gdf, intersecting_edges="abc")
+
+    polygons, linestrings, points = common.separate_geodataframe(
+        gdf, intersecting_edges="error"
+    )
     assert isinstance(polygons.geometry.iloc[0], sg.Polygon)
     assert isinstance(linestrings.geometry.iloc[0], sg.LineString)
     assert isinstance(points.geometry.iloc[0], sg.Point)
@@ -250,16 +307,18 @@ def test_separate_geodataframe():
     # Make sure it works for single elements
     gdf = gpd.GeoDataFrame(geometry=[a])
     gdf["cellsize"] = 1.0
-    common.separate_geodataframe(gdf)
+    common.separate_geodataframe(gdf, intersecting_edges="error")
 
     gdf = gpd.GeoDataFrame(geometry=[a, La])
     gdf["cellsize"] = 1.0
-    polygons, linestrings, points = common.separate_geodataframe(gdf)
+    polygons, linestrings, points = common.separate_geodataframe(
+        gdf, intersecting_edges="error"
+    )
 
     # Make sure cellsize is cast to float
     gdf = gpd.GeoDataFrame(geometry=[a, La])
     gdf["cellsize"] = "1"
-    dfs = common.separate_geodataframe(gdf)
+    dfs = common.separate_geodataframe(gdf, intersecting_edges="error")
     for df in dfs:
         assert np.issubdtype(df["cellsize"].dtype, np.floating)
 
@@ -267,7 +326,7 @@ def test_separate_geodataframe():
         TypeError, match="GeoDataFrame contains unsupported geometry types"
     ):
         gdf = gpd.GeoDataFrame(geometry=[sg.MultiPolygon([a, b])])
-        common.separate_geodataframe(gdf)
+        common.separate_geodataframe(gdf, intersecting_edges="error")
 
 
 def test_central_origin():
@@ -345,3 +404,66 @@ def test_to_geodataframe():
     # Assertions
     assert isinstance(gdf, gpd.GeoDataFrame)
     assert len(gdf) == 2  # Two polygons (one triangle, one quadrangle)
+
+
+class TestLineworkIntersection:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.donut = sg.Polygon(
+            [
+                [0.0, 0.0],
+                [10.0, 0.0],
+                [10.0, 10.0],
+                [0.0, 10.0],
+            ],
+            holes=[
+                [
+                    [2.0, 5.0],
+                    [5.0, 8.0],
+                    [8.0, 5.0],
+                    [5.0, 2.0],
+                ]
+            ],
+        )
+        self.line0 = shapely.LineString(
+            [
+                [-2.0, 0.0],
+                [12.0, 10.0],
+            ]
+        )
+        self.line1 = shapely.LineString(
+            [
+                [5.5, 9.0],
+                [9.0, 5.5],
+            ]
+        )
+        self.gdf = gpd.GeoDataFrame(geometry=[self.donut, self.line0, self.line1])
+
+    def test_find_edge_intersections(self):
+        gdf = gpd.GeoDataFrame(geometry=[self.donut])
+        with pytest.raises(TypeError, match="Expected geopandas.GeoSeries"):
+            common.find_edge_intersections(gdf)
+
+        actual = common.find_edge_intersections(gdf.geometry)
+        assert len(actual) == 0
+
+        gdf = gpd.GeoDataFrame(geometry=[self.donut, self.line0])
+        actual = common.find_edge_intersections(gdf.geometry)
+        assert len(actual) == 4
+
+        gdf = gpd.GeoDataFrame(geometry=[self.donut, self.line1])
+        actual = common.find_edge_intersections(gdf.geometry)
+        assert len(actual) == 0
+
+    def test_check_linework(self):
+        gdf = gpd.GeoDataFrame(geometry=[self.donut, self.line1])
+        polygons, lines, _ = common.separate_geometry(gdf.geometry)
+        common.check_linework(polygons, lines, "error")
+
+        gdf = gpd.GeoDataFrame(geometry=[self.donut, self.line0])
+        polygons, lines, _ = common.separate_geometry(gdf.geometry)
+        with pytest.raises(ValueError):
+            common.check_linework(polygons, lines, "error")
+
+        with pytest.warns(UserWarning):
+            common.check_linework(polygons, lines, "warn")

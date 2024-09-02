@@ -527,7 +527,7 @@ class Preprocessor:
         """
         if len(self.points) == 0:
             return self._copy_with()
-        index = snap_nodes(shapely.get_coordinates(self.points), distance)
+        index = snap_nodes(self.points, distance)
         return self._copy_with(
             points=self.points[index],
             point_indexer=self.point_indexer[index],
