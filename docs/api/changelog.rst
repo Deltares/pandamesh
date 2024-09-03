@@ -23,9 +23,9 @@ Fixed
 Added
 ~~~~~
 
-- :meth:`pandamesh.TriangleMesher.to_geodataframe()` and
-- :meth:`pandamesh.GmshMesher.to_geodataframe()` have been added to return
-  generated meshes as geodataframes.
+- :meth:`pandamesh.TriangleMesher.generate_geodataframe()` and -
+  :meth:`pandamesh.GmshMesher.generate_geodataframe()` have been added to
+  return generated meshes as geodataframes.
 - Added :attr:`pandamesh.MeshAlgorithm.QUASI_STRUCTURED_QUAD` as an option.
 - Added :class:`pandamesh.Preprocessor` to assist in preparing and cleaning
   geospatial data prior to meshing.
