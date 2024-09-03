@@ -379,7 +379,7 @@ sizes in the lower left corner, and large cell sizes in the upper right:
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7f880093f320>
+    <matplotlib.collections.PathCollection object at 0x7fa56a848470>
 
 
 
@@ -451,7 +451,7 @@ specification, we need to take care to ensure values remain > 0.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.680 seconds)
+   **Total running time of the script:** (0 minutes 0.695 seconds)
 
 
 .. _sphx_glr_download_examples_gmsh-fields.py:
