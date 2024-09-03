@@ -12,7 +12,7 @@ from pandamesh.preprocessor import Preprocessor
 from pandamesh.triangle_enums import DelaunayAlgorithm
 from pandamesh.triangle_mesher import TriangleMesher
 
-__version__ = "0.1.6"
+__version__ = "0.2.0"
 
 
 __all__ = (
