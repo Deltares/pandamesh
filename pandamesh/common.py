@@ -295,7 +295,8 @@ def find_proximate_perimeter_points(
     geometry: gpd.GeoSeries, minimum_spacing: float = 1.0e-3
 ) -> gpd.GeoSeries:
     """
-    Detect vertices in polygon perimeters that are very close to each other.
+    Detect vertices in polygon perimeters (exteriors and interiors) that are
+    very close to each other.
 
     Note that dangling edges can be detected through self-intersection: whether
     a geometry is simple or not. However, some slivers will almost form a

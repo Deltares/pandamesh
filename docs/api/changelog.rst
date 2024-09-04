@@ -9,6 +9,22 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Unreleased
 ----------
 
+Added
+~~~~~
+
+- Added :func:`find_proximate_perimeter_points` to identify (near) dangling
+  edges and extremely short edges in polygon perimeters.
+
+Changed
+~~~~~~~
+
+- Added a ``minimum_perimeter_spacing`` keyword to
+  :class:`pandamesh.TriangleMesher` and :class:`pandamesh.GmshMesher` to define
+  a tolerance for (near) dangling edges and very short edges in polygon
+  perimeters. This tolerance is set to 1.0e-3 by default; it means that the
+  meshers will error during initialization if slivers of 0.001 or thinner are
+  found, or if consecutive vertices are within 0.001 of each other.
+
 [0.2.0] 2024-09-03
 ------------------
 

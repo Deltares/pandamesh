@@ -28,7 +28,7 @@ Preprocessing
     Preprocessor.clip_points
     Preprocessor.to_geodataframe
     find_edge_intersections
-    find_proximate_polygon_points
+    find_proximate_perimeter_points
 
 Triangle
 --------
