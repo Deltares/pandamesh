@@ -248,6 +248,11 @@ def _compute_cross_product(triangles: FloatArray) -> FloatArray:
 
 
 def _find_proximate_points(rings: GeometryArray, minimum_spacing: float) -> FloatArray:
+    # This function identifies points at very short distances of each other, or
+    # two edges that nearly intersect each other: i.e. a sliver triangle. In
+    # case of a sliver, the distance of the last vertex (c) to the first edge
+    # (a-b) is very small, i.e. the height of the triangle is very small with
+    # respect to base (a-b).
     triangles = _triangles(rings)
     # Check convex / concave. Note shapely canonical form: exterior is
     # clockwise (CW), interior is counter-clockwise (CCW).
@@ -255,17 +260,34 @@ def _find_proximate_points(rings: GeometryArray, minimum_spacing: float) -> Floa
     # we need to worry about CONCAVE angles in the CCW interior.
     # Both therefore need positive cross product values.
     cross_product = _compute_cross_product(triangles)
-    check = cross_product <= 0
 
-    # Compute segment lenghts
-    a = np.linalg.norm(triangles[:, 1, :] - triangles[:, 0, :], axis=-1)
-    b = np.linalg.norm(triangles[:, 2, :] - triangles[:, 1, :], axis=-1)
-    c = np.linalg.norm(triangles[:, 0, :] - triangles[:, 2, :], axis=-1)
+    # Identify non-monotone triangles: for a monotone triangle, the angle at
+    # the second vertex will always be obtuse (90 < angle < 180), and the
+    # distance a-c is always larger than a-b. Hence, to find a shortest
+    # segment, we need only compare a-b and b-c; monotonic collinear points are
+    # allowed, but have a height of 0.
+    # For non-monotone triangles or non-monotone collinear points, we need to
+    # consider the height of the triangle, since in that case, point c might be
+    # in between a and b (e.g. along the x-axis).
+    d_ab = triangles[:, 1, :] - triangles[:, 0, :]
+    d_bc = triangles[:, 2, :] - triangles[:, 1, :]
+    d_ca = triangles[:, 2, :] - triangles[:, 0, :]
+    non_monotone = ((np.sign(d_ab) * np.sign(d_bc)) < 0).any(axis=1)
+    check_height = (cross_product <= 0) & non_monotone
+    # Euclidian distance.
+    a = np.linalg.norm(d_ab, axis=-1)
+    b = np.linalg.norm(d_bc, axis=-1)
+    c = np.linalg.norm(d_ca, axis=-1)
+    # Semiperimeter and Heron's formula.
+    s = (a + b + c) / 2
+    area = np.sqrt(s * (s - a) * (s - b) * (s - c))
+    height = (2 * area) / a
 
-    # Use only distance a and b if has a positive cross product.
+    # Use only distance a and b if exterior angle is convex and points are
+    # monotonic.
     distance = np.minimum(a, b)
-    # Also use distance c in case of a negative cross product.
-    distance[check] = np.minimum.reduce((a[check], b[check], c[check]))
+    # Use triangle height otherwise.
+    distance[check_height] = height[check_height]
     return triangles[distance <= minimum_spacing, 1, :]
 
 
