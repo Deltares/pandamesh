@@ -379,7 +379,7 @@ sizes in the lower left corner, and large cell sizes in the upper right:
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7f5ae87f19d0>
+    <matplotlib.collections.PathCollection object at 0x7f0528c5d130>
 
 
 

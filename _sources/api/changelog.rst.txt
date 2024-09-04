@@ -9,6 +9,9 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Unreleased
 ----------
 
+[0.2.1] 2024-09-04
+------------------
+
 Added
 ~~~~~
 
