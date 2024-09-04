@@ -577,3 +577,22 @@ class TestProximatePoints:
         assert len(faulty) == 5
         actual = shapely.get_coordinates(faulty)
         assert np.array_equal(actual, expected)
+
+    def test_find_proximate_points_hourglass(self):
+        # The gap here is only 1e-3 wide, but because there are several
+        # vertices between, it is not detected. Ideally we would find these
+        # cases as well.
+        hourglass = sg.Polygon(
+            shell=[
+                [0.0, 0.0],
+                [10.0, 0.0],
+                [10.0, 10.0],
+                [1e-3, 10.0],
+                [1e-3, 10.01],
+                [-0.01, 10.01],
+                [0.0, 10.0],
+            ]
+        )
+        geometry = gpd.GeoSeries([hourglass])
+        faulty = common.find_proximate_perimeter_points(geometry, 2e-3)
+        assert len(faulty) == 0
