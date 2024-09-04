@@ -1,0 +1,6 @@
+﻿pandamesh.find\_proximate\_perimeter\_points
+============================================
+
+.. currentmodule:: pandamesh
+
+.. autofunction:: find_proximate_perimeter_points

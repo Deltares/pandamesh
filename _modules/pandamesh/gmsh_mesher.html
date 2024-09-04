@@ -474,6 +474,11 @@
 <span class="sd">        * &quot;ignore&quot;: skip check.</span>
 <span class="sd">        * &quot;warning&quot;: emit a warning.</span>
 <span class="sd">        * &quot;error&quot;: raise a ValueError.</span>
+<span class="sd">    minimum_perimeter_spacing: float, default is 1.0e-3.</span>
+<span class="sd">        Errors if spacing of vertices on polygon perimeters is less or equal to</span>
+<span class="sd">        minimum spacing. A distance of 0.0 indicates a dangling edge or a</span>
+<span class="sd">        repeated vertex. Such features may cause a crash during mesh</span>
+<span class="sd">        generation.</span>
 <span class="sd">    read_config_files: bool</span>
 <span class="sd">        Gmsh initialization option: Read system Gmsh configuration files</span>
 <span class="sd">        (gmshrc and gmsh-options).</span>
@@ -525,6 +530,7 @@
         <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span>
         <span class="n">shift_origin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">intersecting_edges</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+        <span class="n">minimum_perimeter_spacing</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0e-3</span><span class="p">,</span>
         <span class="n">read_config_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">interruptible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;GmshMesher&quot;</span><span class="p">:</span>
@@ -539,7 +545,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">gdf</span><span class="p">,</span> <span class="n">shift_origin</span><span class="p">,</span> <span class="n">intersecting_edges</span><span class="p">,</span> <span class="n">read_config_files</span><span class="p">,</span> <span class="n">interruptible</span>
+            <span class="n">gdf</span><span class="p">,</span>
+            <span class="n">shift_origin</span><span class="p">,</span>
+            <span class="n">intersecting_edges</span><span class="p">,</span>
+            <span class="n">minimum_perimeter_spacing</span><span class="p">,</span>
+            <span class="n">read_config_files</span><span class="p">,</span>
+            <span class="n">interruptible</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -547,6 +558,7 @@
         <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span>
         <span class="n">shift_origin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">intersecting_edges</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+        <span class="n">minimum_perimeter_spacing</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0e-3</span><span class="p">,</span>
         <span class="n">read_config_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">interruptible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -555,7 +567,9 @@
         <span class="p">)</span>
         <span class="n">check_geodataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="s2">&quot;cellsize&quot;</span><span class="p">},</span> <span class="n">check_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">gdf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_yoff</span> <span class="o">=</span> <span class="n">central_origin</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">shift_origin</span><span class="p">)</span>
-        <span class="n">polygons</span><span class="p">,</span> <span class="n">linestrings</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">separate_geodataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">intersecting_edges</span><span class="p">)</span>
+        <span class="n">polygons</span><span class="p">,</span> <span class="n">linestrings</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">separate_geodataframe</span><span class="p">(</span>
+            <span class="n">gdf</span><span class="p">,</span> <span class="n">intersecting_edges</span><span class="p">,</span> <span class="n">minimum_perimeter_spacing</span>
+        <span class="p">)</span>
 
         <span class="c1"># Include geometry into gmsh</span>
         <span class="n">add_geometry</span><span class="p">(</span><span class="n">polygons</span><span class="p">,</span> <span class="n">linestrings</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>

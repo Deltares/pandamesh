@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pandamesh.Preprocessor.unify_lines &#8212; pandamesh  documentation</title>
+    <title>pandamesh.find_proximate_perimeter_points &#8212; pandamesh  documentation</title>
   
   
   
@@ -43,11 +43,11 @@
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/api/pandamesh.Preprocessor.unify_lines';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/api/pandamesh.find_proximate_perimeter_points';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pandamesh.Preprocessor.interpolate_lines_to_points" href="pandamesh.Preprocessor.interpolate_lines_to_points.html" />
-    <link rel="prev" title="pandamesh.Preprocessor.clip_lines" href="pandamesh.Preprocessor.clip_lines.html" />
+    <link rel="next" title="pandamesh.TriangleMesher" href="pandamesh.TriangleMesher.html" />
+    <link rel="prev" title="pandamesh.find_edge_intersections" href="pandamesh.find_edge_intersections.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -322,13 +322,13 @@
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.unify_polygons.html">pandamesh.Preprocessor.unify_polygons</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.merge_polygons.html">pandamesh.Preprocessor.merge_polygons</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.clip_lines.html">pandamesh.Preprocessor.clip_lines</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">pandamesh.Preprocessor.unify_lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.unify_lines.html">pandamesh.Preprocessor.unify_lines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.interpolate_lines_to_points.html">pandamesh.Preprocessor.interpolate_lines_to_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.snap_points.html">pandamesh.Preprocessor.snap_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.clip_points.html">pandamesh.Preprocessor.clip_points</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.Preprocessor.to_geodataframe.html">pandamesh.Preprocessor.to_geodataframe</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.find_edge_intersections.html">pandamesh.find_edge_intersections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandamesh.find_proximate_perimeter_points.html">pandamesh.find_proximate_perimeter_points</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">pandamesh.find_proximate_perimeter_points</a></li>
 </ul>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="pandamesh.TriangleMesher.html">pandamesh.TriangleMesher</a></li>
@@ -415,7 +415,7 @@
     
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API Reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">pandamesh.Pr...</li>
+    <li class="breadcrumb-item active" aria-current="page">pandamesh.fi...</li>
   </ul>
 </nav>
 </div>
@@ -432,18 +432,27 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="pandamesh-preprocessor-unify-lines">
-<h1>pandamesh.Preprocessor.unify_lines<a class="headerlink" href="#pandamesh-preprocessor-unify-lines" title="Link to this heading">#</a></h1>
-<dl class="py method">
-<dt class="sig sig-object py" id="pandamesh.Preprocessor.unify_lines">
-<span class="sig-prename descclassname"><span class="pre">Preprocessor.</span></span><span class="sig-name descname"><span class="pre">unify_lines</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pandamesh.Preprocessor.html#pandamesh.Preprocessor" title="pandamesh.preprocessor.Preprocessor"><span class="pre">Preprocessor</span></a></span></span><a class="reference internal" href="../../_modules/pandamesh/preprocessor.html#Preprocessor.unify_lines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.Preprocessor.unify_lines" title="Link to this definition">#</a></dt>
-<dd><p>Ensure intersections between lines are present.</p>
+  <section id="pandamesh-find-proximate-perimeter-points">
+<h1>pandamesh.find_proximate_perimeter_points<a class="headerlink" href="#pandamesh-find-proximate-perimeter-points" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="pandamesh.find_proximate_perimeter_points">
+<span class="sig-prename descclassname"><span class="pre">pandamesh.</span></span><span class="sig-name descname"><span class="pre">find_proximate_perimeter_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoSeries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">GeoSeries</span></span></span><a class="reference internal" href="../../_modules/pandamesh/common.html#find_proximate_perimeter_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.find_proximate_perimeter_points" title="Link to this definition">#</a></dt>
+<dd><p>Detect vertices in polygon perimeters (exteriors and interiors) that are
+very close to each other.</p>
+<p>Note that dangling edges can be detected through self-intersection: whether
+a geometry is simple or not. However, some slivers will almost form a
+dangling edge, where the sliver still have a very small thickness. This may
+result in problems during mesh generation, as tiny triangles will be
+required locally.</p>
+<p>Note that sliver concavities are allowed: the vertex spacing <strong>along</strong> the
+perimeter is not necessarily small.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>processed</strong></p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="pandamesh.Preprocessor.html#pandamesh.Preprocessor" title="pandamesh.Preprocessor">pandamesh.Preprocessor</a></p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>geometry</strong> (<em>geopandas.Geoseries</em>) – Points, lines, polygons.</p></li>
+<li><p><strong>minimum_spacing</strong> (<em>float</em><em>, </em><em>default is 1.0e-3.</em>) – The minimum allowed distance between vertices, or the minimum width of
+slivers.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -461,20 +470,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="pandamesh.Preprocessor.clip_lines.html"
+       href="pandamesh.find_edge_intersections.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">pandamesh.Preprocessor.clip_lines</p>
+        <p class="prev-next-title">pandamesh.find_edge_intersections</p>
       </div>
     </a>
     <a class="right-next"
-       href="pandamesh.Preprocessor.interpolate_lines_to_points.html"
+       href="pandamesh.TriangleMesher.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pandamesh.Preprocessor.interpolate_lines_to_points</p>
+        <p class="prev-next-title">pandamesh.TriangleMesher</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -496,14 +505,14 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.Preprocessor.unify_lines"><code class="docutils literal notranslate"><span class="pre">Preprocessor.unify_lines()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandamesh.find_proximate_perimeter_points"><code class="docutils literal notranslate"><span class="pre">find_proximate_perimeter_points()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../_sources/api/api/pandamesh.Preprocessor.unify_lines.rst.txt">
+    <a href="../../_sources/api/api/pandamesh.find_proximate_perimeter_points.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
