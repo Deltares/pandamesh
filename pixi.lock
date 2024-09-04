@@ -25617,9 +25617,9 @@ packages:
   timestamp: 1718189540074
 - kind: pypi
   name: pandamesh
-  version: 0.1.6
+  version: 0.2.0
   path: .
-  sha256: 928869cf109697e03fc408f61dfd3dd2c3b5e98c43d215829a71d21460a9a9b7
+  sha256: 810fe4f827ba6ef6c7714ca71b746bcf238aad2a4fa173c84010a16107d72764
   requires_dist:
   - geopandas
   - pooch
