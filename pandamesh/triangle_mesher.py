@@ -68,6 +68,11 @@ class TriangleMesher:
         * "warning": emit a warning.
         * "error": raise a ValueError.
 
+    minimum_perimeter_spacing: float, default is 1.0e-3.
+        Errors if spacing of vertices on polygon perimeters is less or equal to
+        minimum spacing. A distance of 0.0 indicates a dangling edge or a
+        repeated vertex. Such features may cause a crash during mesh
+        generation.
     """
 
     def __init__(
@@ -75,10 +80,13 @@ class TriangleMesher:
         gdf: gpd.GeoDataFrame,
         shift_origin: bool = True,
         intersecting_edges="error",
+        minimum_perimeter_spacing=1.0e-3,
     ) -> None:
         check_geodataframe(gdf, {"geometry", "cellsize"}, check_index=True)
         gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
-        polygons, linestrings, points = separate_geodataframe(gdf, intersecting_edges)
+        polygons, linestrings, points = separate_geodataframe(
+            gdf, intersecting_edges, minimum_perimeter_spacing
+        )
         self.vertices, self.segments, self.regions = collect_geometry(
             polygons, linestrings, points
         )
