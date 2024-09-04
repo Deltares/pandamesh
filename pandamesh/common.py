@@ -3,7 +3,7 @@ from __future__ import annotations
 import functools
 import operator
 import warnings
-from typing import Any, Sequence, Set, Tuple
+from typing import Any, Sequence, Set, Tuple, TypeVar
 
 import geopandas as gpd
 import numpy as np
@@ -46,6 +46,7 @@ IntArray = np.ndarray
 FloatArray = np.ndarray
 GeometryArray = np.ndarray
 coord_dtype = np.dtype([("x", np.float64), ("y", np.float64)])
+Geometries = TypeVar("Geometries", GeometryArray, gpd.GeoSeries)
 
 POINT = shapely.GeometryType.POINT
 LINESTRING = shapely.GeometryType.LINESTRING
@@ -140,24 +141,14 @@ def check_intersection(features: gpd.GeoSeries, feature_type: str) -> None:
 
 def check_features(features: gpd.GeoSeries, feature_type) -> None:
     """Check whether features are simple."""
-    are_simple = features.is_simple
-    n_complex = (~are_simple).sum()
-    if n_complex > 0:
+    is_complex = ~features.is_simple
+    if is_complex.any():
+        n_complex = is_complex.sum()
+        index = features.index[is_complex].to_numpy()
         raise ValueError(
-            f"{n_complex} cases of complex {feature_type} detected: these "
-            " features contain self intersections"
+            f"{n_complex} cases of complex {feature_type} detected.\nThese "
+            f"features contain self intersections:\n{index}"
         )
-    return
-
-
-def check_polygons(polygons: gpd.GeoSeries) -> None:
-    check_features(polygons, "polygon")
-    check_intersection(polygons, "polygon")
-    return
-
-
-def check_lines(lines: gpd.GeoSeries) -> None:
-    check_features(lines, "lines")
     return
 
 
@@ -222,30 +213,103 @@ def linework_intersections(
     return intersections[unresolved]
 
 
-def check_linework(
-    polygons: gpd.GeoSeries,
-    lines: gpd.GeoSeries,
-    on_unresolved_intersection: str,
-) -> None:
-    intersections = linework_intersections(
-        polygons.geometry,
-        lines.geometry,
-        tolerance=1.0e-6,
-    )
-    n_intersection = len(intersections)
-    if n_intersection > 0:
-        msg = (
-            f"{n_intersection} unresolved intersections between polygon "
-            "boundary or line segments.\nRun "
-            "pandamesh.find_edge_intersections(gdf.geometry) to identify the "
-            "intersection locations.\nIntersections can be resolved using "
-            "the pandamesh.Preprocessor."
+def _triangles(rings: GeometryArray) -> FloatArray:
+    coords = shapely.get_coordinates(rings)
+    n = shapely.get_num_coordinates(rings)
+
+    polygon_ids = np.repeat(np.arange(len(rings)), n)
+
+    # Calculate the local index within each polygon
+    local_indices = np.arange(n.sum()) % n[polygon_ids]
+
+    # Get rid of the last vertex, since this is the same as the first in a
+    # linearring.
+    lengths = n - 1
+    discard_last = local_indices != lengths[polygon_ids]
+    local_indices = local_indices[discard_last]
+    polygon_ids = polygon_ids[discard_last]
+
+    # Create shifts for the three consecutive vertices
+    shifts = np.column_stack(
+        (
+            local_indices,
+            (local_indices + 1) % lengths[polygon_ids],
+            (local_indices + 2) % lengths[polygon_ids],
         )
-        if on_unresolved_intersection == "error":
-            raise ValueError(msg)
-        elif on_unresolved_intersection == "warn":
-            warnings.warn(msg)
-    return
+    )
+    indices = (np.cumsum(n) - n)[polygon_ids, np.newaxis] + shifts
+    return coords[indices]
+
+
+def _compute_cross_product(triangles: FloatArray) -> FloatArray:
+    ab = triangles[:, 1] - triangles[:, 0]
+    bc = triangles[:, 2] - triangles[:, 1]
+    return ab[:, 0] * bc[:, 1] - ab[:, 1] * bc[:, 0]
+
+
+def _find_proximate_points(rings: GeometryArray, minimum_spacing: float) -> FloatArray:
+    triangles = _triangles(rings)
+    # Check convex / concave. Note shapely canonical form: exterior is
+    # clockwise (CW), interior is counter-clockwise (CCW).
+    # We need to worry about CONVEX angles in the CLOCKWISE exterior;
+    # we need to worry about CONCAVE angles in the CCW interior.
+    # Both therefore need positive cross product values.
+    cross_product = _compute_cross_product(triangles)
+    check = cross_product <= 0
+
+    # Compute segment lenghts
+    a = np.linalg.norm(triangles[:, 1, :] - triangles[:, 0, :], axis=-1)
+    b = np.linalg.norm(triangles[:, 2, :] - triangles[:, 1, :], axis=-1)
+    c = np.linalg.norm(triangles[:, 0, :] - triangles[:, 2, :], axis=-1)
+
+    # Use only distance a and b if has a positive cross product.
+    distance = np.minimum(a, b)
+    # Also use distance c in case of a negative cross product.
+    distance[check] = np.minimum.reduce((a[check], b[check], c[check]))
+    return triangles[distance <= minimum_spacing, 1, :]
+
+
+def find_proximate_perimeter_points(
+    geometry: gpd.GeoSeries, minimum_spacing: float = 1.0e-3
+) -> gpd.GeoSeries:
+    """
+    Detect vertices in polygon perimeters that are very close to each other.
+
+    Note that dangling edges can be detected through self-intersection: whether
+    a geometry is simple or not. However, some slivers will almost form a
+    dangling edge, where the sliver still have a very small thickness. This may
+    result in problems during mesh generation, as tiny triangles will be
+    required locally.
+
+    Note that sliver concavities are allowed: the vertex spacing **along** the
+    perimeter is not necessarily small.
+
+    Parameters
+    ----------
+    geometry : geopandas.Geoseries
+        Points, lines, polygons.
+    minimum_spacing : float, default is 1.0e-3.
+        The minimum allowed distance between vertices, or the minimum width of
+        slivers.
+    """
+
+    # Normalize forces strict canonical form:
+    # "the coordinates of exterior rings follow a clockwise orientation and
+    # interior rings have a counter-clockwise orientation"
+    polygons, _, _ = separate_geometry(geometry)
+    polygons = shapely.normalize(polygons)
+    points = _find_proximate_points(
+        rings=polygons.exterior.to_numpy(),
+        minimum_spacing=minimum_spacing,
+    )
+    interiors = flatten(polygons.interiors)
+    if len(interiors) > 0:
+        interior_points = _find_proximate_points(
+            rings=np.atleast_1d(interiors),
+            minimum_spacing=minimum_spacing,
+        )
+        points = np.concatenate((points, interior_points))
+    return gpd.GeoSeries(gpd.points_from_xy(*points.T))
 
 
 def find_edge_intersections(geometry: gpd.Geoseries) -> gpd.GeoSeries:
@@ -295,8 +359,48 @@ def check_points(
     return
 
 
+def check_linework(
+    polygons: gpd.GeoSeries,
+    lines: gpd.GeoSeries,
+    on_unresolved_intersection: str,
+) -> None:
+    intersections = linework_intersections(
+        polygons.geometry,
+        lines.geometry,
+        tolerance=1.0e-6,
+    )
+    n_intersection = len(intersections)
+    if n_intersection > 0:
+        msg = (
+            f"{n_intersection} unresolved intersections between polygon "
+            "boundary or line segments.\nRun "
+            "pandamesh.find_edge_intersections(gdf.geometry) to identify the "
+            "intersection locations.\nIntersections can be resolved using "
+            "the pandamesh.Preprocessor."
+        )
+        if on_unresolved_intersection == "error":
+            raise ValueError(msg)
+        elif on_unresolved_intersection == "warn":
+            warnings.warn(msg)
+    return
+
+
+def check_perimeter_proximate_points(
+    polygons: gpd.GeoSeries, minimum_spacing: float
+) -> None:
+    proximate_points = find_proximate_perimeter_points(polygons, minimum_spacing)
+    n_proximate = len(proximate_points)
+    if n_proximate > 0:
+        raise ValueError(
+            f"{n_proximate} proximate points found on polygon perimeters.\n"
+            "Run pandamesh.find_perimeter_proximate_points to identify these "
+            "points."
+        )
+    return
+
+
 def _separate(
-    geometry: GeometryArray,
+    geometry: Geometries,
 ) -> Tuple[BoolArray, BoolArray, BoolArray]:
     geometry_id = shapely.get_type_id(geometry)
     allowed_types = (POINT, LINESTRING, LINEARRING, POLYGON)
@@ -319,8 +423,8 @@ def _separate(
 
 
 def separate_geometry(
-    geometry: GeometryArray,
-) -> Tuple[GeometryArray, GeometryArray, GeometryArray]:
+    geometry: Geometries,
+) -> Tuple[Geometries, Geometries, Geometries]:
     is_polygon, is_line, is_point = _separate(geometry)
     return (
         geometry[is_polygon],
@@ -329,9 +433,22 @@ def separate_geometry(
     )
 
 
+def check_polygons(polygons: gpd.GeoSeries, minimum_spacing: float) -> None:
+    check_features(polygons, "polygon")
+    check_perimeter_proximate_points(polygons, minimum_spacing)
+    check_intersection(polygons, "polygon")
+    return
+
+
+def check_lines(lines: gpd.GeoSeries) -> None:
+    check_features(lines, "lines")
+    return
+
+
 def separate_geodataframe(
     gdf: gpd.GeoDataFrame,
     intersecting_edges: str,
+    minimum_spacing: float,
 ) -> Tuple[gpd.GeoDataFrame, gpd.GeoDataFrame, gpd.GeoDataFrame]:
     acceptable = ("error", "warn", "ignore")
     if intersecting_edges not in acceptable:
@@ -352,7 +469,7 @@ def separate_geodataframe(
         df["cellsize"] = df["cellsize"].astype(float)
         df.crs = None
 
-    check_polygons(polygons.geometry)
+    check_polygons(polygons.geometry, minimum_spacing)
     check_lines(lines.geometry)
     if intersecting_edges != "ignore":
         check_linework(polygons.geometry, lines.geometry, intersecting_edges)

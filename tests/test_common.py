@@ -49,6 +49,17 @@ e = sg.Polygon(
         (4.0, 0.0),
     ]
 )
+# Almost dangling edge
+f = sg.Polygon(
+    [
+        (0.0, 0.0),
+        (1.0, 0.0),
+        (2.0, 0.0),
+        (1.0, 0.001),
+        (1.0, 1.0),
+        (0.0, 1.0),
+    ]
+)
 
 La = sg.LineString(
     [
@@ -262,11 +273,17 @@ def test_compute_intersections():
 def test_check_polygons():
     polygons = gpd.GeoSeries(data=[a, b, c, d, e], index=[0, 1, 2, 3, 4])
     with pytest.raises(ValueError, match="1 cases of complex polygon detected"):
-        common.check_polygons(polygons)
+        common.check_polygons(polygons, 1.0e-3)
 
     polygons = gpd.GeoSeries(data=[a, b, c, d], index=[0, 1, 2, 3])
     with pytest.raises(ValueError, match="2 cases of intersecting polygon detected"):
-        common.check_polygons(polygons)
+        common.check_polygons(polygons, 1.0e-3)
+
+    polygons = gpd.GeoSeries(data=[f], index=[0])
+    with pytest.raises(
+        ValueError, match="1 proximate points found on polygon perimeters"
+    ):
+        common.check_polygons(polygons, 1.0e-3)
 
 
 def test_check_points():
@@ -295,10 +312,12 @@ def test_separate_geodataframe():
     gdf["cellsize"] = 1.0
 
     with pytest.raises(ValueError, match="intersecting_edges should be one of"):
-        common.separate_geodataframe(gdf, intersecting_edges="abc")
+        common.separate_geodataframe(
+            gdf, intersecting_edges="abc", minimum_spacing=1.0e-3
+        )
 
     polygons, linestrings, points = common.separate_geodataframe(
-        gdf, intersecting_edges="error"
+        gdf, intersecting_edges="error", minimum_spacing=1.0e-3
     )
     assert isinstance(polygons.geometry.iloc[0], sg.Polygon)
     assert isinstance(linestrings.geometry.iloc[0], sg.LineString)
@@ -307,18 +326,22 @@ def test_separate_geodataframe():
     # Make sure it works for single elements
     gdf = gpd.GeoDataFrame(geometry=[a])
     gdf["cellsize"] = 1.0
-    common.separate_geodataframe(gdf, intersecting_edges="error")
+    common.separate_geodataframe(
+        gdf, intersecting_edges="error", minimum_spacing=1.0e-3
+    )
 
     gdf = gpd.GeoDataFrame(geometry=[a, La])
     gdf["cellsize"] = 1.0
     polygons, linestrings, points = common.separate_geodataframe(
-        gdf, intersecting_edges="error"
+        gdf, intersecting_edges="error", minimum_spacing=1.0e-3
     )
 
     # Make sure cellsize is cast to float
     gdf = gpd.GeoDataFrame(geometry=[a, La])
     gdf["cellsize"] = "1"
-    dfs = common.separate_geodataframe(gdf, intersecting_edges="error")
+    dfs = common.separate_geodataframe(
+        gdf, intersecting_edges="error", minimum_spacing=1.0e-3
+    )
     for df in dfs:
         assert np.issubdtype(df["cellsize"].dtype, np.floating)
 
@@ -326,7 +349,9 @@ def test_separate_geodataframe():
         TypeError, match="GeoDataFrame contains unsupported geometry types"
     ):
         gdf = gpd.GeoDataFrame(geometry=[sg.MultiPolygon([a, b])])
-        common.separate_geodataframe(gdf, intersecting_edges="error")
+        common.separate_geodataframe(
+            gdf, intersecting_edges="error", minimum_spacing=1.0e-3
+        )
 
 
 def test_central_origin():
@@ -467,3 +492,89 @@ class TestLineworkIntersection:
 
         with pytest.warns(UserWarning):
             common.check_linework(polygons, lines, "warn")
+
+
+class TestProximatePoints:
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        self.shell0 = [
+            [0.0, 0.0],
+            [5.0, 0.0],
+            [10.0, 0.0],
+            [15.0, 0.0],
+            [10.0, 0.1],
+            [10.0, 9.9],
+            [13.0, 10.0],
+            [10.0, 10.0],
+            [5.0, 10.0],
+            [0.0, 10.0],
+        ]
+        self.shell1 = [
+            [20.0, 0.0],
+            [30.0, 0.0],
+            [30.0, 5.0],
+            [25.0, 5.0],
+            [30.0, 5.1],
+            [30.0, 10.0],
+            [20.0, 10.0],
+        ]
+        self.shell2 = [
+            [40.0, 0.0],
+            [50.0, 0.0],
+            [50.0, 10.0],
+            [40.0, 10.0],
+        ]
+        self.hole2 = [
+            [42.0, 2.0],
+            [42.0, 8.0],
+            [45.0, 8.0],
+            [45.0, 7.0],
+            [45.1, 8.0],
+            [48.0, 8.0],
+            [48.0, 2.0],
+        ]
+        self.shell3 = [
+            [60.0, 0.0],
+            [70.0, 0.0],
+            [73.0, 0.0],
+            [73.0, 0.01],
+            [70.0, 0.01],
+            [70.0, 10.0],
+            [60.0, 10.0],
+        ]
+
+    # Order of vertices shouldn't matter, since we're calling shapely.normalize
+    @pytest.mark.parametrize("flip", [True, False])
+    def test_find_proximate_points(self, flip: bool):
+        def construct_polygon(shell, hole=None):
+            if flip:
+                shell = reversed(shell)
+                if hole is not None:
+                    hole = reversed(hole)
+            return sg.Polygon(shell=shell, holes=[hole])
+
+        poly0 = construct_polygon(self.shell0)
+        poly1 = construct_polygon(self.shell1)
+        poly2 = construct_polygon(self.shell2, self.hole2)
+        poly3 = construct_polygon(self.shell3)
+        geometry = gpd.GeoSeries([poly0, poly1, poly2, poly3])
+
+        # Default tolerance of 0.001, no problems
+        faulty = common.find_proximate_perimeter_points(geometry)
+        assert isinstance(faulty, gpd.GeoSeries)
+        assert len(faulty) == 0
+
+        faulty = common.find_proximate_perimeter_points(geometry, 0.5)
+        expected = np.array(
+            [
+                [13.0, 10.0],
+                [15.0, 0.0],
+                [73.0, 0.01],
+                [73.0, 0.0],
+                [45.0, 7.0],
+            ]
+        )
+        assert isinstance(faulty, gpd.GeoSeries)
+        assert len(faulty) == 5
+        actual = shapely.get_coordinates(faulty)
+        assert np.array_equal(actual, expected)

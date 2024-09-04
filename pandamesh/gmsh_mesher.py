@@ -110,6 +110,11 @@ class GmshMesher:
         * "ignore": skip check.
         * "warning": emit a warning.
         * "error": raise a ValueError.
+    minimum_perimeter_spacing: float, default is 1.0e-3.
+        Errors if spacing of vertices on polygon perimeters is less or equal to
+        minimum spacing. A distance of 0.0 indicates a dangling edge or a
+        repeated vertex. Such features may cause a crash during mesh
+        generation.
     read_config_files: bool
         Gmsh initialization option: Read system Gmsh configuration files
         (gmshrc and gmsh-options).
@@ -158,6 +163,7 @@ class GmshMesher:
         gdf: gpd.GeoDataFrame,
         shift_origin: bool = True,
         intersecting_edges: str = "error",
+        minimum_perimeter_spacing: float = 1.0e-3,
         read_config_files: bool = True,
         interruptible: bool = True,
     ) -> "GmshMesher":
@@ -172,7 +178,12 @@ class GmshMesher:
         """
         cls.finalize()
         return cls(
-            gdf, shift_origin, intersecting_edges, read_config_files, interruptible
+            gdf,
+            shift_origin,
+            intersecting_edges,
+            minimum_perimeter_spacing,
+            read_config_files,
+            interruptible,
         )
 
     def __init__(
@@ -180,6 +191,7 @@ class GmshMesher:
         gdf: gpd.GeoDataFrame,
         shift_origin: bool = True,
         intersecting_edges="error",
+        minimum_perimeter_spacing: float = 1.0e-3,
         read_config_files: bool = True,
         interruptible: bool = True,
     ) -> None:
@@ -188,7 +200,9 @@ class GmshMesher:
         )
         check_geodataframe(gdf, {"geometry", "cellsize"}, check_index=True)
         gdf, self._xoff, self._yoff = central_origin(gdf, shift_origin)
-        polygons, linestrings, points = separate_geodataframe(gdf, intersecting_edges)
+        polygons, linestrings, points = separate_geodataframe(
+            gdf, intersecting_edges, minimum_perimeter_spacing
+        )
 
         # Include geometry into gmsh
         add_geometry(polygons, linestrings, points)

@@ -1,5 +1,5 @@
 from pandamesh import data
-from pandamesh.common import find_edge_intersections
+from pandamesh.common import find_edge_intersections, find_proximate_perimeter_points
 from pandamesh.gmsh_enums import (
     FieldCombination,
     GeneralVerbosity,
@@ -28,4 +28,5 @@ __all__ = (
     "TriangleMesher",
     "Preprocessor",
     "find_edge_intersections",
+    "find_proximate_perimeter_points",
 )
