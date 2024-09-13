@@ -109,7 +109,6 @@ html_theme_options = {
         "image_light": "pandamesh-logo.svg",
         "image_dark": "pandamesh-logo.svg",
     },
-    "navbar_end": ["navbar-icon-links"],  # remove dark mode switch
 }
 
 # -- Extension configuration -------------------------------------------------
