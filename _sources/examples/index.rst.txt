@@ -18,48 +18,14 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll illustrate how to generate a mesh from a &quot;real-world&quot; geospatial vector dataset.">
-
-.. only:: html
-
-  .. image:: /examples/images/thumb/sphx_glr_triangle-geospatial_thumb.png
-    :alt:
-
-  :ref:`sphx_glr_examples_triangle-geospatial.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Geospatial Triangle Example</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate some of the mesh generation features that Gmsh provides in combination with polygon, point, and linestring geometries represented by geopandas.">
-
-.. only:: html
-
-  .. image:: /examples/images/thumb/sphx_glr_gmsh-basic_thumb.png
-    :alt:
-
-  :ref:`sphx_glr_examples_gmsh-basic.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Basic Gmsh Example</div>
-    </div>
-
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate some of the mesh generation features that Triangle provides in combination with polygon, point, and linestring geometries represented by geopandas.">
 
 .. only:: html
 
-  .. image:: /examples/images/thumb/sphx_glr_triangle-basic_thumb.png
+  .. image:: /examples/images/thumb/sphx_glr_01_triangle-basic_thumb.png
     :alt:
 
-  :ref:`sphx_glr_examples_triangle-basic.py`
+  :ref:`sphx_glr_examples_01_triangle-basic.py`
 
 .. raw:: html
 
@@ -69,14 +35,31 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate some of the mesh generation features that Gmsh provides in combination with polygon, point, and linestring geometries represented by geopandas.">
+
+.. only:: html
+
+  .. image:: /examples/images/thumb/sphx_glr_02_gmsh-basic_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_02_gmsh-basic.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Basic Gmsh Example</div>
+    </div>
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Gmsh supports so called &quot;fields&quot; to guide the cell sizes of the generated meshes. These fields are separate from the geometrical constraints: for example, a field point does not end up in the generated mesh, but influences the cell size in its surrounding.">
 
 .. only:: html
 
-  .. image:: /examples/images/thumb/sphx_glr_gmsh-fields_thumb.png
+  .. image:: /examples/images/thumb/sphx_glr_03_gmsh-fields_thumb.png
     :alt:
 
-  :ref:`sphx_glr_examples_gmsh-fields.py`
+  :ref:`sphx_glr_examples_03_gmsh-fields.py`
 
 .. raw:: html
 
@@ -86,14 +69,31 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll illustrate how to generate a mesh from a &quot;real-world&quot; geospatial vector dataset.">
+
+.. only:: html
+
+  .. image:: /examples/images/thumb/sphx_glr_04_triangle-geospatial_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_04_triangle-geospatial.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Geospatial Triangle Example</div>
+    </div>
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Raw geospatial vector data is often not ready to use directly in mesh generation:       Polygon data often do not form a valid planar partition: polygons are   overlapping, or neighboring polygons have small gaps between them.  Polygon boundaries or linestring segments intersect each other.  Points may be located on polygon boundaries or lines. Since floating point   numbers are not exact, points seemingly located on a line are computationally   just left or just right of the line and form an extremely thin triangle.  Points may be located extremely close together, thereby generating tiny   triangles.    Such problems either lead to a generated mesh with extremely small elements, or worse, they lead to a crash of the meshing program. Pandamesh provides a Preprocessor class to assist with cleaning up some common faults. ">
 
 .. only:: html
 
-  .. image:: /examples/images/thumb/sphx_glr_preprocessing_thumb.png
+  .. image:: /examples/images/thumb/sphx_glr_05_preprocessing_thumb.png
     :alt:
 
-  :ref:`sphx_glr_examples_preprocessing.py`
+  :ref:`sphx_glr_examples_05_preprocessing.py`
 
 .. raw:: html
 
@@ -111,11 +111,11 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
 .. toctree::
    :hidden:
 
-   /examples/triangle-geospatial
-   /examples/gmsh-basic
-   /examples/triangle-basic
-   /examples/gmsh-fields
-   /examples/preprocessing
+   /examples/01_triangle-basic
+   /examples/02_gmsh-basic
+   /examples/03_gmsh-fields
+   /examples/04_triangle-geospatial
+   /examples/05_preprocessing
 
 
 

@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../_static/theme-deltares.css?v=1c61d878" />
+    <link rel="stylesheet" type="text/css" href="../_static/theme-deltares.css?v=45942d5c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -46,7 +46,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'examples/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Geospatial Triangle Example" href="triangle-geospatial.html" />
+    <link rel="next" title="Basic Triangle Example" href="01_triangle-basic.html" />
     <link rel="prev" title="Pandamesh" href="../index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,6 +181,18 @@
         </div>
       
       
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
@@ -279,6 +291,18 @@
     
       <div class="sidebar-header-items__end">
         
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
           <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
@@ -315,11 +339,11 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="triangle-geospatial.html">Geospatial Triangle Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gmsh-basic.html">Basic Gmsh Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="triangle-basic.html">Basic Triangle Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gmsh-fields.html">Gmsh Fields Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_triangle-basic.html">Basic Triangle Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_gmsh-basic.html">Basic Gmsh Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_gmsh-fields.html">Gmsh Fields Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_triangle-geospatial.html">Geospatial Triangle Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_preprocessing.html">Preprocessing</a></li>
 </ul>
 </div>
 </nav></div>
@@ -379,20 +403,20 @@
 <p>These examples illustrate the basic steps to create meshes with Triangle and
 Gmsh.</p>
 <p>Every example can be downloaded as a Python script or a Jupyter Notebook.</p>
-<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll illustrate how to generate a mesh from a &quot;real-world&quot; geospatial vector dataset."><img alt="" src="../_images/sphx_glr_triangle-geospatial_thumb.png" />
-<p><a class="reference internal" href="triangle-geospatial.html#sphx-glr-examples-triangle-geospatial-py"><span class="std std-ref">Geospatial Triangle Example</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Geospatial Triangle Example</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate some of the mesh generation features that Gmsh provides in combination with polygon, point, and linestring geometries represented by geopandas."><img alt="" src="../_images/sphx_glr_gmsh-basic_thumb.png" />
-<p><a class="reference internal" href="gmsh-basic.html#sphx-glr-examples-gmsh-basic-py"><span class="std std-ref">Basic Gmsh Example</span></a></p>
-  <div class="sphx-glr-thumbnail-title">Basic Gmsh Example</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate some of the mesh generation features that Triangle provides in combination with polygon, point, and linestring geometries represented by geopandas."><img alt="" src="../_images/sphx_glr_triangle-basic_thumb.png" />
-<p><a class="reference internal" href="triangle-basic.html#sphx-glr-examples-triangle-basic-py"><span class="std std-ref">Basic Triangle Example</span></a></p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate some of the mesh generation features that Triangle provides in combination with polygon, point, and linestring geometries represented by geopandas."><img alt="" src="../_images/sphx_glr_01_triangle-basic_thumb.png" />
+<p><a class="reference internal" href="01_triangle-basic.html#sphx-glr-examples-01-triangle-basic-py"><span class="std std-ref">Basic Triangle Example</span></a></p>
   <div class="sphx-glr-thumbnail-title">Basic Triangle Example</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Gmsh supports so called &quot;fields&quot; to guide the cell sizes of the generated meshes. These fields are separate from the geometrical constraints: for example, a field point does not end up in the generated mesh, but influences the cell size in its surrounding."><img alt="" src="../_images/sphx_glr_gmsh-fields_thumb.png" />
-<p><a class="reference internal" href="gmsh-fields.html#sphx-glr-examples-gmsh-fields-py"><span class="std std-ref">Gmsh Fields Example</span></a></p>
+</div><div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll create some basic geometries and turn them into meshes. to illustrate some of the mesh generation features that Gmsh provides in combination with polygon, point, and linestring geometries represented by geopandas."><img alt="" src="../_images/sphx_glr_02_gmsh-basic_thumb.png" />
+<p><a class="reference internal" href="02_gmsh-basic.html#sphx-glr-examples-02-gmsh-basic-py"><span class="std std-ref">Basic Gmsh Example</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Basic Gmsh Example</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Gmsh supports so called &quot;fields&quot; to guide the cell sizes of the generated meshes. These fields are separate from the geometrical constraints: for example, a field point does not end up in the generated mesh, but influences the cell size in its surrounding."><img alt="" src="../_images/sphx_glr_03_gmsh-fields_thumb.png" />
+<p><a class="reference internal" href="03_gmsh-fields.html#sphx-glr-examples-03-gmsh-fields-py"><span class="std std-ref">Gmsh Fields Example</span></a></p>
   <div class="sphx-glr-thumbnail-title">Gmsh Fields Example</div>
-</div><div class="sphx-glr-thumbcontainer" tooltip="Raw geospatial vector data is often not ready to use directly in mesh generation:       Polygon data often do not form a valid planar partition: polygons are   overlapping, or neighboring polygons have small gaps between them.  Polygon boundaries or linestring segments intersect each other.  Points may be located on polygon boundaries or lines. Since floating point   numbers are not exact, points seemingly located on a line are computationally   just left or just right of the line and form an extremely thin triangle.  Points may be located extremely close together, thereby generating tiny   triangles.    Such problems either lead to a generated mesh with extremely small elements, or worse, they lead to a crash of the meshing program. Pandamesh provides a Preprocessor class to assist with cleaning up some common faults. "><img alt="" src="../_images/sphx_glr_preprocessing_thumb.png" />
-<p><a class="reference internal" href="preprocessing.html#sphx-glr-examples-preprocessing-py"><span class="std std-ref">Preprocessing</span></a></p>
+</div><div class="sphx-glr-thumbcontainer" tooltip="In this example we&#x27;ll illustrate how to generate a mesh from a &quot;real-world&quot; geospatial vector dataset."><img alt="" src="../_images/sphx_glr_04_triangle-geospatial_thumb.png" />
+<p><a class="reference internal" href="04_triangle-geospatial.html#sphx-glr-examples-04-triangle-geospatial-py"><span class="std std-ref">Geospatial Triangle Example</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Geospatial Triangle Example</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Raw geospatial vector data is often not ready to use directly in mesh generation:       Polygon data often do not form a valid planar partition: polygons are   overlapping, or neighboring polygons have small gaps between them.  Polygon boundaries or linestring segments intersect each other.  Points may be located on polygon boundaries or lines. Since floating point   numbers are not exact, points seemingly located on a line are computationally   just left or just right of the line and form an extremely thin triangle.  Points may be located extremely close together, thereby generating tiny   triangles.    Such problems either lead to a generated mesh with extremely small elements, or worse, they lead to a crash of the meshing program. Pandamesh provides a Preprocessor class to assist with cleaning up some common faults. "><img alt="" src="../_images/sphx_glr_05_preprocessing_thumb.png" />
+<p><a class="reference internal" href="05_preprocessing.html#sphx-glr-examples-05-preprocessing-py"><span class="std std-ref">Preprocessing</span></a></p>
   <div class="sphx-glr-thumbnail-title">Preprocessing</div>
 </div></div><div class="toctree-wrapper compound">
 </div>
@@ -419,11 +443,11 @@ Gmsh.</p>
       </div>
     </a>
     <a class="right-next"
-       href="triangle-geospatial.html"
+       href="01_triangle-basic.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Geospatial Triangle Example</p>
+        <p class="prev-next-title">Basic Triangle Example</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

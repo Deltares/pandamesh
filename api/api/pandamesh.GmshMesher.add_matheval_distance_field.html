@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../../_static/theme-deltares.css?v=1c61d878" />
+    <link rel="stylesheet" type="text/css" href="../../_static/theme-deltares.css?v=45942d5c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -181,6 +181,18 @@
         </div>
       
       
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
@@ -278,6 +290,18 @@
     
     
       <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
         
           <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -438,8 +462,8 @@
 <dt class="sig sig-object py" id="pandamesh.GmshMesher.add_matheval_distance_field">
 <span class="sig-prename descclassname"><span class="pre">GmshMesher.</span></span><span class="sig-name descname"><span class="pre">add_matheval_distance_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/pandamesh/gmsh_mesher.html#GmshMesher.add_matheval_distance_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.GmshMesher.add_matheval_distance_field" title="Link to this definition">#</a></dt>
 <dd><p>Add a matheval distance field to the mesher.</p>
-<p>The of geometry of these fields are not forced into the mesh, but they
-are used to specify zones of with cell sizes.</p>
+<p>The geometry of these fields are not forced into the mesh, but they are
+used to specify zones of with cell sizes.</p>
 <p>Uses the MathEval functionality in Gmsh, which relies on the SSCILIB
 math expression evaluator.</p>
 <p><a class="reference external" href="https://gitlab.onelab.info/gmsh/gmsh/-/blob/master/contrib/MathEx/mathex.cpp">https://gitlab.onelab.info/gmsh/gmsh/-/blob/master/contrib/MathEx/mathex.cpp</a></p>
@@ -450,7 +474,9 @@ math expression evaluator.</p>
 <code class="docutils literal notranslate"><span class="pre">spacing</span></code> column to specify the spacing of interpolated vertices
 along linestrings and polygon boundaries, and a <code class="docutils literal notranslate"><span class="pre">function</span></code> column
 to specify the function to control cell size as a function of
-distance. See the examples.</p>
+distance, <code class="docutils literal notranslate"><span class="pre">&quot;distance&quot;</span></code> must be present as an argument in the
+function string. Note that the distance must never evaluate to 0,
+since 0 sized cells are not allowed. See the examples.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -466,6 +492,8 @@ distance. See the examples.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="p">[</span><span class="s2">&quot;function&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;max(distance^2, 1.0)&quot;</span>
 </pre></div>
 </div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">max</span></code> function is used to ensure that the cell size is
+never smaller than 1.0</p>
 <p>Apply it:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mesher</span><span class="o">.</span><span class="n">add_matheval_distance_field</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
 </pre></div>
@@ -474,7 +502,7 @@ distance. See the examples.</p>
 <p>Basic Operators</p>
 <ul class="simple">
 <li><p>Arithmetic: <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">%</span></code> (modulo), <code class="docutils literal notranslate"><span class="pre">^</span></code> (power)</p></li>
-<li><p>Comparison: <code class="docutils literal notranslate"><span class="pre">``&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></li>
+<li><p>Comparison: <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></li>
 </ul>
 <p>Mathematical Functions</p>
 <ul class="simple">
@@ -490,7 +518,7 @@ distance. See the examples.</p>
 <li><p>Minimum: <code class="docutils literal notranslate"><span class="pre">min(x,</span> <span class="pre">y,</span> <span class="pre">...)</span></code></p></li>
 <li><p>Maximum: <code class="docutils literal notranslate"><span class="pre">max(x,</span> <span class="pre">y,</span> <span class="pre">...)</span></code></p></li>
 <li><p>Sum: <code class="docutils literal notranslate"><span class="pre">sum(x,</span> <span class="pre">y,</span> <span class="pre">...)</span></code></p></li>
-<li><p>Average: <code class="docutils literal notranslate"><span class="pre">med(x,</span> <span class="pre">y,</span> <span class="pre">...)`</span></code></p></li>
+<li><p>Average: <code class="docutils literal notranslate"><span class="pre">med(x,</span> <span class="pre">y,</span> <span class="pre">...)</span></code></p></li>
 </ul>
 <p>Trigonometric Functions</p>
 <ul class="simple">
