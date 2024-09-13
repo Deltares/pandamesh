@@ -417,8 +417,8 @@ class GmshMesher:
         """
         Add a matheval distance field to the mesher.
 
-        The of geometry of these fields are not forced into the mesh, but they
-        are used to specify zones of with cell sizes.
+        The geometry of these fields are not forced into the mesh, but they are
+        used to specify zones of with cell sizes.
 
         Uses the MathEval functionality in Gmsh, which relies on the SSCILIB
         math expression evaluator.
@@ -434,7 +434,9 @@ class GmshMesher:
             ``spacing`` column to specify the spacing of interpolated vertices
             along linestrings and polygon boundaries, and a ``function`` column
             to specify the function to control cell size as a function of
-            distance. See the examples.
+            distance, ``"distance"`` must be present as an argument in the
+            function string. Note that the distance must never evaluate to 0,
+            since 0 sized cells are not allowed. See the examples.
 
         Examples
         --------
@@ -450,6 +452,9 @@ class GmshMesher:
         >>> field["spacing"] = np.nan
         >>> field["function"] = "max(distance^2, 1.0)"
 
+        Note that the ``max`` function is used to ensure that the cell size is
+        never smaller than 1.0
+
         Apply it:
 
         >>> mesher.add_matheval_distance_field(field)
@@ -459,7 +464,7 @@ class GmshMesher:
         Basic Operators
 
         - Arithmetic: ``+``, ``-``, ``*``, ``/``, ``%`` (modulo), ``^`` (power)
-        - Comparison: ````<``, ``>``
+        - Comparison: ``<``, ``>``
 
         Mathematical Functions
 
@@ -475,7 +480,7 @@ class GmshMesher:
         - Minimum: ``min(x, y, ...)``
         - Maximum: ``max(x, y, ...)``
         - Sum: ``sum(x, y, ...)``
-        - Average: ``med(x, y, ...)```
+        - Average: ``med(x, y, ...)``
 
         Trigonometric Functions
 

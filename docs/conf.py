@@ -46,6 +46,7 @@ sphinx_gallery_conf = {
     "filename_pattern": ".py",
     "abort_on_example_error": True,
     "download_all_examples": False,
+    "within_subsection_order": "sphinx_gallery.sorting.FileNameSortKey",
 }
 
 # The suffix(es) of source filenames.
