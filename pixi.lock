@@ -93,8 +93,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/freetype-2.12.1-h267a509_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/freexl-2.0.0-h743c826_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/gdal-3.9.2-py312h7eda2e2_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/geos-3.12.2-he02047a_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/geotiff-1.7.3-hf7fa9e8_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/giflib-5.2.2-hd590300_0.conda
@@ -303,7 +303,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pydata-sphinx-theme-0.15.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py312h8ad7a51_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py312h5aa26c2_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pyproj-3.6.1-py312h01329cd_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -508,8 +508,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/freetype-2.12.1-h60636b9_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/freexl-2.0.0-h3ec172f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/gdal-3.9.2-py312h29648be_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/geos-3.12.2-hf036a51_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/geotiff-1.7.3-h4bbec01_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/giflib-5.2.2-h10d778d_0.conda
@@ -694,7 +694,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyobjc-core-10.3.1-py312he77c50b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyobjc-framework-cocoa-10.3.1-py312he77c50b_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py312h43b3a95_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py312hcd3578f_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyproj-3.6.1-py312ha320102_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -880,8 +880,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/freetype-2.12.1-hadb7bae_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/freexl-2.0.0-hfbad9fb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/gdal-3.9.2-py312hdb848f7_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/geos-3.12.2-h00cdb27_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/geotiff-1.7.3-h7e5fb84_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/giflib-5.2.2-h93a5062_0.conda
@@ -1066,7 +1066,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyobjc-core-10.3.1-py312hbb55c70_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyobjc-framework-cocoa-10.3.1-py312hbb55c70_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py312h15038b3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py312hf3c922e_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyproj-3.6.1-py312h64656f7_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -1252,8 +1252,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/freetype-2.12.1-hdaf720e_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/freexl-2.0.0-h8276f4a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gdal-3.9.2-py312h16ac12d_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/geos-3.12.2-h5a68840_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/geotiff-1.7.3-h232476a_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gmsh-4.12.2-hcc95203_0.conda
@@ -1434,7 +1434,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pydata-sphinx-theme-0.15.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py312hd215820_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py312hd215820_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/pyproj-3.6.1-py312h6f27134_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -1641,8 +1641,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/freetype-2.12.1-h267a509_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/freexl-2.0.0-h743c826_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/gdal-3.9.2-py39h43ca41f_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/geos-3.12.2-he02047a_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/geotiff-1.7.3-hf7fa9e8_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/giflib-5.2.2-hd590300_0.conda
@@ -1852,7 +1852,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pydata-sphinx-theme-0.15.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py39hb01807b_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py39haf01bb9_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pyproj-3.6.1-py39hf8c1f24_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -2058,8 +2058,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/freetype-2.12.1-h60636b9_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/freexl-2.0.0-h3ec172f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/gdal-3.9.2-py39h8e38deb_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/geos-3.12.2-hf036a51_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/geotiff-1.7.3-h4bbec01_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/giflib-5.2.2-h10d778d_0.conda
@@ -2245,7 +2245,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyobjc-core-10.3.1-py39hf8f43b1_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyobjc-framework-cocoa-10.3.1-py39hf8f43b1_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py39h7e54be4_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py39h8a6ec8d_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyproj-3.6.1-py39heafbd0c_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -2432,8 +2432,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/freetype-2.12.1-hadb7bae_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/freexl-2.0.0-hfbad9fb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/gdal-3.9.2-py39hd7edc34_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/geos-3.12.2-h00cdb27_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/geotiff-1.7.3-h7e5fb84_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/giflib-5.2.2-h93a5062_0.conda
@@ -2619,7 +2619,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyobjc-core-10.3.1-py39h336d860_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyobjc-framework-cocoa-10.3.1-py39h336d860_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py39h9765fb2_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py39h5942dda_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyproj-3.6.1-py39h1c728a2_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -2806,8 +2806,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/freetype-2.12.1-hdaf720e_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/freexl-2.0.0-h8276f4a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gdal-3.9.2-py39h96760b6_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/geos-3.12.2-h5a68840_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/geotiff-1.7.3-h232476a_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gmsh-4.12.2-hcc95203_0.conda
@@ -2989,7 +2989,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pydata-sphinx-theme-0.15.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py39hfbd773f_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py39hfbd773f_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/pyproj-3.6.1-py39h7325a8d_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -3197,8 +3197,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/freetype-2.12.1-h267a509_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/freexl-2.0.0-h743c826_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/gdal-3.9.2-py310hec0203c_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/geos-3.12.2-he02047a_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/geotiff-1.7.3-hf7fa9e8_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/giflib-5.2.2-hd590300_0.conda
@@ -3407,7 +3407,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pydata-sphinx-theme-0.15.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py310h3d73142_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py310hf7e30c6_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pyproj-3.6.1-py310h8efdad9_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -3613,8 +3613,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/freetype-2.12.1-h60636b9_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/freexl-2.0.0-h3ec172f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/gdal-3.9.2-py310h3e61115_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/geos-3.12.2-hf036a51_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/geotiff-1.7.3-h4bbec01_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/giflib-5.2.2-h10d778d_0.conda
@@ -3799,7 +3799,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyobjc-core-10.3.1-py310h445dc1f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyobjc-framework-cocoa-10.3.1-py310h445dc1f_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py310hc4416aa_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py310hb541b2e_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyproj-3.6.1-py310hba78213_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -3986,8 +3986,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/freetype-2.12.1-hadb7bae_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/freexl-2.0.0-hfbad9fb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/gdal-3.9.2-py310hb9bcb78_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/geos-3.12.2-h00cdb27_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/geotiff-1.7.3-h7e5fb84_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/giflib-5.2.2-h93a5062_0.conda
@@ -4172,7 +4172,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyobjc-core-10.3.1-py310h4b7648a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyobjc-framework-cocoa-10.3.1-py310h4b7648a_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py310h2d86289_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py310h535c5f1_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyproj-3.6.1-py310h39d21c2_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -4359,8 +4359,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/freetype-2.12.1-hdaf720e_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/freexl-2.0.0-h8276f4a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gdal-3.9.2-py310h1e3c057_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/geos-3.12.2-h5a68840_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/geotiff-1.7.3-h232476a_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gmsh-4.12.2-hcc95203_0.conda
@@ -4541,7 +4541,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pydata-sphinx-theme-0.15.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py310h98d268c_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py310h98d268c_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/pyproj-3.6.1-py310h67d88da_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -4749,8 +4749,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/freetype-2.12.1-h267a509_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/freexl-2.0.0-h743c826_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/gdal-3.9.2-py311hb17e472_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/geos-3.12.2-he02047a_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/geotiff-1.7.3-hf7fa9e8_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/giflib-5.2.2-hd590300_0.conda
@@ -4959,7 +4959,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pydata-sphinx-theme-0.15.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py311hfc743a8_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py311h35c0331_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pyproj-3.6.1-py311ha1c4eca_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -5164,8 +5164,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/freetype-2.12.1-h60636b9_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/freexl-2.0.0-h3ec172f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/gdal-3.9.2-py311h0ab1470_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/geos-3.12.2-hf036a51_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/geotiff-1.7.3-h4bbec01_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/giflib-5.2.2-h10d778d_0.conda
@@ -5350,7 +5350,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyobjc-core-10.3.1-py311h9d23797_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyobjc-framework-cocoa-10.3.1-py311h9d23797_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py311h4afbaa0_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py311hdb57d13_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyproj-3.6.1-py311hc55c11a_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -5536,8 +5536,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/freetype-2.12.1-hadb7bae_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/freexl-2.0.0-hfbad9fb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/gdal-3.9.2-py311h08b0975_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/geos-3.12.2-h00cdb27_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/geotiff-1.7.3-h7e5fb84_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/giflib-5.2.2-h93a5062_0.conda
@@ -5722,7 +5722,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyobjc-core-10.3.1-py311h5f135c3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyobjc-framework-cocoa-10.3.1-py311h5f135c3_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.8.0-py311he661659_2.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py311h2258722_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyproj-3.6.1-py311h5e0e26b_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -5908,8 +5908,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/freetype-2.12.1-hdaf720e_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/freexl-2.0.0-h8276f4a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gdal-3.9.2-py311h689aae6_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/geos-3.12.2-h5a68840_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/geotiff-1.7.3-h232476a_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gmsh-4.12.2-hcc95203_0.conda
@@ -6090,7 +6090,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pydata-sphinx-theme-0.15.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py311h2494c99_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py311h2494c99_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/pyproj-3.6.1-py311h93f6e28_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -6297,8 +6297,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/freetype-2.12.1-h267a509_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/freexl-2.0.0-h743c826_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/gdal-3.9.2-py312h7eda2e2_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/geos-3.12.2-he02047a_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/geotiff-1.7.3-hf7fa9e8_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/giflib-5.2.2-hd590300_0.conda
@@ -6507,7 +6507,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pydata-sphinx-theme-0.15.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py312h8ad7a51_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py312h5aa26c2_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pyproj-3.6.1-py312h01329cd_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -6712,8 +6712,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/freetype-2.12.1-h60636b9_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/freexl-2.0.0-h3ec172f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/gdal-3.9.2-py312h29648be_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/geos-3.12.2-hf036a51_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/geotiff-1.7.3-h4bbec01_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/giflib-5.2.2-h10d778d_0.conda
@@ -6898,7 +6898,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyobjc-core-10.3.1-py312he77c50b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyobjc-framework-cocoa-10.3.1-py312he77c50b_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py312h43b3a95_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py312hcd3578f_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/pyproj-3.6.1-py312ha320102_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -7084,8 +7084,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/freetype-2.12.1-hadb7bae_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/freexl-2.0.0-hfbad9fb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/gdal-3.9.2-py312hdb848f7_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/geos-3.12.2-h00cdb27_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/geotiff-1.7.3-h7e5fb84_2.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/giflib-5.2.2-h93a5062_0.conda
@@ -7270,7 +7270,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyobjc-core-10.3.1-py312hbb55c70_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyobjc-framework-cocoa-10.3.1-py312hbb55c70_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py312h15038b3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py312hf3c922e_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyproj-3.6.1-py312h64656f7_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -7456,8 +7456,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/freetype-2.12.1-hdaf720e_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/freexl-2.0.0-h8276f4a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gdal-3.9.2-py312h16ac12d_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/geos-3.12.2-h5a68840_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/geotiff-1.7.3-h232476a_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gmsh-4.12.2-hcc95203_0.conda
@@ -7638,7 +7638,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pydata-sphinx-theme-0.15.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pygments-2.18.0-pyhd8ed1ab_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py312hd215820_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py312hd215820_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.1.4-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/pyproj-3.6.1-py312h6f27134_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pyproject_hooks-1.1.0-pyhd8ed1ab_0.conda
@@ -14246,15 +14246,16 @@ packages:
 - kind: conda
   name: geopandas
   version: 1.0.1
-  build: pyhd8ed1ab_0
+  build: pyhd8ed1ab_1
+  build_number: 1
   subdir: noarch
   noarch: python
-  url: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_0.conda
-  sha256: 6d3f8148d88b1f2c100e03fce441f19577f6a4b69e3a2c57d522b48010d84f5f
-  md5: efef4ce75a678216d510d08222845c7f
+  url: https://conda.anaconda.org/conda-forge/noarch/geopandas-1.0.1-pyhd8ed1ab_1.conda
+  sha256: ea0e200967b93a1342670bee137917e93d04742f3c3c626fe435ebb29462bbd7
+  md5: 79a9a8d2fd39ecb4081c0df0c10135dc
   depends:
   - folium
-  - geopandas-base 1.0.1 pyha770c72_0
+  - geopandas-base 1.0.1 pyha770c72_1
   - mapclassify >=2.4.0
   - matplotlib-base
   - pyogrio >=0.7.2
@@ -14263,18 +14264,20 @@ packages:
   - xyzservices
   license: BSD-3-Clause
   license_family: BSD
-  purls: []
-  size: 7438
-  timestamp: 1719933423912
+  purls:
+  - pkg:pypi/geopandas?source=conda-forge-mapping
+  size: 7545
+  timestamp: 1726898026216
 - kind: conda
   name: geopandas-base
   version: 1.0.1
-  build: pyha770c72_0
+  build: pyha770c72_1
+  build_number: 1
   subdir: noarch
   noarch: python
-  url: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_0.conda
-  sha256: b07d76f79cc3b1dc7f5a73aeeb0f7c9977526d73237df7e200582fdff48045d1
-  md5: 1b7d46173c29e14dde41f97cf5aa61df
+  url: https://conda.anaconda.org/conda-forge/noarch/geopandas-base-1.0.1-pyha770c72_1.conda
+  sha256: 1b0853491a299e95d57ccf3f3c9053a1b7e49fc9b2ad959f321b0717e567e249
+  md5: cad8d8e1583463e7642adc72a76dc3c5
   depends:
   - numpy >=1.22
   - packaging
@@ -14284,9 +14287,9 @@ packages:
   license: BSD-3-Clause
   license_family: BSD
   purls:
-  - pkg:pypi/geopandas?source=hash-mapping
-  size: 239347
-  timestamp: 1719933418796
+  - pkg:pypi/geopandas?source=conda-forge-mapping
+  size: 239539
+  timestamp: 1726898022361
 - kind: conda
   name: geos
   version: 3.12.2
@@ -25617,7 +25620,7 @@ packages:
   timestamp: 1718189540074
 - kind: pypi
   name: pandamesh
-  version: 0.2.0
+  version: 0.2.1
   path: .
   sha256: 810fe4f827ba6ef6c7714ca71b746bcf238aad2a4fa173c84010a16107d72764
   requires_dist:
@@ -28299,42 +28302,19 @@ packages:
   timestamp: 1718645692442
 - kind: conda
   name: pyogrio
-  version: 0.8.0
-  build: py311he661659_2
+  version: 0.9.0
+  build: py310h535c5f1_2
   build_number: 2
   subdir: osx-arm64
-  url: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.8.0-py311he661659_2.conda
-  sha256: dc23f072661188c01bdf993ef29b4913cb70854febc8a02e12e0d304ab05078e
-  md5: eadd540cba719d30c75658c0432701b3
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py310h535c5f1_2.conda
+  sha256: 812ac2b32b48c3755fc271c920888f54fb5cadd5a37e3c2e534b9291a4e0a2cb
+  md5: 4b728ed357bbef43b215cd448cb1946a
   depends:
   - __osx >=11.0
   - gdal
-  - libcxx >=16
-  - libgdal >=3.9.0,<3.10.0a0
-  - numpy
-  - packaging
-  - python >=3.11,<3.12.0a0
-  - python >=3.11,<3.12.0a0 *_cpython
-  - python_abi 3.11.* *_cp311
-  license: MIT
-  license_family: MIT
-  purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 668628
-  timestamp: 1716285222123
-- kind: conda
-  name: pyogrio
-  version: 0.9.0
-  build: py310h2d86289_0
-  subdir: osx-arm64
-  url: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py310h2d86289_0.conda
-  sha256: a6a54840f3cf306493916cce608612bfc08fa3e6fc7a39e5ec0d2a5997acf383
-  md5: 32a3b79924cf7ac6c9437a64b1376dbe
-  depends:
-  - __osx >=11.0
-  - gdal
-  - libcxx >=16
-  - libgdal >=3.9.0,<3.10.0a0
+  - libcxx >=17
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
   - numpy
   - packaging
   - python >=3.10,<3.11.0a0
@@ -28343,43 +28323,22 @@ packages:
   license: MIT
   license_family: MIT
   purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 635971
-  timestamp: 1718696294459
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 636914
+  timestamp: 1725519896147
 - kind: conda
   name: pyogrio
   version: 0.9.0
-  build: py310h3d73142_0
-  subdir: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py310h3d73142_0.conda
-  sha256: 58aabeb318a16e302c184e3568e80d0b184f70658eff54115818f3c6cb5f2ddc
-  md5: 8e9064f2c4b8a8408b76db01918816e5
-  depends:
-  - gdal
-  - libgcc-ng >=12
-  - libgdal >=3.9.0,<3.10.0a0
-  - libstdcxx-ng >=12
-  - numpy
-  - packaging
-  - python >=3.10,<3.11.0a0
-  - python_abi 3.10.* *_cp310
-  license: MIT
-  license_family: MIT
-  purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 707723
-  timestamp: 1718696031359
-- kind: conda
-  name: pyogrio
-  version: 0.9.0
-  build: py310h98d268c_0
+  build: py310h98d268c_2
+  build_number: 2
   subdir: win-64
-  url: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py310h98d268c_0.conda
-  sha256: 6e36318574ed3693e7fb905e9c666b64bf3ab947320392acb7b4b94ce916acb6
-  md5: 233a5a3c0374b02cd6d3a96bda5d10a6
+  url: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py310h98d268c_2.conda
+  sha256: b16a3c7067dafd660c2a5e4fabfc1f66a17c030c73cbe9891c76758316d50a36
+  md5: 39c6c9a0f4ec57d69db77122cdd35af2
   depends:
   - gdal
-  - libgdal >=3.9.0,<3.10.0a0
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
   - numpy
   - packaging
   - python >=3.10,<3.11.0a0
@@ -28390,22 +28349,24 @@ packages:
   license: MIT
   license_family: MIT
   purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 866188
-  timestamp: 1718696675315
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 864871
+  timestamp: 1725520326228
 - kind: conda
   name: pyogrio
   version: 0.9.0
-  build: py310hc4416aa_0
+  build: py310hb541b2e_2
+  build_number: 2
   subdir: osx-64
-  url: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py310hc4416aa_0.conda
-  sha256: f66f5ae2ed2cebedaf889681bbcd49d6d9dbd450062e6b705b45ba64b7d27758
-  md5: 46361170c4aab7afa7f3bd2b465576ae
+  url: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py310hb541b2e_2.conda
+  sha256: 0e0dfe0adff8c20d108245d600787d628949c3fa6be8bbdee61f120a2797970a
+  md5: 0e5b138675c1b20dd87f42dc9793b624
   depends:
   - __osx >=10.13
   - gdal
-  - libcxx >=16
-  - libgdal >=3.9.0,<3.10.0a0
+  - libcxx >=17
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
   - numpy
   - packaging
   - python >=3.10,<3.11.0a0
@@ -28413,92 +28374,230 @@ packages:
   license: MIT
   license_family: MIT
   purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 636123
-  timestamp: 1718696094667
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 637743
+  timestamp: 1725519981954
 - kind: conda
   name: pyogrio
   version: 0.9.0
-  build: py311h2494c99_0
-  subdir: win-64
-  url: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py311h2494c99_0.conda
-  sha256: 4d404d0d0a6fd384a2c94ad3eeee8d30d47b44ff1a3baf9fa254c75ec647864c
-  md5: 5749157f37ded7ae4639f35dbb4de3a7
-  depends:
-  - gdal
-  - libgdal >=3.9.0,<3.10.0a0
-  - numpy
-  - packaging
-  - python >=3.11,<3.12.0a0
-  - python_abi 3.11.* *_cp311
-  - ucrt >=10.0.20348.0
-  - vc >=14.2,<15
-  - vc14_runtime >=14.29.30139
-  license: MIT
-  license_family: MIT
-  purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 902559
-  timestamp: 1718696645786
-- kind: conda
-  name: pyogrio
-  version: 0.9.0
-  build: py311h4afbaa0_0
-  subdir: osx-64
-  url: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py311h4afbaa0_0.conda
-  sha256: 5aa1fa1e9db21f4d1312429a00c41f60d0fcc6b895c7012f0ede5ddf810835fc
-  md5: 1202fca68f1c38642e3f7c1059c276cb
-  depends:
-  - __osx >=10.13
-  - gdal
-  - libcxx >=16
-  - libgdal >=3.9.0,<3.10.0a0
-  - numpy
-  - packaging
-  - python >=3.11,<3.12.0a0
-  - python_abi 3.11.* *_cp311
-  license: MIT
-  license_family: MIT
-  purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 671171
-  timestamp: 1718696245065
-- kind: conda
-  name: pyogrio
-  version: 0.9.0
-  build: py311hfc743a8_0
+  build: py310hf7e30c6_2
+  build_number: 2
   subdir: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py311hfc743a8_0.conda
-  sha256: bf2c1b7831d9f95ecdd47f8c54113147e8fa82163e251e93f523c1e4302948c6
-  md5: 8a02cc6044fd91d6171949978cd15a30
+  url: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py310hf7e30c6_2.conda
+  sha256: ee9b326632d8f8acbb3fd5949794b8dbb8862972d4d00e3e9da98f52430ceeb3
+  md5: 14cbd5d3afe249f700f403cfaa808651
   depends:
+  - __glibc >=2.17,<3.0.a0
   - gdal
-  - libgcc-ng >=12
-  - libgdal >=3.9.0,<3.10.0a0
-  - libstdcxx-ng >=12
+  - libgcc >=13
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
+  - libstdcxx >=13
   - numpy
   - packaging
-  - python >=3.11,<3.12.0a0
-  - python_abi 3.11.* *_cp311
+  - python >=3.10,<3.11.0a0
+  - python_abi 3.10.* *_cp310
   license: MIT
   license_family: MIT
   purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 743966
-  timestamp: 1718695983053
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 707059
+  timestamp: 1725519848296
 - kind: conda
   name: pyogrio
   version: 0.9.0
-  build: py312h15038b3_0
+  build: py311h2258722_2
+  build_number: 2
   subdir: osx-arm64
-  url: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py312h15038b3_0.conda
-  sha256: 61d12bb940cde2a28c265b2102abeb70e0a51ae45bb159712e425b4bd226ecdb
-  md5: a940c064a3443f423dae2b50f86ef847
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py311h2258722_2.conda
+  sha256: b6a1381213036e54739314d664415767444f37d23cd15de168a3cb3562531abc
+  md5: bab40265310cd9f52cca7c69362cae3c
   depends:
   - __osx >=11.0
   - gdal
-  - libcxx >=16
-  - libgdal >=3.9.0,<3.10.0a0
+  - libcxx >=17
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
+  - numpy
+  - packaging
+  - python >=3.11,<3.12.0a0
+  - python >=3.11,<3.12.0a0 *_cpython
+  - python_abi 3.11.* *_cp311
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 672607
+  timestamp: 1725519889243
+- kind: conda
+  name: pyogrio
+  version: 0.9.0
+  build: py311h2494c99_2
+  build_number: 2
+  subdir: win-64
+  url: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py311h2494c99_2.conda
+  sha256: 6eb36ecf6e1e4572918c3a0401d0e0b375bb0a9d73fe0352a55f7194de838dbf
+  md5: 59b23be6aab89ef92b6113e3c4ac94db
+  depends:
+  - gdal
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
+  - numpy
+  - packaging
+  - python >=3.11,<3.12.0a0
+  - python_abi 3.11.* *_cp311
+  - ucrt >=10.0.20348.0
+  - vc >=14.2,<15
+  - vc14_runtime >=14.29.30139
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 898744
+  timestamp: 1725520328519
+- kind: conda
+  name: pyogrio
+  version: 0.9.0
+  build: py311h35c0331_2
+  build_number: 2
+  subdir: linux-64
+  url: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py311h35c0331_2.conda
+  sha256: 47f445f9de68456804a888803034c8b2926c78277d37ae0a471d0264a47fa4ea
+  md5: a1bebaeb31c3c765343f4ba7851e4d29
+  depends:
+  - __glibc >=2.17,<3.0.a0
+  - gdal
+  - libgcc >=13
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
+  - libstdcxx >=13
+  - numpy
+  - packaging
+  - python >=3.11,<3.12.0a0
+  - python_abi 3.11.* *_cp311
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 742341
+  timestamp: 1725519877180
+- kind: conda
+  name: pyogrio
+  version: 0.9.0
+  build: py311hdb57d13_2
+  build_number: 2
+  subdir: osx-64
+  url: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py311hdb57d13_2.conda
+  sha256: 0f8a08b59ba47f2a2b32cc7401dd2387b577ffc1df2e5aed25d85b1e48ff10c9
+  md5: 3ff351e34ac564e1215573fc8150796c
+  depends:
+  - __osx >=10.13
+  - gdal
+  - libcxx >=17
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
+  - numpy
+  - packaging
+  - python >=3.11,<3.12.0a0
+  - python_abi 3.11.* *_cp311
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 671828
+  timestamp: 1725520040341
+- kind: conda
+  name: pyogrio
+  version: 0.9.0
+  build: py312h5aa26c2_2
+  build_number: 2
+  subdir: linux-64
+  url: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py312h5aa26c2_2.conda
+  sha256: e9682d1664e09c97f536060696896f6c0e9e84914a635351d406da836140266d
+  md5: 8b4325775ed711941bbf6b8c5ad2b5e9
+  depends:
+  - __glibc >=2.17,<3.0.a0
+  - gdal
+  - libgcc >=13
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
+  - libstdcxx >=13
+  - numpy
+  - packaging
+  - python >=3.12,<3.13.0a0
+  - python_abi 3.12.* *_cp312
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 733154
+  timestamp: 1725519798030
+- kind: conda
+  name: pyogrio
+  version: 0.9.0
+  build: py312hcd3578f_2
+  build_number: 2
+  subdir: osx-64
+  url: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py312hcd3578f_2.conda
+  sha256: 58a8a7fbfd8e1d4637c89ad1d8ae2dc5874d8cf92d7593c5c006cc05efe73d78
+  md5: 70b136b0fdb2751e6c2a0bfd00ef2f6b
+  depends:
+  - __osx >=10.13
+  - gdal
+  - libcxx >=17
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
+  - numpy
+  - packaging
+  - python >=3.12,<3.13.0a0
+  - python_abi 3.12.* *_cp312
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 664111
+  timestamp: 1725519932877
+- kind: conda
+  name: pyogrio
+  version: 0.9.0
+  build: py312hd215820_2
+  build_number: 2
+  subdir: win-64
+  url: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py312hd215820_2.conda
+  sha256: 3adf95bc11ab4352155e7273a8ba235230f85a13b0506dd143e0504fb292a40b
+  md5: 3656489c0c4514e769f26dea21c3dc21
+  depends:
+  - gdal
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
+  - numpy
+  - packaging
+  - python >=3.12,<3.13.0a0
+  - python_abi 3.12.* *_cp312
+  - ucrt >=10.0.20348.0
+  - vc >=14.2,<15
+  - vc14_runtime >=14.29.30139
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 887063
+  timestamp: 1725520279515
+- kind: conda
+  name: pyogrio
+  version: 0.9.0
+  build: py312hf3c922e_2
+  build_number: 2
+  subdir: osx-arm64
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py312hf3c922e_2.conda
+  sha256: 752dc1f95c7207aa0bbbcf3ee51648dcd3b0852699fcfc45a6c388df41d9b364
+  md5: 7dc2ba4a5423ff07b71742226640da86
+  depends:
+  - __osx >=11.0
+  - gdal
+  - libcxx >=17
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
   - numpy
   - packaging
   - python >=3.12,<3.13.0a0
@@ -28507,115 +28606,24 @@ packages:
   license: MIT
   license_family: MIT
   purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 660766
-  timestamp: 1718696356166
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 660793
+  timestamp: 1725519927256
 - kind: conda
   name: pyogrio
   version: 0.9.0
-  build: py312h43b3a95_0
-  subdir: osx-64
-  url: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py312h43b3a95_0.conda
-  sha256: 9dc89062437d698a1060644c96c9800bacb12370ddf416f75d2fda87afde5dea
-  md5: 1a22b21b82d6d134a06440dbaf46d1d7
-  depends:
-  - __osx >=10.13
-  - gdal
-  - libcxx >=16
-  - libgdal >=3.9.0,<3.10.0a0
-  - numpy
-  - packaging
-  - python >=3.12,<3.13.0a0
-  - python_abi 3.12.* *_cp312
-  license: MIT
-  license_family: MIT
-  purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 664241
-  timestamp: 1718696098770
-- kind: conda
-  name: pyogrio
-  version: 0.9.0
-  build: py312h8ad7a51_0
-  subdir: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py312h8ad7a51_0.conda
-  sha256: 4f2cc106c738be0076c11b487546bd448aa8fca7f19d2b0f54afd8fa2ee0b7d1
-  md5: f4d2803818632b2175fa58de7f653901
-  depends:
-  - gdal
-  - libgcc-ng >=12
-  - libgdal >=3.9.0,<3.10.0a0
-  - libstdcxx-ng >=12
-  - numpy
-  - packaging
-  - python >=3.12,<3.13.0a0
-  - python_abi 3.12.* *_cp312
-  license: MIT
-  license_family: MIT
-  purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 734215
-  timestamp: 1718696048397
-- kind: conda
-  name: pyogrio
-  version: 0.9.0
-  build: py312hd215820_0
-  subdir: win-64
-  url: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py312hd215820_0.conda
-  sha256: 069f0782954c9000928f155c97965b51535eddee3feba87c2d86462056c50847
-  md5: 389c4ae48840c02e25aadcfd6def0673
-  depends:
-  - gdal
-  - libgdal >=3.9.0,<3.10.0a0
-  - numpy
-  - packaging
-  - python >=3.12,<3.13.0a0
-  - python_abi 3.12.* *_cp312
-  - ucrt >=10.0.20348.0
-  - vc >=14.2,<15
-  - vc14_runtime >=14.29.30139
-  license: MIT
-  license_family: MIT
-  purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 887820
-  timestamp: 1718696645436
-- kind: conda
-  name: pyogrio
-  version: 0.9.0
-  build: py39h7e54be4_0
-  subdir: osx-64
-  url: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py39h7e54be4_0.conda
-  sha256: 7ffdce65a6af4210afb9a4bcfec5cb0b7dc92b7287ec518ba97958e09d0f93d0
-  md5: 1bda07e69e39b3d718c880f961461af9
-  depends:
-  - __osx >=10.13
-  - gdal
-  - libcxx >=16
-  - libgdal >=3.9.0,<3.10.0a0
-  - numpy
-  - packaging
-  - python >=3.9,<3.10.0a0
-  - python_abi 3.9.* *_cp39
-  license: MIT
-  license_family: MIT
-  purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 635985
-  timestamp: 1718696274324
-- kind: conda
-  name: pyogrio
-  version: 0.9.0
-  build: py39h9765fb2_0
+  build: py39h5942dda_2
+  build_number: 2
   subdir: osx-arm64
-  url: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py39h9765fb2_0.conda
-  sha256: b249c0bfb59e5c709ac71855df732788b8f9b60cd51da1e5bf9c0980a924ee1b
-  md5: bf3b3ad2f001d4468ddd76a8315c1acc
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/pyogrio-0.9.0-py39h5942dda_2.conda
+  sha256: ed542693d665e5ea9c171f3eaa2ce411105ae1ffe0e068439634a31017d86d36
+  md5: 69d54427ded2eb7972788cf877e703cf
   depends:
   - __osx >=11.0
   - gdal
-  - libcxx >=16
-  - libgdal >=3.9.0,<3.10.0a0
+  - libcxx >=17
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
   - numpy
   - packaging
   - python >=3.9,<3.10.0a0
@@ -28624,22 +28632,24 @@ packages:
   license: MIT
   license_family: MIT
   purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 636027
-  timestamp: 1718696224512
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 634734
+  timestamp: 1725519997318
 - kind: conda
   name: pyogrio
   version: 0.9.0
-  build: py39hb01807b_0
-  subdir: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py39hb01807b_0.conda
-  sha256: 4a68b7f6fcc35257f501ba2033e63cd6f70511759a31784df8b736d779689fb8
-  md5: 2364812c9df4d32cc30350570d3206f0
+  build: py39h8a6ec8d_2
+  build_number: 2
+  subdir: osx-64
+  url: https://conda.anaconda.org/conda-forge/osx-64/pyogrio-0.9.0-py39h8a6ec8d_2.conda
+  sha256: 3726ef495829a892cb3fb984b4967d83a269970d70e5cc5e32496b5a4a40fc11
+  md5: 5ecf8a7ce1406fe3ed15e8ba740d52b2
   depends:
+  - __osx >=10.13
   - gdal
-  - libgcc-ng >=12
-  - libgdal >=3.9.0,<3.10.0a0
-  - libstdcxx-ng >=12
+  - libcxx >=17
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
   - numpy
   - packaging
   - python >=3.9,<3.10.0a0
@@ -28647,20 +28657,48 @@ packages:
   license: MIT
   license_family: MIT
   purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 706516
-  timestamp: 1718696012964
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 636771
+  timestamp: 1725520009854
 - kind: conda
   name: pyogrio
   version: 0.9.0
-  build: py39hfbd773f_0
+  build: py39haf01bb9_2
+  build_number: 2
+  subdir: linux-64
+  url: https://conda.anaconda.org/conda-forge/linux-64/pyogrio-0.9.0-py39haf01bb9_2.conda
+  sha256: a6fc9e81e4d2da924c1340ecffc65b0ca01fcd1de0bef382edb8ef74fb7d0479
+  md5: 8717d9aee8d7e25c6ea81fd829e5c9d2
+  depends:
+  - __glibc >=2.17,<3.0.a0
+  - gdal
+  - libgcc >=13
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
+  - libstdcxx >=13
+  - numpy
+  - packaging
+  - python >=3.9,<3.10.0a0
+  - python_abi 3.9.* *_cp39
+  license: MIT
+  license_family: MIT
+  purls:
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 704761
+  timestamp: 1725519828878
+- kind: conda
+  name: pyogrio
+  version: 0.9.0
+  build: py39hfbd773f_2
+  build_number: 2
   subdir: win-64
-  url: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py39hfbd773f_0.conda
-  sha256: 884919bdc3dc2356d0f01ce00d613923f9d109ff8c20c7ae0a890a232c724842
-  md5: 0087403e569ce0b6e7970755d3726879
+  url: https://conda.anaconda.org/conda-forge/win-64/pyogrio-0.9.0-py39hfbd773f_2.conda
+  sha256: 0276b339f9d7b6b45f4787fb7e601bbcf359391c2bb88e33c333d5afa5770ac7
+  md5: 52cf5f9ee775e25004fffcaf72ef4b85
   depends:
   - gdal
-  - libgdal >=3.9.0,<3.10.0a0
+  - libgdal >=3.9.2,<3.10.0a0
+  - libgdal-core >=3.9.2,<3.10.0a0
   - numpy
   - packaging
   - python >=3.9,<3.10.0a0
@@ -28671,9 +28709,9 @@ packages:
   license: MIT
   license_family: MIT
   purls:
-  - pkg:pypi/pyogrio?source=hash-mapping
-  size: 865076
-  timestamp: 1718696743925
+  - pkg:pypi/pyogrio?source=conda-forge-mapping
+  size: 864312
+  timestamp: 1725520328349
 - kind: conda
   name: pyparsing
   version: 3.1.4

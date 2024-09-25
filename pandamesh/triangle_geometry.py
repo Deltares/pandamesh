@@ -13,8 +13,8 @@ def segmentize_linestrings(linestrings: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
         return linestrings
     condition = linestrings["cellsize"].notnull()
     segmentized = linestrings.loc[condition].copy()
-    segmentized["geometry"] = segmentized.segmentize(
-        max_segment_length=segmentized["cellsize"]
+    segmentized["geometry"] = shapely.segmentize(
+        segmentized["geometry"], max_segment_length=segmentized["cellsize"]
     )
     return pd.concat([linestrings.loc[~condition], segmentized])
 
@@ -96,7 +96,11 @@ def polygon_holes(
             true_holes = shapely.difference(interior, all_polygons)
             if shapely.is_empty(true_holes).all():
                 continue
-            hole_points = gpd.GeoSeries(true_holes).explode().representative_point()
+            hole_points = (
+                gpd.GeoSeries(true_holes)
+                .explode(ignore_index=True)
+                .representative_point()
+            )
             points.append(hole_points)
 
     points = gpd.GeoSeries(np.concatenate(points))
@@ -110,14 +114,21 @@ def _polygon_polygon_difference(
     a: gpd.GeoDataFrame, b: gpd.GeoDataFrame
 ) -> gpd.GeoDataFrame:
     out = a.copy()
-    out["geometry"] = out["geometry"].difference(b["geometry"].union_all())
+    out["geometry"] = shapely.difference(
+        out["geometry"],
+        shapely.union_all(b["geometry"]),
+    )
     return out.loc[out.area > 0].copy()
 
 
 def convert_linestring_rings(polygons: gpd.GeoDataFrame, linestrings: gpd.GeoDataFrame):
     # Check if linestrings contain any rings. Triangle will treat such a ring
     # as a region on its own.
-    linestring_polygons = linestrings.polygonize()
+    linestring_polygons = gpd.GeoSeries(
+        shapely.polygonize(linestrings["geometry"].to_numpy()),
+        crs=linestrings.crs,
+        name="polygons",
+    ).explode(ignore_index=True)
     if linestring_polygons.empty:
         # No rings found
         return polygons
@@ -139,10 +150,10 @@ def convert_linestring_rings(polygons: gpd.GeoDataFrame, linestrings: gpd.GeoDat
     # Ensure we burn the polygon holes into the newly created linestrings
     # polygons.
     new_polygons = polygons_inside.loc[:, ["cellsize", "geometry"]].copy()
-    new_polygons["geometry"] = new_polygons["geometry"].intersection(
-        polygons["geometry"].union_all()
+    new_polygons["geometry"] = shapely.intersection(
+        new_polygons["geometry"],
+        shapely.union_all(polygons["geometry"]),
     )
-
     # Make room for the new polygons
     diffed_polygons = _polygon_polygon_difference(
         a=polygons,
