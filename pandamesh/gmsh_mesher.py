@@ -565,8 +565,11 @@ class GmshMesher:
         outside_value: Union[float, None] = None,
     ) -> None:
         """
-        Add an equidistant structured field specifying cell sizes. Gmsh will
-        interpolate between the points to determine the desired cell size.
+        Add an equidistant structured field specifying cell sizes for mesh generation.
+
+        This method defines a grid of cell sizes that Gmsh will use as control points
+        for mesh generation. Gmsh interpolates between these points to determine the
+        desired cell size at any location within the grid.
 
         Parameters
         ----------
@@ -603,9 +606,12 @@ class GmshMesher:
         outside_value: Union[float, None] = None,
     ):
         """
-        Add an equidistant structured field specifying cell sizes from an
-        xarray DataArray object. Gmsh will interpolate between the points to
-        determine the desired cell size.
+        Add an equidistant structured field as an xarray DataArray specifying
+        cell sizes for mesh generation.
+
+        This method defines a grid of cell sizes that Gmsh will use as control
+        points for mesh generation. Gmsh interpolates between these points to
+        determine the desired cell size at any location within the grid.
 
         Parameters
         ----------

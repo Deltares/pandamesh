@@ -9,6 +9,17 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Unreleased
 ----------
 
+[0.2.2] 2024-09-26
+------------------
+
+Fixed
+~~~~~
+
+- Version 0.2.1 introduced new logic relying on geopandas 1.0+ shapely-wrapped
+  functions, breaking compatibility with earlier geopandas versions. These method
+  calls have been replaced with direct shapely functions, ensuring compatibility
+  with older versions such as geopandas 0.14.
+
 [0.2.1] 2024-09-04
 ------------------
 
