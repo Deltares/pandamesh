@@ -970,8 +970,11 @@ document.write(`
         <span class="n">outside_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add an equidistant structured field specifying cell sizes. Gmsh will</span>
-<span class="sd">        interpolate between the points to determine the desired cell size.</span>
+<span class="sd">        Add an equidistant structured field specifying cell sizes for mesh generation.</span>
+
+<span class="sd">        This method defines a grid of cell sizes that Gmsh will use as control points</span>
+<span class="sd">        for mesh generation. Gmsh interpolates between these points to determine the</span>
+<span class="sd">        desired cell size at any location within the grid.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1011,9 +1014,12 @@ document.write(`
         <span class="n">outside_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add an equidistant structured field specifying cell sizes from an</span>
-<span class="sd">        xarray DataArray object. Gmsh will interpolate between the points to</span>
-<span class="sd">        determine the desired cell size.</span>
+<span class="sd">        Add an equidistant structured field as an xarray DataArray specifying</span>
+<span class="sd">        cell sizes for mesh generation.</span>
+
+<span class="sd">        This method defines a grid of cell sizes that Gmsh will use as control</span>
+<span class="sd">        points for mesh generation. Gmsh interpolates between these points to</span>
+<span class="sd">        determine the desired cell size at any location within the grid.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
