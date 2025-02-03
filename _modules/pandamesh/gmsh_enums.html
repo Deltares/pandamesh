@@ -29,7 +29,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -361,12 +361,12 @@
                 <article class="bd-article">
                   
   <h1>Source code for pandamesh.gmsh_enums</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pandamesh.enum_base</span> <span class="kn">import</span> <span class="n">FlexibleEnum</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pandamesh.enum_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">FlexibleEnum</span>
 
 
 <div class="viewcode-block" id="MeshAlgorithm">
 <a class="viewcode-back" href="../../api/api/pandamesh.MeshAlgorithm.html#pandamesh.MeshAlgorithm">[docs]</a>
-<span class="k">class</span> <span class="nc">MeshAlgorithm</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MeshAlgorithm</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gmsh meshing algorithm. Each algorithm has its own advantages and</span>
 <span class="sd">    disadvantages.</span>
@@ -441,7 +441,7 @@
 
 <div class="viewcode-block" id="SubdivisionAlgorithm">
 <a class="viewcode-back" href="../../api/api/pandamesh.SubdivisionAlgorithm.html#pandamesh.SubdivisionAlgorithm">[docs]</a>
-<span class="k">class</span> <span class="nc">SubdivisionAlgorithm</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SubdivisionAlgorithm</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Controls how Gmsh recombines triangles to form quads.</span>
 
@@ -475,7 +475,7 @@
 
 <div class="viewcode-block" id="FieldCombination">
 <a class="viewcode-back" href="../../api/api/pandamesh.FieldCombination.html#pandamesh.FieldCombination">[docs]</a>
-<span class="k">class</span> <span class="nc">FieldCombination</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FieldCombination</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Controls how cell size fields are combined in Gmsh when they are found at</span>
 <span class="sd">    the same location.</span>
@@ -490,7 +490,7 @@
 
 <div class="viewcode-block" id="GeneralVerbosity">
 <a class="viewcode-back" href="../../api/api/pandamesh.GeneralVerbosity.html#pandamesh.GeneralVerbosity">[docs]</a>
-<span class="k">class</span> <span class="nc">GeneralVerbosity</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GeneralVerbosity</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Gmsh level of information printed.&quot;&quot;&quot;</span>
 
     <span class="n">SILENT</span> <span class="o">=</span> <span class="mi">0</span>

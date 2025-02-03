@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -394,12 +394,12 @@ combination with polygon, point, and linestring geometries represented by
 geopandas.</p>
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">GmshMesher</span></code> supports the geometry show in the basic Triangle
 example and has a number of additional features.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">shapely.geometry</span> <span class="k">as</span> <span class="nn">sg</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sg</span>
 
-<span class="kn">import</span> <span class="nn">pandamesh</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandamesh</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pm</span>
 </pre></div>
 </div>
 <section id="a-simple-rectangular-mesh">
@@ -469,7 +469,7 @@ features as is visible around the diagonal (right).</p>
     yoff = 5.0
     fields = []
     combination_field = CombinationField(fields=[], combination=&lt;FieldCombination.MIN: &#39;Min&#39;&gt;, id=1, fields_list=[])
-    tmpdir = &lt;TemporaryDirectory &#39;/tmp/tmpaatsc2dp&#39;&gt;
+    tmpdir = &lt;TemporaryDirectory &#39;/tmp/tmp8lsxals3&#39;&gt;
     recombine_all = False
     mesh_size_extend_from_boundary = True
     mesh_size_from_points = True
@@ -549,7 +549,7 @@ but the same principles apply: we may use polygons, linestrings and points
 with associated cell sizes to steer the triangulation; unlike Triangle,
 for Gmsh cell sizes can associated to linestrings and points, not just
 polygons.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.350 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.360 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-02-gmsh-basic-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/8cde475ccb4086636bb30047f3e21a55/02_gmsh-basic.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">02_gmsh-basic.ipynb</span></code></a></p>

@@ -29,7 +29,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
@@ -361,15 +361,15 @@
                 <article class="bd-article">
                   
   <h1>Source code for pandamesh.preprocessor</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 
-<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">shapely</span>
-<span class="kn">from</span> <span class="nn">shapely</span> <span class="kn">import</span> <span class="n">STRtree</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shapely</span><span class="w"> </span><span class="kn">import</span> <span class="n">STRtree</span>
 
-<span class="kn">from</span> <span class="nn">pandamesh.common</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandamesh.common</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">BoolArray</span><span class="p">,</span>
     <span class="n">GeometryArray</span><span class="p">,</span>
     <span class="n">IntArray</span><span class="p">,</span>
@@ -377,21 +377,21 @@
     <span class="n">flatten_geometry</span><span class="p">,</span>
     <span class="n">separate_geometry</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">pandamesh.snapping</span> <span class="kn">import</span> <span class="n">snap_nodes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandamesh.snapping</span><span class="w"> </span><span class="kn">import</span> <span class="n">snap_nodes</span>
 
 
-<span class="k">def</span> <span class="nf">collect_exteriors</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">collect_exteriors</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">shapely</span><span class="o">.</span><span class="n">get_exterior_ring</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">collect_interiors</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">collect_interiors</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
     <span class="n">interiors</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">geom</span> <span class="ow">in</span> <span class="n">geometry</span><span class="p">:</span>
         <span class="n">interiors</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">interiors</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">interiors</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">filter_holes_and_assign_values</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">filter_holes_and_assign_values</span><span class="p">(</span>
     <span class="n">polygons</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
     <span class="n">index_original</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
     <span class="n">index_union</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
@@ -415,7 +415,7 @@
     <span class="k">return</span> <span class="n">polygons</span><span class="p">[</span><span class="n">maintain</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;indexer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">locate_polygons</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">locate_polygons</span><span class="p">(</span>
     <span class="n">new</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
     <span class="n">old</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
     <span class="n">indexer</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
@@ -438,7 +438,7 @@
     <span class="k">return</span> <span class="n">new_polygons</span><span class="p">,</span> <span class="n">new_indexer</span>
 
 
-<span class="k">def</span> <span class="nf">locate_lines</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">locate_lines</span><span class="p">(</span>
     <span class="n">new</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
     <span class="n">old</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span>
     <span class="n">indexer</span><span class="p">:</span> <span class="n">IntArray</span><span class="p">,</span>
@@ -449,14 +449,14 @@
     <span class="k">return</span> <span class="n">indexer</span><span class="p">[</span><span class="n">index_old</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">merge_polygons</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">merge_polygons</span><span class="p">(</span><span class="n">geometry</span><span class="p">:</span> <span class="n">GeometryArray</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GeometryArray</span><span class="p">:</span>
     <span class="n">merged</span> <span class="o">=</span> <span class="n">shapely</span><span class="o">.</span><span class="n">unary_union</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="n">grid_size</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">flatten_geometry</span><span class="p">(</span><span class="n">merged</span><span class="p">))</span>
 
 
 <div class="viewcode-block" id="Preprocessor">
 <a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.html#pandamesh.Preprocessor">[docs]</a>
-<span class="k">class</span> <span class="nc">Preprocessor</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Preprocessor</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Utilities to clean-up geometries before meshing.</span>
 
@@ -503,7 +503,7 @@
 
 <div class="viewcode-block" id="Preprocessor.__init__">
 <a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.html#pandamesh.Preprocessor.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -525,7 +525,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_indexers</span><span class="p">()</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_set_indexers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_indexers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">n_polys</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">polygons</span><span class="p">)</span>
         <span class="n">n_lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span>
         <span class="n">n_point</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>
@@ -542,7 +542,7 @@
             <span class="p">)</span>
         <span class="k">return</span>
 
-    <span class="k">def</span> <span class="nf">_copy_with</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_copy_with</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">polygons</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -576,7 +576,7 @@
 
 <div class="viewcode-block" id="Preprocessor.to_geodataframe">
 <a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.to_geodataframe.html#pandamesh.Preprocessor.to_geodataframe">[docs]</a>
-    <span class="k">def</span> <span class="nf">to_geodataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_geodataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the processed geometries as a ``geopandas.GeoDataFrame``.</span>
 
@@ -613,7 +613,7 @@
 
 <div class="viewcode-block" id="Preprocessor.merge_polygons">
 <a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.merge_polygons.html#pandamesh.Preprocessor.merge_polygons">[docs]</a>
-    <span class="k">def</span> <span class="nf">merge_polygons</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">merge_polygons</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Merge polygons with the same value for indexer (the same value if</span>
 <span class="sd">        ``values`` was provided at initialization).</span>
@@ -639,7 +639,7 @@
 
 <div class="viewcode-block" id="Preprocessor.unify_polygons">
 <a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.unify_polygons.html#pandamesh.Preprocessor.unify_polygons">[docs]</a>
-    <span class="k">def</span> <span class="nf">unify_polygons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unify_polygons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Resolve polygon overlaps and intersections.</span>
 
@@ -745,7 +745,7 @@
 
 <div class="viewcode-block" id="Preprocessor.clip_lines">
 <a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.clip_lines.html#pandamesh.Preprocessor.clip_lines">[docs]</a>
-    <span class="k">def</span> <span class="nf">clip_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clip_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove line segments that are outside or that are near polygon</span>
 <span class="sd">        segments.</span>
@@ -789,7 +789,7 @@
 
 <div class="viewcode-block" id="Preprocessor.unify_lines">
 <a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.unify_lines.html#pandamesh.Preprocessor.unify_lines">[docs]</a>
-    <span class="k">def</span> <span class="nf">unify_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unify_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Ensure intersections between lines are present.</span>
 
@@ -817,7 +817,7 @@
 
 <div class="viewcode-block" id="Preprocessor.clip_points">
 <a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.clip_points.html#pandamesh.Preprocessor.clip_points">[docs]</a>
-    <span class="k">def</span> <span class="nf">clip_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clip_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove points that are outside of a polygon or near line or</span>
 <span class="sd">        polygon segments.</span>
@@ -857,7 +857,7 @@
 
 <div class="viewcode-block" id="Preprocessor.interpolate_lines_to_points">
 <a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.interpolate_lines_to_points.html#pandamesh.Preprocessor.interpolate_lines_to_points">[docs]</a>
-    <span class="k">def</span> <span class="nf">interpolate_lines_to_points</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">interpolate_lines_to_points</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">values_as_distance</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -905,7 +905,7 @@
 
 <div class="viewcode-block" id="Preprocessor.snap_points">
 <a class="viewcode-back" href="../../api/api/pandamesh.Preprocessor.snap_points.html#pandamesh.Preprocessor.snap_points">[docs]</a>
-    <span class="k">def</span> <span class="nf">snap_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">snap_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Preprocessor&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Snap points together that are within tolerance of each other.</span>
 
