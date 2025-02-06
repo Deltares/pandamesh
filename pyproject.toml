@@ -96,7 +96,7 @@ xarray = "*"
 pre-commit = "pre-commit run --all-files"
 test = "pytest --cov=pandamesh --cov-report xml --cov-report term"
 docs = "sphinx-build docs docs/_build"
-all = { depends_on = ["pre-commit", "test", "docs"]}
+all = { depends-on = ["pre-commit", "test", "docs"]}
 pypi-publish = { cmd = "rm --recursive --force dist && python -m build && twine check dist/* && twine upload dist/*" }
 
 [tool.pixi.feature.py312.dependencies]
