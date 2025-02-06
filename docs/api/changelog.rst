@@ -9,6 +9,13 @@ The format is based on `Keep a Changelog`_, and this project adheres to
 Unreleased
 ----------
 
+[0.2.3] 2025-01-06
+------------------
+
+Added
+~~~~~
+- Support for Python 3.13
+
 [0.2.2] 2024-09-26
 ------------------
 
