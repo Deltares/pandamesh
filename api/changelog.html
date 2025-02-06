@@ -53,7 +53,7 @@
     <link rel="prev" title="API Reference" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.2.2" />
+  <meta name="docsearch:version" content="0.2.3" />
   </head>
   
   
@@ -445,7 +445,16 @@
 <h2>Unreleased<a class="headerlink" href="#unreleased" title="Link to this heading">#</a></h2>
 </section>
 <section id="id1">
-<h2>[0.2.2] 2024-09-26<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<h2>[0.2.3] 2025-01-06<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Support for Python 3.13</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>[0.2.2] 2024-09-26<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <section id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -456,10 +465,10 @@ with older versions such as geopandas 0.14.</p></li>
 </ul>
 </section>
 </section>
-<section id="id2">
-<h2>[0.2.1] 2024-09-04<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<section id="added">
-<h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
+<section id="id3">
+<h2>[0.2.1] 2024-09-04<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h3>Added<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Added <code class="xref py py-func docutils literal notranslate"><span class="pre">find_proximate_perimeter_points()</span></code> to identify (near) dangling
 edges and extremely short edges in polygon perimeters.</p></li>
@@ -477,10 +486,10 @@ found, or if consecutive vertices are within 0.001 of each other.</p></li>
 </ul>
 </section>
 </section>
-<section id="id3">
-<h2>[0.2.0] 2024-09-03<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
-<section id="id4">
-<h3>Fixed<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<section id="id5">
+<h2>[0.2.0] 2024-09-03<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h3>Fixed<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Previously, <a class="reference internal" href="api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher" title="pandamesh.TriangleMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.TriangleMesher</span></code></a> would not respect specified
 cell sizes in areas that are fully bounded by linestrings (rather than
@@ -491,8 +500,8 @@ whether linestrings form any coincendental polygons, and including these
 polygons are separate zones.</p></li>
 </ul>
 </section>
-<section id="id5">
-<h3>Added<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<section id="id7">
+<h3>Added<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="api/pandamesh.TriangleMesher.generate_geodataframe.html#pandamesh.TriangleMesher.generate_geodataframe" title="pandamesh.TriangleMesher.generate_geodataframe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandamesh.TriangleMesher.generate_geodataframe()</span></code></a> and -
 <a class="reference internal" href="api/pandamesh.GmshMesher.generate_geodataframe.html#pandamesh.GmshMesher.generate_geodataframe" title="pandamesh.GmshMesher.generate_geodataframe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandamesh.GmshMesher.generate_geodataframe()</span></code></a> have been added to
@@ -511,8 +520,8 @@ automatically finalize after mesh generation.</p></li>
 intersection between polygon boundary, linestring, and linearring edges.</p></li>
 </ul>
 </section>
-<section id="id6">
-<h3>Changed<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<section id="id8">
+<h3>Changed<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher" title="pandamesh.TriangleMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.TriangleMesher</span></code></a> does a cell size to area conversion. This
 previously assumed right-angled triangles. This has been changed to assume
@@ -539,26 +548,26 @@ intersections are encountered.</p></li>
 </ul>
 </section>
 </section>
-<section id="id7">
-<h2>[0.1.6] 2024-07-17<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
-<section id="id8">
-<h3>Added<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h2>[0.1.6] 2024-07-17<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<section id="id10">
+<h3>Added<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GmshMesher</span></code></a> now takes <code class="docutils literal notranslate"><span class="pre">read_config_files</span></code> and <code class="docutils literal notranslate"><span class="pre">interruptible</span></code>
 as initialization arguments for <code class="docutils literal notranslate"><span class="pre">gmsh.</span></code>.</p></li>
 </ul>
 </section>
-<section id="id9">
-<h3>Fixed<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<section id="id11">
+<h3>Fixed<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Compatibility changes for Numpy 2.0.</p></li>
 </ul>
 </section>
 </section>
-<section id="id10">
-<h2>[0.1.5] 2024-02-06<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
-<section id="id11">
-<h3>Fixed<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<section id="id12">
+<h2>[0.1.5] 2024-02-06<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<section id="id13">
+<h3>Fixed<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Inside of <a class="reference internal" href="api/pandamesh.GmshMesher.html#pandamesh.GmshMesher" title="pandamesh.GmshMesher"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GmshMesher</span></code></a> a check now occurs before finalization.
 This keeps <code class="docutils literal notranslate"><span class="pre">gmsh</span></code> from printing (harmless) errors to the console, which
@@ -570,16 +579,16 @@ the entire import of <code class="docutils literal notranslate"><span class="pre
 <code class="docutils literal notranslate"><span class="pre">RuntimeError</span></code>.</p></li>
 </ul>
 </section>
-<section id="id12">
-<h3>Added<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<section id="id14">
+<h3>Added<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><a class="reference internal" href="api/pandamesh.GeneralVerbosity.html#pandamesh.GeneralVerbosity" title="pandamesh.GeneralVerbosity"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandamesh.GeneralVerbosity</span></code></a> has been added to control the verbosity
 of Gmsh. It can be set via the <code class="xref py py-attr docutils literal notranslate"><span class="pre">GmshMesher.general_verbosity</span></code>
 property. Its default value is <code class="docutils literal notranslate"><span class="pre">SILENT</span></code>.</p></li>
 </ul>
 </section>
-<section id="id13">
-<h3>Changed<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<section id="id15">
+<h3>Changed<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>A number of deprecations have been fixed. Most notable is the deprecation
 of <code class="docutils literal notranslate"><span class="pre">geopandas.datasets</span></code>. The South America geodataframe can now be
@@ -640,30 +649,34 @@ positives.</p></li>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unreleased">Unreleased</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">[0.2.2] 2024-09-26</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">[0.2.3] 2025-01-06</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#added">Added</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">[0.2.2] 2024-09-26</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed">Fixed</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">[0.2.1] 2024-09-04</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#added">Added</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">[0.2.1] 2024-09-04</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Added</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changed">Changed</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">[0.2.0] 2024-09-03</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Fixed</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Added</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Changed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">[0.2.0] 2024-09-03</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Changed</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">[0.1.6] 2024-07-17</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Added</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Fixed</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">[0.1.5] 2024-02-06</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">[0.1.6] 2024-07-17</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Added</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Fixed</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Added</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Changed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">[0.1.5] 2024-02-06</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Changed</a></li>
 </ul>
 </li>
 </ul>
