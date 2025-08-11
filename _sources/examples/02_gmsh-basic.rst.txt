@@ -198,7 +198,7 @@ The GmshMesher class is initialized with a number of default parameters:
         yoff = 5.0
         fields = []
         combination_field = CombinationField(fields=[], combination=<FieldCombination.MIN: 'Min'>, id=1, fields_list=[])
-        tmpdir = <TemporaryDirectory '/tmp/tmpqmwz_btt'>
+        tmpdir = <TemporaryDirectory '/tmp/tmpiy66kktn'>
         recombine_all = False
         mesh_size_extend_from_boundary = True
         mesh_size_from_points = True
@@ -327,7 +327,7 @@ polygons.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.356 seconds)
+   **Total running time of the script:** (0 minutes 0.347 seconds)
 
 
 .. _sphx_glr_download_examples_02_gmsh-basic.py:
