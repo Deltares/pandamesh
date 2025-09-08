@@ -446,7 +446,7 @@ are inserted, such that the polygons share an edge.
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7f7bc62546e0>
+    <matplotlib.collections.PathCollection object at 0x7f8307981b20>
 
 
 
@@ -668,7 +668,7 @@ triangles around the line intersection have disappeared:
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7f7bd4589c40>
+    <matplotlib.collections.PathCollection object at 0x7f8307819ee0>
 
 
 
@@ -712,7 +712,7 @@ from any polygon boundary by providing a distance to ``clip_lines``:
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7f7bc61d76e0>
+    <matplotlib.collections.PathCollection object at 0x7f830772bb00>
 
 
 
@@ -929,7 +929,7 @@ processing steps (such as filtering points) can be applied.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.651 seconds)
+   **Total running time of the script:** (0 minutes 1.650 seconds)
 
 
 .. _sphx_glr_download_examples_05_preprocessing.py:
