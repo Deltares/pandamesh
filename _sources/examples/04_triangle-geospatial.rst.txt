@@ -309,7 +309,7 @@ opened by e.g. QGIS.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.545 seconds)
+   **Total running time of the script:** (0 minutes 0.535 seconds)
 
 
 .. _sphx_glr_download_examples_04_triangle-geospatial.py:
