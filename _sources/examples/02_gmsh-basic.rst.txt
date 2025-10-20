@@ -198,7 +198,7 @@ The GmshMesher class is initialized with a number of default parameters:
         yoff = 5.0
         fields = []
         combination_field = CombinationField(fields=[], combination=<FieldCombination.MIN: 'Min'>, id=1, fields_list=[])
-        tmpdir = <TemporaryDirectory '/tmp/tmp_18x189i'>
+        tmpdir = <TemporaryDirectory '/tmp/tmphy783sw_'>
         recombine_all = False
         mesh_size_extend_from_boundary = True
         mesh_size_from_points = True
