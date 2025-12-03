@@ -25,7 +25,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
   .. image:: /examples/images/thumb/sphx_glr_01_triangle-basic_thumb.png
     :alt:
 
-  :ref:`sphx_glr_examples_01_triangle-basic.py`
+  :doc:`/examples/01_triangle-basic`
 
 .. raw:: html
 
@@ -42,7 +42,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
   .. image:: /examples/images/thumb/sphx_glr_02_gmsh-basic_thumb.png
     :alt:
 
-  :ref:`sphx_glr_examples_02_gmsh-basic.py`
+  :doc:`/examples/02_gmsh-basic`
 
 .. raw:: html
 
@@ -59,7 +59,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
   .. image:: /examples/images/thumb/sphx_glr_03_gmsh-fields_thumb.png
     :alt:
 
-  :ref:`sphx_glr_examples_03_gmsh-fields.py`
+  :doc:`/examples/03_gmsh-fields`
 
 .. raw:: html
 
@@ -76,7 +76,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
   .. image:: /examples/images/thumb/sphx_glr_04_triangle-geospatial_thumb.png
     :alt:
 
-  :ref:`sphx_glr_examples_04_triangle-geospatial.py`
+  :doc:`/examples/04_triangle-geospatial`
 
 .. raw:: html
 
@@ -93,7 +93,7 @@ Every example can be downloaded as a Python script or a Jupyter Notebook.
   .. image:: /examples/images/thumb/sphx_glr_05_preprocessing_thumb.png
     :alt:
 
-  :ref:`sphx_glr_examples_05_preprocessing.py`
+  :doc:`/examples/05_preprocessing`
 
 .. raw:: html
 
