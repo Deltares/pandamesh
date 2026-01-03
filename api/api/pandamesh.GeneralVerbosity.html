@@ -44,8 +44,8 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/api/pandamesh.GeneralVerbosity';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -440,24 +440,24 @@
 <h1>pandamesh.GeneralVerbosity<a class="headerlink" href="#pandamesh-generalverbosity" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pandamesh.GeneralVerbosity">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.</span></span><span class="sig-name descname"><span class="pre">GeneralVerbosity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pandamesh/gmsh_enums.html#GeneralVerbosity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.GeneralVerbosity" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pandamesh.</span></span><span class="sig-name descname"><span class="pre">GeneralVerbosity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pandamesh/gmsh_enums.html#GeneralVerbosity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.GeneralVerbosity" title="Link to this definition">#</a></dt>
 <dd><p>Gmsh level of information printed.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.GeneralVerbosity.SILENT">
-<span class="sig-name descname"><span class="pre">SILENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#pandamesh.GeneralVerbosity.SILENT" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">SILENT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#pandamesh.GeneralVerbosity.SILENT" title="Link to this definition">#</a></dt>
 <dd><p>No output is printed. All messages are suppressed.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.GeneralVerbosity.ERRORS">
-<span class="sig-name descname"><span class="pre">ERRORS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pandamesh.GeneralVerbosity.ERRORS" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">ERRORS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#pandamesh.GeneralVerbosity.ERRORS" title="Link to this definition">#</a></dt>
 <dd><p>Only error messages are printed. This level is useful when you want to be
 alerted only to critical issues that prevent correct execution.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.GeneralVerbosity.WARNINGS">
-<span class="sig-name descname"><span class="pre">WARNINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#pandamesh.GeneralVerbosity.WARNINGS" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">WARNINGS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#pandamesh.GeneralVerbosity.WARNINGS" title="Link to this definition">#</a></dt>
 <dd><p>Error and warning messages are printed. This level adds important
 cautionary information that doesn’t necessarily prevent execution but might
 affect results.</p>
@@ -465,7 +465,7 @@ affect results.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.GeneralVerbosity.DIRECT">
-<span class="sig-name descname"><span class="pre">DIRECT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#pandamesh.GeneralVerbosity.DIRECT" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">DIRECT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#pandamesh.GeneralVerbosity.DIRECT" title="Link to this definition">#</a></dt>
 <dd><p>Errors, warnings, and direct output from Gmsh commands are printed. This
 level is useful for seeing immediate results of operations without too much
 extra information.</p>
@@ -473,7 +473,7 @@ extra information.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.GeneralVerbosity.INFORMATION">
-<span class="sig-name descname"><span class="pre">INFORMATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#pandamesh.GeneralVerbosity.INFORMATION" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">INFORMATION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></span><a class="headerlink" href="#pandamesh.GeneralVerbosity.INFORMATION" title="Link to this definition">#</a></dt>
 <dd><p>Errors, warnings, direct output, and additional informational messages are
 printed. This level provides more detailed feedback about the progress and
 state of operations.</p>
@@ -481,7 +481,7 @@ state of operations.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.GeneralVerbosity.STATUS">
-<span class="sig-name descname"><span class="pre">STATUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#pandamesh.GeneralVerbosity.STATUS" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">STATUS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></span><a class="headerlink" href="#pandamesh.GeneralVerbosity.STATUS" title="Link to this definition">#</a></dt>
 <dd><p>Errors, warnings, direct output, information, and status updates are
 printed. This level offers comprehensive feedback, including progress
 indicators for longer operations.</p>
@@ -489,7 +489,7 @@ indicators for longer operations.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.GeneralVerbosity.DEBUG">
-<span class="sig-name descname"><span class="pre">DEBUG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">99</span></em><a class="headerlink" href="#pandamesh.GeneralVerbosity.DEBUG" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">DEBUG</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">99</span></span><a class="headerlink" href="#pandamesh.GeneralVerbosity.DEBUG" title="Link to this definition">#</a></dt>
 <dd><p>All possible output is printed, including detailed debugging information.
 This level is extremely verbose and is typically used for troubleshooting
 or development purposes.</p>
@@ -602,7 +602,7 @@ or development purposes.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

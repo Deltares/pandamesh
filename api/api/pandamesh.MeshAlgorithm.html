@@ -44,8 +44,8 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/api/pandamesh.MeshAlgorithm';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -440,7 +440,7 @@
 <h1>pandamesh.MeshAlgorithm<a class="headerlink" href="#pandamesh-meshalgorithm" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pandamesh.MeshAlgorithm">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.</span></span><span class="sig-name descname"><span class="pre">MeshAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pandamesh/gmsh_enums.html#MeshAlgorithm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.MeshAlgorithm" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pandamesh.</span></span><span class="sig-name descname"><span class="pre">MeshAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pandamesh/gmsh_enums.html#MeshAlgorithm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.MeshAlgorithm" title="Link to this definition">#</a></dt>
 <dd><p>Gmsh meshing algorithm. Each algorithm has its own advantages and
 disadvantages.</p>
 <p>For all 2D unstructured algorithms a Delaunay mesh that contains all
@@ -473,51 +473,51 @@ MeshAdapt is automatically triggered. The Automatic algorithm uses
 Delaunay for plane surfaces and MeshAdapt for all other surfaces.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.MeshAlgorithm.MESH_ADAPT">
-<span class="sig-name descname"><span class="pre">MESH_ADAPT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pandamesh.MeshAlgorithm.MESH_ADAPT" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">MESH_ADAPT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#pandamesh.MeshAlgorithm.MESH_ADAPT" title="Link to this definition">#</a></dt>
 <dd><p>Local mesh modifications using edge swaps, splits, and collapses. Robust
 for complex curved surfaces.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.MeshAlgorithm.AUTOMATIC">
-<span class="sig-name descname"><span class="pre">AUTOMATIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#pandamesh.MeshAlgorithm.AUTOMATIC" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">AUTOMATIC</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="headerlink" href="#pandamesh.MeshAlgorithm.AUTOMATIC" title="Link to this definition">#</a></dt>
 <dd><p>Uses Delaunay for plane surfaces and MeshAdapt for all other surfaces.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.MeshAlgorithm.INITIAL_MESH_ONLY">
-<span class="sig-name descname"><span class="pre">INITIAL_MESH_ONLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#pandamesh.MeshAlgorithm.INITIAL_MESH_ONLY" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">INITIAL_MESH_ONLY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#pandamesh.MeshAlgorithm.INITIAL_MESH_ONLY" title="Link to this definition">#</a></dt>
 <dd><p>Generates only the initial Delaunay triangulation.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.MeshAlgorithm.FRONTAL_DELAUNAY">
-<span class="sig-name descname"><span class="pre">FRONTAL_DELAUNAY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#pandamesh.MeshAlgorithm.FRONTAL_DELAUNAY" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">FRONTAL_DELAUNAY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></span><a class="headerlink" href="#pandamesh.MeshAlgorithm.FRONTAL_DELAUNAY" title="Link to this definition">#</a></dt>
 <dd><p>Good for high element quality.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.MeshAlgorithm.BAMG">
-<span class="sig-name descname"><span class="pre">BAMG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#pandamesh.MeshAlgorithm.BAMG" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">BAMG</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></span><a class="headerlink" href="#pandamesh.MeshAlgorithm.BAMG" title="Link to this definition">#</a></dt>
 <dd><p>Experimental algorithm for generating anisotropic triangulations.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.MeshAlgorithm.FRONTAL_DELAUNAY_FOR_QUADS">
-<span class="sig-name descname"><span class="pre">FRONTAL_DELAUNAY_FOR_QUADS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#pandamesh.MeshAlgorithm.FRONTAL_DELAUNAY_FOR_QUADS" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">FRONTAL_DELAUNAY_FOR_QUADS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></span><a class="headerlink" href="#pandamesh.MeshAlgorithm.FRONTAL_DELAUNAY_FOR_QUADS" title="Link to this definition">#</a></dt>
 <dd><p>Variant of Frontal-Delaunay aiming to generate right-angle triangles
 suitable for recombination.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.MeshAlgorithm.PACKING_OF_PARALLELLOGRAMS">
-<span class="sig-name descname"><span class="pre">PACKING_OF_PARALLELLOGRAMS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></em><a class="headerlink" href="#pandamesh.MeshAlgorithm.PACKING_OF_PARALLELLOGRAMS" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">PACKING_OF_PARALLELLOGRAMS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></span><a class="headerlink" href="#pandamesh.MeshAlgorithm.PACKING_OF_PARALLELLOGRAMS" title="Link to this definition">#</a></dt>
 <dd><p>Experimental algorithm for parallelogram-based mesh generation.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.MeshAlgorithm.QUASI_STRUCTURED_QUAD">
-<span class="sig-name descname"><span class="pre">QUASI_STRUCTURED_QUAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">11</span></em><a class="headerlink" href="#pandamesh.MeshAlgorithm.QUASI_STRUCTURED_QUAD" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">QUASI_STRUCTURED_QUAD</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">11</span></span><a class="headerlink" href="#pandamesh.MeshAlgorithm.QUASI_STRUCTURED_QUAD" title="Link to this definition">#</a></dt>
 <dd><p>Combines an initial unstructured quad mesh with topological improvements
 guided by cross fields to produce quasi-structured meshes with few
 irregular vertices.</p>
@@ -631,7 +631,7 @@ irregular vertices.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>

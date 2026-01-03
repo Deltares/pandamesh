@@ -44,8 +44,8 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/api/pandamesh.SubdivisionAlgorithm';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -439,7 +439,7 @@
 <h1>pandamesh.SubdivisionAlgorithm<a class="headerlink" href="#pandamesh-subdivisionalgorithm" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pandamesh.SubdivisionAlgorithm">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pandamesh.</span></span><span class="sig-name descname"><span class="pre">SubdivisionAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pandamesh/gmsh_enums.html#SubdivisionAlgorithm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.SubdivisionAlgorithm" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pandamesh.</span></span><span class="sig-name descname"><span class="pre">SubdivisionAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pandamesh/gmsh_enums.html#SubdivisionAlgorithm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pandamesh.SubdivisionAlgorithm" title="Link to this definition">#</a></dt>
 <dd><p>Controls how Gmsh recombines triangles to form quads.</p>
 <p>The default recombination algorithm might leave some triangles in the mesh,
 if recombining all the triangles leads to badly shaped quads. In such
@@ -449,14 +449,14 @@ algorithm, which will automatically perform a coarser mesh followed by
 recombination, smoothing and subdivision.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.SubdivisionAlgorithm.NONE">
-<span class="sig-name descname"><span class="pre">NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#pandamesh.SubdivisionAlgorithm.NONE" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">NONE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="headerlink" href="#pandamesh.SubdivisionAlgorithm.NONE" title="Link to this definition">#</a></dt>
 <dd><p>No subdivision is applied. The mesh remains as is after the initial
 recombination process, potentially leaving some triangles in the mesh.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.SubdivisionAlgorithm.ALL_QUADRANGLES">
-<span class="sig-name descname"><span class="pre">ALL_QUADRANGLES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pandamesh.SubdivisionAlgorithm.ALL_QUADRANGLES" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">ALL_QUADRANGLES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></span><a class="headerlink" href="#pandamesh.SubdivisionAlgorithm.ALL_QUADRANGLES" title="Link to this definition">#</a></dt>
 <dd><p>Subdivides the mesh to convert all elements into quadrangles. This method
 ensures a full-quad mesh by subdividing any remaining triangles after the
 initial recombination process.</p>
@@ -464,7 +464,7 @@ initial recombination process.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pandamesh.SubdivisionAlgorithm.BARYCENTRIC">
-<span class="sig-name descname"><span class="pre">BARYCENTRIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#pandamesh.SubdivisionAlgorithm.BARYCENTRIC" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">BARYCENTRIC</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></span><a class="headerlink" href="#pandamesh.SubdivisionAlgorithm.BARYCENTRIC" title="Link to this definition">#</a></dt>
 <dd><p>Applies barycentric subdivision to the mesh. This method subdivides each
 element by connecting its barycenter to the midpoints of its edges,
 resulting in a refined mesh with increased element count.</p>
@@ -564,7 +564,7 @@ resulting in a refined mesh with increased element count.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     <br/>
   </p>
 </div>
