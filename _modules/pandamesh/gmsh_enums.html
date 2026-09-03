@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=fd6457a4" />
@@ -37,10 +37,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/theme-deltares.css?v=45942d5c" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -389,7 +389,7 @@
 <div class="viewcode-block" id="MeshAlgorithm">
 <a class="viewcode-back" href="../../api/api/pandamesh.MeshAlgorithm.html#pandamesh.MeshAlgorithm">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MeshAlgorithm</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Gmsh meshing algorithm. Each algorithm has its own advantages and</span>
 <span class="sd">    disadvantages.</span>
 
@@ -421,50 +421,50 @@
 <span class="sd">    Frontal-Delaunay. When the Delaunay or Frontal-Delaunay algorithms fail,</span>
 <span class="sd">    MeshAdapt is automatically triggered. The Automatic algorithm uses</span>
 <span class="sd">    Delaunay for plane surfaces and MeshAdapt for all other surfaces.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">MESH_ADAPT</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Local mesh modifications using edge swaps, splits, and collapses. Robust</span>
 <span class="sd">    for complex curved surfaces.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">AUTOMATIC</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Uses Delaunay for plane surfaces and MeshAdapt for all other surfaces.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">INITIAL_MESH_ONLY</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates only the initial Delaunay triangulation.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Generates only the initial Delaunay triangulation."""</span>
 
     <span class="n">FRONTAL_DELAUNAY</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Good for high element quality.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Good for high element quality."""</span>
 
     <span class="n">BAMG</span> <span class="o">=</span> <span class="mi">7</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Experimental algorithm for generating anisotropic triangulations.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Experimental algorithm for generating anisotropic triangulations."""</span>
 
     <span class="n">FRONTAL_DELAUNAY_FOR_QUADS</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Variant of Frontal-Delaunay aiming to generate right-angle triangles</span>
 <span class="sd">    suitable for recombination.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">PACKING_OF_PARALLELLOGRAMS</span> <span class="o">=</span> <span class="mi">9</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Experimental algorithm for parallelogram-based mesh generation.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Experimental algorithm for parallelogram-based mesh generation."""</span>
 
     <span class="n">QUASI_STRUCTURED_QUAD</span> <span class="o">=</span> <span class="mi">11</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Combines an initial unstructured quad mesh with topological improvements</span>
 <span class="sd">    guided by cross fields to produce quasi-structured meshes with few</span>
 <span class="sd">    irregular vertices.</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="SubdivisionAlgorithm">
 <a class="viewcode-back" href="../../api/api/pandamesh.SubdivisionAlgorithm.html#pandamesh.SubdivisionAlgorithm">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SubdivisionAlgorithm</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Controls how Gmsh recombines triangles to form quads.</span>
 
 <span class="sd">    The default recombination algorithm might leave some triangles in the mesh,</span>
@@ -473,91 +473,91 @@
 <span class="sd">    hybrid mesh (ALL_QUADRANGLES), or use the full-quad recombination</span>
 <span class="sd">    algorithm, which will automatically perform a coarser mesh followed by</span>
 <span class="sd">    recombination, smoothing and subdivision.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">NONE</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    No subdivision is applied. The mesh remains as is after the initial</span>
 <span class="sd">    recombination process, potentially leaving some triangles in the mesh.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">ALL_QUADRANGLES</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Subdivides the mesh to convert all elements into quadrangles. This method</span>
 <span class="sd">    ensures a full-quad mesh by subdividing any remaining triangles after the</span>
 <span class="sd">    initial recombination process.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">BARYCENTRIC</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Applies barycentric subdivision to the mesh. This method subdivides each</span>
 <span class="sd">    element by connecting its barycenter to the midpoints of its edges,</span>
 <span class="sd">    resulting in a refined mesh with increased element count.</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="FieldCombination">
 <a class="viewcode-back" href="../../api/api/pandamesh.FieldCombination.html#pandamesh.FieldCombination">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FieldCombination</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Controls how cell size fields are combined in Gmsh when they are found at</span>
 <span class="sd">    the same location.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">MIN</span> <span class="o">=</span> <span class="s2">&quot;Min&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use the minimum size.&quot;&quot;&quot;</span>
-    <span class="n">MAX</span> <span class="o">=</span> <span class="s2">&quot;Max&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use the maximum size.&quot;&quot;&quot;</span></div>
+    <span class="n">MIN</span> <span class="o">=</span> <span class="s2">"Min"</span>
+<span class="w">    </span><span class="sd">"""Use the minimum size."""</span>
+    <span class="n">MAX</span> <span class="o">=</span> <span class="s2">"Max"</span>
+<span class="w">    </span><span class="sd">"""Use the maximum size."""</span></div>
 
 
 
 <div class="viewcode-block" id="GeneralVerbosity">
 <a class="viewcode-back" href="../../api/api/pandamesh.GeneralVerbosity.html#pandamesh.GeneralVerbosity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GeneralVerbosity</span><span class="p">(</span><span class="n">FlexibleEnum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gmsh level of information printed.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Gmsh level of information printed."""</span>
 
     <span class="n">SILENT</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;No output is printed. All messages are suppressed.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""No output is printed. All messages are suppressed."""</span>
 
     <span class="n">ERRORS</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Only error messages are printed. This level is useful when you want to be</span>
 <span class="sd">    alerted only to critical issues that prevent correct execution.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">WARNINGS</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Error and warning messages are printed. This level adds important</span>
-<span class="sd">    cautionary information that doesn&#39;t necessarily prevent execution but might</span>
+<span class="sd">    cautionary information that doesn't necessarily prevent execution but might</span>
 <span class="sd">    affect results.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">DIRECT</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Errors, warnings, and direct output from Gmsh commands are printed. This</span>
 <span class="sd">    level is useful for seeing immediate results of operations without too much</span>
 <span class="sd">    extra information.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">INFORMATION</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Errors, warnings, direct output, and additional informational messages are</span>
 <span class="sd">    printed. This level provides more detailed feedback about the progress and</span>
 <span class="sd">    state of operations.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">STATUS</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Errors, warnings, direct output, information, and status updates are</span>
 <span class="sd">    printed. This level offers comprehensive feedback, including progress</span>
 <span class="sd">    indicators for longer operations.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">DEBUG</span> <span class="o">=</span> <span class="mi">99</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    All possible output is printed, including detailed debugging information.</span>
 <span class="sd">    This level is extremely verbose and is typically used for troubleshooting</span>
 <span class="sd">    or development purposes.</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 </pre></div>
 
@@ -588,8 +588,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -623,7 +623,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=fd6457a4" />
@@ -37,10 +37,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/theme-deltares.css?v=45942d5c" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -405,10 +405,10 @@
 <div class="viewcode-block" id="TriangleMesher">
 <a class="viewcode-back" href="../../api/api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TriangleMesher</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Wrapper for the python bindings to Triangle. This class must be initialized</span>
 <span class="sd">    with a geopandas GeoDataFrame containing at least one polygon, and a column</span>
-<span class="sd">    named ``&quot;cellsize&quot;``.</span>
+<span class="sd">    named ``"cellsize"``.</span>
 
 <span class="sd">    Optionally, multiple polygons with different cell sizes can be included in</span>
 <span class="sd">    the geodataframe. These can be used to achieve local mesh refinement.</span>
@@ -427,7 +427,7 @@
 <span class="sd">          vertex is present in both.</span>
 <span class="sd">        * Every linestring should be fully contained by a single polygon;</span>
 <span class="sd">          a linestring may not intersect two or more polygons.</span>
-<span class="sd">        * Linestrings and points should not &quot;touch&quot; / be located on</span>
+<span class="sd">        * Linestrings and points should not "touch" / be located on</span>
 <span class="sd">          polygon borders.</span>
 <span class="sd">        * Holes in polygons are fully supported, but they must not contain</span>
 <span class="sd">          any linestrings or points.</span>
@@ -441,26 +441,26 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    gdf: gpd.GeoDataFrame</span>
-<span class="sd">        GeoDataFrame containing the vector geometry. Must contain a &quot;cellsize&quot;</span>
+<span class="sd">        GeoDataFrame containing the vector geometry. Must contain a "cellsize"</span>
 <span class="sd">        column.</span>
 <span class="sd">    shift_origin: bool, optional, default is True.</span>
 <span class="sd">        If True, temporarily shifts the coordinate system origin to the centroid</span>
-<span class="sd">        of the geometry&#39;s bounding box during mesh generation. This helps mitigate</span>
+<span class="sd">        of the geometry's bounding box during mesh generation. This helps mitigate</span>
 <span class="sd">        floating-point precision issues. The resulting mesh vertices are</span>
 <span class="sd">        automatically translated back to the original coordinate system.</span>
-<span class="sd">    intersecting_edges: str, optional, default is &quot;error&quot;</span>
+<span class="sd">    intersecting_edges: str, optional, default is "error"</span>
 <span class="sd">        String indicating how to report unresolved line segment intersections:</span>
 
-<span class="sd">        * &quot;ignore&quot;: skip check.</span>
-<span class="sd">        * &quot;warning&quot;: emit a warning.</span>
-<span class="sd">        * &quot;error&quot;: raise a ValueError.</span>
+<span class="sd">        * "ignore": skip check.</span>
+<span class="sd">        * "warning": emit a warning.</span>
+<span class="sd">        * "error": raise a ValueError.</span>
 
 <span class="sd">    minimum_perimeter_spacing: float, default is 1.0e-3.</span>
 <span class="sd">        Errors if spacing of vertices on polygon perimeters is less or equal to</span>
 <span class="sd">        minimum spacing. A distance of 0.0 indicates a dangling edge or a</span>
 <span class="sd">        repeated vertex. Such features may cause a crash during mesh</span>
 <span class="sd">        generation.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="TriangleMesher.__init__">
 <a class="viewcode-back" href="../../api/api/pandamesh.TriangleMesher.html#pandamesh.TriangleMesher.__init__">[docs]</a>
@@ -468,10 +468,10 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span>
         <span class="n">shift_origin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="n">intersecting_edges</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+        <span class="n">intersecting_edges</span><span class="o">=</span><span class="s2">"error"</span><span class="p">,</span>
         <span class="n">minimum_perimeter_spacing</span><span class="o">=</span><span class="mf">1.0e-3</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">check_geodataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;geometry&quot;</span><span class="p">,</span> <span class="s2">&quot;cellsize&quot;</span><span class="p">},</span> <span class="n">check_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">check_geodataframe</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="p">{</span><span class="s2">"geometry"</span><span class="p">,</span> <span class="s2">"cellsize"</span><span class="p">},</span> <span class="n">check_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">gdf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xoff</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_yoff</span> <span class="o">=</span> <span class="n">central_origin</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">shift_origin</span><span class="p">)</span>
         <span class="n">polygons</span><span class="p">,</span> <span class="n">linestrings</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">separate_geodataframe</span><span class="p">(</span>
             <span class="n">gdf</span><span class="p">,</span> <span class="n">intersecting_edges</span><span class="p">,</span> <span class="n">minimum_perimeter_spacing</span>
@@ -495,82 +495,82 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">minimum_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Minimum allowed angle for any triangle in the mesh.</span>
 
 <span class="sd">        See:</span>
 <span class="sd">        https://www.cs.cmu.edu/~quake/triangle.q.html</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_minimum_angle</span>
 
     <span class="nd">@minimum_angle</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">minimum_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;minimum angle must be a float&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"minimum angle must be a float"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">34.0</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;minimum_angle should fall in the interval: (0.0, 34.0)&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"minimum_angle should fall in the interval: (0.0, 34.0)"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_minimum_angle</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">conforming_delaunay</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Conforming Delaunay: use this switch if you want all triangles in the</span>
 <span class="sd">        mesh to be Delaunay, and not just constrained Delaunay; or if you want</span>
 <span class="sd">        to ensure that all Voronoi vertices lie within the triangulation.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conforming_delaunay</span>
 
     <span class="nd">@conforming_delaunay</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">conforming_delaunay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;conforming_delaunay must be a bool&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"conforming_delaunay must be a bool"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_conforming_delaunay</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">suppress_exact_arithmetic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Suppresses exact arithmetic.</span>
 
 <span class="sd">        See:</span>
 <span class="sd">        https://www.cs.cmu.edu/~quake/triangle.exact.html</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_suppress_exact_arithmetic</span>
 
     <span class="nd">@suppress_exact_arithmetic</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">suppress_exact_arithmetic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;suppress_exact_arithmetic must be a bool&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"suppress_exact_arithmetic must be a bool"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_suppress_exact_arithmetic</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">maximum_steiner_points</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Specifies the maximum number of added Steiner points</span>
 
 <span class="sd">        See:</span>
 <span class="sd">        https://www.cs.cmu.edu/~quake/triangle.S.html</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maximum_steiner_points</span>
 
     <span class="nd">@maximum_steiner_points</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">maximum_steiner_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;maximum_steiner_points must be an int or None&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"maximum_steiner_points must be an int or None"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_maximum_steiner_points</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">delaunay_algorithm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DelaunayAlgorithm</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Sets the Delaunay algorithm. Can be set to one of:</span>
 <span class="sd">        :py:class:`pandamesh.DelaunayAlgorithm`:</span>
 
 <span class="sd">        .. code::</span>
 
-<span class="sd">            DIVIDE_AND_CONQUER = &quot;&quot;</span>
-<span class="sd">            INCREMENTAL = &quot;i&quot;</span>
-<span class="sd">            SWEEPLINE = &quot;F&quot;</span>
+<span class="sd">            DIVIDE_AND_CONQUER = ""</span>
+<span class="sd">            INCREMENTAL = "i"</span>
+<span class="sd">            SWEEPLINE = "F"</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delaunay_algorithm</span>
 
     <span class="nd">@delaunay_algorithm</span><span class="o">.</span><span class="n">setter</span>
@@ -580,77 +580,77 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">consistency_check</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Check the consistency of the final mesh. Uses exact arithmetic for</span>
 <span class="sd">        checking, even if ``suppress_exact_arithmetic`` is set to ``False``.</span>
 <span class="sd">        Useful if you suspect Triangle is buggy.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_consistency_check</span>
 
     <span class="nd">@consistency_check</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">consistency_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;consistency_check must be a bool&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"consistency_check must be a bool"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_consistency_check</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="TriangleMesher.generate">
 <a class="viewcode-back" href="../../api/api/pandamesh.TriangleMesher.generate.html#pandamesh.TriangleMesher.generate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">FloatArray</span><span class="p">,</span> <span class="n">IntArray</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate a mesh of triangles.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        vertices: np.ndarray of floats with shape ``(n_vertex, 2)``</span>
 <span class="sd">        triangles: np.ndarray of integers with shape ``(n_triangle, 3)``</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">options</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;p&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;q</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minimum_angle</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="s2">&quot;a&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;D&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_conforming_delaunay</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;X&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_suppress_exact_arithmetic</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;S&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_maximum_steiner_points</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_maximum_steiner_points</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="kc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_delaunay_algorithm</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;C&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">consistency_check</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="s2">"p"</span>
+            <span class="sa">f</span><span class="s2">"q</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minimum_angle</span><span class="si">}</span><span class="s2">"</span>
+            <span class="s2">"a"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'D'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_conforming_delaunay</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="si">}</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'X'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_suppress_exact_arithmetic</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="si">}</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'S'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_maximum_steiner_points</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_maximum_steiner_points</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="kc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="si">}</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_delaunay_algorithm</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'C'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">consistency_check</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
 
-        <span class="n">tri</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;vertices&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="s2">&quot;segments&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">}</span>
+        <span class="n">tri</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"vertices"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">,</span> <span class="s2">"segments"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">holes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">tri</span><span class="p">[</span><span class="s2">&quot;holes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">holes</span>
+            <span class="n">tri</span><span class="p">[</span><span class="s2">"holes"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">holes</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">regions</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">tri</span><span class="p">[</span><span class="s2">&quot;regions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regions</span>
+            <span class="n">tri</span><span class="p">[</span><span class="s2">"regions"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regions</span>
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">triangle</span><span class="o">.</span><span class="n">triangulate</span><span class="p">(</span><span class="n">tri</span><span class="o">=</span><span class="n">tri</span><span class="p">,</span> <span class="n">opts</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
-        <span class="n">vertices</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;vertices&quot;</span><span class="p">]</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">"vertices"</span><span class="p">]</span>
         <span class="n">vertices</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xoff</span>
         <span class="n">vertices</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_yoff</span>
-        <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;triangles&quot;</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s2">"triangles"</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="TriangleMesher.generate_geodataframe">
 <a class="viewcode-back" href="../../api/api/pandamesh.TriangleMesher.generate_geodataframe.html#pandamesh.TriangleMesher.generate_geodataframe">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">generate_geodataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate a mesh and return it as a geopandas GeoDataFrame.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        mesh: geopandas.GeoDataFrame</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">to_geodataframe</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="TriangleMesher.generate_ugrid">
 <a class="viewcode-back" href="../../api/api/pandamesh.TriangleMesher.generate_ugrid.html#pandamesh.TriangleMesher.generate_ugrid">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">generate_ugrid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;xugrid.Ugrid2d&quot;</span><span class="p">:</span>  <span class="c1"># type: ignore # noqa  pragma: no cover</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_ugrid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"xugrid.Ugrid2d"</span><span class="p">:</span>  <span class="c1"># type: ignore # noqa  pragma: no cover</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate a mesh and return it as an xugrid Ugrid2d.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        mesh: xugrid.Ugrid2d</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">to_ugrid</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">generate</span><span class="p">())</span></div>
 </div>
 
@@ -683,8 +683,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -718,7 +718,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

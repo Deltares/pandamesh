@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=fd6457a4" />
@@ -38,10 +38,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/theme-deltares.css?v=45942d5c" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -523,7 +523,7 @@ geometry.</p></li>
 <p>Resolve overlapping polygons, assigning the smallest cell size values
 in case of overlap:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">processed</span> <span class="o">=</span> <span class="p">(</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">pandamesh</span><span class="o">.</span><span class="n">Preprocessor</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">],</span> <span class="n">values</span><span class="o">=</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cellsize&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">pandamesh</span><span class="o">.</span><span class="n">Preprocessor</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">gdf</span><span class="p">[</span><span class="s2">"geometry"</span><span class="p">],</span> <span class="n">values</span><span class="o">=</span><span class="n">gdf</span><span class="p">[</span><span class="s2">"cellsize"</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="o">.</span><span class="n">unify_polygons</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="o">.</span><span class="n">merge_polygons</span><span class="p">(</span><span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="o">.</span><span class="n">to_geodataframe</span><span class="p">()</span>
@@ -532,7 +532,7 @@ in case of overlap:</p>
 </div>
 <p>Assign the largest cell size value instead:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">processed</span> <span class="o">=</span> <span class="p">(</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">pandamesh</span><span class="o">.</span><span class="n">Preprocessor</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">],</span> <span class="n">values</span><span class="o">=</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;cellsize&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">pandamesh</span><span class="o">.</span><span class="n">Preprocessor</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">gdf</span><span class="p">[</span><span class="s2">"geometry"</span><span class="p">],</span> <span class="n">values</span><span class="o">=</span><span class="n">gdf</span><span class="p">[</span><span class="s2">"cellsize"</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="o">.</span><span class="n">unify_polygons</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="o">.</span><span class="n">merge_polygons</span><span class="p">(</span><span class="n">first</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="o">.</span><span class="n">to_geodataframe</span><span class="p">()</span>
@@ -541,16 +541,16 @@ in case of overlap:</p>
 </div>
 <p>Alternatively, to control the result of the merging with values, we can
 sort the <code class="docutils literal notranslate"><span class="pre">gdf</span></code> prior to processing.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sorted_gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">processor</span> <span class="o">=</span> <span class="n">pandamesh</span><span class="o">.</span><span class="n">Preprocessor</span><span class="p">(</span><span class="n">sorted_gdf</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sorted_gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">processor</span> <span class="o">=</span> <span class="n">pandamesh</span><span class="o">.</span><span class="n">Preprocessor</span><span class="p">(</span><span class="n">sorted_gdf</span><span class="p">[</span><span class="s2">"geometry"</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Afterwards, the returned indexer can be used to fetch the data associated
 with the merged results.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">to_geodataframe</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">processed</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">data</span><span class="o">=</span><span class="n">sorted_gdf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">out</span><span class="p">[</span><span class="s2">&quot;indexer&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]],</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">geometry</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">data</span><span class="o">=</span><span class="n">sorted_gdf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">out</span><span class="p">[</span><span class="s2">"indexer"</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">]],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">geometry</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="s2">"geometry"</span><span class="p">],</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
 </pre></div>
 </div>
@@ -631,8 +631,8 @@ with the merged results.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -666,7 +666,7 @@ with the merged results.</p>
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.20.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>
