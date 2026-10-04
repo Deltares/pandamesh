@@ -113,7 +113,7 @@ exterior of the inner zone.
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -170,7 +170,7 @@ The resulting geodataframe's geometries are valid planar partition:
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -229,7 +229,7 @@ be overlapping
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -268,7 +268,7 @@ These will also be resolved by ``.unify_polygons``.
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -309,7 +309,7 @@ into the triangulation. We can rid of these by calling ``.merge_polygons``:
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -405,7 +405,7 @@ left polygon. We can identify these intersections with
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -446,7 +446,7 @@ are inserted, such that the polygons share an edge.
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7f69233c15b0>
+    <matplotlib.collections.PathCollection object at 0x7f6ed891cd70>
 
 
 
@@ -509,7 +509,7 @@ Lines may only be only partially present, or present in holes:
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -542,7 +542,7 @@ We can identify these problematic intersections again using
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -576,7 +576,7 @@ A first step is to remove line segments that do not fall in any polygon:
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -668,7 +668,7 @@ triangles around the line intersection have disappeared:
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7f6916ef5940>
+    <matplotlib.collections.PathCollection object at 0x7f6ed86e3950>
 
 
 
@@ -712,7 +712,7 @@ from any polygon boundary by providing a distance to ``clip_lines``:
  .. code-block:: none
 
 
-    <matplotlib.collections.PathCollection object at 0x7f692362dfa0>
+    <matplotlib.collections.PathCollection object at 0x7f6ed8771d30>
 
 
 
@@ -753,7 +753,7 @@ Points cannot intersect each other, which sidesteps a large number of problems.
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -799,7 +799,7 @@ We can remove those points by providing a distance to ``clip_points``.
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -914,7 +914,7 @@ to check the intermediate result after clipping but prior to snapping:
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='x', ylabel='y'>
 
 
 
@@ -929,7 +929,7 @@ processing steps (such as filtering points) can be applied.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.509 seconds)
+   **Total running time of the script:** (0 minutes 1.437 seconds)
 
 
 .. _sphx_glr_download_examples_05_preprocessing.py:

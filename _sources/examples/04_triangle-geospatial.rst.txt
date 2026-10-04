@@ -102,7 +102,7 @@ Let's check the polygons for overlap first.
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='Easting [metre]', ylabel='Northing [metre]'>
 
 
 
@@ -185,7 +185,7 @@ This creates a clean, and simpler, geometry.
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='Easting [metre]', ylabel='Northing [metre]'>
 
 
 
@@ -211,6 +211,17 @@ constant cell size.
    :srcset: /examples/images/sphx_glr_04_triangle-geospatial_003.png
    :class: sphx-glr-single-img
 
+
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /home/runner/work/pandamesh/pandamesh/.pixi/envs/default/lib/python3.12/site-packages/pandas/core/generic.py:6208: FutureWarning: Overriding the CRS of a GeoDataFrame that already has CRS. This unsafe behavior will be deprecated in future versions. Use GeoDataFrame.set_crs method instead
+      return object.__setattr__(self, name, value)
+    /home/runner/work/pandamesh/pandamesh/.pixi/envs/default/lib/python3.12/site-packages/pandas/core/generic.py:6208: FutureWarning: Overriding the CRS of a GeoDataFrame that already has CRS. This unsafe behavior will be deprecated in future versions. Use GeoDataFrame.set_crs method instead
+      return object.__setattr__(self, name, value)
+    /home/runner/work/pandamesh/pandamesh/.pixi/envs/default/lib/python3.12/site-packages/pandas/core/generic.py:6208: FutureWarning: Overriding the CRS of a GeoDataFrame that already has CRS. This unsafe behavior will be deprecated in future versions. Use GeoDataFrame.set_crs method instead
+      return object.__setattr__(self, name, value)
 
 
 
@@ -262,7 +273,7 @@ ensure that no overlap occurs in the follwing steps:
  .. code-block:: none
 
 
-    <Axes: >
+    <Axes: xlabel='Easting [metre]', ylabel='Northing [metre]'>
 
 
 
@@ -288,6 +299,17 @@ This results in a mesh with a smaller cell size in the province of Utrecht.
    :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ .. code-block:: none
+
+    /home/runner/work/pandamesh/pandamesh/.pixi/envs/default/lib/python3.12/site-packages/pandas/core/generic.py:6208: FutureWarning: Overriding the CRS of a GeoDataFrame that already has CRS. This unsafe behavior will be deprecated in future versions. Use GeoDataFrame.set_crs method instead
+      return object.__setattr__(self, name, value)
+    /home/runner/work/pandamesh/pandamesh/.pixi/envs/default/lib/python3.12/site-packages/pandas/core/generic.py:6208: FutureWarning: Overriding the CRS of a GeoDataFrame that already has CRS. This unsafe behavior will be deprecated in future versions. Use GeoDataFrame.set_crs method instead
+      return object.__setattr__(self, name, value)
+    /home/runner/work/pandamesh/pandamesh/.pixi/envs/default/lib/python3.12/site-packages/pandas/core/generic.py:6208: FutureWarning: Overriding the CRS of a GeoDataFrame that already has CRS. This unsafe behavior will be deprecated in future versions. Use GeoDataFrame.set_crs method instead
+      return object.__setattr__(self, name, value)
+
 
 
 
@@ -309,7 +331,7 @@ opened by e.g. QGIS.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.554 seconds)
+   **Total running time of the script:** (0 minutes 0.525 seconds)
 
 
 .. _sphx_glr_download_examples_04_triangle-geospatial.py:
